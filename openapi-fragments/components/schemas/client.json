@@ -1,0 +1,322 @@
+{
+  "schemas": {
+    "ClientDeployCreationResponse": {
+      "properties": {
+        "id_deploy": {
+          "type": "string",
+          "title": "Id Deploy",
+          "description": "ID del nuevo registro de despliegue creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_deploy"
+      ],
+      "title": "ClientDeployCreationResponse"
+    },
+    "ClientDeployData": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "str del registro de despliegue."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "str del producto asociado."
+        },
+        "bucket_config": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bucket Config",
+          "description": "Ruta/Bucket de la configuración principal."
+        },
+        "gs_examples_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Examples Agent",
+          "description": "Ruta del Google Storage para ejemplos del agente."
+        },
+        "gs_prompt_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Prompt Agent",
+          "description": "Ruta del Google Storage para prompt del agente."
+        },
+        "gs_prompt_sql": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Prompt Sql",
+          "description": "Ruta del Google Storage para prompt SQL."
+        },
+        "gs_profiling_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Profiling Agent",
+          "description": "Ruta del Google Storage para profiling del agente."
+        },
+        "gs_metrics_config_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Metrics Config Agent",
+          "description": "Ruta del Google Storage para configuración de métricas."
+        },
+        "client": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Client",
+          "description": "Nombre o ID del cliente (campo 'client')."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "product_id",
+        "created_at",
+        "updated_at"
+      ],
+      "title": "ClientDeployData",
+      "description": "Modelo para representar un registro de clients_products_deploys."
+    },
+    "ClientDeployDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del registro a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "ClientDeployDeleteRequest",
+      "description": "Datos necesarios para la eliminación.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "ClientDeployDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Registro de despliegue eliminado exitosamente."
+        },
+        "deploy_id": {
+          "type": "string",
+          "title": "Deploy Id",
+          "description": "ID del registro eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "deploy_id"
+      ],
+      "title": "ClientDeployDeleteResponse"
+    },
+    "ClientDeployListResponse": {
+      "properties": {
+        "deploys": {
+          "items": {
+            "$ref": "#/components/schemas/ClientDeployData"
+          },
+          "type": "array",
+          "title": "Deploys"
+        }
+      },
+      "type": "object",
+      "required": [
+        "deploys"
+      ],
+      "title": "ClientDeployListResponse"
+    },
+    "ClientDeployRegisterRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto."
+        },
+        "bucket_config": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bucket Config"
+        },
+        "gs_semantic_config": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Semantic Config"
+        },
+        "gs_examples_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Examples Agent"
+        },
+        "gs_prompt_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Prompt Agent"
+        },
+        "gs_prompt_sql": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Prompt Sql"
+        },
+        "gs_profiling_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Profiling Agent"
+        },
+        "gs_metrics_config_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gs Metrics Config Agent"
+        },
+        "client": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Client"
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "ClientDeployRegisterRequest",
+      "description": "Datos necesarios para la inserción/Update.",
+      "example": {
+        "bucket_config": "deploy-config-s3/prod",
+        "client": "KM Dev",
+        "gs_examples_agent": "gs://mindash-agents/v3/examples_kmd",
+        "gs_metrics_config_agent": "gs://mindash-agents/v3/metrics_kmd",
+        "gs_profiling_agent": "gs://mindash-agents/v3/profiling_kmd",
+        "gs_prompt_agent": "gs://mindash-agents/v3/prompt_kmd",
+        "gs_prompt_sql": "gs://mindash-agents/v3/prompt_sql_kmd",
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1"
+      }
+    },
+    "ClientDeployUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Registro de despliegue actualizado exitosamente."
+        },
+        "deploy_id": {
+          "type": "string",
+          "title": "Deploy Id",
+          "description": "ID del registro actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "deploy_id"
+      ],
+      "title": "ClientDeployUpdateResponse"
+    }
+  }
+}

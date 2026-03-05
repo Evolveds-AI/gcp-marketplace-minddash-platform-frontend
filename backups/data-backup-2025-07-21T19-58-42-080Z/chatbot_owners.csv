@@ -1,0 +1,6 @@
+id,usuario_id,chatbot_id,chatbot_name,company_name,permissions,created_at,updated_at
+9ada2a60-403e-4482-a450-9f22738e04a0,ef133e6e-03c3-44c5-9981-a68f87356554,chatbotLisa,Lisit,LISIT,[object Object],Mon Jul 07 2025 18:24:35 GMT-0300 (Argentina Standard Time),Mon Jul 07 2025 18:24:35 GMT-0300 (Argentina Standard Time)
+e7908e57-6b34-48d6-bddd-9fcf98d45a09,5f212679-9aca-4cae-9ed2-81a324e9cb36,chatbotID3456,Cintac,Cintac,[object Object],Mon Jul 07 2025 18:24:35 GMT-0300 (Argentina Standard Time),Mon Jul 07 2025 18:24:35 GMT-0300 (Argentina Standard Time)
+62ac726a-729e-4f3a-b4ce-b42de6420c29,2431de40-226e-4403-81b9-90ac6e6633b9,chatbotID8787,Mecanic,Mecánica Express,[object Object],Mon Jul 07 2025 18:24:36 GMT-0300 (Argentina Standard Time),Mon Jul 07 2025 18:24:36 GMT-0300 (Argentina Standard Time)
+5ac521cc-8ea5-40c6-9e1e-bd147628beab,9ee57f9f-f095-4d03-bc0b-b57a955ccf83,chatbotID9292,Restobar,Restobar Central,[object Object],Mon Jul 07 2025 18:24:37 GMT-0300 (Argentina Standard Time),Mon Jul 07 2025 18:24:37 GMT-0300 (Argentina Standard Time)
+5f2606ba-9295-4a46-8a73-f12954419697,a52e4caf-74af-43d2-9441-683908ab5c75,chatbotID3434,MindDash,MindDash Analytics,[object Object],Mon Jul 07 2025 18:24:38 GMT-0300 (Argentina Standard Time),Mon Jul 07 2025 18:24:38 GMT-0300 (Argentina Standard Time)

@@ -1,0 +1,50 @@
+{
+  "paths": {
+    "/users/getInfoByUser": {
+      "post": {
+        "tags": [
+          "Users Management"
+        ],
+        "summary": "Obtener Información Base de Usuario por ID",
+        "description": "Recupera la información general de un usuario (incluyendo detalles de acceso o *metadata* básica) utilizando su `user_id` proporcionado en el cuerpo de la solicitud.",
+        "operationId": "getListProjectByUser_users_getInfoByUser_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UserBaseInfoResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistprojectbyuser Users Getinfobyuser Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

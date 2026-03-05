@@ -1,0 +1,63 @@
+{
+  "schemas": {
+    "EmailRecipients": {
+      "properties": {
+        "to": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "To",
+          "description": "Lista de correos electrónicos principales (To)."
+        },
+        "cc": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cc",
+          "description": "Lista de correos electrónicos con copia (Cc)."
+        },
+        "bcc": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bcc",
+          "description": "Lista de correos electrónicos con copia oculta (Bcc)."
+        }
+      },
+      "type": "object",
+      "required": [
+        "to"
+      ],
+      "title": "EmailRecipients",
+      "description": "Define las listas de destinatarios para un correo electrónico.",
+      "example": {
+        "bcc": [
+          "logs_seguridad@miempresa.com"
+        ],
+        "cc": [
+          "manager@miempresa.com"
+        ],
+        "to": [
+          "operador_critico@miempresa.com"
+        ]
+      }
+    }
+  }
+}

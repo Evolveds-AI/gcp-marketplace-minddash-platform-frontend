@@ -1,0 +1,350 @@
+{
+  "schemas": {
+    "ChannelCreationResponse": {
+      "properties": {
+        "id_channel": {
+          "type": "string",
+          "title": "Id Channel",
+          "description": "El ID (str) del canal recién creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_channel"
+      ],
+      "title": "ChannelCreationResponse"
+    },
+    "ChannelDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del canal que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "ChannelDeleteRequest",
+      "description": "Datos para la eliminación de un canal.",
+      "example": {
+        "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
+      }
+    },
+    "ChannelDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Canal eliminado exitosamente."
+        },
+        "channel_id": {
+          "type": "string",
+          "title": "Channel Id",
+          "description": "ID del canal eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "channel_id"
+      ],
+      "title": "ChannelDeleteResponse"
+    },
+    "ChannelProductCreationResponse": {
+      "properties": {
+        "id_channel_product": {
+          "type": "string",
+          "title": "Id Channel Product",
+          "description": "El ID (str) de la relación recién creada."
+        },
+        "url_webhook_channel": {
+          "type": "string",
+          "title": "Url Webhook Channel",
+          "description": "El url webhook generado para la comunicacion."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_channel_product",
+        "url_webhook_channel"
+      ],
+      "title": "ChannelProductCreationResponse"
+    },
+    "ChannelProductDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID principal del registro de relación (channel_product) que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "ChannelProductDeleteRequest",
+      "description": "Datos para la eliminación de una relación Canal-Producto.",
+      "example": {
+        "id": "b1c2d3e4-f5g6-7h8i-9j0k-1l2m3n4o5p6q"
+      }
+    },
+    "ChannelProductDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Relación Canal-Producto eliminada exitosamente."
+        },
+        "channel_product_id": {
+          "type": "string",
+          "title": "Channel Product Id",
+          "description": "ID de la relación eliminada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "channel_product_id"
+      ],
+      "title": "ChannelProductDeleteResponse"
+    },
+    "ChannelProductRegisterRequest": {
+      "properties": {
+        "channel_id": {
+          "type": "string",
+          "title": "Channel Id",
+          "description": "ID del Canal."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del Producto."
+        },
+        "channel_product_type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Channel Product Type",
+          "description": "Tipo de la relación (ej: 'prod', 'test', 'dev')."
+        },
+        "configuration": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Configuration",
+          "description": "Configuración JSONB específica."
+        }
+      },
+      "type": "object",
+      "required": [
+        "channel_id",
+        "product_id"
+      ],
+      "title": "ChannelProductRegisterRequest",
+      "description": "Datos necesarios para crear una nueva relación.",
+      "example": {
+        "channel_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "channel_product_type": "prod",
+        "configuration": {
+          "deployment_name": "channel_prod_v1"
+        },
+        "product_id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "ChannelProductUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID principal del registro de relación."
+        },
+        "channel_id": {
+          "type": "string",
+          "title": "Channel Id",
+          "description": "Nuevo ID del Canal."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "Nuevo ID del Producto."
+        },
+        "channel_product_type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Channel Product Type",
+          "description": "Nuevo tipo de la relación."
+        },
+        "configuration": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Configuration",
+          "description": "Nueva configuración JSONB."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "channel_id",
+        "product_id"
+      ],
+      "title": "ChannelProductUpdateRequest",
+      "description": "Datos para la actualización de una relación.",
+      "example": {
+        "channel_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "channel_product_type": "test",
+        "configuration": {
+          "deployment_name": "channel_prod_v2"
+        },
+        "id": "b1c2d3e4-f5g6-7h8i-9j0k-1l2m3n4o5p6q",
+        "product_id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "ChannelProductUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Relación Canal-Producto actualizada exitosamente."
+        },
+        "channel_product_id": {
+          "type": "string",
+          "title": "Channel Product Id",
+          "description": "ID de la relación actualizada."
+        },
+        "url_webhook_channel": {
+          "type": "string",
+          "title": "Url Webhook Channel",
+          "description": "El url webhook generado para la comunicacion."
+        }
+      },
+      "type": "object",
+      "required": [
+        "channel_product_id",
+        "url_webhook_channel"
+      ],
+      "title": "ChannelProductUpdateResponse"
+    },
+    "ChannelRegisterRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "title": "Name",
+          "description": "Nombre del canal (ej: 'WhatsApp', 'Web')."
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description",
+          "description": "Descripción del canal."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "title": "ChannelRegisterRequest",
+      "description": "Datos para la creación de un nuevo canal.",
+      "example": {
+        "description": "El canal oficial de atención vía Telegram.",
+        "name": "Canal de Telegram"
+      }
+    },
+    "ChannelUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del canal que se va a actualizar."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "title": "Name",
+          "description": "Nuevo nombre del canal."
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description",
+          "description": "Nueva descripción del canal."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "ChannelUpdateRequest",
+      "description": "Datos para la actualización de un canal existente.",
+      "example": {
+        "description": "El canal de atención vía Telegram v2.0.",
+        "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+        "name": "Canal de Telegram Oficial"
+      }
+    },
+    "ChannelUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Canal actualizado exitosamente."
+        },
+        "channel_id": {
+          "type": "string",
+          "title": "Channel Id",
+          "description": "ID del canal actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "channel_id"
+      ],
+      "title": "ChannelUpdateResponse"
+    }
+  }
+}

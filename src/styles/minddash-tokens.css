@@ -1,0 +1,124 @@
+/* MindDash Design System Tokens
+ * Paleta coherente con celeste y verde como colores base
+ * Inspirada en shadcn/ui y dashboards oscuros modernos
+ */
+
+:root {
+  /* === Celeste (Primario) === */
+  --minddash-celeste-50: #e6fbff;
+  --minddash-celeste-100: #bff3fb;
+  --minddash-celeste-200: #8fe8f7;
+  --minddash-celeste-300: #5fddf2;
+  --minddash-celeste-400: #2fd2ee;
+  --minddash-celeste-500: #00a5cf; /* Base Primario */
+  --minddash-celeste-600: #008fb3;
+  --minddash-celeste-700: #007996;
+  --minddash-celeste-800: #006278;
+  --minddash-celeste-900: #004e64;
+
+  /* === Verde (Secundario/Éxito) === */
+  --minddash-verde-50: #ecfdf6;
+  --minddash-verde-100: #d1fae5;
+  --minddash-verde-200: #a7f3d0;
+  --minddash-verde-300: #9fffcb;
+  --minddash-verde-400: #7ae582;
+  --minddash-verde-500: #25a18e; /* Base Secundario/Éxito */
+  --minddash-verde-600: #1f8c7b;
+  --minddash-verde-700: #197768;
+  --minddash-verde-800: #136255;
+  --minddash-verde-900: #0d4d42;
+
+  /* === Neutros (Tema Oscuro) === */
+  --minddash-gray-50: #f9fafb;
+  --minddash-gray-100: #f3f4f6;
+  --minddash-gray-200: #e5e7eb;
+  --minddash-gray-300: #d1d5db;
+  --minddash-gray-400: #9ca3af;
+  --minddash-gray-500: #6b7280;
+  --minddash-gray-600: #4b5563;
+  --minddash-gray-700: #374151;
+  --minddash-gray-800: #1f2937;
+  --minddash-gray-900: #111827;
+
+  /* === Fondos (Dark Theme) === */
+  --minddash-bg: #0a0a0a; /* Fondo principal */
+  --minddash-surface: #111111; /* Contenedores principales */
+  --minddash-card: #1a1a1a; /* Tarjetas y paneles */
+  --minddash-elevated: #222222; /* Elementos elevados */
+
+  /* === Bordes === */
+  --minddash-border: #2a2a2a;
+  --minddash-border-subtle: #333333;
+
+  /* === Texto === */
+  --minddash-text-primary: #e5e7eb;
+  --minddash-text-secondary: #9ca3af;
+  --minddash-text-muted: #6b7280;
+  --minddash-text-inverse: #0a0a0a;
+
+  /* === Estados === */
+  --minddash-success: var(--minddash-verde-500);
+  --minddash-success-hover: var(--minddash-verde-600);
+  --minddash-warning: #f59e0b;
+  --minddash-warning-hover: #d97706;
+  --minddash-error: #ef4444;
+  --minddash-error-hover: #dc2626;
+  --minddash-info: var(--minddash-celeste-500);
+  --minddash-info-hover: var(--minddash-celeste-600);
+
+  /* === Sombras === */
+  --minddash-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --minddash-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --minddash-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --minddash-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --minddash-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* === Gradientes === */
+  --minddash-gradient-brand: linear-gradient(135deg, var(--minddash-celeste-500) 0%, var(--minddash-celeste-700) 45%, var(--minddash-celeste-900) 100%);
+  --minddash-gradient-success: linear-gradient(135deg, var(--minddash-verde-600) 0%, var(--minddash-verde-400) 100%);
+  --minddash-gradient-avatar: linear-gradient(135deg, var(--minddash-celeste-500) 0%, var(--minddash-verde-500) 100%);
+}
+
+/* === Light Theme (Opcional) === */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Fondos Light */
+    --minddash-bg: #ffffff;
+    --minddash-surface: #f9fafb;
+    --minddash-card: #ffffff;
+    --minddash-elevated: #f3f4f6;
+
+    /* Bordes Light */
+    --minddash-border: #e5e7eb;
+    --minddash-border-subtle: #f3f4f6;
+
+    /* Texto Light */
+    --minddash-text-primary: #111827;
+    --minddash-text-secondary: #4b5563;
+    --minddash-text-muted: #6b7280;
+    --minddash-text-inverse: #ffffff;
+  }
+}
+
+/* === Utilidades === */
+.text-minddash-brand { color: var(--minddash-celeste-500); }
+.text-minddash-success { color: var(--minddash-verde-500); }
+.bg-minddash-brand { background-color: var(--minddash-celeste-500); }
+.bg-minddash-success { background-color: var(--minddash-verde-500); }
+.border-minddash { border-color: var(--minddash-border); }
+
+/* === Focus Rings === */
+.focus-ring-minddash:focus {
+  outline: 2px solid var(--minddash-celeste-500);
+  outline-offset: 2px;
+}
+
+/* === Animaciones === */
+@keyframes minddash-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-minddash-pulse {
+  animation: minddash-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

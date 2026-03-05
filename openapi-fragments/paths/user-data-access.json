@@ -1,0 +1,696 @@
+{
+  "paths": {
+    "/user-data-access/getUserDataAccess": {
+      "post": {
+        "tags": [
+          "User Data Access"
+        ],
+        "summary": "Listar Acceso a Datos (Todos o por ID)",
+        "description": "Obtiene todos los registros de acceso a datos de usuario, o uno específico si se proporciona `user_data_access_id`.",
+        "operationId": "getUserDataAccess_user_data_access_getUserDataAccess_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserDataAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UserDataAccessResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Getuserdataaccess User Data Access Getuserdataaccess Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/getUserDataAccessByRole": {
+      "post": {
+        "tags": [
+          "User Data Access"
+        ],
+        "summary": "Listar Acceso a Datos por Rol",
+        "description": "Obtiene la lista de registros de acceso a datos de usuario que están asociados a un `role_id` específico.",
+        "operationId": "getUserDataAccessByRole_user_data_access_getUserDataAccessByRole_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserDataAccessByRoleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UserDataAccessByRole"
+                  },
+                  "type": "array",
+                  "title": "Response Getuserdataaccessbyrole User Data Access Getuserdataaccessbyrole Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/getUserDataAccessByUser": {
+      "post": {
+        "tags": [
+          "User Data Access"
+        ],
+        "summary": "Listar Acceso a Datos por Usuario",
+        "description": "Obtiene la lista de registros de acceso a datos que están asociados a un `user_id` específico.",
+        "operationId": "getUserDataAccessByUser_user_data_access_getUserDataAccessByUser_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserDataAccessByUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UserDataAccessByUser"
+                  },
+                  "type": "array",
+                  "title": "Response Getuserdataaccessbyuser User Data Access Getuserdataaccessbyuser Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/sendRegistroUserDataAccess": {
+      "post": {
+        "tags": [
+          "User Data Access"
+        ],
+        "summary": "Registrar Acceso de Usuario (CREATE)",
+        "description": "Crea un nuevo registro de acceso a datos detallado para un usuario.",
+        "operationId": "sendRegistroUserDataAccess_user_data_access_sendRegistroUserDataAccess_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDataAccessRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDataAccessCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/updateUserDataAccess": {
+      "put": {
+        "tags": [
+          "User Data Access"
+        ],
+        "summary": "Actualizar Acceso de Usuario (UPDATE)",
+        "description": "Modifica un registro de acceso a datos de usuario existente, identificado por su `id`.",
+        "operationId": "updateUserDataAccess_user_data_access_updateUserDataAccess_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDataAccessUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDataAccessUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/deleteUserDataAccess": {
+      "delete": {
+        "tags": [
+          "User Data Access"
+        ],
+        "summary": "Eliminar Acceso de Usuario (DELETE)",
+        "description": "Elimina un registro de acceso a datos de usuario existente.",
+        "operationId": "deleteUserDataAccess_user_data_access_deleteUserDataAccess_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDataAccessDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDataAccessDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/getRolesDataAccess": {
+      "post": {
+        "tags": [
+          "Role Data Access"
+        ],
+        "summary": "Listar Roles de Acceso a Datos (Todos o por ID)",
+        "description": "Obtiene todos los roles de acceso a datos o uno específico si se proporciona `role_id`.",
+        "operationId": "getRolesDataAccess_user_data_access_getRolesDataAccess_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetRolesDataAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RoleDataAccessResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Getrolesdataaccess User Data Access Getrolesdataaccess Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/getRolesDataAccessByProduct": {
+      "post": {
+        "tags": [
+          "Role Data Access"
+        ],
+        "summary": "Listar Roles de Acceso por Producto",
+        "description": "Obtiene la lista de roles de acceso a datos que están asociados a un `product_id` específico.",
+        "operationId": "getRolesDataAccessByProduct_user_data_access_getRolesDataAccessByProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetRolesDataAccessByProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RoleDataAccessByProduct"
+                  },
+                  "type": "array",
+                  "title": "Response Getrolesdataaccessbyproduct User Data Access Getrolesdataaccessbyproduct Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/sendRegistroRoleDataAccess": {
+      "post": {
+        "tags": [
+          "Role Data Access"
+        ],
+        "summary": "Registrar Acceso de Rol (CREATE)",
+        "description": "Crea un nuevo rol de acceso a datos en la base de datos.",
+        "operationId": "sendRegistroRoleDataAccess_user_data_access_sendRegistroRoleDataAccess_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDataAccessRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDataAccessCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/updateRoleDataAccess": {
+      "put": {
+        "tags": [
+          "Role Data Access"
+        ],
+        "summary": "Actualizar Acceso de Rol (UPDATE)",
+        "description": "Modifica un rol de acceso a datos existente, identificado por su `id`.",
+        "operationId": "updateRoleDataAccess_user_data_access_updateRoleDataAccess_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDataAccessUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDataAccessUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/deleteRoleDataAccess": {
+      "delete": {
+        "tags": [
+          "Role Data Access"
+        ],
+        "summary": "Eliminar Acceso de Rol (DELETE)",
+        "description": "Elimina un rol de acceso a datos existente.",
+        "operationId": "deleteRoleDataAccess_user_data_access_deleteRoleDataAccess_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDataAccessDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDataAccessDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/getDeployConfig": {
+      "post": {
+        "tags": [
+          "Client Product Deploys"
+        ],
+        "summary": "Obtener Configuración de Despliegue (Todos o por ID)",
+        "description": "Obtiene todos los registros de configuración de despliegue o uno específico si se proporciona `deploy_id`.",
+        "operationId": "get_deploy_config_user_data_access_getDeployConfig_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetClientDeployRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDeployListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/getDeploysByProduct": {
+      "post": {
+        "tags": [
+          "Client Product Deploys"
+        ],
+        "summary": "Listar Despliegues por Producto",
+        "description": "Obtiene la lista de configuraciones de despliegue asociadas a un `product_id` específico.",
+        "operationId": "get_deploys_by_product_user_data_access_getDeploysByProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetClientDeployByProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDeployListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/sendRegisterDeployConfig": {
+      "post": {
+        "tags": [
+          "Client Product Deploys"
+        ],
+        "summary": "Registrar Configuración de Despliegue (CREATE)",
+        "description": "Crea un nuevo registro de configuración de despliegue para un producto/cliente usando el SP V2 (INSERT o UPDATE).",
+        "operationId": "send_register_deploy_config_user_data_access_sendRegisterDeployConfig_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientDeployRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDeployCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/updateDeployConfig": {
+      "put": {
+        "tags": [
+          "Client Product Deploys"
+        ],
+        "summary": "Actualizar Configuración de Despliegue (UPDATE)",
+        "description": "Modifica un registro de configuración de despliegue existente.",
+        "operationId": "update_deploy_config_user_data_access_updateDeployConfig_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientDeployRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDeployUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-data-access/deleteDeployConfig": {
+      "delete": {
+        "tags": [
+          "Client Product Deploys"
+        ],
+        "summary": "Eliminar Configuración de Despliegue (DELETE)",
+        "description": "Elimina un registro de configuración de despliegue.",
+        "operationId": "delete_deploy_config_user_data_access_deleteDeployConfig_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientDeployDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDeployDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

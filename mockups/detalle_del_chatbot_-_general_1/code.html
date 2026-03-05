@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #135bec;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+<div class="flex min-h-screen">
+<aside class="w-64 bg-gray-950/50 flex flex-col">
+<div class="p-6">
+<h1 class="text-2xl font-bold text-white">MindDash</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md bg-primary-500 text-white bg-[var(--primary-color)]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>General</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span>Capa Semántica</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span>Prompt</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span>Permisos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span>Alertas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span>Insights</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span>Administración</span>
+</a>
+</div>
+</aside>
+<main class="flex-1">
+<header class="flex items-center justify-between border-b border-gray-800 px-8 py-4">
+<div class="flex items-center gap-3 text-sm text-gray-400">
+<span>Tech Solutions</span>
+<span class="material-symbols-outlined text-gray-500">chevron_right</span>
+<span>Proyecto Alpha</span>
+<span class="material-symbols-outlined text-gray-500">chevron_right</span>
+<span class="text-white font-semibold">EVA</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeSLk_D1LMFTjUpRUHevUcHZ74YhHVyC4ap-DGiQ9wkt9OWZ3z41q5t8LzzruKNYFiMS2T9tLBuqvvyElfwccXYpGR8kVgGxnYpB71VFR3EifgUm6KwNP_hF3jZaop3I9A3lkZD2akvslDmnmDhYSe_FGpGzqB96KAPS0u-tz7ehEvDt0LmEmHUp0YB8S1-u-h00H0Yd6RQweiRzCN--JGHof_YObKkK8ILJJJSB-1lbLD2XCXU2Ag-Kxw3cqMi6qYu9Fhg7O7HCk");'></div>
+</div>
+</header>
+<div class="p-8">
+<h2 class="text-3xl font-bold text-white mb-8">General</h2>
+<div class="space-y-10">
+<div>
+<h3 class="text-xl font-semibold text-white mb-4">Reporte</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-gray-800/50 p-6 rounded-md border border-gray-800">
+<p class="text-gray-400 mb-2">Conexiones</p>
+<p class="text-4xl font-bold text-white">12</p>
+</div>
+<div class="bg-gray-800/50 p-6 rounded-md border border-gray-800">
+<p class="text-gray-400 mb-2">Usuarios Registrados</p>
+<p class="text-4xl font-bold text-white">1,234</p>
+</div>
+<div class="bg-gray-800/50 p-6 rounded-md border border-gray-800">
+<p class="text-gray-400 mb-2">Usuarios Activos</p>
+<p class="text-4xl font-bold text-white">567</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-white mb-4">Vínculos</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<a class="flex items-center gap-4 p-4 bg-gray-800/50 rounded-md border border-gray-800 hover:border-[var(--primary-color)] transition-colors group" href="#">
+<div class="p-2 bg-gray-700/50 rounded-md">
+<svg class="text-white" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="2" x2="22" y1="12" y2="12"></line>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+</svg>
+</div>
+<span class="font-semibold">Web</span>
+</a>
+<a class="flex items-center gap-4 p-4 bg-gray-800/50 rounded-md border border-gray-800 hover:border-[var(--primary-color)] transition-colors group" href="#">
+<div class="p-2 bg-gray-700/50 rounded-md">
+<svg class="text-green-500" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+</svg>
+</div>
+<span class="font-semibold">WhatsApp</span>
+</a>
+<a class="flex items-center gap-4 p-4 bg-gray-800/50 rounded-md border border-gray-800 hover:border-[var(--primary-color)] transition-colors group" href="#">
+<div class="p-2 bg-gray-700/50 rounded-md">
+<svg class="text-indigo-500" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.29 21.35c-2.36 1.08-5.32.86-7.82-.67l-2.61-1.6c-2.5-.53-4.22-2.58-4.22-5.18V10.1c0-2.6 1.72-4.65 4.22-5.18l2.61-1.6c2.5-1.53 5.46-1.75 7.82-.67l2.84 1.3c2.36 1.08 3.82 3.5 3.82 6.07v.18c0 2.58-1.46 5-3.82 6.08l-2.84 1.3z"></path>
+<path d="M8.28 15.65v-4.3c0-.99.78-1.79 1.74-1.79h.84c.96 0 1.74.8 1.74 1.79v4.3M8.28 9.57v-1.9a1.76 1.76 0 0 1 1.74-1.79h.84c.96 0 1.74.8 1.74 1.79v1.9"></path>
+<path d="M15.72 15.65v-4.3c0-.99-.78-1.79-1.74-1.79h-.84c-.96 0-1.74.8-1.74 1.79v4.3"></path>
+</svg>
+</div>
+<span class="font-semibold">Microsoft Teams</span>
+</a>
+<a class="flex items-center gap-4 p-4 bg-gray-800/50 rounded-md border border-gray-800 hover:border-[var(--primary-color)] transition-colors group" href="#">
+<div class="p-2 bg-gray-700/50 rounded-md">
+<svg class="text-white" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.96 15.21c-1.39.38-2.64.38-4.03 0a2.31 2.31 0 1 1 4.03 0Z"></path>
+<path d="M8.79 19.43c.38-1.39.38-2.64 0-4.03a2.31 2.31 0 1 1 0 4.03Z"></path>
+<path d="M8.79 8.79c-.38-1.39-.38-2.64 0-4.03a2.31 2.31 0 1 1 0 4.03Z"></path>
+<path d="M15.21 15.21c1.39.38 2.64.38 4.03 0a2.31 2.31 0 1 0-4.03 0Z"></path>
+<path d="M19.43 8.79c-.38 1.39-.38 2.64 0 4.03a2.31 2.31 0 1 0 0-4.03Z"></path>
+<path d="M15.21 8.79c1.39-.38 2.64-.38 4.03 0a2.31 2.31 0 1 0-4.03 0Z"></path>
+<path d="M8.79 4.57c.38 1.39.38 2.64 0 4.03a2.31 2.31 0 1 0 0-4.03Z"></path>
+<path d="M4.57 15.21c-1.39-.38-2.64-.38-4.03 0a2.31 2.31 0 1 1 4.03 0Z"></path>
+</svg>
+</div>
+<span class="font-semibold">Slack</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

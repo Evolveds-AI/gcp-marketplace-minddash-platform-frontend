@@ -1,0 +1,435 @@
+{
+  "schemas": {
+    "RoleDataAccessByProduct": {
+      "properties": {
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "ID del rol de acceso a datos."
+        },
+        "role_name": {
+          "type": "string",
+          "title": "Role Name",
+          "description": "Nombre del rol."
+        },
+        "role_table_names": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Role Table Names",
+          "description": "Lista de nombres de tablas."
+        },
+        "role_data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Data Access",
+          "description": "Configuración de acceso a datos."
+        },
+        "role_metrics_access": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Role Metrics Access",
+          "description": "Configuración de acceso a métricas."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto."
+        },
+        "product_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Name",
+          "description": "Nombre del producto."
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "role_id",
+        "role_name",
+        "role_table_names",
+        "product_id"
+      ],
+      "title": "RoleDataAccessByProduct",
+      "description": "Representa un rol de acceso a datos con información del producto."
+    },
+    "RoleDataAccessCreationResponse": {
+      "properties": {
+        "id_role": {
+          "type": "string",
+          "title": "Id Role",
+          "description": "ID del rol creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_role"
+      ],
+      "title": "RoleDataAccessCreationResponse",
+      "description": "Respuesta al crear un nuevo rol de acceso a datos."
+    },
+    "RoleDataAccessDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del rol que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "RoleDataAccessDeleteRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_delete_role_data_access.\nSolo requiere el ID.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "RoleDataAccessDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Rol de acceso a datos eliminado exitosamente."
+        },
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "ID del rol eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "role_id"
+      ],
+      "title": "RoleDataAccessDeleteResponse",
+      "description": "Respuesta al eliminar un rol de acceso a datos."
+    },
+    "RoleDataAccessRegisterRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto al que pertenece el rol."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255,
+          "title": "Name",
+          "description": "Nombre del rol de acceso a datos."
+        },
+        "table_names": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Table Names",
+          "description": "Lista de nombres de tablas."
+        },
+        "data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Access",
+          "description": "Configuración de acceso a datos JSONB."
+        },
+        "metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metrics Access",
+          "description": "Configuración de acceso a métricas JSONB."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "name",
+        "table_names"
+      ],
+      "title": "RoleDataAccessRegisterRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_role_data_access.",
+      "example": {
+        "metrics_access": [
+          "cross_selling_general",
+          "cross_selling_specific",
+          "cross_selling_agronomic",
+          "nip_real_ponderado",
+          "nip_target_ponderado"
+        ],
+        "name": "AllAccess",
+        "product_id": "82c9669b-7ad4-429f-a52f-8985a7b279e2",
+        "table_names": [
+          "facturacion_argentina",
+          "tablon_target_real_2025",
+          "tablon_target_one_page_2025",
+          "dev_tablon_target_FYV_2025"
+        ]
+      }
+    },
+    "RoleDataAccessResponse": {
+      "properties": {
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "ID del rol."
+        },
+        "role_name": {
+          "type": "string",
+          "title": "Role Name",
+          "description": "Nombre del rol."
+        },
+        "role_table_names": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Role Table Names",
+          "description": "Lista de nombres de tablas."
+        },
+        "role_data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Data Access",
+          "description": "Configuración de acceso a datos."
+        },
+        "role_metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Metrics Access",
+          "description": "Configuración de acceso a métricas."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto."
+        },
+        "product_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Name",
+          "description": "Nombre del producto."
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "role_id",
+        "role_name",
+        "role_table_names",
+        "product_id"
+      ],
+      "title": "RoleDataAccessResponse",
+      "description": "Respuesta para un rol de acceso a datos individual."
+    },
+    "RoleDataAccessUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del rol que se va a actualizar."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255,
+          "title": "Name",
+          "description": "Nuevo nombre del rol."
+        },
+        "table_names": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Table Names",
+          "description": "Nueva lista de nombres de tablas."
+        },
+        "data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Access",
+          "description": "Nueva configuración de acceso a datos."
+        },
+        "metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metrics Access",
+          "description": "Nueva configuración de acceso a métricas."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "product_id",
+        "name",
+        "table_names"
+      ],
+      "title": "RoleDataAccessUpdateRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_role_data_access.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e",
+        "metrics_access": [
+          "cross_selling_general",
+          "cross_selling_specific",
+          "cross_selling_agronomic",
+          "nip_real_ponderado",
+          "nip_target_ponderado"
+        ],
+        "name": "AllAccess",
+        "product_id": "82c9669b-7ad4-429f-a52f-8985a7b279e2",
+        "table_names": [
+          "facturacion_argentina",
+          "tablon_target_real_2025",
+          "tablon_target_one_page_2025",
+          "dev_tablon_target_FYV_2025"
+        ]
+      }
+    },
+    "RoleDataAccessUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Rol de acceso a datos actualizado exitosamente."
+        },
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "ID del rol actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "role_id"
+      ],
+      "title": "RoleDataAccessUpdateResponse",
+      "description": "Respuesta al actualizar un rol de acceso a datos."
+    }
+  }
+}

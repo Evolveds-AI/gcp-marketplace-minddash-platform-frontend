@@ -1,0 +1,5 @@
+id,usuario_id,chatbot_id,chatbot_name,chatbot_path,gcp_name,is_active,assigned_at,assigned_by
+697ca818-bf19-4890-8ab5-11b9eecf0809,2431de40-226e-4403-81b9-90ac6e6633b9,chatbotLisa,Lisit,/chatbot/chatbotLisa,lisit,true,Tue Jul 08 2025 18:23:19 GMT-0300 (Argentina Standard Time),00000000-0000-0000-0000-000000000000
+7407cb04-9036-43f8-8361-909bbd02be7f,a52e4caf-74af-43d2-9441-683908ab5c75,chatbotLisa,Lisit,/chatbot/chatbotLisa,lisit,true,Tue Jul 08 2025 18:23:19 GMT-0300 (Argentina Standard Time),00000000-0000-0000-0000-000000000000
+b2f7086c-fefc-46c0-91fd-0d60e96d2009,ef133e6e-03c3-44c5-9981-a68f87356554,chatbotLisa,Lisit,/chatbot/chatbotLisa,lisit,true,Tue Jul 08 2025 18:23:19 GMT-0300 (Argentina Standard Time),00000000-0000-0000-0000-000000000000
+a0bb4dba-6ae2-499a-8769-dfabeb14ea4e,9ee57f9f-f095-4d03-bc0b-b57a955ccf83,chatbotID9292,REMO,/chatbot/chatbotID9292,remo,true,Tue Jul 08 2025 18:40:12 GMT-0300 (Argentina Standard Time),f9fd1cd3-be68-42b9-aff4-bda91cc433a6

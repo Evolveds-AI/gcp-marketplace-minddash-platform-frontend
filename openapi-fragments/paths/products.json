@@ -1,0 +1,374 @@
+{
+  "paths": {
+    "/products/getListProduct": {
+      "get": {
+        "tags": [
+          "Products Management"
+        ],
+        "summary": "Listar Todos los Productos",
+        "description": "Obtiene una lista completa de todos los productos registrados en el sistema.",
+        "operationId": "getListProduct_products_getListProduct_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistproduct Products Getlistproduct Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/getListProductByUser": {
+      "post": {
+        "tags": [
+          "Products Management"
+        ],
+        "summary": "Listar Productos por Usuario",
+        "description": "Obtiene la lista de productos a los que un `user_id` específico tiene acceso (directo o heredado), filtrando por el ID de usuario proporcionado en el cuerpo de la solicitud.",
+        "operationId": "getListProductByUser_products_getListProductByUser_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProductByUser"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistproductbyuser Products Getlistproductbyuser Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/getListProductByPrd": {
+      "post": {
+        "tags": [
+          "Products Management"
+        ],
+        "summary": "Obtener Producto por ID",
+        "description": "Recupera los detalles de un producto específico utilizando su `product_id`. Incluye validación de acceso por `user_id`.",
+        "operationId": "getListProductByPrd_products_getListProductByPrd_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetProductRequestByPrd"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistproductbyprd Products Getlistproductbyprd Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/sendRegistroProduct": {
+      "post": {
+        "tags": [
+          "Products Management"
+        ],
+        "summary": "Registrar Nuevo Producto (CREATE)",
+        "description": "Crea un nuevo registro de producto en la base de datos.",
+        "operationId": "sendRegistroProduct_products_sendRegistroProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/updateProduct": {
+      "put": {
+        "tags": [
+          "Products Management"
+        ],
+        "summary": "Actualizar Producto (UPDATE)",
+        "description": "Modifica los datos de un producto existente. Devuelve error 404 si el producto no existe.",
+        "operationId": "updateProduct_products_updateProduct_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/deleteProduct": {
+      "delete": {
+        "tags": [
+          "Products Management"
+        ],
+        "summary": "Eliminar Producto (DELETE)",
+        "description": "Elimina un producto del sistema usando su `id`. Devuelve error 404 si el producto no existe.",
+        "operationId": "deleteProduct_products_deleteProduct_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/sendAccessProduct": {
+      "post": {
+        "tags": [
+          "Product Access"
+        ],
+        "summary": "Otorgar Acceso a Producto (CREATE Permission)",
+        "description": "Registra el acceso de un `user_id` a un `product_id` específico, asignándole un `role_id`.",
+        "operationId": "sendAccessProduct_products_sendAccessProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRegisterAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCreationAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/updateAccessProduct": {
+      "put": {
+        "tags": [
+          "Product Access"
+        ],
+        "summary": "Actualizar Acceso a Producto (UPDATE Permission)",
+        "description": "Modifica un registro de acceso existente, permitiendo cambiar el rol (`role_id`) o reasignar el acceso. Devuelve error 404 si el registro de acceso no existe.",
+        "operationId": "updateAccessProduct_products_updateAccessProduct_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductUpdateAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductUpdateAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/deleteAccessProduct": {
+      "delete": {
+        "tags": [
+          "Product Access"
+        ],
+        "summary": "Revocar Acceso a Producto (DELETE Permission)",
+        "description": "Elimina el registro de acceso, revocando los permisos del usuario para el producto específico. Devuelve error 404 si el registro de acceso no existe.",
+        "operationId": "deleteAccessProduct_products_deleteAccessProduct_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDeleteAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDeleteAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

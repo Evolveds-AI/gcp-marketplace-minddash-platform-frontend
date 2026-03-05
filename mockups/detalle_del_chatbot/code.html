@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-500: #135bec;
+        --primary-600: #0a47c4;
+      }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+<div class="flex min-h-screen">
+<aside class="w-64 bg-gray-950 p-6 flex flex-col">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-8 h-8 text-[var(--primary-500)]">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold">Chatbot Manager</h1>
+</div>
+<nav class="flex flex-col gap-4">
+<a class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white rounded-md" href="#">
+<span class="material-symbols-outlined"> dashboard </span>
+            Dashboard
+          </a>
+<a class="flex items-center gap-3 px-4 py-2 text-white bg-[var(--primary-500)] rounded-md" href="#">
+<span class="material-symbols-outlined"> smart_toy </span>
+            Chatbots
+          </a>
+<a class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white rounded-md" href="#">
+<span class="material-symbols-outlined"> integration_instructions </span>
+            Integrations
+          </a>
+<a class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white rounded-md" href="#">
+<span class="material-symbols-outlined"> description </span>
+            Documentation
+          </a>
+</nav>
+<div class="mt-auto flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3pIZ8FIRncaHeB4ykTEXQAjkoJmh1IX8zAieuHbHk2rymutFA50XZlUSZpi1xoNS0U2fFUkyrhFKm6cK8bEvbNmC9cKcbap9fyFV8ak5JEmsZqSTUopxbfV4eL6dYaT7bV2pTeANgYGu6iz0fhAxxPs_6IN1mLzUT7BlD6ZlEG3LXw0bE5HyN6ftMYSFMYEZnL1qAfxX9YrYgNiuNO18B_lnS-wdoPZMQcOfywO7R3MlbLc7qAvV8SfoLRpXkLbi01MLpm3k3c8k");'></div>
+<div class="flex flex-col">
+<span class="font-medium">John Doe</span>
+<span class="text-sm text-gray-400">Admin</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<h1 class="text-4xl font-bold tracking-tight">E-commerce Assistant</h1>
+<p class="text-gray-400 mt-2">Gestiona y monitorea el rendimiento y la configuración de tu chatbot.</p>
+</div>
+<div class="border-b border-gray-700 mb-8">
+<nav class="flex gap-6 -mb-px">
+<a class="px-1 py-4 border-b-2 border-[var(--primary-500)] text-[var(--primary-500)] font-semibold text-sm" href="#">General</a>
+<a class="px-1 py-4 border-b-2 border-transparent text-gray-400 hover:text-white hover:border-gray-300 font-semibold text-sm" href="#">
+                Capa semántica
+              </a>
+<a class="px-1 py-4 border-b-2 border-transparent text-gray-400 hover:text-white hover:border-gray-300 font-semibold text-sm" href="#">
+                Prompt
+              </a>
+<a class="px-1 py-4 border-b-2 border-transparent text-gray-400 hover:text-white hover:border-gray-300 font-semibold text-sm" href="#">
+                Permisos/Usuarios
+              </a>
+<a class="px-1 py-4 border-b-2 border-transparent text-gray-400 hover:text-white hover:border-gray-300 font-semibold text-sm" href="#">
+                Alertas
+              </a>
+<a class="px-1 py-4 border-b-2 border-transparent text-gray-400 hover:text-white hover:border-gray-300 font-semibold text-sm" href="#">
+                Insights
+              </a>
+</nav>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2">
+<h2 class="text-2xl font-bold tracking-tight mb-4">Resumen del Chatbot</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-gray-800 rounded-lg p-6 flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400"> link </span>
+<p class="text-base font-medium text-gray-300">Conexiones</p>
+</div>
+<p class="text-4xl font-bold tracking-tight">15</p>
+</div>
+<div class="bg-gray-800 rounded-lg p-6 flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400"> group </span>
+<p class="text-base font-medium text-gray-300">Usuarios Registrados</p>
+</div>
+<p class="text-4xl font-bold tracking-tight">1,200</p>
+</div>
+<div class="bg-gray-800 rounded-lg p-6 flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400"> trending_up </span>
+<p class="text-base font-medium text-gray-300">Usuarios Activos</p>
+</div>
+<p class="text-4xl font-bold tracking-tight">350</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1">
+<h2 class="text-2xl font-bold tracking-tight mb-4">Canales de Enlace</h2>
+<div class="space-y-4">
+<a class="flex items-center gap-4 rounded-lg bg-gray-800 hover:bg-gray-700 p-4 transition-colors" href="#">
+<div class="text-white">
+<span class="material-symbols-outlined text-2xl"> public </span>
+</div>
+<h3 class="text-base font-bold">Web</h3>
+<span class="material-symbols-outlined ml-auto text-gray-500"> chevron_right </span>
+</a>
+<a class="flex items-center gap-4 rounded-lg bg-gray-800 hover:bg-gray-700 p-4 transition-colors" href="#">
+<div class="text-green-500">
+<svg class="w-6 h-6" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+</div>
+<h3 class="text-base font-bold">WhatsApp</h3>
+<span class="material-symbols-outlined ml-auto text-gray-500"> chevron_right </span>
+</a>
+<a class="flex items-center gap-4 rounded-lg bg-gray-800 hover:bg-gray-700 p-4 transition-colors" href="#">
+<div class="text-blue-500">
+<svg class="w-6 h-6" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M13 2H2v10l3.2-3.2 4.1 4.1L13 9V2zM22 13l-3.2 3.2-4.1-4.1L11 15v7h11v-10z"></path></svg>
+</div>
+<h3 class="text-base font-bold">Microsoft Teams</h3>
+<span class="material-symbols-outlined ml-auto text-gray-500"> chevron_right </span>
+</a>
+<a class="flex items-center gap-4 rounded-lg bg-gray-800 hover:bg-gray-700 p-4 transition-colors" href="#">
+<div class="text-purple-500">
+<svg class="w-6 h-6" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 11.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 5 0V11a2.5 2.5 0 1 1-5 0V6.5a2.5 2.5 0 0 1 5 0V11a2.5 2.5 0 1 1-5 0zM12.5 7a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM17 12.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM11.5 17a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0z"></path></svg>
+</div>
+<h3 class="text-base font-bold">Slack</h3>
+<span class="material-symbols-outlined ml-auto text-gray-500"> chevron_right </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,130 @@
+<html><head>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #135bec;
+      }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+<div class="flex min-h-screen">
+<aside class="w-64 bg-gray-900 flex flex-col p-6 border-r border-gray-700">
+<div class="flex items-center gap-2 mb-10">
+<div class="text-[var(--primary-color)] w-8 h-8">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold">MindDash</h1>
+</div>
+<nav class="flex-grow">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md bg-gray-800 text-white" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Clientes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 text-gray-400" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Usuarios</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 text-gray-400" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboards</span>
+</a>
+</li>
+</ul>
+</nav>
+<div>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-800 text-gray-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Administración</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="flex items-center justify-between px-8 py-4 border-b border-gray-700">
+<h2 class="text-2xl font-bold">Clientes</h2>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-md h-10 w-10 bg-[var(--primary-color)] text-white hover:bg-blue-600">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeMGS9LBcY4nkoApt6cgF2zH582FgDm8vjMuc-NUpsbI2MlbwJv7qV4w1yLIH382hc1gNZlMWWJGpXVDQ1GhJyiGBm2gOq5-pigkL1g7jN5tLjIn3Osnmnv5x8og3OtT_p_ZgwSlBqe6OW3yMp1dRZ_d_ffpZ3QDIBKq4QDZh5jKIlEa9y4QgroU3IPgW-xaRCMuxwRnBTqjyzylcyxre_XXPHNob0fp0r5Az7oLeEux2ttBRUxdLgrAbW6JwBJmajIhCYwslH9FI");'></div>
+</div>
+</header>
+<main class="flex-1 p-8 bg-gray-900">
+<div class="mb-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full bg-gray-800 border-none rounded-md pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]" placeholder="Buscar clientes" type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto rounded-md border border-gray-700">
+<table class="w-full text-sm text-left text-gray-400">
+<thead class="text-xs text-gray-400 uppercase bg-gray-800">
+<tr>
+<th class="px-6 py-3" scope="col">Nombre del Cliente</th>
+<th class="px-6 py-3" scope="col">Razón Social</th>
+<th class="px-6 py-3" scope="col">Descripción</th>
+<th class="px-6 py-3" scope="col">País</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+<th class="px-6 py-4 font-medium text-white whitespace-nowrap cursor-pointer hover:text-[var(--primary-color)]" scope="row">
+                    Acme Corp
+                  </th>
+<td class="px-6 py-4">Acme Corporation</td>
+<td class="px-6 py-4">Empresa líder en tecnología</td>
+<td class="px-6 py-4">Estados Unidos</td>
+</tr>
+<tr class="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+<th class="px-6 py-4 font-medium text-white whitespace-nowrap cursor-pointer hover:text-[var(--primary-color)]" scope="row">
+                    Tech Solutions
+                  </th>
+<td class="px-6 py-4">Tech Solutions Inc.</td>
+<td class="px-6 py-4">Proveedores de soluciones tecnológicas</td>
+<td class="px-6 py-4">Canadá</td>
+</tr>
+<tr class="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+<th class="px-6 py-4 font-medium text-white whitespace-nowrap cursor-pointer hover:text-[var(--primary-color)]" scope="row">
+                    Global Innovations
+                  </th>
+<td class="px-6 py-4">Global Innovations Ltd.</td>
+<td class="px-6 py-4">Compañía de innovación global</td>
+<td class="px-6 py-4">Reino Unido</td>
+</tr>
+<tr class="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+<th class="px-6 py-4 font-medium text-white whitespace-nowrap cursor-pointer hover:text-[var(--primary-color)]" scope="row">
+                    Innovatech
+                  </th>
+<td class="px-6 py-4">Innovatech S.A.</td>
+<td class="px-6 py-4">Empresa de innovación tecnológica</td>
+<td class="px-6 py-4">España</td>
+</tr>
+<tr class="bg-gray-900 hover:bg-gray-800">
+<th class="px-6 py-4 font-medium text-white whitespace-nowrap cursor-pointer hover:text-[var(--primary-color)]" scope="row">
+                    Future Dynamics
+                  </th>
+<td class="px-6 py-4">Future Dynamics GmbH</td>
+<td class="px-6 py-4">Empresa de dinámica futura</td>
+<td class="px-6 py-4">Alemania</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

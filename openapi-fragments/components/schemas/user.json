@@ -1,0 +1,836 @@
+{
+  "schemas": {
+    "UserBaseInfoResponse": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario."
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "Nombre de usuario."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "title": "Email",
+          "description": "Correo electrónico del usuario."
+        },
+        "password_hash": {
+          "type": "string",
+          "title": "Password Hash",
+          "description": "Hash de la contraseña (NO debe exponerse en el API final)."
+        },
+        "email_verified": {
+          "type": "boolean",
+          "title": "Email Verified",
+          "description": "Indica si el correo ha sido verificado."
+        },
+        "is_active": {
+          "type": "boolean",
+          "title": "Is Active",
+          "description": "Estado de actividad de la cuenta."
+        },
+        "failed_attempts": {
+          "type": "integer",
+          "title": "Failed Attempts",
+          "description": "Número de intentos de login fallidos."
+        },
+        "locked_until": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Locked Until",
+          "description": "Momento hasta el cual la cuenta está bloqueada."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Created At",
+          "description": "Fecha de creación del registro."
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Updated At",
+          "description": "Última fecha de actualización del registro."
+        },
+        "primary_chatbot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Primary Chatbot Id",
+          "description": "ID del chatbot principal asociado al usuario."
+        },
+        "can_manage_users": {
+          "type": "boolean",
+          "title": "Can Manage Users",
+          "description": "Indica si el usuario tiene permiso para gestionar otros usuarios."
+        },
+        "phone_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Phone Number",
+          "description": "Número de teléfono del usuario."
+        },
+        "is_active_whatsapp": {
+          "type": "boolean",
+          "title": "Is Active Whatsapp",
+          "description": "Estado de actividad de WhatsApp."
+        },
+        "role_acceso_data_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Acceso Data Id",
+          "description": "ID del rol específico para acceso a datos."
+        },
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "UUID del rol base del usuario."
+        },
+        "role_name": {
+          "type": "string",
+          "title": "Role Name",
+          "description": "Nombre del rol base (ej. 'Admin')."
+        },
+        "role_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Type",
+          "description": "Tipo o clasificación del rol (ej. 'Administrador del servicio')."
+        },
+        "role_description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Description",
+          "description": "Descripción de las funciones del rol."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "username",
+        "email",
+        "password_hash",
+        "email_verified",
+        "is_active",
+        "failed_attempts",
+        "created_at",
+        "can_manage_users",
+        "is_active_whatsapp",
+        "role_id",
+        "role_name"
+      ],
+      "title": "UserBaseInfoResponse",
+      "description": "Mapea todos los campos del view_info_user_details (datos de usuario + rol base)."
+    },
+    "UserDataAccessByRole": {
+      "properties": {
+        "user_data_access_id": {
+          "type": "string",
+          "title": "User Data Access Id",
+          "description": "ID del acceso de datos de usuario."
+        },
+        "role_data_id": {
+          "type": "string",
+          "title": "Role Data Id",
+          "description": "ID del rol de acceso a datos."
+        },
+        "role_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Name",
+          "description": "Nombre del rol."
+        },
+        "user_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Id",
+          "description": "ID del usuario."
+        },
+        "user_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Name",
+          "description": "Username del usuario."
+        },
+        "user_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Email",
+          "description": "Email del usuario."
+        },
+        "user_table_names": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Table Names",
+          "description": "Lista de nombres de tablas del usuario."
+        },
+        "user_data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Data Access",
+          "description": "Configuración de acceso a datos del usuario."
+        },
+        "user_metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Metrics Access",
+          "description": "Configuración de acceso a métricas del usuario."
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_data_access_id",
+        "role_data_id"
+      ],
+      "title": "UserDataAccessByRole",
+      "description": "Representa un acceso de datos de usuario con información del rol."
+    },
+    "UserDataAccessByUser": {
+      "properties": {
+        "user_data_access_id": {
+          "type": "string",
+          "title": "User Data Access Id",
+          "description": "ID del acceso de datos de usuario."
+        },
+        "role_data_id": {
+          "type": "string",
+          "title": "Role Data Id",
+          "description": "ID del rol de acceso a datos."
+        },
+        "role_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Name",
+          "description": "Nombre del rol."
+        },
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "ID del usuario."
+        },
+        "user_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Name",
+          "description": "Username del usuario."
+        },
+        "user_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Email",
+          "description": "Email del usuario."
+        },
+        "user_table_names": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Table Names",
+          "description": "Lista de nombres de tablas del usuario."
+        },
+        "user_data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Data Access",
+          "description": "Configuración de acceso a datos del usuario."
+        },
+        "user_metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Metrics Access",
+          "description": "Configuración de acceso a métricas del usuario."
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_data_access_id",
+        "role_data_id",
+        "user_id"
+      ],
+      "title": "UserDataAccessByUser",
+      "description": "Representa un acceso de datos de usuario con información del usuario."
+    },
+    "UserDataAccessCreationResponse": {
+      "properties": {
+        "id_user_data_access": {
+          "type": "string",
+          "title": "Id User Data Access",
+          "description": "ID del acceso de datos de usuario creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_user_data_access"
+      ],
+      "title": "UserDataAccessCreationResponse",
+      "description": "Respuesta al crear un nuevo acceso de datos de usuario."
+    },
+    "UserDataAccessDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del acceso de datos de usuario que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "UserDataAccessDeleteRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_delete_user_data_access.\nSolo requiere el ID.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "UserDataAccessDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Acceso de datos de usuario eliminado exitosamente."
+        },
+        "user_data_access_id": {
+          "type": "string",
+          "title": "User Data Access Id",
+          "description": "ID del acceso de datos de usuario eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_data_access_id"
+      ],
+      "title": "UserDataAccessDeleteResponse",
+      "description": "Respuesta al eliminar un acceso de datos de usuario."
+    },
+    "UserDataAccessRegisterRequest": {
+      "properties": {
+        "role_data_id": {
+          "type": "string",
+          "title": "Role Data Id",
+          "description": "ID del rol de acceso a datos."
+        },
+        "user_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Id",
+          "description": "ID del usuario."
+        },
+        "table_names": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Table Names",
+          "description": "Lista de nombres de tablas."
+        },
+        "data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Access",
+          "description": "Configuración de acceso a datos JSONB."
+        },
+        "metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metrics Access",
+          "description": "Configuración de acceso a métricas JSONB."
+        }
+      },
+      "type": "object",
+      "required": [
+        "role_data_id"
+      ],
+      "title": "UserDataAccessRegisterRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_user_data_access.",
+      "example": {
+        "data_access": {
+          "facturacion_argentina.BU.in": [
+            "BU CENTRO"
+          ],
+          "facturacion_argentina.es_fyv.in": [
+            "no"
+          ]
+        },
+        "role_data_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "table_names": [
+          "users",
+          "orders",
+          "products",
+          "analytics"
+        ],
+        "user_id": "b7f49729-5419-5efd-94e8-5g09762750d2"
+      }
+    },
+    "UserDataAccessResponse": {
+      "properties": {
+        "user_data_access_id": {
+          "type": "string",
+          "title": "User Data Access Id",
+          "description": "ID del acceso de datos de usuario."
+        },
+        "role_data_id": {
+          "type": "string",
+          "title": "Role Data Id",
+          "description": "ID del rol de acceso a datos."
+        },
+        "role_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Name",
+          "description": "Nombre del rol."
+        },
+        "user_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Id",
+          "description": "ID del usuario."
+        },
+        "user_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Name",
+          "description": "Username del usuario."
+        },
+        "user_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Email",
+          "description": "Email del usuario."
+        },
+        "user_table_names": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Table Names",
+          "description": "Lista de nombres de tablas del usuario."
+        },
+        "user_data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Data Access",
+          "description": "Configuración de acceso a datos del usuario."
+        },
+        "user_metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Metrics Access",
+          "description": "Configuración de acceso a métricas del usuario."
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_data_access_id",
+        "role_data_id"
+      ],
+      "title": "UserDataAccessResponse",
+      "description": "Respuesta para un acceso de datos de usuario individual."
+    },
+    "UserDataAccessUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del acceso de datos de usuario que se va a actualizar."
+        },
+        "role_data_id": {
+          "type": "string",
+          "title": "Role Data Id",
+          "description": "ID del rol de acceso a datos."
+        },
+        "user_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Id",
+          "description": "ID del usuario."
+        },
+        "table_names": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Table Names",
+          "description": "Lista de nombres de tablas."
+        },
+        "data_access": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Access",
+          "description": "Configuración de acceso a datos."
+        },
+        "metrics_access": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metrics Access",
+          "description": "Configuración de acceso a métricas."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "role_data_id"
+      ],
+      "title": "UserDataAccessUpdateRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_user_data_access.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e",
+        "metrics_access": [
+          "user_count",
+          "order_volume",
+          "revenue"
+        ],
+        "role_data_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "table_names": [
+          "users",
+          "orders",
+          "products",
+          "analytics"
+        ],
+        "user_id": "b7f49729-5419-5efd-94e8-5g09762750d2"
+      }
+    },
+    "UserDataAccessUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Acceso de datos de usuario actualizado exitosamente."
+        },
+        "user_data_access_id": {
+          "type": "string",
+          "title": "User Data Access Id",
+          "description": "ID del acceso de datos de usuario actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_data_access_id"
+      ],
+      "title": "UserDataAccessUpdateResponse",
+      "description": "Respuesta al actualizar un acceso de datos de usuario."
+    }
+  }
+}

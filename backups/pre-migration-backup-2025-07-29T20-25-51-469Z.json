@@ -1,0 +1,2554 @@
+{
+  "migration": "add-userwpp-relation",
+  "timestamp": "2025-07-29T20:25:51.469Z",
+  "tables": {
+    "Message": {
+      "timestamp": "2025-07-29T20:25:51.101Z",
+      "table": "Message",
+      "count": 347,
+      "data": [
+        {
+          "id": "a6404d4d-7e09-4f79-9547-b20b38d5687e",
+          "text": "Hola Eva",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T16:18:41.560Z",
+          "updatedAt": "2025-07-08T16:18:41.560Z"
+        },
+        {
+          "id": "472df4c8-2e97-4477-a25d-0a4f2b813d63",
+          "text": "Como vienen las ventas a la fecha de cada Unidad de negocio?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T16:19:18.159Z",
+          "updatedAt": "2025-07-08T16:19:18.159Z"
+        },
+        {
+          "id": "990b55e3-c6a8-490b-ae3f-d790c99f7045",
+          "text": "Que entiendes por.unidad de negocio?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T16:20:02.440Z",
+          "updatedAt": "2025-07-08T16:20:02.440Z"
+        },
+        {
+          "id": "dcb711e0-fef0-409e-a495-fcaa74f1d349",
+          "text": "Me puedes entregar la venta en USD de CP, la de Maiz en UEQ y la de glifosato en UEQ que llevamos a la fecha?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T16:21:08.166Z",
+          "updatedAt": "2025-07-08T16:21:08.166Z"
+        },
+        {
+          "id": "cbd60ede-a1c7-4c4d-a86c-e75123a43878",
+          "text": "Puedes generar un KPI de crecimiento con respecto al 2024 en cada unidad de negocio?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T16:22:28.285Z",
+          "updatedAt": "2025-07-08T16:22:28.285Z"
+        },
+        {
+          "id": "61b8a6ef-6723-4202-97fb-efe3c5b91f50",
+          "text": "Puedes generar un KPI de crecimiento con respecto al 2024 en cada unidad de negocio, considerando las diferentes unidades de medida solicitadas",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T16:23:43.609Z",
+          "updatedAt": "2025-07-08T16:23:43.609Z"
+        },
+        {
+          "id": "bf183460-b7de-41e3-8270-9b511e62c09f",
+          "text": "cuantas bolsas de maiz vendimos hoy",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-08T19:11:27.879Z",
+          "updatedAt": "2025-07-08T19:11:27.879Z"
+        },
+        {
+          "id": "f4c93be1-b0b2-4f9a-95f4-87f3f33529df",
+          "text": "Cuantas bolsas vendidos en el año 2025",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-08T19:11:59.502Z",
+          "updatedAt": "2025-07-08T19:11:59.502Z"
+        },
+        {
+          "id": "66da4f2a-f015-4959-a925-2ec281a6901a",
+          "text": "Si, podes decirme cuantas SSU se vendieron durante el año 2024 y 2025",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-08T19:12:52.563Z",
+          "updatedAt": "2025-07-08T19:12:52.563Z"
+        },
+        {
+          "id": "fee1f859-79d9-4b32-bd6c-476e807afe57",
+          "text": "decime solo BRAND MAIZ",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-08T19:13:28.136Z",
+          "updatedAt": "2025-07-08T19:13:28.136Z"
+        },
+        {
+          "id": "869061cb-0253-4218-8e0f-20328edd4278",
+          "text": "Cuales son las familias de productos disponibles con venta",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-08T19:14:59.940Z",
+          "updatedAt": "2025-07-08T19:14:59.940Z"
+        },
+        {
+          "id": "e2e7a8f9-b0a2-4390-9e14-f3b0e5285d2f",
+          "text": "Puedes generar un kpi de crecimiento",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-08T19:20:38.939Z",
+          "updatedAt": "2025-07-08T19:20:38.939Z"
+        },
+        {
+          "id": "19e40d09-a284-4226-9697-7c3ec218ff99",
+          "text": "Hola eva",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:43:59.479Z",
+          "updatedAt": "2025-07-08T21:43:59.479Z"
+        },
+        {
+          "id": "e6297b32-8f6b-4948-9e15-227553807592",
+          "text": "Como va la venta de tipo producto F&V a la fecha?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:44:14.276Z",
+          "updatedAt": "2025-07-08T21:44:14.276Z"
+        },
+        {
+          "id": "a6129a7d-0e1d-482f-85ba-f0cb768c73e9",
+          "text": "En USD",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:44:38.884Z",
+          "updatedAt": "2025-07-08T21:44:38.884Z"
+        },
+        {
+          "id": "b90e8a24-4c5f-48d0-ba7d-4b1f00d6e820",
+          "text": "Y F&V mixto",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:45:29.791Z",
+          "updatedAt": "2025-07-08T21:45:29.791Z"
+        },
+        {
+          "id": "ea4abbb7-bfd5-4a5d-b7d1-d9a96dccaa55",
+          "text": "Cual es el NIP Promedio de venta de Adengo a la fecha",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:46:07.408Z",
+          "updatedAt": "2025-07-08T21:46:07.408Z"
+        },
+        {
+          "id": "04f767ce-356d-445a-b0df-32b07e26136d",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:46:22.894Z",
+          "updatedAt": "2025-07-08T21:46:22.894Z"
+        },
+        {
+          "id": "af6e065e-d485-4e75-b9c3-84d7c904b310",
+          "text": "Cual es el NIP target de adengo?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:49:37.151Z",
+          "updatedAt": "2025-07-08T21:49:37.151Z"
+        },
+        {
+          "id": "8f06d627-e99c-49cd-93be-bf0d7f9f3eee",
+          "text": "Nip target es igual a USD Target de adengo divido unidades UEQ de Adengo",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:51:51.859Z",
+          "updatedAt": "2025-07-08T21:51:51.859Z"
+        },
+        {
+          "id": "cbf95e90-dcff-4364-9a2c-b88ab9090ac4",
+          "text": "Herbicida premium",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-08T21:52:24.232Z",
+          "updatedAt": "2025-07-08T21:52:24.232Z"
+        },
+        {
+          "id": "b50c4649-d3d0-4e01-89ae-165ac7b2bf32",
+          "text": "Hola Eva",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T12:44:06.417Z",
+          "updatedAt": "2025-07-09T12:44:06.417Z"
+        },
+        {
+          "id": "727af8df-6dfa-45fe-a765-e8bb70d9b0e9",
+          "text": "Cual es la ultima fecha de facturacion de nuestra base de facturacion?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T12:44:31.151Z",
+          "updatedAt": "2025-07-09T12:44:31.151Z"
+        },
+        {
+          "id": "bda12280-c267-40d1-97d9-fb916c6c186b",
+          "text": "Como vamos con la venta actual de la unidades de negocio CP en USD, Maiz en UEQ y Glifo en Kregs comparado con la venta del año anterior y cual es el procentaje de crecimiento",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T12:46:35.993Z",
+          "updatedAt": "2025-07-09T12:46:35.993Z"
+        },
+        {
+          "id": "9da3076d-9d7a-47bf-87d2-817162309ba0",
+          "text": "Cuales son las TOP 10 marcas con mayor crecimiento con respecto al año pasado en CP en USD?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T12:58:35.247Z",
+          "updatedAt": "2025-07-09T12:58:35.247Z"
+        },
+        {
+          "id": "42b25312-79e2-4cfd-8deb-a4123c4a8a70",
+          "text": "Cuales son los campos de la base base target 2025?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T13:02:00.147Z",
+          "updatedAt": "2025-07-09T13:02:00.147Z"
+        },
+        {
+          "id": "b6ad910f-7d2b-419f-92ff-79e3086b67ff",
+          "text": "Hola Eva, puedes decirme la venta de Maíz a la fecha de hoy?",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-09T16:10:46.703Z",
+          "updatedAt": "2025-07-09T16:10:46.703Z"
+        },
+        {
+          "id": "12af543f-9860-4948-a5b8-5b3a4aa4b43a",
+          "text": "Eva, me podes compartir las bolsas vendidas por BU en 2025",
+          "userId": "94244b6b-574a-4753-a972-962af8b5e2ae",
+          "createdAt": "2025-07-09T16:47:35.855Z",
+          "updatedAt": "2025-07-09T16:47:35.855Z"
+        },
+        {
+          "id": "434da4b9-4e89-4dba-9ac7-903c540e45ab",
+          "text": "Cuáles fueron los distribuidores que más vendieron maíz en 2025",
+          "userId": "94244b6b-574a-4753-a972-962af8b5e2ae",
+          "createdAt": "2025-07-09T18:32:33.908Z",
+          "updatedAt": "2025-07-09T18:32:33.908Z"
+        },
+        {
+          "id": "cdec9d71-7bfc-492d-8060-60ed7a5ed399",
+          "text": "UEQ y dólares",
+          "userId": "94244b6b-574a-4753-a972-962af8b5e2ae",
+          "createdAt": "2025-07-09T18:33:06.579Z",
+          "updatedAt": "2025-07-09T18:33:06.579Z"
+        },
+        {
+          "id": "7c001123-fc7a-4de8-877b-c5a6beb89b96",
+          "text": "Alguno realizó crosselling?",
+          "userId": "94244b6b-574a-4753-a972-962af8b5e2ae",
+          "createdAt": "2025-07-09T18:33:55.565Z",
+          "updatedAt": "2025-07-09T18:33:55.565Z"
+        },
+        {
+          "id": "85dce914-41a8-44c0-83c0-0a7219771c29",
+          "text": "CP",
+          "userId": "94244b6b-574a-4753-a972-962af8b5e2ae",
+          "createdAt": "2025-07-09T18:34:17.146Z",
+          "updatedAt": "2025-07-09T18:34:17.146Z"
+        },
+        {
+          "id": "30b3ae5a-eb2c-4456-9514-fc6b3473e52b",
+          "text": "Que clasificaciones tienes en la base de Tafget?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:35:46.964Z",
+          "updatedAt": "2025-07-09T21:35:46.964Z"
+        },
+        {
+          "id": "5d966715-4938-4bd2-a8ab-5d96b4f34a20",
+          "text": "Dame el avance sobre el Target de la marca DK en UEQ coml pais",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:37:30.497Z",
+          "updatedAt": "2025-07-09T21:37:30.497Z"
+        },
+        {
+          "id": "400de496-017b-4df8-92e6-96c829a835d4",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:37:52.736Z",
+          "updatedAt": "2025-07-09T21:37:52.736Z"
+        },
+        {
+          "id": "0cb34a2e-12b1-478d-bb4a-18f4015cc153",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:38:43.054Z",
+          "updatedAt": "2025-07-09T21:38:43.054Z"
+        },
+        {
+          "id": "0fd29af8-d149-40c3-ab10-f4892be3dd3f",
+          "text": "Realiza el mismo calculonpara la.marca Maiz LT",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:39:40.569Z",
+          "updatedAt": "2025-07-09T21:39:40.569Z"
+        },
+        {
+          "id": "1d55af3a-7dc6-4f88-bdd8-767f619b1b5e",
+          "text": "Que BU es la que tienen el mayor avance sobre el target en la marca DK",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:40:37.942Z",
+          "updatedAt": "2025-07-09T21:40:37.942Z"
+        },
+        {
+          "id": "0f0c518c-065e-4e35-8472-83aadd478860",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:40:56.279Z",
+          "updatedAt": "2025-07-09T21:40:56.279Z"
+        },
+        {
+          "id": "78577c49-fbb7-407f-8a3b-ba47736df578",
+          "text": "Cuales son los numeros que consideraste para este calculo",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:41:53.267Z",
+          "updatedAt": "2025-07-09T21:41:53.267Z"
+        },
+        {
+          "id": "48e9b9fb-1c45-4577-a1df-900ed4c7f4bc",
+          "text": "Cual es el NIP target de la.marca DK ?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:45:04.429Z",
+          "updatedAt": "2025-07-09T21:45:04.429Z"
+        },
+        {
+          "id": "17a5511a-20e5-4ea3-9e95-22f3d0a27146",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:45:33.252Z",
+          "updatedAt": "2025-07-09T21:45:33.252Z"
+        },
+        {
+          "id": "025b0d8c-9aef-4e9a-b171-ab81a547b87d",
+          "text": "Que BU tiene una dispersion sobre este NIP mayor?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:47:14.257Z",
+          "updatedAt": "2025-07-09T21:47:14.257Z"
+        },
+        {
+          "id": "17fa8b43-0fbe-4297-9de3-8bb089afe3bf",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T21:47:35.233Z",
+          "updatedAt": "2025-07-09T21:47:35.233Z"
+        },
+        {
+          "id": "601f6e1e-aff7-4dc2-b6ad-3a0e84b17156",
+          "text": "Cual es el avance de la.BU KA en la marca DK en UEQ",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:19:43.177Z",
+          "updatedAt": "2025-07-09T22:19:43.177Z"
+        },
+        {
+          "id": "f0eb4050-323a-4aae-a28a-ca7de5ded617",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:20:32.936Z",
+          "updatedAt": "2025-07-09T22:20:32.936Z"
+        },
+        {
+          "id": "701395b5-adef-4423-9179-e15195e7cee3",
+          "text": "Cual es las ventas YTD 202t de la.marca DK. Para la BU KA en UEQ",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:21:24.243Z",
+          "updatedAt": "2025-07-09T22:21:24.243Z"
+        },
+        {
+          "id": "364e8a26-d24f-4945-9158-ddd3506c909c",
+          "text": "Y el.importe?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:21:52.012Z",
+          "updatedAt": "2025-07-09T22:21:52.012Z"
+        },
+        {
+          "id": "5c36e82a-25a7-4f60-b2d1-2db5c90e1316",
+          "text": "Calcula ahora el NIP promedio",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:22:23.151Z",
+          "updatedAt": "2025-07-09T22:22:23.151Z"
+        },
+        {
+          "id": "6005a8fb-2000-4216-bc1a-21d4a732b418",
+          "text": "Como calculaste el NIP?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:23:30.894Z",
+          "updatedAt": "2025-07-09T22:23:30.894Z"
+        },
+        {
+          "id": "c47b2d68-b254-4f1e-b86f-2b804cfec4cb",
+          "text": "Puedes recalcularlo como el promedio ponderado",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:28:09.200Z",
+          "updatedAt": "2025-07-09T22:28:09.200Z"
+        },
+        {
+          "id": "4b553fc3-f353-41f1-a5b3-c6bdd494b907",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-09T22:28:56.524Z",
+          "updatedAt": "2025-07-09T22:28:56.524Z"
+        },
+        {
+          "id": "d7a1cf47-e0a3-4dfa-a13a-6b51450312b9",
+          "text": "Hola Eva! Cómo estas?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T11:26:43.123Z",
+          "updatedAt": "2025-07-10T11:26:43.123Z"
+        },
+        {
+          "id": "128a4a62-e056-4482-b60f-4f4feadab1c1",
+          "text": "Quiero saber cuantas bolsas van vendidas en el squad de socios estrategicos",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T11:27:21.692Z",
+          "updatedAt": "2025-07-10T11:27:21.692Z"
+        },
+        {
+          "id": "d27f3029-880b-48a4-b8f8-43055fa9a70c",
+          "text": "Bolsas de maiz, marca LT",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T11:27:47.963Z",
+          "updatedAt": "2025-07-10T11:27:47.963Z"
+        },
+        {
+          "id": "eff349c8-c32b-4121-9d59-54a01ae3b4fc",
+          "text": "El squad que mencionas es el de frutas y verduras, el squad que yo digo está dentro de la BU KA",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T11:29:18.581Z",
+          "updatedAt": "2025-07-10T11:29:18.581Z"
+        },
+        {
+          "id": "e4ea213b-de18-4cee-8465-76dd28acb04f",
+          "text": "Cuales son los squad que tenés identificados dentro de la BU KA",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T11:46:08.314Z",
+          "updatedAt": "2025-07-10T11:46:08.314Z"
+        },
+        {
+          "id": "148d2b8b-ecf7-4415-8707-491220d7cbf9",
+          "text": "S16-SE es el squad de socios estrategicos",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T11:46:55.070Z",
+          "updatedAt": "2025-07-10T11:46:55.070Z"
+        },
+        {
+          "id": "927a5d9d-6f44-40df-ad31-3a0dd2810dca",
+          "text": "En qué mes se vendió más?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T11:47:36.236Z",
+          "updatedAt": "2025-07-10T11:47:36.236Z"
+        },
+        {
+          "id": "f5a9527b-2814-4730-becf-79cb11b35030",
+          "text": "Mostrame mes a mes la cantidad de bolsas vendidas de LT en el squad de socios",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:09:41.362Z",
+          "updatedAt": "2025-07-10T12:09:41.362Z"
+        },
+        {
+          "id": "69e2bf27-338d-40ae-b07b-fb5831fecc24",
+          "text": "Me podés calcular el promedio?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:10:36.124Z",
+          "updatedAt": "2025-07-10T12:10:36.124Z"
+        },
+        {
+          "id": "2f8783ad-51e2-4093-9ac7-b8513a00ed8c",
+          "text": "promedio de bolsas vendidas del squad de socios en este ultimo año por mes",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:23:47.454Z",
+          "updatedAt": "2025-07-10T12:23:47.454Z"
+        },
+        {
+          "id": "a93fcba8-c3bb-4f0f-a70b-d92632e0cc35",
+          "text": "si",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:24:04.068Z",
+          "updatedAt": "2025-07-10T12:24:04.068Z"
+        },
+        {
+          "id": "1bfd0851-de17-444a-85da-895e08daeb62",
+          "text": "que otras maneras podes proponerme",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:24:44.988Z",
+          "updatedAt": "2025-07-10T12:24:44.988Z"
+        },
+        {
+          "id": "705920a9-b9f0-40d6-9c6a-c5ee11903dff",
+          "text": "la primera por ahora",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:25:12.606Z",
+          "updatedAt": "2025-07-10T12:25:12.606Z"
+        },
+        {
+          "id": "def6386e-085a-4ffa-9faf-8f3c23511708",
+          "text": "si a todo",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:26:14.981Z",
+          "updatedAt": "2025-07-10T12:26:14.981Z"
+        },
+        {
+          "id": "22440d67-f436-4c78-b2f4-f8e61188752c",
+          "text": "si hago la suma, no coincide con el valor total que me diste antes. Por que puede pasar esto?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:28:37.540Z",
+          "updatedAt": "2025-07-10T12:28:37.540Z"
+        },
+        {
+          "id": "f11700f1-8ba6-4d68-b4ba-eeaddd948abd",
+          "text": "1000 + 350 + 25177 + 19612 + 2999 da 49078",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:30:12.273Z",
+          "updatedAt": "2025-07-10T12:30:12.273Z"
+        },
+        {
+          "id": "56630804-a832-4dac-b08d-0d3b1a27f295",
+          "text": "podes hacerme el mismo analisis con los clientes premium?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:46:42.141Z",
+          "updatedAt": "2025-07-10T12:46:42.141Z"
+        },
+        {
+          "id": "46e257fe-0e60-4028-a300-03bd73d27271",
+          "text": "te reformulo, quiero saber la cantidad de bolsas de maiz LT vendidas a clientes premium durante el 2025",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:47:58.885Z",
+          "updatedAt": "2025-07-10T12:47:58.885Z"
+        },
+        {
+          "id": "5cc895e3-eb9d-45f3-8368-fb4ed5f21f98",
+          "text": "exacto",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:51:37.573Z",
+          "updatedAt": "2025-07-10T12:51:37.573Z"
+        },
+        {
+          "id": "1e76f61d-46bc-4770-87f5-85f2affcd949",
+          "text": "Hola si te digo vendedor, entender la columna rv",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:56:22.913Z",
+          "updatedAt": "2025-07-10T12:56:22.913Z"
+        },
+        {
+          "id": "8cfab0df-57ad-4d90-ad14-6e1121777272",
+          "text": "Si",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:56:41.247Z",
+          "updatedAt": "2025-07-10T12:56:41.247Z"
+        },
+        {
+          "id": "2a7c6435-480a-4dbf-bfa7-fe68401b1d13",
+          "text": "Si",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:56:59.645Z",
+          "updatedAt": "2025-07-10T12:56:59.645Z"
+        },
+        {
+          "id": "13e4f691-648f-4c3b-9910-0c1584e569d8",
+          "text": "Si te digo bolsas de maiz respondeme de la columna SSU",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:57:15.241Z",
+          "updatedAt": "2025-07-10T12:57:15.241Z"
+        },
+        {
+          "id": "e2e8a48c-2ef6-4795-8a34-545745f2aa82",
+          "text": "La factu ueq",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:57:40.979Z",
+          "updatedAt": "2025-07-10T12:57:40.979Z"
+        },
+        {
+          "id": "d796136a-69cd-4c99-bf8c-d5c9847ae1ae",
+          "text": "Si",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:57:56.915Z",
+          "updatedAt": "2025-07-10T12:57:56.915Z"
+        },
+        {
+          "id": "4d0735cf-c438-42ea-8b22-213c2a590256",
+          "text": "Cual es el vendedor que vendió más bolsas de maiz en julio",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:58:10.331Z",
+          "updatedAt": "2025-07-10T12:58:10.331Z"
+        },
+        {
+          "id": "18f4ebe3-87bb-4b11-b7c6-b974238d784a",
+          "text": "existen clientes premium que hayan comprado glifosato LT?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T12:58:38.986Z",
+          "updatedAt": "2025-07-10T12:58:38.986Z"
+        },
+        {
+          "id": "31eca2de-0c3c-4693-8144-31424e2d8c89",
+          "text": "Que entendes por vender",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:58:50.617Z",
+          "updatedAt": "2025-07-10T12:58:50.617Z"
+        },
+        {
+          "id": "be028281-9c83-4f13-b0c3-f9308ae71151",
+          "text": "Mostrame las ventas por vendedor. Y déjame solamente los nombres con mayor fact ueq",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T12:59:37.598Z",
+          "updatedAt": "2025-07-10T12:59:37.598Z"
+        },
+        {
+          "id": "3d0ab761-e71b-414b-bf8a-6833afe8f28e",
+          "text": "dale",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T13:00:10.313Z",
+          "updatedAt": "2025-07-10T13:00:10.313Z"
+        },
+        {
+          "id": "b8c1e1e6-1542-48c3-9fbe-4eb09a27c3bb",
+          "text": "dame el top 10 de productores innoba que hayan comprado mas bolsas DK en 2025",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T13:01:14.554Z",
+          "updatedAt": "2025-07-10T13:01:14.554Z"
+        },
+        {
+          "id": "fc66cefa-d3e3-4228-90bb-ee8fdfccd90d",
+          "text": "A la unidad de negocio maiz. Solo las ventas de maiz. Ventas en ueq",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:01:54.668Z",
+          "updatedAt": "2025-07-10T13:01:54.668Z"
+        },
+        {
+          "id": "976c40fa-8aa9-4627-8895-7fcacaa54d56",
+          "text": "Si. Mostrame 5 vendedores",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:02:38.821Z",
+          "updatedAt": "2025-07-10T13:02:38.821Z"
+        },
+        {
+          "id": "70d80f7d-aaf6-4909-b31d-3a20993ddf25",
+          "text": "Mostrame lo que tengas",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:03:25.881Z",
+          "updatedAt": "2025-07-10T13:03:25.881Z"
+        },
+        {
+          "id": "5b95e295-ee84-4f2c-9a6c-8599ab06a552",
+          "text": "me podes filtrar de ahi a AIBAL?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T13:04:00.493Z",
+          "updatedAt": "2025-07-10T13:04:00.493Z"
+        },
+        {
+          "id": "0ad4b9ca-1868-490e-b440-d3271b3a7ec7",
+          "text": "Y que distribuidores vendieron más maiz?",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:04:35.627Z",
+          "updatedAt": "2025-07-10T13:04:35.627Z"
+        },
+        {
+          "id": "b4ed8a41-c3c7-455b-aa18-d61a69dd6b5d",
+          "text": "no, me refiero a sacarlo del lsitado que me pasaste y agregar el siguiente en la lista",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T13:06:08.583Z",
+          "updatedAt": "2025-07-10T13:06:08.583Z"
+        },
+        {
+          "id": "045ba56c-fefe-46de-9c05-66eea3a1e603",
+          "text": "Porque no pudiste?",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:06:10.583Z",
+          "updatedAt": "2025-07-10T13:06:10.583Z"
+        },
+        {
+          "id": "2d30f904-5451-4977-b52b-ff697d022588",
+          "text": "sisi",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-10T13:06:47.366Z",
+          "updatedAt": "2025-07-10T13:06:47.366Z"
+        },
+        {
+          "id": "8c07b919-b402-4ad8-971b-818ed46b8c3b",
+          "text": "Dale. Mostrame los primeros 10 distribuidores que vendieron maiz en el 2025",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:07:15.472Z",
+          "updatedAt": "2025-07-10T13:07:15.472Z"
+        },
+        {
+          "id": "45b62653-8360-49af-b123-69e91d8e6438",
+          "text": "Si",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:07:56.445Z",
+          "updatedAt": "2025-07-10T13:07:56.445Z"
+        },
+        {
+          "id": "b9963740-be6c-4502-9b6b-8bdb4c59123d",
+          "text": "Como va la venta a hoy para las unidades de negocio CP ( USD), MAIZ(UEQ) y GLIFO ( UEQ)",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T13:20:06.240Z",
+          "updatedAt": "2025-07-10T13:20:06.240Z"
+        },
+        {
+          "id": "7ad8c037-c6c6-47df-a2d7-9257412b13a4",
+          "text": "cual es el nip target de maiz , brand DK",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-10T13:48:43.970Z",
+          "updatedAt": "2025-07-10T13:48:43.970Z"
+        },
+        {
+          "id": "84e6f457-c9f7-4e3b-bc9d-648c2a378607",
+          "text": "Cual es la venta en USD para CP para el distribuidor Agro Uchacha hasta el 10 de julio?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T22:09:09.243Z",
+          "updatedAt": "2025-07-10T22:09:09.243Z"
+        },
+        {
+          "id": "0d78fea1-4dac-49d6-9c04-c5e0e020eb25",
+          "text": "2024",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T22:09:32.075Z",
+          "updatedAt": "2025-07-10T22:09:32.075Z"
+        },
+        {
+          "id": "16e6f0fe-b8d3-4364-8777-c087cb22c37d",
+          "text": "Esta mal",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T22:10:29.651Z",
+          "updatedAt": "2025-07-10T22:10:29.651Z"
+        },
+        {
+          "id": "ab92acbe-0457-4323-b257-bcc37a354a0f",
+          "text": "Perfecto",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T22:11:07.814Z",
+          "updatedAt": "2025-07-10T22:11:07.814Z"
+        },
+        {
+          "id": "52df6bad-ee04-4819-aafe-65699b504cdc",
+          "text": "Ahora calcula la venta en UEQ DE MAIZ",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T22:11:21.160Z",
+          "updatedAt": "2025-07-10T22:11:21.160Z"
+        },
+        {
+          "id": "105d56ab-5a16-4d4a-a4fb-e62e8232feca",
+          "text": "Si...2024 y 2025",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T22:11:45.820Z",
+          "updatedAt": "2025-07-10T22:11:45.820Z"
+        },
+        {
+          "id": "f5ed1aca-b2c7-47dc-b5c4-07168b3c7df1",
+          "text": "So Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T22:12:28.206Z",
+          "updatedAt": "2025-07-10T22:12:28.206Z"
+        },
+        {
+          "id": "868adc96-0e74-4903-b33c-7c5c52b5edfd",
+          "text": "Eva debe ser en UEQ",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-10T22:17:22.130Z",
+          "updatedAt": "2025-07-10T22:17:22.130Z"
+        },
+        {
+          "id": "377ed3c9-f061-4ae7-a24c-5ef2125a5ae9",
+          "text": "Cual es el avance la de venta de MAIZ en UEQ a la fecha?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T23:18:40.705Z",
+          "updatedAt": "2025-07-10T23:18:40.705Z"
+        },
+        {
+          "id": "3e5d1778-3d4f-4541-9390-17e9fab84de3",
+          "text": "pais y contra target anual",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-10T23:19:10.229Z",
+          "updatedAt": "2025-07-10T23:19:10.229Z"
+        },
+        {
+          "id": "d435a884-4b1f-4906-8437-a7898faf622c",
+          "text": "Cuál es el área de siembra de maíz en argentina para el 2025?",
+          "userId": "b0fac7bb-bc5d-4148-bf53-35f4d3f45877",
+          "createdAt": "2025-07-11T00:01:37.791Z",
+          "updatedAt": "2025-07-11T00:01:37.791Z"
+        },
+        {
+          "id": "0e6245b0-c055-4119-81dc-8d58b0e1d1d2",
+          "text": "Quiero saber cómo va la venta de bolsas de maíz al día de hoy.",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-11T01:23:43.903Z",
+          "updatedAt": "2025-07-11T01:23:43.903Z"
+        },
+        {
+          "id": "a5fddba1-7c85-4518-96a7-666c05bc81eb",
+          "text": "Deberías usar fact umv. Me interesa la venta total de maíz",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-11T01:24:41.701Z",
+          "updatedAt": "2025-07-11T01:24:41.701Z"
+        },
+        {
+          "id": "e9c9da26-36c1-454a-bf7f-69ae0b4c5b89",
+          "text": "Cuál es la fecha de la última factura registrada ?",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-11T01:25:26.144Z",
+          "updatedAt": "2025-07-11T01:25:26.144Z"
+        },
+        {
+          "id": "cbef0a8c-b6de-4d0f-b06d-3fae6ed620d9",
+          "text": "Puede mostrame información detallada de esa factura?",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-11T01:26:20.272Z",
+          "updatedAt": "2025-07-11T01:26:20.272Z"
+        },
+        {
+          "id": "098db6a5-9b43-4b5d-b702-716b8305a221",
+          "text": "Hola Eva, quiero saber cómo va el avance de facturación al día de hoy",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-11T11:11:36.794Z",
+          "updatedAt": "2025-07-11T11:11:36.794Z"
+        },
+        {
+          "id": "258c6c78-411e-4a42-88b8-af91cf23c566",
+          "text": "Como va la venta a la fecha en las unidades de negocio CP (USD), MAIZ (UEQ) y Glifo (UEQ) ?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T13:47:19.861Z",
+          "updatedAt": "2025-07-11T13:47:19.861Z"
+        },
+        {
+          "id": "1de6d7d1-4734-4b36-8e85-abeb7448c31d",
+          "text": "eva que entiendes por bolsa de maiz",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T15:24:50.970Z",
+          "updatedAt": "2025-07-11T15:24:50.970Z"
+        },
+        {
+          "id": "2d4712d0-5d17-4f54-9098-64d27f57e0a0",
+          "text": "Como va a hoy la venta de CP en USD ?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T19:43:54.427Z",
+          "updatedAt": "2025-07-11T19:43:54.427Z"
+        },
+        {
+          "id": "5152650a-be6b-4e4b-b36c-6da4011097af",
+          "text": "Y maiz dk y maiz LT en UEQ a la fecha?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T19:45:06.673Z",
+          "updatedAt": "2025-07-11T19:45:06.673Z"
+        },
+        {
+          "id": "5fe46205-4836-45fe-a8b6-c2e7ad8e2f32",
+          "text": "Y por separado?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T19:45:42.631Z",
+          "updatedAt": "2025-07-11T19:45:42.631Z"
+        },
+        {
+          "id": "1fb36263-650c-4ec9-ac16-17ef38c142d7",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T19:46:20.104Z",
+          "updatedAt": "2025-07-11T19:46:20.104Z"
+        },
+        {
+          "id": "01b1af05-a6ef-4eee-8cb8-b9572e28fd55",
+          "text": "Entregame una lista de mayor a menor venta en UEQ de la unidad de negocio Maiz a la fecha?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T19:47:37.298Z",
+          "updatedAt": "2025-07-11T19:47:37.298Z"
+        },
+        {
+          "id": "d49c9822-7f35-44e4-8aac-be0a59660780",
+          "text": "No, a ordenar las ventas de cada BU de mayor a menor",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-11T19:48:12.399Z",
+          "updatedAt": "2025-07-11T19:48:12.399Z"
+        },
+        {
+          "id": "94d6cf63-7b8f-4c11-b68b-540bdf755fff",
+          "text": "Hola",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-14T13:06:42.276Z",
+          "updatedAt": "2025-07-14T13:06:42.276Z"
+        },
+        {
+          "id": "370086ed-ff73-48bb-bf4d-a59d51bed085",
+          "text": "Por favor me puedes detallar cantidad de bolsas vendidas hasta la fecha?",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-14T13:07:31.554Z",
+          "updatedAt": "2025-07-14T13:07:31.554Z"
+        },
+        {
+          "id": "4a8be6de-678c-487b-93f4-c011aab5dc37",
+          "text": "Total General",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-14T13:08:16.686Z",
+          "updatedAt": "2025-07-14T13:08:16.686Z"
+        },
+        {
+          "id": "4705762d-e1af-491c-9083-554b2eebfdb5",
+          "text": "Comparando a ytd 2024 y 2023 como nos va?",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-14T13:12:18.897Z",
+          "updatedAt": "2025-07-14T13:12:18.897Z"
+        },
+        {
+          "id": "696e0114-aaa0-4ee3-a338-34d718cd02f1",
+          "text": "Hola Eva. Me podes decir la facturacion de maiz dekalb YTD?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-14T13:18:16.422Z",
+          "updatedAt": "2025-07-14T13:18:16.422Z"
+        },
+        {
+          "id": "d0986f2f-23af-4c07-98fc-a0f1b09d4244",
+          "text": "En valor usd",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-14T13:18:37.934Z",
+          "updatedAt": "2025-07-14T13:18:37.934Z"
+        },
+        {
+          "id": "dac3c979-be17-4834-9424-7cfa6240cc87",
+          "text": "y compararlo a la misma altura del año del año anterior (2024)?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-14T13:19:19.874Z",
+          "updatedAt": "2025-07-14T13:19:19.874Z"
+        },
+        {
+          "id": "0f6a62ad-27d9-4432-9cbe-a7ff32fb7ee2",
+          "text": "si y que me digas la diferencia",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-14T13:19:53.890Z",
+          "updatedAt": "2025-07-14T13:19:53.890Z"
+        },
+        {
+          "id": "59483a89-0021-4c1d-8647-501b369d8213",
+          "text": "y en UEQ?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-14T13:24:58.761Z",
+          "updatedAt": "2025-07-14T13:24:58.761Z"
+        },
+        {
+          "id": "c20fc0f6-eed0-4dea-adcc-097fe9d7a918",
+          "text": "quiero saber cuanto llevamos vendiendo de maiz en ssu durante el mes de julio, para las 4 bus. y ademas quiero que me compares el mismo periodo pero del año pasado.",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-14T13:31:22.536Z",
+          "updatedAt": "2025-07-14T13:31:22.536Z"
+        },
+        {
+          "id": "1ebd5a89-8576-4fd6-8e8c-3c91849a7cad",
+          "text": "y si te hago la misma pregutna, pero para el periodo CAMPAÑA 25 (CY25) VS CY24",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-14T13:32:20.883Z",
+          "updatedAt": "2025-07-14T13:32:20.883Z"
+        },
+        {
+          "id": "c6fdf380-50a7-40fd-a362-f66bfa077f35",
+          "text": "cual es el periodo campaña 25",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-14T13:34:12.328Z",
+          "updatedAt": "2025-07-14T13:34:12.328Z"
+        },
+        {
+          "id": "b732b5b3-ae42-4d92-8cf7-c465e9bcd416",
+          "text": "no. la campaña comienza en abril y termina en Marzo del año siguiente",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-14T13:35:07.569Z",
+          "updatedAt": "2025-07-14T13:35:07.569Z"
+        },
+        {
+          "id": "e2cbe6f8-b8f7-4913-ab59-95bfb010d24f",
+          "text": "no, eso seria la campaña 24",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-14T13:35:53.918Z",
+          "updatedAt": "2025-07-14T13:35:53.918Z"
+        },
+        {
+          "id": "38c13b12-b055-4a4c-a693-1ace5bb3dbef",
+          "text": "no. la campaña 25 es ABRIL 2025 A mARZO 2026",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-14T13:41:00.655Z",
+          "updatedAt": "2025-07-14T13:41:00.655Z"
+        },
+        {
+          "id": "09b78420-cdef-41fe-859b-d355661be73f",
+          "text": "Hola",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:11:33.239Z",
+          "updatedAt": "2025-07-14T20:11:33.239Z"
+        },
+        {
+          "id": "57f18f6b-a6d6-4d25-849b-40dab8c34ae8",
+          "text": "Ventas 2025",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:14:19.155Z",
+          "updatedAt": "2025-07-14T20:14:19.155Z"
+        },
+        {
+          "id": "8bf57da4-f17c-48fa-aa3a-6a0e55d09ccf",
+          "text": "Ventas en USD",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:14:53.393Z",
+          "updatedAt": "2025-07-14T20:14:53.393Z"
+        },
+        {
+          "id": "912a0add-d694-465e-8a38-485f802b76fc",
+          "text": "Cuál es el top 10 de productos en ventas USD?",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:16:43.468Z",
+          "updatedAt": "2025-07-14T20:16:43.468Z"
+        },
+        {
+          "id": "9ff9f109-43e6-40ae-9cb3-7df675f8c047",
+          "text": "Ventas en USD de Julio 2025 vs Junio 2025",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:17:29.595Z",
+          "updatedAt": "2025-07-14T20:17:29.595Z"
+        },
+        {
+          "id": "220126f2-1475-4596-bfd0-c54588a583b9",
+          "text": "Ventas 2024",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:18:01.298Z",
+          "updatedAt": "2025-07-14T20:18:01.298Z"
+        },
+        {
+          "id": "3ae7440b-d989-4f52-95a0-64654bf98d49",
+          "text": "Ventas en USD de Maíz en el 2024",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:19:15.837Z",
+          "updatedAt": "2025-07-14T20:19:15.837Z"
+        },
+        {
+          "id": "4ba79ad7-4cf0-47c2-9162-82cda975dcc8",
+          "text": "Quiero saber las ventas de maíz 2025 en USD",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:28:27.087Z",
+          "updatedAt": "2025-07-14T20:28:27.087Z"
+        },
+        {
+          "id": "34918a82-2943-4292-96b3-acf49632412d",
+          "text": "Ventas 2025 en usd",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:29:02.050Z",
+          "updatedAt": "2025-07-14T20:29:02.050Z"
+        },
+        {
+          "id": "a1595e7f-f6b6-4402-8e93-02412691afbf",
+          "text": "Cuales son mis top 3 productos por ventas en el 2025?",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:29:59.182Z",
+          "updatedAt": "2025-07-14T20:29:59.182Z"
+        },
+        {
+          "id": "b540af76-0a15-41b9-9b8c-d2fa68980ba7",
+          "text": "Me puedes comparar las ventas en usd 2025 vs 2024",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:30:51.313Z",
+          "updatedAt": "2025-07-14T20:30:51.313Z"
+        },
+        {
+          "id": "739ef15f-fcc4-4d0b-95fa-9e785060d276",
+          "text": "Ventas totales",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:31:22.865Z",
+          "updatedAt": "2025-07-14T20:31:22.865Z"
+        },
+        {
+          "id": "8a7b19c1-a3d0-4140-9a37-4e46c41b9448",
+          "text": "Ventas por Producto",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:46:38.070Z",
+          "updatedAt": "2025-07-14T20:46:38.070Z"
+        },
+        {
+          "id": "f5bc347c-a2a1-4ab3-bc73-900d75b46e86",
+          "text": "2025",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:46:58.044Z",
+          "updatedAt": "2025-07-14T20:46:58.044Z"
+        },
+        {
+          "id": "afceb9d4-36f9-4e32-b2e1-35c602bad846",
+          "text": "por familia",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-14T20:47:28.565Z",
+          "updatedAt": "2025-07-14T20:47:28.565Z"
+        },
+        {
+          "id": "ab97ab98-136f-449a-82d4-9a2a4a40beb5",
+          "text": "cuales son las ventas de hoy",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T13:54:55.832Z",
+          "updatedAt": "2025-07-15T13:54:55.832Z"
+        },
+        {
+          "id": "ca0b45f2-2e27-499a-aa52-a43ae4f427b2",
+          "text": "Hola",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-15T14:06:21.287Z",
+          "updatedAt": "2025-07-15T14:06:21.287Z"
+        },
+        {
+          "id": "d72a3522-8636-404e-b77a-6165cf344c75",
+          "text": "Me muestras las ventas por familia de producto",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-15T14:07:10.156Z",
+          "updatedAt": "2025-07-15T14:07:10.156Z"
+        },
+        {
+          "id": "24a9972c-7231-4fd2-86aa-69805f770a72",
+          "text": "Si, insecticidas",
+          "userId": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "createdAt": "2025-07-15T14:17:30.934Z",
+          "updatedAt": "2025-07-15T14:17:30.934Z"
+        },
+        {
+          "id": "78f97b3b-7fcc-4cbd-b204-588cca8127a6",
+          "text": "Cuál es mi distribuidor?",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T16:05:54.687Z",
+          "updatedAt": "2025-07-15T16:05:54.687Z"
+        },
+        {
+          "id": "c31fddfb-81ed-423a-a1f1-91bc782b597a",
+          "text": "La facturación que me muestras es la suma de todos los distribuidores?",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T16:10:54.751Z",
+          "updatedAt": "2025-07-15T16:10:54.751Z"
+        },
+        {
+          "id": "fcdc5740-b72e-45ed-b82a-53650b59e961",
+          "text": "Al día de hoy cuánto se ha vendido de maíz durante el año 2025",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T16:20:31.812Z",
+          "updatedAt": "2025-07-15T16:20:31.812Z"
+        },
+        {
+          "id": "ca830a56-5340-492a-b5a1-f4609035903d",
+          "text": "Al día de hoy cuánto se ha vendido de maíz durante el año 2025",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T16:20:51.246Z",
+          "updatedAt": "2025-07-15T16:20:51.246Z"
+        },
+        {
+          "id": "62937831-cafc-474e-9b7c-d640f908e588",
+          "text": "Hola eva",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T16:33:05.426Z",
+          "updatedAt": "2025-07-15T16:33:05.426Z"
+        },
+        {
+          "id": "8082e686-9f2a-4910-ab22-b0440de54f67",
+          "text": "Hola",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T16:35:43.563Z",
+          "updatedAt": "2025-07-15T16:35:43.563Z"
+        },
+        {
+          "id": "537a3643-2b56-409e-ba5f-d95b2d57ea1d",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T17:03:23.301Z",
+          "updatedAt": "2025-07-15T17:03:23.301Z"
+        },
+        {
+          "id": "c7ace899-8535-46e3-825c-9a755f479926",
+          "text": "La venta consolidada",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T17:05:34.597Z",
+          "updatedAt": "2025-07-15T17:05:34.597Z"
+        },
+        {
+          "id": "5861d219-03a6-471e-9bb4-fcc5e54c5d74",
+          "text": "Hola eva",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T17:08:13.281Z",
+          "updatedAt": "2025-07-15T17:08:13.281Z"
+        },
+        {
+          "id": "a9c497a4-0f53-4eb6-8967-cbdcec42600d",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T17:09:34.300Z",
+          "updatedAt": "2025-07-15T17:09:34.300Z"
+        },
+        {
+          "id": "1f1b2828-27d7-4c07-a036-b027277398ae",
+          "text": "Cual es el precio real de venta de Maiz DK",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T17:11:22.021Z",
+          "updatedAt": "2025-07-15T17:11:22.021Z"
+        },
+        {
+          "id": "26e639e5-85b3-4d68-b4c2-f86237cb29c7",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T17:11:36.848Z",
+          "updatedAt": "2025-07-15T17:11:36.848Z"
+        },
+        {
+          "id": "6ee4a91b-d236-432c-b432-398810bfe8b1",
+          "text": "Dame el NIP promedio ponderado de DK a la fecha",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T17:12:33.977Z",
+          "updatedAt": "2025-07-15T17:12:33.977Z"
+        },
+        {
+          "id": "daed9988-6326-4aa9-a413-a59f6f4aa0c8",
+          "text": "Es el net invoice price...y se calcula dividiendo los USD totales de Dk por la unidades UEQ TOTALES DE dK",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T17:13:45.962Z",
+          "updatedAt": "2025-07-15T17:13:45.962Z"
+        },
+        {
+          "id": "0cd206a7-b41b-4af1-8bdb-69d0cae011a6",
+          "text": "y hoy? aumento algo?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T18:55:49.426Z",
+          "updatedAt": "2025-07-15T18:55:49.426Z"
+        },
+        {
+          "id": "cbe83393-15fc-44be-885c-fb642e57fa7b",
+          "text": "hoy es 15 de julio",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T18:56:23.382Z",
+          "updatedAt": "2025-07-15T18:56:23.382Z"
+        },
+        {
+          "id": "4a5ff3f0-841c-4885-a77f-a170b0a8e629",
+          "text": "hasta que fecha exacta es esa la facturación? cada cuanto se actualiza?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T18:57:01.591Z",
+          "updatedAt": "2025-07-15T18:57:01.591Z"
+        },
+        {
+          "id": "603a5b19-df3a-4e92-954c-21ec09cb7067",
+          "text": "ok eso es en cantidad,  que seria volumen. y en precio, que seria facturacion? cual es el total de ventas de maiz? y diferenciando entre DK y LT? y CP? y en que podes segmentarlo?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T18:58:14.098Z",
+          "updatedAt": "2025-07-15T18:58:14.098Z"
+        },
+        {
+          "id": "536682ff-5476-48e7-8ceb-fea004694016",
+          "text": "si el acumulado del año hasta la fecha de hoy (YTD). quiero que ademas de eso me des los numeros por separado de facturacion de DK y LT.",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T18:59:05.658Z",
+          "updatedAt": "2025-07-15T18:59:05.658Z"
+        },
+        {
+          "id": "72f514b1-d974-49e4-b126-2f64d1de6651",
+          "text": "cuanto es el total de maiz?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T18:59:56.003Z",
+          "updatedAt": "2025-07-15T18:59:56.003Z"
+        },
+        {
+          "id": "96c7e960-10e1-4fbb-a7d0-473ccc755407",
+          "text": "en facturacion, no volumen",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T19:00:13.208Z",
+          "updatedAt": "2025-07-15T19:00:13.208Z"
+        },
+        {
+          "id": "a8588084-ab9a-41f8-b35c-6728b96e6f4f",
+          "text": "cuales son todas las clasificaciones?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T19:00:34.612Z",
+          "updatedAt": "2025-07-15T19:00:34.612Z"
+        },
+        {
+          "id": "bdb33b12-fd9f-4e35-94ec-528fc37ba8b6",
+          "text": "si",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T19:01:03.153Z",
+          "updatedAt": "2025-07-15T19:01:03.153Z"
+        },
+        {
+          "id": "19c63776-2e3c-4a2d-b3f3-3ca01a3b2838",
+          "text": "pero ayer me dijiste: La facturación en USD de Maíz Dekalb (DK) YTD 2025 es de $322,131,108.61. como puede ser que sea menos la suma de dk y lt?",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T19:02:25.429Z",
+          "updatedAt": "2025-07-15T19:02:25.429Z"
+        },
+        {
+          "id": "842ec903-9307-410e-b265-0fe1d99aa47f",
+          "text": "a ver dame ambas",
+          "userId": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "createdAt": "2025-07-15T19:02:47.953Z",
+          "updatedAt": "2025-07-15T19:02:47.953Z"
+        },
+        {
+          "id": "a8e750d8-00b1-4858-bb73-8e2db6e506b2",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:18:08.887Z",
+          "updatedAt": "2025-07-15T19:18:08.887Z"
+        },
+        {
+          "id": "20427064-f8cc-4d0d-94b4-8182b117cc25",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:18:14.831Z",
+          "updatedAt": "2025-07-15T19:18:14.831Z"
+        },
+        {
+          "id": "92a33e58-431d-4f18-aae6-85d27b5bc859",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:19:12.856Z",
+          "updatedAt": "2025-07-15T19:19:12.856Z"
+        },
+        {
+          "id": "4096ac00-a87a-4384-b265-50ea20168344",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:19:59.350Z",
+          "updatedAt": "2025-07-15T19:19:59.350Z"
+        },
+        {
+          "id": "814778f2-b42e-489c-921f-a0161f64dac1",
+          "text": "quien sos",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:20:18.639Z",
+          "updatedAt": "2025-07-15T19:20:18.639Z"
+        },
+        {
+          "id": "9a80ce1b-e5ac-45f3-a498-e875514aa301",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:21:27.569Z",
+          "updatedAt": "2025-07-15T19:21:27.569Z"
+        },
+        {
+          "id": "9e02e34a-19e6-47ea-a50e-947d71f75ff2",
+          "text": "haceme el top 5 días con mas ventas en el ultimo mes",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:21:55.987Z",
+          "updatedAt": "2025-07-15T19:21:55.987Z"
+        },
+        {
+          "id": "11fc8efa-26cd-4479-aca1-bffe256fa436",
+          "text": "en junio 2025",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:22:07.111Z",
+          "updatedAt": "2025-07-15T19:22:07.111Z"
+        },
+        {
+          "id": "95be4bc1-5a3f-47fb-8bb6-16abd73d361f",
+          "text": "por favor me puedes decir la cantidad de UEQ de Maiz vendidas hasta hoy?",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T19:22:53.444Z",
+          "updatedAt": "2025-07-15T19:22:53.444Z"
+        },
+        {
+          "id": "905ff2b0-0ad8-4500-a9f6-b9c0672d91bc",
+          "text": "haceme el top 5 días con mas ventas en el abril",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:23:21.143Z",
+          "updatedAt": "2025-07-15T19:23:21.143Z"
+        },
+        {
+          "id": "5e518c16-0987-4dd3-9cf2-7f7c1f037f3d",
+          "text": "si",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:23:30.025Z",
+          "updatedAt": "2025-07-15T19:23:30.025Z"
+        },
+        {
+          "id": "4723f961-6a35-4692-bef0-5a4b0e99ffa6",
+          "text": "haceme una comparacion entre los primeros 5 meses de 2025, teniendo en cuenta las ventas en dolares",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:24:19.491Z",
+          "updatedAt": "2025-07-15T19:24:19.491Z"
+        },
+        {
+          "id": "f1f6773d-1d05-48cf-b2f4-96520e2af218",
+          "text": "Quiero la venta mes a mes de lo que va del año",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:25:14.445Z",
+          "updatedAt": "2025-07-15T19:25:14.445Z"
+        },
+        {
+          "id": "e88b8d05-4348-4f9a-b512-bb9c6ec96b84",
+          "text": "hola",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T19:25:58.618Z",
+          "updatedAt": "2025-07-15T19:25:58.618Z"
+        },
+        {
+          "id": "290ee013-1524-47e8-b7cf-f1b73c0f93be",
+          "text": "dame la venta de hoy de glisofato",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T19:28:50.592Z",
+          "updatedAt": "2025-07-15T19:28:50.592Z"
+        },
+        {
+          "id": "6e744ec5-4eff-4302-9676-bda73e92a303",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:29:32.323Z",
+          "updatedAt": "2025-07-15T19:29:32.323Z"
+        },
+        {
+          "id": "af61fb96-297f-4f66-8dc1-3931fc5e0cc4",
+          "text": "Hola eva",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T19:29:32.794Z",
+          "updatedAt": "2025-07-15T19:29:32.794Z"
+        },
+        {
+          "id": "99482029-5844-4b7d-a524-7b60822fa8d9",
+          "text": "Dame la venta en UEQ de la jnidad de negocio Maiz a la fecha",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T19:30:06.057Z",
+          "updatedAt": "2025-07-15T19:30:06.057Z"
+        },
+        {
+          "id": "862b7d8c-30cc-4224-9c8f-34dae648d365",
+          "text": "Cuanto de esta venta es por Subfamilia?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T19:30:41.018Z",
+          "updatedAt": "2025-07-15T19:30:41.018Z"
+        },
+        {
+          "id": "0457f5ff-4eff-4c43-9ccf-c475f9c8c2ec",
+          "text": "Dame la venta UEQ para la unidad de negocio de Maiz",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T19:32:21.895Z",
+          "updatedAt": "2025-07-15T19:32:21.895Z"
+        },
+        {
+          "id": "4c1f3d48-212d-43ea-b241-2a88873aa957",
+          "text": "prueba",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T19:32:29.547Z",
+          "updatedAt": "2025-07-15T19:32:29.547Z"
+        },
+        {
+          "id": "01370148-f1f1-4fae-b74c-917c737254ba",
+          "text": "si de este año",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T19:33:05.517Z",
+          "updatedAt": "2025-07-15T19:33:05.517Z"
+        },
+        {
+          "id": "21b845cb-5b9d-428c-b77e-85bcef3868bd",
+          "text": "puedes darme la venta de hoy (glisofato)",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T19:33:10.035Z",
+          "updatedAt": "2025-07-15T19:33:10.035Z"
+        },
+        {
+          "id": "7fb66450-da77-46dc-b44b-27a2bafed114",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:33:49.232Z",
+          "updatedAt": "2025-07-15T19:33:49.232Z"
+        },
+        {
+          "id": "6ea1e7a9-b039-42bd-8189-cbbed19cda32",
+          "text": "haceme el top 5 días con mas ventas en junio 2025",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:34:07.079Z",
+          "updatedAt": "2025-07-15T19:34:07.079Z"
+        },
+        {
+          "id": "4318521d-e92d-4438-81ae-a2466c16e8e3",
+          "text": "Quiero la venta mes a mes de lo que va del año",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:35:03.460Z",
+          "updatedAt": "2025-07-15T19:35:03.460Z"
+        },
+        {
+          "id": "7a2a53eb-497a-4bb5-b863-844ff5fd6e1d",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:35:07.853Z",
+          "updatedAt": "2025-07-15T19:35:07.853Z"
+        },
+        {
+          "id": "7ba1cf57-17b2-4c5a-b11f-986e30a41c71",
+          "text": "en odlares",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:35:18.508Z",
+          "updatedAt": "2025-07-15T19:35:18.508Z"
+        },
+        {
+          "id": "49d0ed1e-073f-446d-b691-82cc7febc5dd",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:36:29.899Z",
+          "updatedAt": "2025-07-15T19:36:29.899Z"
+        },
+        {
+          "id": "174f1e56-d13c-4d38-b420-486031d20873",
+          "text": "Hola",
+          "userId": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "createdAt": "2025-07-15T19:37:42.658Z",
+          "updatedAt": "2025-07-15T19:37:42.658Z"
+        },
+        {
+          "id": "4c0e6373-732a-4d97-a3a8-1dad259497d5",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:39:07.278Z",
+          "updatedAt": "2025-07-15T19:39:07.278Z"
+        },
+        {
+          "id": "f521447a-d27d-416e-927f-a9f9c9e66762",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:39:20.975Z",
+          "updatedAt": "2025-07-15T19:39:20.975Z"
+        },
+        {
+          "id": "d8292248-2221-470a-a296-a715f2520bf9",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:40:13.335Z",
+          "updatedAt": "2025-07-15T19:40:13.335Z"
+        },
+        {
+          "id": "ff0ddddb-c892-4c1f-882f-27a91d4f5a49",
+          "text": "solo 2025",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:40:34.257Z",
+          "updatedAt": "2025-07-15T19:40:34.257Z"
+        },
+        {
+          "id": "9103fca7-f394-42f2-ba7d-8a5350d45b3a",
+          "text": "Quiero la venta mes a mes de lo que va del año",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:41:05.759Z",
+          "updatedAt": "2025-07-15T19:41:05.759Z"
+        },
+        {
+          "id": "8fefc274-fe9f-47a9-8d6f-ee51e9f141da",
+          "text": "en dolares, en general",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:41:24.957Z",
+          "updatedAt": "2025-07-15T19:41:24.957Z"
+        },
+        {
+          "id": "d215d8e6-902f-40ed-887a-e62d47446a88",
+          "text": "¿Cómo ha sido la tendencia de ventas desde mayo hasta junio?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:43:14.393Z",
+          "updatedAt": "2025-07-15T19:43:14.393Z"
+        },
+        {
+          "id": "a4f03bcb-ef4b-49ee-a5b3-c5807441e365",
+          "text": "Listame los 3 días con mayores ventas de marzo",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:44:43.487Z",
+          "updatedAt": "2025-07-15T19:44:43.487Z"
+        },
+        {
+          "id": "2d783c6a-86c6-448f-8353-c323b0d43cb0",
+          "text": "Listame los 3 días con mayores ventas de enero",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T19:46:17.277Z",
+          "updatedAt": "2025-07-15T19:46:17.277Z"
+        },
+        {
+          "id": "d31b3365-0bb7-4e8d-8004-4874d697de6a",
+          "text": "Hola",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T19:56:56.431Z",
+          "updatedAt": "2025-07-15T19:56:56.431Z"
+        },
+        {
+          "id": "8d1bb81c-4500-44bd-b5a5-63cb3d8cb2a9",
+          "text": "puedes darme la venta de YTD de glisofatoy compararla contrar el año pasdao (ytd)",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T19:57:50.816Z",
+          "updatedAt": "2025-07-15T19:57:50.816Z"
+        },
+        {
+          "id": "00150af5-3b19-4a9c-b7ca-4a831530c55d",
+          "text": "Listame los 3 días con mayores ventas de febrero",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:02:42.102Z",
+          "updatedAt": "2025-07-15T20:02:42.102Z"
+        },
+        {
+          "id": "a930673a-9794-4efd-86f8-a6b2720b2db7",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:02:45.760Z",
+          "updatedAt": "2025-07-15T20:02:45.760Z"
+        },
+        {
+          "id": "7d2eff4c-f7cf-44d9-ab99-882096c6133e",
+          "text": "hola! tenes el acumulado de bolsas este año?",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-15T20:03:20.127Z",
+          "updatedAt": "2025-07-15T20:03:20.127Z"
+        },
+        {
+          "id": "e70682c5-63a0-491d-98fd-14a479671560",
+          "text": "maiz",
+          "userId": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "createdAt": "2025-07-15T20:03:32.531Z",
+          "updatedAt": "2025-07-15T20:03:32.531Z"
+        },
+        {
+          "id": "d4e3c70d-15e7-44da-bc73-051cf9a71257",
+          "text": "Listame los 3 días con mayores ventas de febrero",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:03:38.235Z",
+          "updatedAt": "2025-07-15T20:03:38.235Z"
+        },
+        {
+          "id": "c2cb8080-6447-4ef4-ac47-060bfbfc836a",
+          "text": "Listame los 3 días con mayores ventas de enero",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:09:04.265Z",
+          "updatedAt": "2025-07-15T20:09:04.265Z"
+        },
+        {
+          "id": "9cb2c1d1-c750-4cd8-8928-96d5191e0a82",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:12:16.032Z",
+          "updatedAt": "2025-07-15T20:12:16.032Z"
+        },
+        {
+          "id": "8ca54db4-97e2-49fa-90bc-ee908493723d",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:16:16.616Z",
+          "updatedAt": "2025-07-15T20:16:16.616Z"
+        },
+        {
+          "id": "9a31185e-eee0-4903-a6c4-a0e5ef47c5bf",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:16:56.053Z",
+          "updatedAt": "2025-07-15T20:16:56.053Z"
+        },
+        {
+          "id": "9c4fd264-43dd-4e3d-ac1f-bcfa202dd559",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:17:54.480Z",
+          "updatedAt": "2025-07-15T20:17:54.480Z"
+        },
+        {
+          "id": "833cbc46-7203-4a1a-ab2c-37a86715ab8f",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:18:23.837Z",
+          "updatedAt": "2025-07-15T20:18:23.837Z"
+        },
+        {
+          "id": "93d7205a-d0d8-42dc-b9e0-ef5b182c5998",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:19:05.852Z",
+          "updatedAt": "2025-07-15T20:19:05.852Z"
+        },
+        {
+          "id": "bbe272d1-4377-4b86-ad22-e647a480f9e8",
+          "text": "quien sos",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:19:14.586Z",
+          "updatedAt": "2025-07-15T20:19:14.586Z"
+        },
+        {
+          "id": "905f62d5-05e4-4f66-ac2c-8c687e8326bc",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:32:29.701Z",
+          "updatedAt": "2025-07-15T20:32:29.701Z"
+        },
+        {
+          "id": "8b83f7e1-dda6-4281-ac99-2d33f1e613b8",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:32:43.649Z",
+          "updatedAt": "2025-07-15T20:32:43.649Z"
+        },
+        {
+          "id": "ce2da4d9-5eef-4079-a0b1-139d75e4103b",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:32:57.877Z",
+          "updatedAt": "2025-07-15T20:32:57.877Z"
+        },
+        {
+          "id": "849acdde-595f-4429-9dc0-3595e99bd0a9",
+          "text": "90",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:33:12.105Z",
+          "updatedAt": "2025-07-15T20:33:12.105Z"
+        },
+        {
+          "id": "5048bf2d-ce94-4f93-99cc-688d9bb6865c",
+          "text": "holaaa",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:33:33.582Z",
+          "updatedAt": "2025-07-15T20:33:33.582Z"
+        },
+        {
+          "id": "9de1126c-eac1-476a-bf80-a33c21227f83",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:33:57.982Z",
+          "updatedAt": "2025-07-15T20:33:57.982Z"
+        },
+        {
+          "id": "30c3b1fc-b952-4c91-a88b-30ea9d6181e2",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:36:23.549Z",
+          "updatedAt": "2025-07-15T20:36:23.549Z"
+        },
+        {
+          "id": "0a8f4160-76c1-43c6-9759-cfc0467a5ba2",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:38:15.417Z",
+          "updatedAt": "2025-07-15T20:38:15.417Z"
+        },
+        {
+          "id": "c1b30ba2-fb5b-4c28-96f1-398508a43889",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:38:58.114Z",
+          "updatedAt": "2025-07-15T20:38:58.114Z"
+        },
+        {
+          "id": "95b413f7-e730-49b1-b2f2-ee53a3662e05",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:42:42.050Z",
+          "updatedAt": "2025-07-15T20:42:42.050Z"
+        },
+        {
+          "id": "c31c4cc9-1629-410a-a666-f830f1060363",
+          "text": "quien sos",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:43:01.030Z",
+          "updatedAt": "2025-07-15T20:43:01.030Z"
+        },
+        {
+          "id": "a4333464-17c1-4762-ab80-ea2e5b2bdc46",
+          "text": "_event_voice_note__e717a506-3f47-44b2-94fe-ec688cfa0c49",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:43:20.445Z",
+          "updatedAt": "2025-07-15T20:43:20.445Z"
+        },
+        {
+          "id": "0a2e6fae-4bfc-4c83-859a-402281926d46",
+          "text": "_event_voice_note__11fa0579-6bee-4997-b63b-d88caf6d7151",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:43:43.053Z",
+          "updatedAt": "2025-07-15T20:43:43.053Z"
+        },
+        {
+          "id": "949cf21d-2946-4368-8445-de9277ce3a2b",
+          "text": "_event_voice_note__043de198-e0ec-49f0-b42c-d21c6f6c4efb",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:44:06.145Z",
+          "updatedAt": "2025-07-15T20:44:06.145Z"
+        },
+        {
+          "id": "5be2cbdd-6b85-4a20-ac83-5e9a78215c79",
+          "text": "_event_voice_note__452a2375-91fe-4d99-8aa0-e80feb1608bb",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:45:12.435Z",
+          "updatedAt": "2025-07-15T20:45:12.435Z"
+        },
+        {
+          "id": "351a5cac-59e5-46be-bfde-6372cb5f8f18",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:47:01.009Z",
+          "updatedAt": "2025-07-15T20:47:01.009Z"
+        },
+        {
+          "id": "ba6072f9-4aff-4623-b975-4f89d5db3de9",
+          "text": "_event_voice_note__aea28edc-b804-43f8-8c3e-1a3341b5e89c",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:47:21.092Z",
+          "updatedAt": "2025-07-15T20:47:21.092Z"
+        },
+        {
+          "id": "166e3e13-0d87-4c97-8017-953792374e5d",
+          "text": "_event_voice_note__50c7fba5-72d2-4e13-821b-65af36be14aa",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:47:53.036Z",
+          "updatedAt": "2025-07-15T20:47:53.036Z"
+        },
+        {
+          "id": "ae8f8690-9901-4bbf-9c55-3ede02d8d327",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:50:21.555Z",
+          "updatedAt": "2025-07-15T20:50:21.555Z"
+        },
+        {
+          "id": "538691d1-1c6e-49e4-8945-cedc92f0bd72",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:52:24.937Z",
+          "updatedAt": "2025-07-15T20:52:24.937Z"
+        },
+        {
+          "id": "32c1df37-729d-4654-9e91-63c0326b6df6",
+          "text": "en 2025",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:52:34.614Z",
+          "updatedAt": "2025-07-15T20:52:34.614Z"
+        },
+        {
+          "id": "be01eed7-99e2-4aad-b8d3-32da1e23c9c3",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:53:21.453Z",
+          "updatedAt": "2025-07-15T20:53:21.453Z"
+        },
+        {
+          "id": "1eca8266-4aef-41c2-8e15-531c1e90ec1a",
+          "text": "2025",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:54:13.395Z",
+          "updatedAt": "2025-07-15T20:54:13.395Z"
+        },
+        {
+          "id": "3c131306-3f43-42e7-b75f-2ddd8ebf5e5d",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas en 2025?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T20:56:22.206Z",
+          "updatedAt": "2025-07-15T20:56:22.206Z"
+        },
+        {
+          "id": "97f93d71-c957-464b-b585-c4a0edfef83a",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-15T21:26:40.191Z",
+          "updatedAt": "2025-07-15T21:26:40.191Z"
+        },
+        {
+          "id": "1e6457a0-cc74-44ec-888b-a2e1e123e5f0",
+          "text": "Hola",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-15T22:05:57.339Z",
+          "updatedAt": "2025-07-15T22:05:57.339Z"
+        },
+        {
+          "id": "d1d6f6c0-673e-4ba7-b76f-a84d6586403d",
+          "text": "Eva, quiero saber cuántas bolsas facturo el negocio de maíz desde el comienzo de campaña.",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-15T23:31:58.663Z",
+          "updatedAt": "2025-07-15T23:31:58.663Z"
+        },
+        {
+          "id": "e20d0acf-65da-4289-95a4-8705e0ff098b",
+          "text": "Cuando hablo de comienzo de campaña, me refiero al 1 de abril del año en curso.",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-15T23:32:45.230Z",
+          "updatedAt": "2025-07-15T23:32:45.230Z"
+        },
+        {
+          "id": "05bcf06e-978d-4e2e-8fb3-7580bc5c7e4e",
+          "text": "Si, muéstrame la información por híbrido de maiz.",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-15T23:33:27.930Z",
+          "updatedAt": "2025-07-15T23:33:27.930Z"
+        },
+        {
+          "id": "83df8672-8054-45f9-b58c-6c6dcb3b0895",
+          "text": "Ordena los valores de manera descendente. Del híbrido que más facturo al que menos facturo.",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-15T23:34:30.754Z",
+          "updatedAt": "2025-07-15T23:34:30.754Z"
+        },
+        {
+          "id": "44597bbb-3ebf-4360-96cc-d7500a53e45b",
+          "text": "Puedes mostrarme la misma información pero segmentado por tipo de cliente?",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-15T23:35:41.385Z",
+          "updatedAt": "2025-07-15T23:35:41.385Z"
+        },
+        {
+          "id": "3e98e38f-b289-40ff-ab83-63422f894540",
+          "text": "Recuerdas cuál es la fecha de inicio de campaña?",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-15T23:36:44.892Z",
+          "updatedAt": "2025-07-15T23:36:44.892Z"
+        },
+        {
+          "id": "b03b9f14-2eb0-4038-94d8-183dfe2da788",
+          "text": "Si, me refiero a la fecha de inicio de campaña actual",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-15T23:37:22.939Z",
+          "updatedAt": "2025-07-15T23:37:22.939Z"
+        },
+        {
+          "id": "18120ccc-597a-45cd-bf5a-05bdc8225e7e",
+          "text": "Puedes entregarme el avance por BU sonre el target de maiz Dk?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T23:43:59.531Z",
+          "updatedAt": "2025-07-15T23:43:59.531Z"
+        },
+        {
+          "id": "d0de71b6-a223-4aef-b9c4-cd218dd4f702",
+          "text": "Ai Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T23:44:45.319Z",
+          "updatedAt": "2025-07-15T23:44:45.319Z"
+        },
+        {
+          "id": "cd4e8ffe-e432-493c-8ac9-6ae38f6222ca",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T23:45:27.953Z",
+          "updatedAt": "2025-07-15T23:45:27.953Z"
+        },
+        {
+          "id": "8d35070e-3831-4f95-ba87-29656283bcc6",
+          "text": "Para calcular el target de cada BU para la.marca DK debes sumar los Target de DK cada Squad .",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T23:46:53.910Z",
+          "updatedAt": "2025-07-15T23:46:53.910Z"
+        },
+        {
+          "id": "f1f57eb2-7d55-451f-9d8a-8171da5e90af",
+          "text": "Si",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-15T23:47:13.498Z",
+          "updatedAt": "2025-07-15T23:47:13.498Z"
+        },
+        {
+          "id": "fdb862f3-5cfb-4d39-b905-1c77589d60d0",
+          "text": "Cuando me refiera a comienzo de campaña, debes tomar como fecha de inicio el 1 de abril del año en curso",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-16T00:01:09.374Z",
+          "updatedAt": "2025-07-16T00:01:09.374Z"
+        },
+        {
+          "id": "06091cd2-06ec-453c-8c25-d6ace598f9ec",
+          "text": "Cuál es la facturación de glifosato en UEQ por squad?",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-16T00:01:44.279Z",
+          "updatedAt": "2025-07-16T00:01:44.279Z"
+        },
+        {
+          "id": "63ee1cba-c920-42b5-909e-ecb5dc905ed9",
+          "text": "Y desde el comienzo de campaña?",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-16T00:02:40.481Z",
+          "updatedAt": "2025-07-16T00:02:40.481Z"
+        },
+        {
+          "id": "cc4af506-7371-47cc-9962-06d841044d64",
+          "text": "Dime la manera correcta de interactuar contigo. Y dame ejemplos de prompts correctos",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-16T00:04:41.375Z",
+          "updatedAt": "2025-07-16T00:04:41.375Z"
+        },
+        {
+          "id": "7837ea27-d496-4451-b2c3-4f7e05184230",
+          "text": "Quiero saber que campos de información están disponibles para su consulta",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-16T00:10:26.499Z",
+          "updatedAt": "2025-07-16T00:10:26.499Z"
+        },
+        {
+          "id": "7e96b32e-d94c-485a-97e9-c724783a4e00",
+          "text": "Muéstrame en porcentaje cuanto falta a cada squad para llegar al objetivo de facturación",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-16T00:14:49.174Z",
+          "updatedAt": "2025-07-16T00:14:49.174Z"
+        },
+        {
+          "id": "53b6d141-6c62-40a4-84dc-c5c7726accb5",
+          "text": "Muéstrame segmentado por unidad de negocio",
+          "userId": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "createdAt": "2025-07-16T00:15:22.699Z",
+          "updatedAt": "2025-07-16T00:15:22.699Z"
+        },
+        {
+          "id": "2d91c534-26b2-411b-bcc4-483c198c8ae6",
+          "text": "Hola eva",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-16T11:34:16.679Z",
+          "updatedAt": "2025-07-16T11:34:16.679Z"
+        },
+        {
+          "id": "34d7f743-2171-48d0-a41d-170edc9747a1",
+          "text": "Como va la venta de Maiz Dk en UEQ a la fecha a nivel pais?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-16T11:34:33.287Z",
+          "updatedAt": "2025-07-16T11:34:33.287Z"
+        },
+        {
+          "id": "89f37365-8ef8-4577-a495-a0a5c2964537",
+          "text": "Puedes aperturar por subfamilia",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-16T11:35:15.927Z",
+          "updatedAt": "2025-07-16T11:35:15.927Z"
+        },
+        {
+          "id": "83cf5c9e-4b8a-4372-a0ea-8a82f3f66857",
+          "text": "Subfamilia",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-16T11:35:45.842Z",
+          "updatedAt": "2025-07-16T11:35:45.842Z"
+        },
+        {
+          "id": "42b25afc-c977-4b46-8c9a-809df9989221",
+          "text": "Comomva la venta a la fecha de la unidad de negocil maiz?",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-16T11:36:51.774Z",
+          "updatedAt": "2025-07-16T11:36:51.774Z"
+        },
+        {
+          "id": "7d09628c-c845-4ab2-8bc5-9f8293b498b9",
+          "text": "Me aperturas este dato por subfamilia",
+          "userId": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "createdAt": "2025-07-16T11:37:28.698Z",
+          "updatedAt": "2025-07-16T11:37:28.698Z"
+        },
+        {
+          "id": "a5aaa024-7741-44c1-98b9-8b53067496f0",
+          "text": "holaaa",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T14:36:05.728Z",
+          "updatedAt": "2025-07-16T14:36:05.728Z"
+        },
+        {
+          "id": "cebac525-41ee-4624-86cc-dcf84c949836",
+          "text": "quien sos",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T14:36:40.093Z",
+          "updatedAt": "2025-07-16T14:36:40.093Z"
+        },
+        {
+          "id": "ff3cfe0f-2380-4b33-b2f5-bc81dc6c20f9",
+          "text": "¿Cuál fue el peak de ventas en los últimos 30 días?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T14:47:21.756Z",
+          "updatedAt": "2025-07-16T14:47:21.756Z"
+        },
+        {
+          "id": "9f24b361-6ae0-440a-b7c2-d64ffa7a69ae",
+          "text": "maiz, en dolars",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T14:47:55.766Z",
+          "updatedAt": "2025-07-16T14:47:55.766Z"
+        },
+        {
+          "id": "08829789-9982-418d-b952-d0210e8db1dd",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T14:48:36.594Z",
+          "updatedAt": "2025-07-16T14:48:36.594Z"
+        },
+        {
+          "id": "9a270abf-9d21-4b40-b1cd-ccd9090b5c4a",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T14:56:41.823Z",
+          "updatedAt": "2025-07-16T14:56:41.823Z"
+        },
+        {
+          "id": "0148a5c9-89b1-4732-adab-96230da7b14b",
+          "text": "¿Qué porcentaje de las ventas totales representan los fungicidas?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T15:02:19.730Z",
+          "updatedAt": "2025-07-16T15:02:19.730Z"
+        },
+        {
+          "id": "12d5c911-5fb8-4c8f-8d47-49a91565bdbc",
+          "text": "en 2025",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T15:04:13.844Z",
+          "updatedAt": "2025-07-16T15:04:13.844Z"
+        },
+        {
+          "id": "8ad14501-d566-44e2-b606-48190f0e61e9",
+          "text": "¿Cuál fue el peak de ventas en los últimos 30 días?",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-16T15:05:16.217Z",
+          "updatedAt": "2025-07-16T15:05:16.217Z"
+        },
+        {
+          "id": "f1710bb3-52c7-4b3c-8236-275f94446a09",
+          "text": "dame una comparativa del ytd 2025 vs ytd 2024 por unidad de negocio y un indicador de crecimiento",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-16T16:17:55.045Z",
+          "updatedAt": "2025-07-16T16:17:55.045Z"
+        },
+        {
+          "id": "57761d96-5164-4f47-add3-3a41dd12b109",
+          "text": "Hola Eva",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T22:37:54.579Z",
+          "updatedAt": "2025-07-16T22:37:54.579Z"
+        },
+        {
+          "id": "e70a68ae-7b0d-4348-830e-6d604bff33f4",
+          "text": "Quiero saber cómo vienen las ventas 2025",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T22:38:09.659Z",
+          "updatedAt": "2025-07-16T22:38:09.659Z"
+        },
+        {
+          "id": "f7acfc67-315f-4004-bc00-3d6e06e03e0d",
+          "text": "De todo",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T22:38:20.267Z",
+          "updatedAt": "2025-07-16T22:38:20.267Z"
+        },
+        {
+          "id": "b77a3e76-53a7-4341-88b4-27d14c6a0fc8",
+          "text": "Y todo en dólares?",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T22:39:05.998Z",
+          "updatedAt": "2025-07-16T22:39:05.998Z"
+        },
+        {
+          "id": "5f8edcce-a42d-4fe8-824e-90e7f70fd728",
+          "text": "Ok",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T22:39:24.841Z",
+          "updatedAt": "2025-07-16T22:39:24.841Z"
+        },
+        {
+          "id": "e4269fd1-fad0-4845-be8d-078a4b565cac",
+          "text": "dame una comparativa del ytd 2025 vs ytd 2024 por unidad de negocio",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-16T22:41:27.506Z",
+          "updatedAt": "2025-07-16T22:41:27.506Z"
+        },
+        {
+          "id": "87419b33-38f2-4067-9bce-089a729d60d7",
+          "text": "dolares",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-16T22:41:41.066Z",
+          "updatedAt": "2025-07-16T22:41:41.066Z"
+        },
+        {
+          "id": "940e92c0-a48f-4914-91db-c30b4402e3e8",
+          "text": "Denuevo",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T22:43:03.258Z",
+          "updatedAt": "2025-07-16T22:43:03.258Z"
+        },
+        {
+          "id": "7de2f65c-62e0-462e-b6d8-fcb9360093ba",
+          "text": "Cuáles son los mejores vendedores de CP",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T22:45:55.539Z",
+          "updatedAt": "2025-07-16T22:45:55.539Z"
+        },
+        {
+          "id": "b4be67c8-94cf-4c8d-8719-d64fba3bb634",
+          "text": "Y cuáles son los productos más vendidos ?",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T23:10:01.840Z",
+          "updatedAt": "2025-07-16T23:10:01.840Z"
+        },
+        {
+          "id": "bb622497-5678-48db-a013-1ff363e7a967",
+          "text": "CP",
+          "userId": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "createdAt": "2025-07-16T23:10:19.239Z",
+          "updatedAt": "2025-07-16T23:10:19.239Z"
+        },
+        {
+          "id": "8b0aac0c-5988-42cf-a563-56ea91b04782",
+          "text": "hola COMO ESTAS",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T13:13:07.828Z",
+          "updatedAt": "2025-07-17T13:13:07.828Z"
+        },
+        {
+          "id": "7640e73f-34e6-46b9-8366-99b10f67a122",
+          "text": "ME PODRIAS GRAFICAR LA EVOLUCIÓN HISTOIRCA DE LA FACTURAICÓN CY25 MAIZ SSU",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T13:13:46.279Z",
+          "updatedAt": "2025-07-17T13:13:46.279Z"
+        },
+        {
+          "id": "7663dad6-6a61-4d59-80b9-40c5d0ea8a2e",
+          "text": "por trimestre",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:02:48.420Z",
+          "updatedAt": "2025-07-17T14:02:48.420Z"
+        },
+        {
+          "id": "686d3cd0-f320-4805-9b13-92eac3ed376d",
+          "text": "en SSU",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:03:23.464Z",
+          "updatedAt": "2025-07-17T14:03:23.464Z"
+        },
+        {
+          "id": "7774fba1-59d4-481d-8be6-63696b9afe63",
+          "text": "LA EVOLUCIÓN TRIMESTRA",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:03:31.375Z",
+          "updatedAt": "2025-07-17T14:03:31.375Z"
+        },
+        {
+          "id": "225ac484-4990-4f5e-9841-2f59cfd38bf7",
+          "text": "DALE,. mostrame que podrias hacer.",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:05:22.537Z",
+          "updatedAt": "2025-07-17T14:05:22.537Z"
+        },
+        {
+          "id": "bf38cb44-1de7-4a8e-8b0f-2e4d2696c1dd",
+          "text": "si",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:05:34.186Z",
+          "updatedAt": "2025-07-17T14:05:34.186Z"
+        },
+        {
+          "id": "9ef94828-c0b2-4455-b555-6a96f1b0ce8a",
+          "text": "hola",
+          "userId": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "createdAt": "2025-07-17T14:07:17.224Z",
+          "updatedAt": "2025-07-17T14:07:17.224Z"
+        },
+        {
+          "id": "bf02cba3-6d57-449f-b308-6abaee9eac47",
+          "text": "podrias pasarme la facturación de 2025 en SSU DE MAIZ DK",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:07:38.824Z",
+          "updatedAt": "2025-07-17T14:07:38.824Z"
+        },
+        {
+          "id": "29c4b8fb-c8f2-46ac-93eb-6cc843a60994",
+          "text": "Y DE MAIZ LT",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:08:28.393Z",
+          "updatedAt": "2025-07-17T14:08:28.393Z"
+        },
+        {
+          "id": "2ce93383-0572-4c11-98e5-73a67524b3a3",
+          "text": "Me podrias mostrar para ambas marcas como se diostribuye por SQUAD",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:10:20.034Z",
+          "updatedAt": "2025-07-17T14:10:20.034Z"
+        },
+        {
+          "id": "ed241a14-21c9-4400-8ada-b4335042a2d3",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:10:37.914Z",
+          "updatedAt": "2025-07-17T14:10:37.914Z"
+        },
+        {
+          "id": "3b1ae3f2-6af4-4a0d-9291-28f432bcb59c",
+          "text": "me gustaria separa por marca y analizar solamente la bu sur",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:11:38.267Z",
+          "updatedAt": "2025-07-17T14:11:38.267Z"
+        },
+        {
+          "id": "b7897e19-60ce-4b11-abff-b8ed99080be9",
+          "text": "Me podrias a su vez detectar por marcar para esta BU, los 3 distirbuidores más importantes para cada Squad",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:13:07.587Z",
+          "updatedAt": "2025-07-17T14:13:07.587Z"
+        },
+        {
+          "id": "f782f789-07f5-48d0-8ae1-d3fddfd4d878",
+          "text": "que entendes por mas importante?",
+          "userId": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "createdAt": "2025-07-17T14:15:30.979Z",
+          "updatedAt": "2025-07-17T14:15:30.979Z"
+        },
+        {
+          "id": "ef29a5bb-91f9-48e2-9554-ed0fcfdcd11a",
+          "text": "como estas hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:23:55.932Z",
+          "updatedAt": "2025-07-17T14:23:55.932Z"
+        },
+        {
+          "id": "a2b45fca-b78d-4b64-864f-7d336e6a58d1",
+          "text": "me podes ayudar hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:24:00.560Z",
+          "updatedAt": "2025-07-17T14:24:00.560Z"
+        },
+        {
+          "id": "c6f89f36-2bcc-4082-82aa-d6f458d85b40",
+          "text": "holaa quien sos",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:24:23.897Z",
+          "updatedAt": "2025-07-17T14:24:23.897Z"
+        },
+        {
+          "id": "7f7a7cc2-df5b-4147-8a77-959a10059df3",
+          "text": "ayudame",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:24:27.656Z",
+          "updatedAt": "2025-07-17T14:24:27.656Z"
+        },
+        {
+          "id": "a42361d0-faf9-4a84-85fc-020a46c22ac0",
+          "text": "oka",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:24:42.127Z",
+          "updatedAt": "2025-07-17T14:24:42.127Z"
+        },
+        {
+          "id": "143b413a-12dd-4ac8-ae69-94cb5d2503f4",
+          "text": "pero que podes hacer",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:24:46.132Z",
+          "updatedAt": "2025-07-17T14:24:46.132Z"
+        },
+        {
+          "id": "c0efe805-85b0-473c-ab42-b6e5b7d39ab1",
+          "text": "entonces",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T14:24:48.861Z",
+          "updatedAt": "2025-07-17T14:24:48.861Z"
+        },
+        {
+          "id": "202d0643-9bbe-453a-ae19-76ac521178ec",
+          "text": "hol",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T15:50:35.384Z",
+          "updatedAt": "2025-07-17T15:50:35.384Z"
+        },
+        {
+          "id": "009544cb-5ac8-4a76-9be0-984f3479c575",
+          "text": "que es el cy",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T15:50:46.223Z",
+          "updatedAt": "2025-07-17T15:50:46.223Z"
+        },
+        {
+          "id": "60c920a4-1e9d-4a44-82dc-45f3dadbe034",
+          "text": "cual fue la evolucion historica de la facturacion de maiz ssu por trimestre, en el cy25",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T15:51:03.792Z",
+          "updatedAt": "2025-07-17T15:51:03.792Z"
+        },
+        {
+          "id": "a64de047-7d76-4725-acc7-54b44f33e8c7",
+          "text": "a los transcurridos del cy25",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T15:51:27.118Z",
+          "updatedAt": "2025-07-17T15:51:27.118Z"
+        },
+        {
+          "id": "bf611038-96b3-48cb-a631-904bdb96991d",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T16:23:21.148Z",
+          "updatedAt": "2025-07-17T16:23:21.148Z"
+        },
+        {
+          "id": "72fe4c69-b2e0-4290-8a2f-98d7e1f98ad5",
+          "text": "que es el cy",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T16:23:32.858Z",
+          "updatedAt": "2025-07-17T16:23:32.858Z"
+        },
+        {
+          "id": "50c8efd5-fed4-4e26-9600-95d8a532d18b",
+          "text": "cual fue la evolucion historica de la facturacion de maiz ssu por trimestre, en el cy25",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T16:23:46.759Z",
+          "updatedAt": "2025-07-17T16:23:46.759Z"
+        },
+        {
+          "id": "9750082f-3425-4715-8cab-6a8446a9893a",
+          "text": "a los ya transcurridos",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T16:24:04.132Z",
+          "updatedAt": "2025-07-17T16:24:04.132Z"
+        },
+        {
+          "id": "aac9ef78-8d4a-4753-a75d-56cd1bf5350a",
+          "text": "cual fue la evolucion historica de la facturacion de maiz ssu por trimestre, en el cy25",
+          "userId": "7447b5dd-c4cd-4089-a7ce-be28f8c29bdc",
+          "createdAt": "2025-07-17T16:28:28.454Z",
+          "updatedAt": "2025-07-17T16:28:28.454Z"
+        },
+        {
+          "id": "33e630c8-947e-4a4c-af14-441f5583e2d5",
+          "text": "a los ya transcurridos",
+          "userId": "7447b5dd-c4cd-4089-a7ce-be28f8c29bdc",
+          "createdAt": "2025-07-17T16:28:50.593Z",
+          "updatedAt": "2025-07-17T16:28:50.593Z"
+        },
+        {
+          "id": "9a82c5eb-96a1-4f31-ab58-b32bf91f2521",
+          "text": "holalalala",
+          "userId": "7447b5dd-c4cd-4089-a7ce-be28f8c29bdc",
+          "createdAt": "2025-07-17T17:00:42.714Z",
+          "updatedAt": "2025-07-17T17:00:42.714Z"
+        },
+        {
+          "id": "bd637f55-ddd5-4e10-85f9-fbfb3582fd4c",
+          "text": "hola",
+          "userId": "7447b5dd-c4cd-4089-a7ce-be28f8c29bdc",
+          "createdAt": "2025-07-17T17:00:54.051Z",
+          "updatedAt": "2025-07-17T17:00:54.051Z"
+        },
+        {
+          "id": "dd2cad6d-8dc4-484f-bd19-9c2a3a892409",
+          "text": "cual fue la evolucion de la facturacion de maiz ssu por trimestre, en el cy25",
+          "userId": "7447b5dd-c4cd-4089-a7ce-be28f8c29bdc",
+          "createdAt": "2025-07-17T17:01:37.475Z",
+          "updatedAt": "2025-07-17T17:01:37.475Z"
+        },
+        {
+          "id": "c047cc51-40ca-4822-a273-1b8939cd1727",
+          "text": "cual fue la evolucion de la facturacion de maiz ssu por trimestre, en el cy25",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:02:20.773Z",
+          "updatedAt": "2025-07-17T17:02:20.773Z"
+        },
+        {
+          "id": "25a2a493-9ec7-4fff-ae49-3c487cc72cf7",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:03:23.140Z",
+          "updatedAt": "2025-07-17T17:03:23.140Z"
+        },
+        {
+          "id": "b898dacd-5890-4221-b115-5705f5a96bc3",
+          "text": "quien sos",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:05:35.876Z",
+          "updatedAt": "2025-07-17T17:05:35.876Z"
+        },
+        {
+          "id": "405d2392-b7e2-4b27-8b17-c04161475dcc",
+          "text": "cual fue la evolucion de la facturacion de maiz ssu por trimestre, en el cy25",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:05:43.309Z",
+          "updatedAt": "2025-07-17T17:05:43.309Z"
+        },
+        {
+          "id": "7a4ceeae-23d8-41f6-99c0-58f7682b6073",
+          "text": "en dolares",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:06:34.688Z",
+          "updatedAt": "2025-07-17T17:06:34.688Z"
+        },
+        {
+          "id": "ec9a62bc-d3db-412e-83f9-9a99693cc433",
+          "text": "hola",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:08:55.561Z",
+          "updatedAt": "2025-07-17T17:08:55.561Z"
+        },
+        {
+          "id": "b3c5dc4f-7908-48af-ad81-7b849e23187f",
+          "text": "cual fue la evolucion de la facturacion de maiz ssu por trimestre, en el cy25",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:09:02.171Z",
+          "updatedAt": "2025-07-17T17:09:02.171Z"
+        },
+        {
+          "id": "0b5a35e2-4e11-401d-bfad-37c7939fa714",
+          "text": "en dolares",
+          "userId": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "createdAt": "2025-07-17T17:09:13.355Z",
+          "updatedAt": "2025-07-17T17:09:13.355Z"
+        }
+      ]
+    },
+    "UserWpp": {
+      "timestamp": "2025-07-29T20:25:51.469Z",
+      "table": "UserWpp",
+      "count": 15,
+      "data": [
+        {
+          "id": "1b799ad5-739e-4fd2-b515-ac7f608908d3",
+          "phoneNumber": "56977152949",
+          "name": "Leszek",
+          "createdAt": "2025-07-03T19:53:59.888Z",
+          "updatedAt": "2025-07-03T19:53:59.888Z"
+        },
+        {
+          "id": "3c0ff5c6-6197-4aa4-a0e0-ed3eacf7e909",
+          "phoneNumber": "56998293288",
+          "name": "Javier Correa",
+          "createdAt": "2025-07-03T19:53:59.888Z",
+          "updatedAt": "2025-07-03T19:53:59.888Z"
+        },
+        {
+          "id": "65cf231d-68f5-4c7f-a68f-2cf24cc14021",
+          "phoneNumber": "5491166111880",
+          "name": "Ramiro Monllor",
+          "createdAt": "2025-07-03T19:53:59.888Z",
+          "updatedAt": "2025-07-03T19:53:59.888Z"
+        },
+        {
+          "id": "9d88bae9-e91f-4a00-888b-2e898841c415",
+          "phoneNumber": "56966054415",
+          "name": "Carlos Pacheco",
+          "createdAt": "2025-07-03T19:53:59.888Z",
+          "updatedAt": "2025-07-03T19:53:59.888Z"
+        },
+        {
+          "id": "bcebda27-df87-43f1-80db-3ce16dbb4bf2",
+          "phoneNumber": "5491131495115",
+          "name": "Matias Calello",
+          "createdAt": "2025-07-03T19:53:56.474Z",
+          "updatedAt": "2025-07-03T19:53:56.474Z"
+        },
+        {
+          "id": "f605c12d-ca9d-4acb-af16-3133e50b94ac",
+          "phoneNumber": "56981497384",
+          "name": "Sebastian",
+          "createdAt": "2025-07-03T19:53:59.888Z",
+          "updatedAt": "2025-07-03T19:53:59.888Z"
+        },
+        {
+          "id": "cbbfd556-f63c-4df2-82b7-93db59a304ec",
+          "phoneNumber": "5491137679459",
+          "name": "Andre Passicot",
+          "createdAt": "2025-07-09T14:33:12.644Z",
+          "updatedAt": "2025-07-09T14:33:12.644Z"
+        },
+        {
+          "id": "c5dc7f5a-5d5f-4882-a5e4-a71907ddfc85",
+          "phoneNumber": "5491128560196",
+          "name": "Martín Spinelli",
+          "createdAt": "2025-07-09T14:33:30.056Z",
+          "updatedAt": "2025-07-09T14:33:30.056Z"
+        },
+        {
+          "id": "94244b6b-574a-4753-a972-962af8b5e2ae",
+          "phoneNumber": "5491135171995",
+          "name": "Sol Cendra",
+          "createdAt": "2025-07-09T14:33:47.930Z",
+          "updatedAt": "2025-07-09T14:33:47.930Z"
+        },
+        {
+          "id": "20ab4d60-d16e-4752-9c5d-e0a97b286273",
+          "phoneNumber": "5491137736329",
+          "name": "Federico Goerens",
+          "createdAt": "2025-07-09T14:34:01.416Z",
+          "updatedAt": "2025-07-09T14:34:01.416Z"
+        },
+        {
+          "id": "b2c8ff92-e4dd-4ad3-baea-984b765798ce",
+          "phoneNumber": "5491133580142",
+          "name": "Martina Lamarca",
+          "createdAt": "2025-07-09T14:34:17.248Z",
+          "updatedAt": "2025-07-09T14:34:17.248Z"
+        },
+        {
+          "id": "889442bc-4dda-4fec-bc1d-900bf0c4d7e5",
+          "phoneNumber": "5491176445279",
+          "name": "Nahuel Corvalan",
+          "createdAt": "2025-07-09T14:34:39.710Z",
+          "updatedAt": "2025-07-09T14:34:39.710Z"
+        },
+        {
+          "id": "b0fac7bb-bc5d-4148-bf53-35f4d3f45877",
+          "phoneNumber": "5493415882086",
+          "name": "Geronimo Raddi",
+          "createdAt": "2025-07-10T15:20:52.393Z",
+          "updatedAt": "2025-07-10T15:20:52.393Z"
+        },
+        {
+          "id": "ea1dee96-67d6-427e-8e42-2a4e4022cfa8",
+          "phoneNumber": "+5491166111798",
+          "name": "Facundo",
+          "createdAt": "2025-07-17T16:27:17.230Z",
+          "updatedAt": "2025-07-17T16:27:17.230Z"
+        },
+        {
+          "id": "7447b5dd-c4cd-4089-a7ce-be28f8c29bdc",
+          "phoneNumber": "5491166111798",
+          "name": "Facundo",
+          "createdAt": "2025-07-17T16:28:16.500Z",
+          "updatedAt": "2025-07-17T16:28:16.500Z"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemas": {
+    "EncodingAxis": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "temporal",
+            "nominal",
+            "ordinal",
+            "quantitative"
+          ],
+          "title": "Type",
+          "description": "Tipo de datos en el eje: 'temporal' (fechas/tiempo), 'nominal' (categorías sin orden), 'ordinal' (categorías con orden) o 'quantitative' (valores numéricos)."
+        },
+        "format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Format",
+          "description": "Formato específico para mostrar los valores (ej: '%Y-%m-%d' para fechas, '$,.2f' para moneda)."
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Unit",
+          "description": "Unidad de medida para el eje Y (ej: 'USD', '%', 'miles')."
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "title": "EncodingAxis",
+      "description": "Define las propiedades de codificación y formato para un eje (X o Y) en el gráfico."
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "schemas": {
+    "ChartRequest": {
+      "properties": {
+        "agent_reply": {
+          "type": "string",
+          "title": "Agent Reply"
+        },
+        "user_prompt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Prompt"
+        },
+        "preferred_types": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Preferred Types"
+        },
+        "is_table": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Table"
+        },
+        "column_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Column Count"
+        }
+      },
+      "type": "object",
+      "required": [
+        "agent_reply"
+      ],
+      "title": "ChartRequest"
+    },
+    "ChartSpec": {
+      "properties": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "bar",
+                "line",
+                "pie"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Type",
+          "description": "Tipo de gráfico sugerido (valor obsoleto, usar 'mark')."
+        },
+        "mark": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "bar",
+                "line",
+                "area",
+                "pie"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mark",
+          "description": "Tipo de marca visual a usar para representar los datos (ej: 'line', 'bar')."
+        },
+        "encoding": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/components/schemas/EncodingAxis"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Encoding",
+          "description": "Define las propiedades de codificación para los ejes. Estructura esperada: `{ 'x': EncodingAxis, 'y': EncodingAxis }`."
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title",
+          "description": "Título principal del gráfico."
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Labels",
+          "description": "Etiquetas de la categoría o dimensión (eje X) que serán compartidas por todas las series."
+        },
+        "series": {
+          "items": {
+            "$ref": "#/components/schemas/Series"
+          },
+          "type": "array",
+          "title": "Series",
+          "description": "Lista de series de datos a dibujar. Cada serie contiene su nombre y sus valores."
+        },
+        "meta": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Meta",
+          "description": "Metadatos adicionales o configuraciones específicas no incluidas en el esquema principal."
+        }
+      },
+      "type": "object",
+      "required": [
+        "labels",
+        "series"
+      ],
+      "title": "ChartSpec",
+      "description": "Especificación completa para construir un gráfico.\nEsta estructura combina metadatos del gráfico (tipo, codificación) con los datos puros (labels, series)."
+    }
+  }
+}

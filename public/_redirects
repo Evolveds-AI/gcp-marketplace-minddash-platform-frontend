@@ -1,0 +1,10 @@
+# Redirecciones para funciones y API
+/.netlify/functions/*  /.netlify/functions/:splat  200
+/api/chat            /.netlify/functions/chat      200
+/api/messages        /.netlify/functions/messages  200
+
+# Assets estáticos
+/_next/static/*      /_next/static/:splat         200
+
+# SPA fallback para rutas de la aplicación
+/*                  /index.html                    200

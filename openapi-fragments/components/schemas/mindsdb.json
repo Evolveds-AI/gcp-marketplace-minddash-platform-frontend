@@ -1,0 +1,260 @@
+{
+  "schemas": {
+    "MindsdbMetaRequest": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "listar_conexiones",
+            "listar_esquemas",
+            "listar_tablas",
+            "listar_columnas",
+            "listar_tablasv2"
+          ],
+          "title": "Action"
+        },
+        "server_url": {
+          "type": "string",
+          "title": "Server Url"
+        },
+        "client_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Client Name"
+        },
+        "database": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Database"
+        },
+        "engine": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "postgres",
+                "mysql",
+                "bigquery",
+                "mariadb",
+                "mssql",
+                "synapsemssql",
+                "redshift",
+                "snowflake",
+                "aurora",
+                "aurorapostgres",
+                "auroramysql",
+                "hana",
+                "oracle",
+                "teradata",
+                "clickhouse",
+                "databricks"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Engine",
+          "default": "postgres"
+        },
+        "schemas": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Schemas"
+        },
+        "schema_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Schema Name"
+        },
+        "table": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Table"
+        },
+        "parameters": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parameters"
+        }
+      },
+      "type": "object",
+      "required": [
+        "action",
+        "server_url"
+      ],
+      "title": "MindsdbMetaRequest",
+      "examples": [
+        {
+          "summary": "Listar Conexiones",
+          "value": {
+            "action": "listar_conexiones",
+            "client_name": "postgresql_conn_minddash_dev",
+            "server_url": "http://0.0.0.0:47334/"
+          }
+        },
+        {
+          "summary": "Listar Esquemas",
+          "value": {
+            "action": "listar_esquemas",
+            "client_name": "postgresql_conn_minddash_dev",
+            "database": "postgresql_conn_minddash_dev",
+            "server_url": "http://0.0.0.0:47334/"
+          }
+        },
+        {
+          "summary": "Listar Tablas",
+          "value": {
+            "action": "listar_tablas",
+            "client_name": "postgresql_conn_minddash_dev",
+            "database": "postgresql_conn_minddash_dev",
+            "schemas": [
+              "public"
+            ],
+            "server_url": "http://0.0.0.0:47334/"
+          }
+        },
+        {
+          "summary": "Listar Columnas",
+          "value": {
+            "action": "listar_columnas",
+            "client_name": "postgresql_conn_minddash_dev",
+            "database": "postgresql_conn_minddash_dev",
+            "schema_name": "public",
+            "schemas": [
+              "public"
+            ],
+            "server_url": "http://0.0.0.0:47334/",
+            "table": "raw_base_kdm_ppt"
+          }
+        }
+      ]
+    },
+    "MindsdbMetaResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "title": "Status"
+        },
+        "conexiones": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Conexiones"
+        },
+        "esquemas": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Esquemas"
+        },
+        "tablas": {
+          "anyOf": [
+            {
+              "items": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tablas"
+        },
+        "columnas": {
+          "anyOf": [
+            {
+              "items": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Columnas"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Message"
+        }
+      },
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "title": "MindsdbMetaResponse"
+    }
+  }
+}

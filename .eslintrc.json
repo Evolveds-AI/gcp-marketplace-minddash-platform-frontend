@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-require-imports": "warn",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "warn",
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "react/display-name": "warn",
+    "react/no-children-prop": "warn",
+    "@next/next/no-img-element": "warn",
+    "@next/next/no-assign-module-variable": "warn",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}

@@ -1,0 +1,575 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model access_user_client {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id    String?   @db.Uuid
+  client_id  String?   @db.Uuid
+  role_id    String?   @db.Uuid
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+  clients    clients?  @relation(fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "client_roles_fkey")
+  roles      roles?    @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "roles_client_fkey")
+  users      users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_roles_fkey")
+}
+
+model access_user_organization {
+  id              String         @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id         String?        @db.Uuid
+  organization_id String?        @db.Uuid
+  role_id         String?        @db.Uuid
+  created_at      DateTime       @default(now())
+  updated_at      DateTime?
+  organizations   organizations? @relation(fields: [organization_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "organization_roles_fkey")
+  roles           roles?         @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "roles_organization_fkey")
+  users           users?         @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_roles_fkey")
+}
+
+model access_user_product {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id    String    @db.Uuid
+  product_id String    @db.Uuid
+  created_at DateTime  @default(now()) @db.Timestamp(6)
+  role_id    String?   @db.Uuid
+  updated_at DateTime?
+  roles      roles?    @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "roles_product_fkey")
+  products   products  @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_access_product_fkey")
+  users      users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_access_user_fkey")
+}
+
+model access_user_project {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id    String?   @db.Uuid
+  project_id String?   @db.Uuid
+  role_id    String?   @db.Uuid
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+  projects   projects? @relation(fields: [project_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "projects_roles_users_projects_fkey")
+  roles      roles?    @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "roles_project_fkey")
+  users      users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_roles_users_projects_fkey")
+}
+
+model access_users_clients {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id    String?   @db.Uuid
+  client_id  String?   @db.Uuid
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+  clients    clients?  @relation(fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "client_roles_fkey")
+}
+
+model access_users_data {
+  id                    String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id               String?            @db.Uuid
+  name                  String?            @db.VarChar(255)
+  description           String?
+  access_item_id        String?            @db.Uuid
+  allowed_columns       Json?
+  row_filter_conditions Json?
+  data_access_items     data_access_items? @relation(fields: [access_item_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "access_users_data_data_access_items_fkey")
+}
+
+model access_users_product {
+  id            String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id       String    @db.Uuid
+  product_id    String    @db.Uuid
+  created_at    DateTime  @default(now()) @db.Timestamp(6)
+  updated_at    DateTime?
+  data_role_id  String?   @db.Uuid
+  rol_client_id String?   @db.Uuid
+}
+
+model alert_thresholds {
+  id                    String                  @id @db.Uuid
+  metric_id             String?                 @db.Uuid
+  condition             String?                 @db.VarChar(10)
+  value                 Decimal?                @db.Decimal
+  frecuency             Decimal?                @db.Decimal
+  date_start_control    DateTime?               @db.Timestamp(6)
+  date_end_control      DateTime?               @db.Timestamp(6)
+  created_at            DateTime                @default(now()) @db.Timestamp(6)
+  updated_at            DateTime                @default(now()) @db.Timestamp(6)
+  channel_id            String?                 @db.Uuid
+  notification_channels notification_channels[]
+}
+
+model app_states {
+  app_name    String   @id @db.VarChar(128)
+  state       Json
+  update_time DateTime @db.Timestamp(6)
+}
+
+model channel_product {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  channel_id    String?   @db.Uuid
+  product_id    String?   @db.Uuid
+  configuration Json?
+  channels      channels? @relation(fields: [channel_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "channel_product_channels_fkey")
+  products      products? @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "channel_product_prodpromptsucts_fkey")
+}
+
+model channels {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String?           @db.VarChar(100)
+  description     String?           @db.VarChar(100)
+  created_at      DateTime          @default(now())
+  updated_at      DateTime
+  channel_product channel_product[]
+}
+
+model clients {
+  id                   String                 @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  nombre               String
+  description          String?
+  created_at           DateTime               @default(now())
+  updated_at           DateTime
+  access_user_client   access_user_client[]
+  access_users_clients access_users_clients[]
+  client_settings      client_settings?
+}
+
+model client_settings {
+  client_id                  String   @id @db.Uuid
+  company_name               String?
+  company_description        String?
+  timezone                   String   @default("UTC")
+  language                   String   @default("es")
+  ui_theme                   String   @default("dark")
+  avatar_data                String?  @db.Text
+  two_factor_enabled         Boolean  @default(false)
+  session_timeout            Int      @default(30)
+  password_min_length        Int      @default(8)
+  password_require_special   Boolean  @default(true)
+  password_require_numbers   Boolean  @default(true)
+  password_require_uppercase Boolean  @default(true)
+  ip_whitelist               String[] @default([])
+  email_notifications        Boolean  @default(true)
+  sms_notifications          Boolean  @default(false)
+  user_alerts                Boolean  @default(true)
+  system_alerts              Boolean  @default(true)
+  reports_enabled            Boolean  @default(true)
+  maintenance_alerts         Boolean  @default(true)
+  current_plan               String   @default("basic")
+  billing_email              String   @default("")
+  payment_method             String   @default("")
+  auto_renewal               Boolean  @default(true)
+  created_at                 DateTime @default(now()) @db.Timestamp(6)
+  updated_at                 DateTime @default(now()) @db.Timestamp(6)
+  client                     clients  @relation(fields: [client_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([client_id], map: "idx_client_settings_client")
+}
+
+model clients_products_deploys {
+  id                      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  product_id              String   @db.Uuid
+  bucket_config           String?  @db.VarChar(200)
+  gs_examples_agent       String?  @db.VarChar(200)
+  gs_prompt_agent         String?  @db.VarChar(200)
+  gs_prompt_sql           String?  @db.VarChar(200)
+  gs_profiling_agent      String?  @db.VarChar(200)
+  gs_metrics_config_agent String?  @db.VarChar(200)
+  client                  String?
+  created_at              DateTime @default(now())
+  updated_at              DateTime
+  products                products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_data_access_users_fkey")
+}
+
+model data_access_items {
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  connection_id        String?                @db.Uuid
+  item_type            String?                @db.VarChar(50)
+  item_name            String?                @db.VarChar(255)
+  description          String?
+  access_users_data    access_users_data[]
+  metrics_data_sources metrics_data_sources[]
+}
+
+model data_connections {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organization_id String?        @db.Uuid
+  name            String?        @db.VarChar(255)
+  type            String?        @db.VarChar(50)
+  configuration   Json?
+  organizations   organizations? @relation(fields: [organization_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "data_connections_organizations_fkey")
+}
+
+model documents_rag {
+  id        Int                    @id @default(autoincrement())
+  content   String
+  source    String
+  chunk_id  Int
+  embedding Unsupported("vector")?
+
+  @@index([embedding])
+}
+
+model events {
+  id                         String   @db.VarChar(128)
+  app_name                   String   @db.VarChar(128)
+  user_id                    String   @db.VarChar(128)
+  session_id                 String   @db.VarChar(128)
+  invocation_id              String   @db.VarChar(256)
+  author                     String   @db.VarChar(256)
+  branch                     String?  @db.VarChar(256)
+  timestamp                  DateTime @db.Timestamp(6)
+  content                    Json?
+  actions                    Bytes
+  long_running_tool_ids_json String?
+  grounding_metadata         Json?
+  partial                    Boolean?
+  turn_complete              Boolean?
+  error_code                 String?  @db.VarChar(256)
+  error_message              String?  @db.VarChar(1024)
+  interrupted                Boolean?
+  sessions                   sessions @relation(fields: [app_name, user_id, session_id], references: [app_name, user_id, id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([id, app_name, user_id, session_id])
+}
+
+model insight_results {
+  id            Int     @id @default(autoincrement())
+  channel_id    String? @db.VarChar(255)
+  product_id    String? @db.Uuid
+  configuration Json?   @db.Json
+}
+
+model message_whatsapp {
+  id              String    @id @db.Uuid
+  text            String?
+  user_id         String?   @db.Uuid
+  created_at      DateTime? @db.Timestamp(6)
+  updated_at      DateTime? @db.Timestamp(6)
+  conversation_id String?
+  role            String?
+  message_type    String?   @default("text")
+}
+
+model metrics {
+  id          String  @id @db.Uuid
+  product_id  String? @db.Uuid
+  name        String? @db.VarChar(200)
+  description String? @db.VarChar(200)
+  data_query  Json?
+}
+
+model metrics_data_sources {
+  id                  String             @id @db.Uuid
+  metric_id           String?            @db.Uuid
+  data_access_item_id String?            @db.Uuid
+  data_access_items   data_access_items? @relation(fields: [data_access_item_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "data_access_items_metrics_data_sources_fkey")
+}
+
+model notification_channels {
+  id                  String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  alert_id            String?           @db.Uuid
+  type                String?           @db.VarChar(50)
+  destination_webhook String?           @db.VarChar(255)
+  alert_thresholds    alert_thresholds? @relation(fields: [alert_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "alert_thresholds_notification_channels_fkey")
+}
+
+model organizations {
+  id                       String                     @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name                     String                     @db.VarChar(50)
+  company_name             String                     @db.VarChar(100)
+  description              String?                    @db.VarChar(200)
+  country                  String?                    @db.VarChar(25)
+  created_at               DateTime                   @default(now())
+  updated_at               DateTime
+  access_user_organization access_user_organization[]
+  data_connections         data_connections[]
+  projects                 projects[]
+}
+
+model products {
+  id                       String                     @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name                     String                     @db.VarChar(200)
+  project_id               String                     @db.Uuid
+  is_active                Boolean                    @default(true)
+  created_at               DateTime                   @default(now())
+  updated_at               DateTime
+  description              String?                    @db.VarChar(200)
+  language                 String?                    @db.VarChar(50)
+  tipo                     String                     @default("chatbot") @db.VarChar(20)
+  config                   Json?                      @default("{}")
+  mensajes_mes             Int?                       @default(0)
+  welcome_message          String?                    @db.VarChar(100)
+  label                    String?                    @db.VarChar(50)
+  label_color              String?                    @db.VarChar(20)
+  max_users                Int?                       @default(100)
+  is_active_rag            Boolean                    @default(false)
+  is_active_alerts         Boolean                    @default(false)
+  is_active_insight        Boolean                    @default(false)
+  access_user_product      access_user_product[]
+  channel_product          channel_product[]
+  clients_products_deploys clients_products_deploys[]
+  projects                 projects                   @relation(fields: [project_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "PRODUCT_projects_fkey")
+  prompts                  prompts[]
+  roles_data_access        roles_data_access[]
+  semantic_layer_configs   semantic_layer_configs[]
+
+  @@index([tipo], map: "idx_product_tipo")
+}
+
+model projects {
+  id                  String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  organization_id     String?               @db.Uuid
+  name                String                @db.VarChar(50)
+  label               String?               @db.VarChar(50)
+  label_color         String?               @db.VarChar(20)
+  description         String?               @db.VarChar(200)
+  created_at          DateTime              @default(now())
+  updated_at          DateTime
+  access_user_project access_user_project[]
+  products            products[]
+  organizations       organizations?        @relation(fields: [organization_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "projects_organizations_fkey")
+}
+
+model prompts {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  product_id       String?   @db.Uuid
+  name             String?   @db.VarChar(255)
+  config_prompt    Json?
+  path_config_file String?   @db.VarChar(255)
+  created_at       DateTime  @default(now())
+  updated_at       DateTime
+  products         products? @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "products_prompts_fkey")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model raw_base_kdm_consolidado {
+  area                String?  @db.VarChar(50)
+  tipo                String?  @db.VarChar(50)
+  empresa             String?  @db.VarChar(100)
+  mes                 Int?
+  anio                Int?
+  profit_code         String?  @db.VarChar(50)
+  prc_name            String?  @db.VarChar(255)
+  u_nx_ctacoges       String?  @db.VarChar(255)
+  account             String?  @db.VarChar(50)
+  acct_name           String?  @db.VarChar(255)
+  memo                String?
+  saldo               Decimal? @db.Decimal(15, 2)
+  u_cc_esp            String?  @db.VarChar(50)
+  u_clasif            String?  @db.VarChar(50)
+  nombre_mes          String?  @db.VarChar(50)
+  concepto            String?  @db.VarChar(255)
+  zona                String?  @db.VarChar(255)
+  orden_concep_compac String?  @db.VarChar(255)
+  concepto_compacto   String?  @db.VarChar(255)
+  epigrafe            String?  @db.VarChar(255)
+  grupo_tabla         String?  @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model raw_base_kdm_ppt {
+  Area                String?
+  Tipo                String?
+  Empresa             String?
+  Mes                 BigInt?
+  Year                BigInt?
+  ProfitCode          BigInt?
+  PrcName             String?
+  U_NX_CtaCOGES       BigInt?
+  Account             BigInt?
+  AcctName            String?
+  Memo                Float?
+  Saldo               Float?
+  U_CC_ESP            String?
+  U_CLASIF            String?
+  Nombre_Mes          String? @map("Nombre Mes")
+  Concepto            String?
+  Zona                String?
+  Orden_Concep_Compac BigInt? @map("Orden Concep Compac")
+  Concepto_Compacto   String? @map("Concepto Compacto")
+  Epigrafe            String?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model raw_base_kdm_real {
+  Area                String?
+  Tipo                String?
+  Empresa             String?
+  Mes                 BigInt?
+  Year                BigInt?
+  ProfitCode          BigInt?
+  PrcName             String?
+  U_NX_CtaCOGES       BigInt?
+  Account             BigInt?
+  AcctName            String?
+  Memo                String?
+  Saldo               Float?
+  U_CC_ESP            String?
+  U_CLASIF            String?
+  Nombre_Mes          String? @map("Nombre Mes")
+  Concepto            String?
+  Zona                String?
+  Orden_Concep_Compac BigInt? @map("Orden Concep Compac")
+  Concepto_Compacto   String? @map("Concepto Compacto")
+  Epigrafe            String?
+
+  @@ignore
+}
+
+model roles {
+  id                       String                     @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name                     String?                    @db.VarChar(50)
+  type_role                String?                    @db.VarChar(50)
+  description              String?
+  created_at               DateTime                   @default(now())
+  updated_at               DateTime?
+  users                    users[]
+  access_user_client       access_user_client[]
+  access_user_organization access_user_organization[]
+  access_user_product      access_user_product[]
+  access_user_project      access_user_project[]
+}
+
+model roles_data_access {
+  id               String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  product_id       String             @db.Uuid
+  name             String             @db.VarChar(255)
+  table_names      String[]
+  data_access      Json?
+  metrics_access   Json?
+  created_at       DateTime           @default(now())
+  updated_at       DateTime
+  products         products           @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "roles_data_access_products_fkey")
+  user_data_access user_data_access[]
+}
+
+model semantic_layer_configs {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  product_id        String   @db.Uuid
+  server_url        String   @db.VarChar(255)
+  database_name     String   @db.VarChar(255)
+  engine            String   @db.VarChar(50)
+  bucket_name       String?  @db.VarChar(100)
+  object_path       String?  @db.VarChar(255)
+  selections_config Json
+  created_at        DateTime @default(now())
+  updated_at        DateTime @default(now())
+  products          products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "products_semantic_layer_configs_fkey")
+}
+
+model sessions {
+  app_name    String   @db.VarChar(128)
+  user_id     String   @db.VarChar(128)
+  id          String   @db.VarChar(128)
+  state       Json
+  create_time DateTime @db.Timestamp(6)
+  update_time DateTime @db.Timestamp(6)
+  events      events[]
+
+  @@id([app_name, user_id, id])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model stg_usuarios {
+  id                 String?
+  username           String?
+  email              String?
+  password_hash      String?
+  iam_role           String?
+  client_id          String?
+  email_verified     Boolean?
+  is_active          Boolean?
+  failed_attempts    BigInt?
+  locked_until       DateTime? @db.Timestamp(6)
+  created_at         DateTime? @db.Timestamp(6)
+  updated_at         DateTime? @db.Timestamp(6)
+  primary_chatbot_id String?
+  can_manage_users   Boolean?
+  phoneNumber        String?
+  is_active_wsp      Boolean?
+  roleAccessId       String?
+
+  @@ignore
+}
+
+model user_data_access {
+  id                String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  role_data_id      String            @db.Uuid
+  user_id           String?           @db.Uuid
+  table_names       String[]
+  data_access       Json?
+  metrics_access    Json?
+  created_at        DateTime          @default(now())
+  updated_at        DateTime
+  roles_data_access roles_data_access @relation(fields: [role_data_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "roles_data_access_users_fkey")
+  users             users?            @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_data_access_users_fkey")
+}
+
+model user_states {
+  app_name    String   @db.VarChar(128)
+  user_id     String   @db.VarChar(128)
+  state       Json
+  update_time DateTime @db.Timestamp(6)
+
+  @@id([app_name, user_id])
+}
+
+model users {
+  id                       String                     @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  username                 String                     @unique
+  email                    String?                    @unique
+  password_hash            String?
+  avatar_data              String?                    @db.Text
+  email_verified           Boolean                    @default(false)
+  is_active                Boolean                    @default(true)
+  failed_attempts          Int                        @default(0)
+  locked_until             DateTime?
+  created_at               DateTime                   @default(now())
+  updated_at               DateTime?
+  primary_chatbot_id       String?                    @db.VarChar(255)
+  can_manage_users         Boolean?                   @default(false)
+  phone_number             String?
+  is_active_whatsapp       Boolean?                   @default(false)
+  role_acceso_data_id      String?                    @db.Uuid
+  role_id                  String?                    @db.Uuid @default("4648f54f-9139-40a2-96d7-c1ac4e936bbf")
+  role                     roles?                     @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  access_user_client       access_user_client[]
+  access_user_organization access_user_organization[]
+  access_user_product      access_user_product[]
+  access_user_project      access_user_project[]
+  user_data_access         user_data_access[]
+  conversations            conversations[]
+}
+
+model conversations {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String    @db.Uuid
+  product_id  String?   @db.Uuid
+  title       String    @db.VarChar(255)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  is_archived Boolean   @default(false)
+  users       users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  messages    chat_messages[]
+
+  @@index([user_id], map: "idx_conversations_user")
+  @@index([product_id], map: "idx_conversations_product")
+}
+
+model chat_messages {
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  conversation_id String        @db.Uuid
+  role            String        @db.VarChar(20)
+  content         String
+  message_type    String        @default("text") @db.VarChar(50)
+  metadata        Json?
+  created_at      DateTime      @default(now())
+  conversations   conversations @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
+
+  @@index([conversation_id], map: "idx_messages_conversation")
+}

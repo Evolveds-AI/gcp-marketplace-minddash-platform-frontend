@@ -1,0 +1,34 @@
+# Redirecciones para los assets estáticos de Next.js
+[[redirects]]
+  from = "/_next/static/*"
+  to = "/_next/static/:splat"
+  status = 200
+  force = true
+
+# Redirección para las funciones serverless
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+
+# Redirección explícita para la función de chat
+[[redirects]]
+  from = "/.netlify/functions/chat"
+  to = "/.netlify/functions/chat"
+  status = 200
+  force = true
+
+# Asegurar que todas las rutas sean manejadas por Next.js
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Configuración de headers para CORS
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"

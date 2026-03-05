@@ -1,0 +1,147 @@
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700&amp;family=Noto+Sans:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>MindDash - Dashboard</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #135bec;
+        --background-color: #111318;
+        --surface-color: #1c1f27;
+        --surface-secondary-color: #282e39;
+        --border-color: #3b4354;
+        --text-primary-color: #ffffff;
+        --text-secondary-color: #9da6b9;
+        --text-accent-color: var(--primary-color);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="bg-[var(--background-color)]" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="flex h-screen text-[var(--text-primary-color)]">
+<aside class="flex w-64 flex-col bg-[var(--surface-color)] p-6">
+<div class="mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--primary-color)] text-3xl">hub</span>
+<h1 class="text-xl font-bold">MindDash</h1>
+</div>
+<nav class="flex flex-1 flex-col justify-between">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 rounded-md bg-[var(--primary-color)] px-4 py-2.5 text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">folder</span>
+<span>Proyectos</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium text-[var(--text-secondary-color)] hover:bg-[var(--surface-secondary-color)] hover:text-[var(--text-primary-color)] transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Usuarios</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium text-[var(--text-secondary-color)] hover:bg-[var(--surface-secondary-color)] hover:text-[var(--text-primary-color)] transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboards</span>
+</a>
+</li>
+</ul>
+<ul>
+<li>
+<a class="flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium text-[var(--text-secondary-color)] hover:bg-[var(--surface-secondary-color)] hover:text-[var(--text-primary-color)] transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Administración</span>
+</a>
+</li>
+</ul>
+</nav>
+</aside>
+<div class="flex flex-1 flex-col">
+<header class="flex h-16 items-center justify-between border-b border-[var(--border-color)] px-8">
+<div>
+<h2 class="text-lg font-semibold">Tech Solutions</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--primary-color)] text-white transition-transform hover:scale-105">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+<img alt="User profile picture" class="h-10 w-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9T9vs-ryI5vpeQHumTnx5m-5SQfZVZru4lQMBG4vpJ2JG5f6Zj4jNR33CawriU8jOWf-O4SWmi6dWlYvWEh9XY55boIIwpRJBHEogyDXl7kCaaKN1RHZAb0Vx3RIC_uYEvEfYePepTPu_5ggmprTyr2DzRJbCt--eeZE-BvqhoyCTlw2DqfrRihdd-9iG_j5AlMp4ggb5ZTTsr5Gurbyp7RCn7Pfu1yT1KODsx9uuTJFjlni9bpj4KCWG3IeO_1IUzF3_Mnu44UQ"/>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto p-8">
+<div class="mb-6 flex items-center justify-between">
+<h2 class="text-2xl font-bold">Proyectos</h2>
+<div class="relative w-full max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary-color)]">search</span>
+<input class="w-full rounded-md border-none bg-[var(--surface-secondary-color)] py-2 pl-10 pr-4 text-sm text-[var(--text-primary-color)] placeholder-[var(--text-secondary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]" placeholder="Buscar proyecto..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto rounded-md border border-[var(--border-color)] bg-[var(--surface-color)]">
+<table class="min-w-full text-sm">
+<thead class="border-b border-[var(--border-color)]">
+<tr class="text-left text-[var(--text-secondary-color)]">
+<th class="px-6 py-4 font-medium">Nombre del Proyecto</th>
+<th class="px-6 py-4 font-medium">Descripción</th>
+<th class="px-6 py-4 font-medium text-center">Chatbots</th>
+<th class="px-6 py-4 font-medium text-center">Usuarios</th>
+<th class="px-6 py-4 font-medium">Etiqueta</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[var(--border-color)]">
+<tr class="hover:bg-[var(--surface-secondary-color)]/50">
+<td class="px-6 py-4 font-medium text-[var(--text-primary-color)]"><a class="hover:text-[var(--text-accent-color)]" href="#">Proyecto Alpha</a></td>
+<td class="max-w-sm truncate px-6 py-4 text-[var(--text-secondary-color)]">Un proyecto innovador para mejorar la comunicación interna.</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">3</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">150</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-blue-900/50 px-2.5 py-0.5 text-xs font-medium text-blue-300">Recursos Humanos</span>
+</td>
+</tr>
+<tr class="hover:bg-[var(--surface-secondary-color)]/50">
+<td class="px-6 py-4 font-medium text-[var(--text-primary-color)]"><a class="hover:text-[var(--text-accent-color)]" href="#">Proyecto Beta</a></td>
+<td class="max-w-sm truncate px-6 py-4 text-[var(--text-secondary-color)]">Desarrollo de un chatbot para atención al cliente.</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">2</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">200</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-green-900/50 px-2.5 py-0.5 text-xs font-medium text-green-300">Atención al Cliente</span>
+</td>
+</tr>
+<tr class="hover:bg-[var(--surface-secondary-color)]/50">
+<td class="px-6 py-4 font-medium text-[var(--text-primary-color)]"><a class="hover:text-[var(--text-accent-color)]" href="#">Proyecto Gamma</a></td>
+<td class="max-w-sm truncate px-6 py-4 text-[var(--text-secondary-color)]">Implementación de un sistema de soporte técnico automatizado.</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">1</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">100</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-yellow-900/50 px-2.5 py-0.5 text-xs font-medium text-yellow-300">Soporte Técnico</span>
+</td>
+</tr>
+<tr class="hover:bg-[var(--surface-secondary-color)]/50">
+<td class="px-6 py-4 font-medium text-[var(--text-primary-color)]"><a class="hover:text-[var(--text-accent-color)]" href="#">Proyecto Delta</a></td>
+<td class="max-w-sm truncate px-6 py-4 text-[var(--text-secondary-color)]">Creación de un asistente virtual para ventas.</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">4</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">250</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-red-900/50 px-2.5 py-0.5 text-xs font-medium text-red-300">Ventas</span>
+</td>
+</tr>
+<tr class="hover:bg-[var(--surface-secondary-color)]/50">
+<td class="px-6 py-4 font-medium text-[var(--text-primary-color)]"><a class="hover:text-[var(--text-accent-color)]" href="#">Proyecto Epsilon</a></td>
+<td class="max-w-sm truncate px-6 py-4 text-[var(--text-secondary-color)]">Desarrollo de una plataforma de aprendizaje con chatbots.</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">2</td>
+<td class="px-6 py-4 text-center text-[var(--text-secondary-color)]">180</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-indigo-900/50 px-2.5 py-0.5 text-xs font-medium text-indigo-300">Educación</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

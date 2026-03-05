@@ -1,0 +1,251 @@
+{
+  "schemas": {
+    "ExampleCreationResponse": {
+      "properties": {
+        "id_example": {
+          "type": "string",
+          "title": "Id Example",
+          "description": "UUID del ejemplo recién creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_example"
+      ],
+      "title": "ExampleCreationResponse"
+    },
+    "ExampleDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del ejemplo a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "ExampleDeleteRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_delete_example."
+    },
+    "ExampleDeleteResponse": {
+      "properties": {
+        "id_example": {
+          "type": "string",
+          "title": "Id Example",
+          "description": "UUID del ejemplo eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_example"
+      ],
+      "title": "ExampleDeleteResponse"
+    },
+    "ExampleListRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "UUID del producto para filtrar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "ExampleListRequest",
+      "description": "Define el UUID del producto para filtrar los ejemplos.",
+      "example": {
+        "product_id": "72a7c5c5-dcbb-4f08-8016-ae1ca63230a3"
+      }
+    },
+    "ExampleListResponseItem": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "UUID del ejemplo."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "UUID del producto asociado."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Nombre del ejemplo."
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Descripción del ejemplo."
+        },
+        "data_query": {
+          "type": "string",
+          "title": "Data Query",
+          "description": "Consulta de datos asociada al ejemplo."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "product_id",
+        "name",
+        "description",
+        "data_query",
+        "created_at",
+        "updated_at"
+      ],
+      "title": "ExampleListResponseItem",
+      "description": "Estructura de un solo ejemplo devuelto por el GET."
+    },
+    "ExampleRegisterRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto al que pertenece el ejemplo."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255,
+          "title": "Name",
+          "description": "Nombre del ejemplo."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Description",
+          "description": "Descripción del ejemplo (VARCHAR)."
+        },
+        "data_query": {
+          "type": "string",
+          "title": "Data Query",
+          "description": "Query SQL o datos de ejemplo (TEXT)."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "name",
+        "description",
+        "data_query"
+      ],
+      "title": "ExampleRegisterRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_example.",
+      "example": {
+        "data_query": "SELECT region, sum(sales) FROM transactions WHERE date > current_date - interval '1 month' GROUP BY region",
+        "description": "Query para sumar ventas por región.",
+        "name": "Ejemplo de Ventas Regionales",
+        "product_id": "72a7c5c5-dcbb-4f08-8016-ae1ca63230a3"
+      }
+    },
+    "ExampleUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del ejemplo a actualizar."
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id",
+          "description": "Nuevo ID del producto (opcional)."
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name",
+          "description": "Nuevo nombre (opcional)."
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description",
+          "description": "Nueva descripción (opcional)."
+        },
+        "data_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Query",
+          "description": "Nuevo query SQL (opcional)."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "ExampleUpdateRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_example.",
+      "example": {
+        "data_query": "SELECT region, sum(sales) FROM transactions WHERE date > current_date - interval ''1 month'' GROUP BY region",
+        "description": "Versión actualizada del query.",
+        "id": "1e2f3g4h-5i6j-7k8l-9m0n-1o2p3q4r5s6t",
+        "name": "Ejemplo de Ventas Regionales V2",
+        "product_id": "1e2f3g4h-5i6j-7k8l-9m0n-1o2p3q4r5s6t"
+      }
+    },
+    "ExampleUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Ejemplo actualizado exitosamente."
+        },
+        "id_example": {
+          "type": "string",
+          "title": "Id Example",
+          "description": "UUID del ejemplo actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_example"
+      ],
+      "title": "ExampleUpdateResponse"
+    }
+  }
+}

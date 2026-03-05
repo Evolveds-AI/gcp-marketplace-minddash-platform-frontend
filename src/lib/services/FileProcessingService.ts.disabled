@@ -1,0 +1,317 @@
+import { PrismaClient } from '@prisma/client';
+import { FileUploadStatus, ProcessingStatus } from '@prisma/client';
+import * as fs from 'fs';
+import * as path from 'path';
+import { nanoid } from 'nanoid';
+import * as XLSX from 'xlsx';
+import * as pdf from 'pdf-parse';
+import csv from 'csv-parser';
+import { Readable } from 'stream';
+
+const prisma = new PrismaClient();
+
+interface FileUploadResult {
+  success: boolean;
+  fileId?: string;
+  error?: string;
+}
+
+interface ProcessingResult {
+  success: boolean;
+  chunksCreated?: number;
+  error?: string;
+}
+
+export class FileProcessingService {
+  private static readonly UPLOAD_DIR = process.env.UPLOAD_DIR || './uploads';
+  private static readonly MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+  private static readonly ALLOWED_TYPES = ['csv', 'xlsx', 'pdf'];
+  private static readonly CHUNK_SIZE = 1000; // caracteres por chunk
+
+  static async uploadFile(
+    productId: string,
+    file: File,
+    originalName: string
+  ): Promise<FileUploadResult> {
+    try {
+      // Validar tamaño del archivo
+      if (file.size > this.MAX_FILE_SIZE) {
+        return {
+          success: false,
+          error: 'El archivo excede el tamaño máximo permitido (10MB)'
+        };
+      }
+
+      // Validar tipo de archivo
+      const fileExtension = path.extname(originalName).toLowerCase().slice(1);
+      if (!this.ALLOWED_TYPES.includes(fileExtension)) {
+        return {
+          success: false,
+          error: 'Tipo de archivo no permitido. Solo se permiten CSV, XLSX y PDF'
+        };
+      }
+
+      // Crear directorio de uploads si no existe
+      if (!fs.existsSync(this.UPLOAD_DIR)) {
+        fs.mkdirSync(this.UPLOAD_DIR, { recursive: true });
+      }
+
+      // Generar nombre único para el archivo
+      const fileId = nanoid();
+      const filename = `${fileId}.${fileExtension}`;
+      const filePath = path.join(this.UPLOAD_DIR, filename);
+
+      // Guardar archivo en el sistema de archivos
+      const buffer = Buffer.from(await file.arrayBuffer());
+      fs.writeFileSync(filePath, buffer);
+
+      // Crear registro en la base de datos
+      const knowledgeFile = await prisma.chatbot_knowledge_files.create({
+        data: {
+          id: fileId,
+          product_id: productId,
+          filename,
+          original_name: originalName,
+          file_type: fileExtension,
+          file_size: file.size,
+          file_path: filePath,
+          upload_status: FileUploadStatus.UPLOADED,
+          processing_status: ProcessingStatus.PENDING,
+          metadata: {
+            uploadedAt: new Date().toISOString(),
+            contentType: file.type
+          }
+        }
+      });
+
+      return {
+        success: true,
+        fileId: knowledgeFile.id
+      };
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      return {
+        success: false,
+        error: 'Error interno al subir el archivo'
+      };
+    }
+  }
+
+  static async processFile(fileId: string): Promise<ProcessingResult> {
+    try {
+      // Obtener información del archivo
+      const file = await prisma.chatbot_knowledge_files.findUnique({
+        where: { id: fileId }
+      });
+
+      if (!file || !file.file_path) {
+        return {
+          success: false,
+          error: 'Archivo no encontrado'
+        };
+      }
+
+      // Actualizar estado a procesando
+      await prisma.chatbot_knowledge_files.update({
+        where: { id: fileId },
+        data: { processing_status: ProcessingStatus.PROCESSING }
+      });
+
+      // Extraer contenido según el tipo de archivo
+      let content: string;
+      switch (file.file_type) {
+        case 'pdf':
+          content = await this.extractPdfContent(file.file_path);
+          break;
+        case 'csv':
+          content = await this.extractCsvContent(file.file_path);
+          break;
+        case 'xlsx':
+          content = await this.extractXlsxContent(file.file_path);
+          break;
+        default:
+          throw new Error(`Tipo de archivo no soportado: ${file.file_type}`);
+      }
+
+      // Dividir contenido en chunks
+      const chunks = this.createChunks(content);
+
+      // Guardar chunks en la base de datos
+      const chunkPromises = chunks.map((chunk, index) =>
+        prisma.knowledge_chunks.create({
+          data: {
+            knowledge_file_id: fileId,
+            chunk_index: index,
+            content: chunk,
+            metadata: {
+              length: chunk.length,
+              createdAt: new Date().toISOString()
+            }
+          }
+        })
+      );
+
+      await Promise.all(chunkPromises);
+
+      // Actualizar estado a completado
+      await prisma.chatbot_knowledge_files.update({
+        where: { id: fileId },
+        data: {
+          processing_status: ProcessingStatus.COMPLETED,
+          processed_date: new Date()
+        }
+      });
+
+      return {
+        success: true,
+        chunksCreated: chunks.length
+      };
+    } catch (error) {
+      console.error('Error processing file:', error);
+      
+      // Actualizar estado a fallido
+      await prisma.chatbot_knowledge_files.update({
+        where: { id: fileId },
+        data: {
+          processing_status: ProcessingStatus.FAILED,
+          error_message: error instanceof Error ? error.message : 'Error desconocido'
+        }
+      });
+
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Error desconocido'
+      };
+    }
+  }
+
+  private static async extractPdfContent(filePath: string): Promise<string> {
+    const buffer = fs.readFileSync(filePath);
+    const data = await pdf.default(buffer);
+    return data.text;
+  }
+
+  private static async extractCsvContent(filePath: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const results: any[] = [];
+      fs.createReadStream(filePath)
+        .pipe(csv())
+        .on('data', (data: any) => results.push(data))
+        .on('end', () => {
+          // Convertir CSV a texto legible
+          const content = results.map(row => 
+            Object.entries(row).map(([key, value]) => `${key}: ${value}`).join(', ')
+          ).join('\n');
+          resolve(content);
+        })
+        .on('error', reject);
+    });
+  }
+
+  private static async extractXlsxContent(filePath: string): Promise<string> {
+    const workbook = XLSX.readFile(filePath);
+    let content = '';
+    
+    workbook.SheetNames.forEach((sheetName: string) => {
+      const worksheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      
+      content += `Hoja: ${sheetName}\n`;
+      jsonData.forEach((row: any) => {
+        if (Array.isArray(row) && row.length > 0) {
+          content += row.join(', ') + '\n';
+        }
+      });
+      content += '\n';
+    });
+    
+    return content;
+  }
+
+  private static createChunks(content: string): string[] {
+    const chunks: string[] = [];
+    const words = content.split(' ');
+    let currentChunk = '';
+
+    for (const word of words) {
+      if ((currentChunk + ' ' + word).length > this.CHUNK_SIZE) {
+        if (currentChunk) {
+          chunks.push(currentChunk.trim());
+          currentChunk = word;
+        } else {
+          // Si una sola palabra es más larga que CHUNK_SIZE
+          chunks.push(word);
+        }
+      } else {
+        currentChunk += (currentChunk ? ' ' : '') + word;
+      }
+    }
+
+    if (currentChunk) {
+      chunks.push(currentChunk.trim());
+    }
+
+    return chunks;
+  }
+
+  static async deleteFile(fileId: string): Promise<boolean> {
+    try {
+      const file = await prisma.chatbot_knowledge_files.findUnique({
+        where: { id: fileId }
+      });
+
+      if (!file) {
+        return false;
+      }
+
+      // Eliminar archivo físico
+      if (file.file_path && fs.existsSync(file.file_path)) {
+        fs.unlinkSync(file.file_path);
+      }
+
+      // Eliminar chunks relacionados
+      await prisma.knowledge_chunks.deleteMany({
+        where: { knowledge_file_id: fileId }
+      });
+
+      // Eliminar registro de la base de datos
+      await prisma.chatbot_knowledge_files.delete({
+        where: { id: fileId }
+      });
+
+      return true;
+    } catch (error) {
+      console.error('Error deleting file:', error);
+      return false;
+    }
+  }
+
+  static async getFilesByProduct(productId: string) {
+    return await prisma.chatbot_knowledge_files.findMany({
+      where: { product_id: productId },
+      include: {
+        _count: {
+          select: {
+            knowledgeChunks: true
+          }
+        }
+      },
+      orderBy: { upload_date: 'desc' }
+    });
+  }
+
+  static async updateFileStatus(
+    fileId: string, 
+    uploadStatus?: FileUploadStatus, 
+    processingStatus?: ProcessingStatus
+  ) {
+    const updateData: any = {};
+    if (uploadStatus) updateData.upload_status = uploadStatus;
+    if (processingStatus) updateData.processing_status = processingStatus;
+
+    return await prisma.chatbot_knowledge_files.update({
+      where: { id: fileId },
+      data: updateData
+    });
+  }
+}

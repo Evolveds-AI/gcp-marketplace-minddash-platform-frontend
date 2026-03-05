@@ -1,0 +1,226 @@
+{
+  "schemas": {
+    "UpdateConnectionRequest": {
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "title": "Server Url"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "postgres",
+            "mysql",
+            "bigquery",
+            "mariadb",
+            "mssql",
+            "synapsemssql",
+            "redshift",
+            "snowflake",
+            "aurora",
+            "aurorapostgres",
+            "auroramysql",
+            "hana",
+            "oracle",
+            "teradata",
+            "clickhouse"
+          ],
+          "title": "Engine"
+        },
+        "parameters": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Parameters"
+        }
+      },
+      "type": "object",
+      "required": [
+        "server_url",
+        "name",
+        "engine",
+        "parameters"
+      ],
+      "title": "UpdateConnectionRequest",
+      "example": {
+        "engine": "postgres",
+        "name": "postgresql_conn_minddash_demo",
+        "parameters": {
+          "database": "minddash_platform",
+          "host": "0.0.0.0",
+          "password": "nueva_password",
+          "port": 5432,
+          "user": "nuevo_usuario"
+        },
+        "server_url": "http://0.0.0.0:47334"
+      }
+    },
+    "UpdateRequest": {
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "title": "Server Url"
+        },
+        "database": {
+          "type": "string",
+          "title": "Database"
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id"
+        },
+        "client": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Client"
+        },
+        "selections": {
+          "items": {
+            "$ref": "#/components/schemas/ColumnSelection"
+          },
+          "type": "array",
+          "title": "Selections"
+        },
+        "infer_types": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Infer Types",
+          "default": true
+        },
+        "add_default_measures": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Add Default Measures",
+          "default": true
+        },
+        "time_dimension_candidates": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Time Dimension Candidates",
+          "default": [
+            "fecha",
+            "date",
+            "created_at",
+            "updated_at",
+            "timestamp",
+            "fecha_factura"
+          ]
+        },
+        "engine": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "postgres",
+                "mysql",
+                "bigquery",
+                "mariadb",
+                "mssql",
+                "synapsemssql",
+                "redshift",
+                "snowflake",
+                "aurora",
+                "aurorapostgres",
+                "auroramysql",
+                "hana",
+                "oracle",
+                "teradata",
+                "clickhouse"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Engine",
+          "default": "postgres"
+        },
+        "include_profiling": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Include Profiling",
+          "default": false
+        },
+        "previous_gs_uri": {
+          "type": "string",
+          "title": "Previous Gs Uri"
+        },
+        "relationships": {
+          "anyOf": [
+            {
+              "items": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Relationships"
+        }
+      },
+      "type": "object",
+      "required": [
+        "server_url",
+        "database",
+        "selections",
+        "previous_gs_uri"
+      ],
+      "title": "UpdateRequest"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemas": {
+    "Series": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Nombre de la serie (ej: 'Ventas Actuales')."
+        },
+        "data": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array",
+          "title": "Data",
+          "description": "Valores numéricos de la serie. La longitud debe coincidir con 'labels'."
+        },
+        "color": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Color",
+          "description": "Color opcional para la serie (ej: '#FF5733' o 'blue')."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "data"
+      ],
+      "title": "Series",
+      "description": "Define una única serie de datos que se representará en el gráfico."
+    }
+  }
+}

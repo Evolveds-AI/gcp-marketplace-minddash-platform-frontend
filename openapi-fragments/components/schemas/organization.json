@@ -1,0 +1,443 @@
+{
+  "schemas": {
+    "Organization": {
+      "properties": {
+        "organization_name": {
+          "type": "string",
+          "title": "Organization Name",
+          "description": "Nombre corto/comercial de la organización."
+        },
+        "organization_company_name": {
+          "type": "string",
+          "title": "Organization Company Name",
+          "description": "Nombre legal de la compañía."
+        },
+        "organization_country": {
+          "type": "string",
+          "title": "Organization Country",
+          "description": "País de la organización."
+        },
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "ID del usuario asociado al acceso."
+        },
+        "user_role_name": {
+          "type": "string",
+          "title": "User Role Name",
+          "description": "Rol del usuario en esta organización."
+        },
+        "user_name": {
+          "type": "string",
+          "title": "User Name",
+          "description": "Nombre completo del usuario."
+        },
+        "user_phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Phone",
+          "description": "Teléfono del usuario."
+        },
+        "user_email": {
+          "type": "string",
+          "format": "email",
+          "title": "User Email",
+          "description": "Correo del usuario."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "UUID del registro de organización."
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created At"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Updated At"
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_name",
+        "organization_company_name",
+        "organization_country",
+        "user_id",
+        "user_role_name",
+        "user_name",
+        "user_email",
+        "organization_id"
+      ],
+      "title": "Organization"
+    },
+    "OrganizationByUser": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario."
+        },
+        "user_name": {
+          "type": "string",
+          "title": "User Name",
+          "description": "Nombre completo del usuario."
+        },
+        "user_phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Phone",
+          "description": "Número de teléfono del usuario (puede ser opcional)."
+        },
+        "user_email": {
+          "type": "string",
+          "format": "email",
+          "title": "User Email",
+          "description": "Correo electrónico del usuario."
+        },
+        "user_role_name": {
+          "type": "string",
+          "title": "User Role Name",
+          "description": "Nombre del rol más efectivo del usuario en esta organización (ej. 'SuperAdmin', 'Administrador')."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "UUID de la organización a la que el usuario tiene acceso."
+        },
+        "organization_name": {
+          "type": "string",
+          "title": "Organization Name",
+          "description": "Nombre corto o comercial de la organización."
+        },
+        "organization_company_name": {
+          "type": "string",
+          "title": "Organization Company Name",
+          "description": "Nombre legal o razón social de la compañía."
+        },
+        "organization_country": {
+          "type": "string",
+          "title": "Organization Country",
+          "description": "País de la organización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "user_name",
+        "user_email",
+        "user_role_name",
+        "organization_id",
+        "organization_name",
+        "organization_company_name",
+        "organization_country"
+      ],
+      "title": "OrganizationByUser",
+      "description": "Representa una tupla de acceso a una Organización para un usuario específico"
+    },
+    "OrganizationCreationAccessResponse": {
+      "properties": {
+        "organization_access_id": {
+          "type": "string",
+          "title": "Organization Access Id",
+          "description": "UUID del nuevo registro de acceso creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_access_id"
+      ],
+      "title": "OrganizationCreationAccessResponse",
+      "description": "Respuesta para el registro exitoso."
+    },
+    "OrganizationCreationResponse": {
+      "properties": {
+        "id_organization": {
+          "type": "string",
+          "title": "Id Organization"
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_organization"
+      ],
+      "title": "OrganizationCreationResponse"
+    },
+    "OrganizationDeleteAccessRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "UUID del registro de acceso a eliminar (access_user_organization.id)."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "OrganizationDeleteAccessRequest",
+      "description": "Modelo para la entrada de datos al eliminar un registro de acceso (DELETE).\nSolo requiere el ID del registro de acceso."
+    },
+    "OrganizationDeleteAccessResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Acceso a organización eliminado exitosamente."
+        },
+        "organization_access_id": {
+          "type": "string",
+          "title": "Organization Access Id",
+          "description": "UUID del registro de acceso eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_access_id"
+      ],
+      "title": "OrganizationDeleteAccessResponse",
+      "description": "Respuesta para la eliminación exitosa."
+    },
+    "OrganizationDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "UUID de la organización a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "OrganizationDeleteRequest",
+      "description": "Modelo para la entrada de datos al eliminar una organización.\nSolo requiere el ID."
+    },
+    "OrganizationDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Organización eliminada exitosamente."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "UUID de la organización eliminada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_id"
+      ],
+      "title": "OrganizationDeleteResponse"
+    },
+    "OrganizationRegisterAccessRequest": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario al que se le da acceso."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "UUID de la organización a la que se da acceso."
+        },
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "UUID del rol que se asigna en esa organización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "organization_id",
+        "role_id"
+      ],
+      "title": "OrganizationRegisterAccessRequest",
+      "description": "Modelo para la entrada de datos al registrar un nuevo acceso (INSERT).\nCorresponde a los parámetros del SP: user_id, organization_id, role_id."
+    },
+    "OrganizationRegisterRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 50,
+          "title": "Name",
+          "description": "Nombre corto o comercial de la organización."
+        },
+        "company_name": {
+          "type": "string",
+          "maxLength": 100,
+          "title": "Company Name",
+          "description": "Nombre legal o razón social de la compañía."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Description",
+          "description": "Descripción de la organización."
+        },
+        "country": {
+          "type": "string",
+          "maxLength": 25,
+          "title": "Country",
+          "description": "País de la organización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "company_name",
+        "description",
+        "country"
+      ],
+      "title": "OrganizationRegisterRequest",
+      "description": "Modelo para la entrada de datos al registrar una nueva organización.\nCorresponde a los parámetros de entrada del store procedure."
+    },
+    "OrganizationUpdateAccessRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "UUID del registro de acceso a actualizar (access_user_organization.id)."
+        },
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "Nuevo UUID del usuario (generalmente el mismo)."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "Nuevo UUID de la organización (generalmente el mismo)."
+        },
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "Nuevo UUID del rol que se asigna."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "user_id",
+        "organization_id",
+        "role_id"
+      ],
+      "title": "OrganizationUpdateAccessRequest",
+      "description": "Modelo para la entrada de datos al actualizar un registro de acceso existente (UPDATE).\nCorresponde a los parámetros del SP: id, user_id, organization_id, role_id."
+    },
+    "OrganizationUpdateAccessResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Acceso a organización actualizado exitosamente."
+        },
+        "organization_access_id": {
+          "type": "string",
+          "title": "Organization Access Id",
+          "description": "UUID del registro de acceso actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_access_id"
+      ],
+      "title": "OrganizationUpdateAccessResponse",
+      "description": "Respuesta para la actualización exitosa."
+    },
+    "OrganizationUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "UUID de la organización a actualizar."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 50,
+          "title": "Name",
+          "description": "Nombre corto o comercial de la organización."
+        },
+        "company_name": {
+          "type": "string",
+          "maxLength": 100,
+          "title": "Company Name",
+          "description": "Nombre legal o razón social de la compañía."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Description",
+          "description": "Descripción de la organización."
+        },
+        "country": {
+          "type": "string",
+          "maxLength": 25,
+          "title": "Country",
+          "description": "País de la organización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "company_name",
+        "description",
+        "country"
+      ],
+      "title": "OrganizationUpdateRequest",
+      "description": "Modelo para la entrada de datos al actualizar una organización existente."
+    },
+    "OrganizationUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Organización actualizada exitosamente."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "UUID de la organización actualizada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_id"
+      ],
+      "title": "OrganizationUpdateResponse"
+    }
+  }
+}

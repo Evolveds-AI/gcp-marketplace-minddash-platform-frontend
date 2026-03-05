@@ -1,0 +1,446 @@
+{
+  "schemas": {
+    "GetClientDeployByProductRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto para filtrar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "GetClientDeployByProductRequest",
+      "description": "Obtiene registros filtrados por product_id.",
+      "example": {
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1"
+      }
+    },
+    "GetClientDeployRequest": {
+      "properties": {
+        "deploy_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deploy Id",
+          "description": "ID del registro de despliegue. Si es None, retorna todos."
+        }
+      },
+      "type": "object",
+      "title": "GetClientDeployRequest",
+      "description": "Obtiene todos los registros o uno específico por ID.",
+      "example": {
+        "deploy_id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "GetDataConnectionsByOrganizationRequest": {
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "ID de la organización para la cual se buscan las conexiones."
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_id"
+      ],
+      "title": "GetDataConnectionsByOrganizationRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de organización."
+    },
+    "GetDataConnectionsRequest": {
+      "properties": {
+        "connection_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Connection Id",
+          "description": "ID de la conexión específica. Si no se proporciona, retorna todas las conexiones."
+        }
+      },
+      "type": "object",
+      "title": "GetDataConnectionsRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que puede contener un ID de conexión opcional.\nSi no se proporciona ID, retorna todas las conexiones.",
+      "example": {
+        "connection_id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "GetMetricsByProductRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto para el cual se buscan las métricas."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "GetMetricsByProductRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de producto.",
+      "example": {
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1"
+      }
+    },
+    "GetMetricsRequest": {
+      "properties": {
+        "metric_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Id",
+          "description": "ID de la métrica específica. Si no se proporciona, retorna todas las métricas."
+        }
+      },
+      "type": "object",
+      "title": "GetMetricsRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que puede contener un ID de métrica opcional.\nSi no se proporciona ID, retorna todas las métricas.",
+      "example": {
+        "metric_id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "GetOrganizationRequest": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario para el cual se buscan las organizaciones."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "title": "GetOrganizationRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de usuario."
+    },
+    "GetOrganizationRequestByOrg": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario para el cual se buscan las organizaciones."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "UUID de la organizacion para el cual se buscan."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "organization_id"
+      ],
+      "title": "GetOrganizationRequestByOrg",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de usuario."
+    },
+    "GetProductRequest": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario para el cual se buscan las organizaciones."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "title": "GetProductRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de usuario."
+    },
+    "GetProductRequestByPrd": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario para el cual se buscan las organizaciones."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "UUID del producto por el que se filtrara la data."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "product_id"
+      ],
+      "title": "GetProductRequestByPrd",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de usuario."
+    },
+    "GetProjectRequest": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario para el cual se buscan las proyectos."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "title": "GetProjectRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de usuario."
+    },
+    "GetProjectRequestByPrj": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario para el cual se buscan las proyectos."
+        },
+        "project_id": {
+          "type": "string",
+          "title": "Project Id",
+          "description": "UUID del usuario para el cual se buscan las proyectos."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "project_id"
+      ],
+      "title": "GetProjectRequestByPrj",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de usuario."
+    },
+    "GetPromptsRequestByProduct": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "format": "uuid",
+          "title": "Product Id",
+          "description": "ID del producto cuyas prompts se desean obtener."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "GetPromptsRequestByProduct",
+      "description": "Define los parámetros necesarios para obtener la lista de prompts\nfiltrados por un producto y un usuario.",
+      "example": {
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1"
+      }
+    },
+    "GetPromptsResponseByProduct": {
+      "properties": {
+        "prompt_id": {
+          "type": "string",
+          "format": "uuid",
+          "title": "Prompt Id",
+          "description": "ID único del prompt registrado."
+        },
+        "prompt_name": {
+          "type": "string",
+          "title": "Prompt Name",
+          "description": "Nombre descriptivo del prompt."
+        },
+        "config_prompt": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Config Prompt",
+          "description": "Contenido JSON (JSONB) del prompt, incluyendo reglas, lógica, etc."
+        },
+        "path_config_file": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Path Config File",
+          "description": "Ruta donde se almacena el archivo YAML/JSON de configuración."
+        },
+        "product_id": {
+          "type": "string",
+          "format": "uuid",
+          "title": "Product Id",
+          "description": "ID del producto al que pertenece el prompt."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Nombre del producto asociado."
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description",
+          "description": "Descripción del producto o del prompt."
+        },
+        "prompt_content": {
+          "type": "string",
+          "title": "Prompt Content",
+          "description": "Contenido del prompt."
+        }
+      },
+      "type": "object",
+      "required": [
+        "prompt_id",
+        "prompt_name",
+        "config_prompt",
+        "product_id",
+        "name",
+        "prompt_content"
+      ],
+      "title": "GetPromptsResponseByProduct",
+      "description": "Define la estructura de datos de un prompt retornado desde la base de datos.\nCorresponde a las columnas seleccionadas en view_info_prompt_product.",
+      "example": {
+        "config_prompt": {
+          "logica_seleccion_tabla": [],
+          "role_principal_del_agente": "Eres Diablo..."
+        },
+        "description": "Prompts de ventas para el BU Chile.",
+        "name": "Cyt Chile",
+        "path_config_file": "prompts/cyt/ventas.yaml",
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "prompt_content": "",
+        "prompt_id": "11111111-2222-3333-4444-555555555555",
+        "prompt_name": "Prompt Cyt Ventas"
+      }
+    },
+    "GetRolesDataAccessByProductRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto para el cual se buscan los roles."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "GetRolesDataAccessByProductRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de producto.",
+      "example": {
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1"
+      }
+    },
+    "GetRolesDataAccessRequest": {
+      "properties": {
+        "role_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role Id",
+          "description": "ID del rol específico. Si no se proporciona, retorna todos los roles."
+        }
+      },
+      "type": "object",
+      "title": "GetRolesDataAccessRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que puede contener un ID de rol opcional.\nSi no se proporciona ID, retorna todos los roles.",
+      "example": {
+        "role_id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "GetUserDataAccessByRoleRequest": {
+      "properties": {
+        "role_data_id": {
+          "type": "string",
+          "title": "Role Data Id",
+          "description": "ID del rol de acceso a datos para el cual se buscan los accesos de usuarios."
+        }
+      },
+      "type": "object",
+      "required": [
+        "role_data_id"
+      ],
+      "title": "GetUserDataAccessByRoleRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID del rol de acceso a datos.",
+      "example": {
+        "role_data_id": "a6f38618-4308-4dfc-83d7-4f98651649c1"
+      }
+    },
+    "GetUserDataAccessByUserRequest": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "ID del usuario para el cual se buscan los accesos de datos."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "title": "GetUserDataAccessByUserRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID del usuario.",
+      "example": {
+        "user_id": "b7f49729-5419-5efd-94e8-5g09762750d2"
+      }
+    },
+    "GetUserDataAccessRequest": {
+      "properties": {
+        "user_data_access_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Data Access Id",
+          "description": "ID del acceso de datos de usuario específico. Si no se proporciona, retorna todos los accesos."
+        }
+      },
+      "type": "object",
+      "title": "GetUserDataAccessRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que puede contener un ID de acceso de datos de usuario opcional.\nSi no se proporciona ID, retorna todos los accesos.",
+      "example": {
+        "user_data_access_id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "GetUserRequest": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "str del usuario para el cual se buscan las organizaciones."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "title": "GetUserRequest",
+      "description": "Modelo para validar el cuerpo de la solicitud que contiene el ID de usuario."
+    }
+  }
+}

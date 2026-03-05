@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MindDash - Creación de Métrica</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "card-dark": "#182030",
+              "input-dark": "#20293A"
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.375rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-dark text-slate-200">
+<div class="flex h-screen">
+<aside class="flex w-64 flex-col border-r border-slate-800 bg-card-dark">
+<div class="flex h-16 items-center px-6">
+<svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<h1 class="ml-2 text-lg font-semibold text-white">MindDash</h1>
+</div>
+<nav class="flex-1 space-y-1 p-4">
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-700/50 hover:text-white" href="#">
+<span class="material-symbols-outlined text-base">grid_view</span>
+                    General
+                </a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-700/50 hover:text-white" href="#">
+<span class="material-symbols-outlined text-base">layers</span>
+                    Capa Semántica
+                </a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-700/50 hover:text-white" href="#">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+                    Prompt
+                </a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-700/50 hover:text-white" href="#">
+<span class="material-symbols-outlined text-base">lock</span>
+                    Permisos
+                </a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-700/50 hover:text-white" href="#">
+<span class="material-symbols-outlined text-base">notifications</span>
+                    Alertas
+                </a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-700/50 hover:text-white" href="#">
+<span class="material-symbols-outlined text-base">insights</span>
+                    Insights
+                </a>
+<a class="flex items-center gap-3 rounded-md bg-primary/20 px-3 py-2 text-sm font-medium text-primary" href="#">
+<span class="material-symbols-outlined text-base">equalizer</span>
+                    Métricas
+                </a>
+</nav>
+<div class="p-4">
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-700/50 hover:text-white" href="#">
+<span class="material-symbols-outlined text-base">admin_panel_settings</span>
+                    Administración
+                </a>
+</div>
+</aside>
+<div class="flex flex-1 flex-col">
+<header class="flex h-16 shrink-0 items-center justify-between border-b border-slate-800 px-6">
+<div class="flex items-center gap-2">
+<h2 class="text-sm font-medium text-slate-400">Tech Solutions - Proyecto Alpha - EVA</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+<div class="h-9 w-9 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaotG1QOUUG-6dHj32S0e7I_HMo4-NoLESyFE3jgCPLCWGW1YE89NwxmaIWY8PXSUMYFolf5_NUyDq-7yxbdYn73KkNqTPKM0a79TmPZ6a9nQq0jENFM5Wx3A4PCpgZ-NeVM0B98xj6-kIxP6WQjn21NHM_zlVXGCumOWbuFX9lzz-9oU5-ZAkRpdr6I29MrOR3DiDezLaY_23WUo8_w5BJ9u4xZC1mmyVu0jmiyM3XP6H946e3do6042S0CVkT0ftW0ajovRF5GU");'></div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto bg-background-dark">
+<div class="p-8">
+<div class="mb-8">
+<h1 class="text-2xl font-bold text-white">Crear/Editar Métrica</h1>
+<p class="text-slate-400">Define una nueva métrica para tu chatbot.</p>
+</div>
+<div class="grid grid-cols-1 gap-12 lg:grid-cols-5">
+<div class="lg:col-span-3">
+<div class="space-y-6">
+<div class="rounded-lg border border-slate-800 bg-card-dark p-6">
+<label class="mb-2 block text-sm font-medium text-slate-300" for="metric-name">Nombre de la Métrica</label>
+<input class="block w-full rounded-md border-slate-700 bg-input-dark text-white placeholder-slate-500 focus:border-primary focus:ring-primary" id="metric-name" placeholder="Ej: Usuarios Activos Diarios" type="text"/>
+</div>
+<div class="rounded-lg border border-slate-800 bg-card-dark p-6">
+<h3 class="mb-4 text-lg font-semibold text-white">Variables de la Métrica Obligatoria</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">filter_list_1</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">filter_list_2</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">date_start</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">date_end</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">group_fields</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+</div>
+</div>
+<div class="rounded-lg border border-slate-800 bg-card-dark p-6">
+<h3 class="mb-4 text-lg font-semibold text-white">Variables de la Métrica Opcionales</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">filter_list_1</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">filter_list_2</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">date_start</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">date_end</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between rounded-md bg-input-dark p-3">
+<span class="text-sm text-slate-300">group_fields</span>
+<input class="h-4 w-4 rounded border-slate-600 bg-slate-700 text-primary focus:ring-primary focus:ring-offset-card-dark" type="checkbox"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-2">
+<div class="space-y-6">
+<div class="rounded-lg border border-slate-800 bg-card-dark p-6">
+<h3 class="mb-4 text-lg font-semibold text-white">Query Builder</h3>
+<div class="relative">
+<div class="mb-2 flex flex-wrap gap-2">
+<button class="rounded-md bg-slate-700 px-2 py-1 text-xs font-semibold text-slate-300 hover:bg-slate-600">SELECT</button>
+<button class="rounded-md bg-slate-700 px-2 py-1 text-xs font-semibold text-slate-300 hover:bg-slate-600">FROM</button>
+<button class="rounded-md bg-slate-700 px-2 py-1 text-xs font-semibold text-slate-300 hover:bg-slate-600">WHERE</button>
+<button class="rounded-md bg-slate-700 px-2 py-1 text-xs font-semibold text-slate-300 hover:bg-slate-600">JOIN</button>
+<button class="rounded-md bg-slate-700 px-2 py-1 text-xs font-semibold text-slate-300 hover:bg-slate-600">GROUP BY</button>
+</div>
+<textarea class="block w-full rounded-md border-slate-700 bg-input-dark font-mono text-sm text-white placeholder-slate-500 focus:border-primary focus:ring-primary" placeholder="SELECT count(id) FROM users WHERE created_at BETWEEN '{date_start}' AND '{date_end}' AND country = {filter_list_1}" rows="12"></textarea>
+</div>
+</div>
+<div class="rounded-lg border border-slate-800 bg-card-dark p-6">
+<h3 class="mb-4 text-lg font-semibold text-white">Tablas Accesibles</h3>
+<div class="max-h-60 overflow-y-auto rounded-md bg-input-dark p-2">
+<ul class="space-y-1 font-mono text-sm">
+<li class="cursor-pointer rounded p-2 text-slate-300 hover:bg-slate-700/50">
+<details>
+<summary class="flex items-center justify-between">users <span class="text-slate-500">3 cols</span></summary>
+<ul class="mt-2 space-y-1 pl-4 text-xs text-slate-400">
+<li>id</li>
+<li>name</li>
+<li>email</li>
+</ul>
+</details>
+</li>
+<li class="cursor-pointer rounded p-2 text-slate-300 hover:bg-slate-700/50">
+<details>
+<summary class="flex items-center justify-between">sessions <span class="text-slate-500">4 cols</span></summary>
+<ul class="mt-2 space-y-1 pl-4 text-xs text-slate-400">
+<li>id</li>
+<li>user_id</li>
+<li>start_time</li>
+<li>end_time</li>
+</ul>
+</details>
+</li>
+<li class="cursor-pointer rounded p-2 text-slate-300 hover:bg-slate-700/50">
+<details>
+<summary class="flex items-center justify-between">events <span class="text-slate-500">4 cols</span></summary>
+<ul class="mt-2 space-y-1 pl-4 text-xs text-slate-400">
+<li>id</li>
+<li>session_id</li>
+<li>type</li>
+<li>timestamp</li>
+</ul>
+</details>
+</li>
+<li class="cursor-pointer rounded p-2 text-slate-300 hover:bg-slate-700/50">
+<details>
+<summary class="flex items-center justify-between">purchases <span class="text-slate-500">4 cols</span></summary>
+<ul class="mt-2 space-y-1 pl-4 text-xs text-slate-400">
+<li>id</li>
+<li>user_id</li>
+<li>amount</li>
+<li>date</li>
+</ul>
+</details>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-end gap-4">
+<button class="rounded-md bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-700">Cancelar</button>
+<button class="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90">Guardar Métrica</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

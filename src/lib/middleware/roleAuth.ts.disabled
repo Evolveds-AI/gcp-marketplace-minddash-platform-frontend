@@ -1,0 +1,458 @@
+import { NextRequest } from 'next/server';
+import { verifyAccessToken } from '../auth';
+import prisma from '../database';
+import { getUserRole } from '../utils/role-helpers';
+
+export interface RoleAuthResult {
+  success: boolean;
+  user?: {
+    id: string;
+    username: string;
+    email: string;
+    iam_role: string;
+    client_id: string;
+    role?: {
+      id: string;
+      name: string;
+      table_names: string[];
+    };
+  };
+  error?: string;
+  status?: number;
+}
+
+export interface EndpointPermission {
+  resource: string;
+  action: 'create' | 'read' | 'update' | 'delete';
+  requiresProductAccess?: boolean;
+  allowedRoles?: string[];
+  requiredTables?: string[];
+}
+
+/**
+ * Middleware principal para validar permisos de rol en endpoints críticos
+ * @param request - NextRequest object
+ * @param permission - Configuración de permisos requeridos
+ * @param productId - ID del producto (opcional)
+ * @returns RoleAuthResult
+ */
+export async function validateRolePermissions(
+  request: NextRequest,
+  permission: EndpointPermission,
+  productId?: string
+): Promise<RoleAuthResult> {
+  try {
+    const authHeader = request.headers.get('Authorization') || request.headers.get('authorization');
+    const token = authHeader?.replace('Bearer ', '');
+    
+    if (!token) {
+      return { 
+        success: false, 
+        error: 'Token de autenticación requerido', 
+        status: 401 
+      };
+    }
+
+    let decoded;
+    try {
+      decoded = verifyAccessToken(token);
+    } catch (error) {
+      return { 
+        success: false, 
+        error: 'Token inválido o expirado', 
+        status: 401 
+      };
+    }
+    
+    if (!decoded) {
+      return { 
+        success: false, 
+        error: 'Token inválido o expirado', 
+        status: 401 
+      };
+    }
+
+    // Buscar usuario en la base de datos
+    const user = await prisma.users.findUnique({
+      where: { id: decoded.userId },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        is_active: true,
+        role: {
+          select: {
+            name: true
+          }
+        }
+      }
+    });
+
+    if (!user) {
+      return { 
+        success: false, 
+        error: 'Usuario no encontrado', 
+        status: 404 
+      };
+    }
+
+    if (!user.is_active) {
+      return { 
+        success: false, 
+        error: 'Usuario inactivo', 
+        status: 403 
+      };
+    }
+
+    // Super admins tienen acceso completo
+    if (user.iam_role === 'super_admin') {
+      return {
+        success: true,
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email || '',
+          iam_role: user.iam_role,
+          client_id: user.client_id || '',
+          role: user.RoleAccess ? {
+            id: user.RoleAccess.id,
+            name: user.RoleAccess.name,
+            table_names: user.RoleAccess.table_names
+          } : undefined
+        }
+      };
+    }
+
+    // Verificar si el usuario tiene un rol asignado (requerido para usuarios no super admin)
+    if (!user.RoleAccess) {
+      return {
+        success: false,
+        error: 'Usuario sin rol asignado. Contacte al administrador.',
+        status: 403
+      };
+    }
+
+    // Validar rol si se especifica
+    const userRole = getUserRole(user);
+    if (permission.allowedRoles && permission.allowedRoles.length > 0) {
+      const hasAllowedRole = permission.allowedRoles.includes(user.iam_role) ||
+                            permission.allowedRoles.includes(user.RoleAccess.name);
+      
+      if (!hasAllowedRole) {
+        return {
+          success: false,
+          error: `Acceso denegado. Roles permitidos: ${permission.allowedRoles.join(', ')}`,
+          status: 403
+        };
+      }
+    }
+
+    // Verificar acceso a tablas requeridas
+    if (permission.requiredTables && permission.requiredTables.length > 0) {
+      const hasTableAccess = permission.requiredTables.every(table => 
+        user.RoleAccess!.table_names.includes(table) || 
+        user.RoleAccess!.table_names.includes('*')
+      );
+
+      if (!hasTableAccess) {
+        const deniedTables = permission.requiredTables.filter(table => 
+          !user.RoleAccess!.table_names.includes(table) && 
+          !user.RoleAccess!.table_names.includes('*')
+        );
+        
+        return {
+          success: false,
+          error: `Acceso denegado a las tablas: ${deniedTables.join(', ')}`,
+          status: 403
+        };
+      }
+    }
+
+    // Verificar acceso al recurso específico
+    const hasResourceAccess = user.RoleAccess.table_names.includes(permission.resource) ||
+                             user.RoleAccess.table_names.includes('*');
+
+    if (!hasResourceAccess) {
+      return {
+        success: false,
+        error: `Acceso denegado al recurso '${permission.resource}'`,
+        status: 403
+      };
+    }
+
+    // Verificar acceso al producto si es requerido
+    if (permission.requiresProductAccess && productId) {
+      const productAccess = await prisma.productUser.findFirst({
+        where: {
+          user_id: user.id,
+          product_id: productId
+        }
+      });
+
+      if (!productAccess) {
+        return {
+          success: false,
+          error: 'Acceso denegado al producto especificado',
+          status: 403
+        };
+      }
+    }
+
+    // Verificar permisos específicos de acción (create, read, update, delete)
+    const actionPermissionResult = await validateActionPermission(
+      user.id,
+      permission.action,
+      permission.resource,
+      productId
+    );
+
+    if (!actionPermissionResult.success) {
+      return actionPermissionResult;
+    }
+
+    return {
+      success: true,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email || '',
+        iam_role: user.iam_role,
+        client_id: user.client_id || '',
+        role: {
+          id: user.RoleAccess.id,
+          name: user.RoleAccess.name,
+          table_names: user.RoleAccess.table_names
+        }
+      }
+    };
+
+  } catch (error) {
+    console.error('Error en validación de permisos de rol:', error);
+    console.error('Error type:', typeof error);
+    console.error('Error message:', error instanceof Error ? error.message : String(error));
+    
+    // Si el error es específico de usuario no encontrado, mantener ese mensaje
+    if (error instanceof Error && error.message.includes('Usuario no encontrado')) {
+      return { 
+        success: false, 
+        error: 'Usuario no encontrado', 
+        status: 404 
+      };
+    }
+    
+    return { 
+      success: false, 
+      error: 'Error interno del servidor', 
+      status: 500 
+    };
+  }
+}
+
+/**
+ * Valida permisos específicos de acción basados en reglas de acceso a datos
+ * @param userId - ID del usuario
+ * @param action - Acción a validar
+ * @param resource - Recurso/tabla
+ * @param productId - ID del producto (opcional)
+ * @returns RoleAuthResult
+ */
+export async function validateActionPermission(
+  userId: string,
+  action: 'create' | 'read' | 'update' | 'delete',
+  resource: string,
+  productId?: string
+): Promise<RoleAuthResult> {
+  try {
+    // Obtener reglas de acceso específicas del usuario para el recurso
+    const accessRules = await prisma.rolesAcDatos.findMany({
+      where: {
+        user_id: userId,
+        tabla: resource
+      }
+    });
+
+    // Si no hay reglas específicas, permitir acceso (el control de tabla ya se hizo)
+    if (accessRules.length === 0) {
+      return { success: true };
+    }
+
+    // Verificar reglas específicas por acción
+    const actionRules = accessRules.filter(rule => {
+      // Si el campo es 'action', verificar que la acción esté permitida
+      if (rule.campo === 'action') {
+        return rule.valor === action || rule.valor === '*';
+      }
+      
+      // Si el campo es 'product_id' y se especifica productId, verificar coincidencia
+      if (rule.campo === 'product_id' && productId) {
+        return rule.valor === productId || rule.valor === '*';
+      }
+      
+      return true;
+    });
+
+    // Si hay reglas de acción específicas, verificar que la acción esté permitida
+    const hasActionRules = accessRules.some(rule => rule.campo === 'action');
+    if (hasActionRules) {
+      const actionAllowed = actionRules.some(rule => 
+        rule.campo === 'action' && (rule.valor === action || rule.valor === '*')
+      );
+      
+      if (!actionAllowed) {
+        return {
+          success: false,
+          error: `Acción '${action}' no permitida en el recurso '${resource}'`,
+          status: 403
+        };
+      }
+    }
+
+    // Si hay reglas de producto específicas, verificar acceso
+    const hasProductRules = accessRules.some(rule => rule.campo === 'product_id');
+    if (hasProductRules && productId) {
+      const productAllowed = actionRules.some(rule => 
+        rule.campo === 'product_id' && (rule.valor === productId || rule.valor === '*')
+      );
+      
+      if (!productAllowed) {
+        return {
+          success: false,
+          error: 'Acceso denegado al producto especificado',
+          status: 403
+        };
+      }
+    }
+
+    return { success: true };
+
+  } catch (error) {
+    console.error('Error en validateRolePermissions:', error);
+    return {
+      success: false,
+      error: 'Error interno del servidor',
+      status: 500
+    };
+  }
+}
+
+/**
+ * Middleware específico para endpoints de administración
+ * @param request - NextRequest object
+ * @param requiredLevel - Nivel de administración requerido
+ * @returns RoleAuthResult
+ */
+export async function validateAdminAccess(
+  request: NextRequest,
+  requiredLevel: 'admin' | 'super_admin' = 'admin'
+): Promise<RoleAuthResult> {
+  const permission: EndpointPermission = {
+    resource: 'admin_panel',
+    action: 'read',
+    allowedRoles: requiredLevel === 'super_admin' ? ['super_admin'] : ['admin', 'super_admin']
+  };
+
+  return validateRolePermissions(request, permission);
+}
+
+/**
+ * Middleware específico para endpoints de gestión de usuarios
+ * @param request - NextRequest object
+ * @param productId - ID del producto (opcional)
+ * @returns RoleAuthResult
+ */
+export async function validateUserManagementAccess(
+  request: NextRequest,
+  productId?: string
+): Promise<RoleAuthResult> {
+  const permission: EndpointPermission = {
+    resource: 'usuarios',
+    action: 'update',
+    requiresProductAccess: !!productId,
+    allowedRoles: ['admin', 'super_admin'],
+    requiredTables: ['usuarios', 'rolesAcDatos']
+  };
+
+  return validateRolePermissions(request, permission, productId);
+}
+
+/**
+ * Middleware específico para endpoints de gestión de roles
+ * @param request - NextRequest object
+ * @param action - Acción a realizar
+ * @param productId - ID del producto (opcional)
+ * @returns RoleAuthResult
+ */
+export async function validateRoleManagementAccess(
+  request: NextRequest,
+  action: 'create' | 'read' | 'update' | 'delete',
+  productId?: string
+): Promise<RoleAuthResult> {
+  const permission: EndpointPermission = {
+    resource: 'RoleAccess',
+    action,
+    requiresProductAccess: !!productId,
+    allowedRoles: ['admin', 'super_admin'],
+    requiredTables: ['RoleAccess', 'rolesAcDatos']
+  };
+
+  return validateRolePermissions(request, permission, productId);
+}
+
+/**
+ * Middleware específico para endpoints de datos sensibles
+ * @param request - NextRequest object
+ * @param tables - Tablas que contienen datos sensibles
+ * @param productId - ID del producto (opcional)
+ * @returns RoleAuthResult
+ */
+export async function validateSensitiveDataAccess(
+  request: NextRequest,
+  tables: string[],
+  productId?: string
+): Promise<RoleAuthResult> {
+  const permission: EndpointPermission = {
+    resource: tables[0], // Usar la primera tabla como recurso principal
+    action: 'read',
+    requiresProductAccess: !!productId,
+    requiredTables: tables
+  };
+
+  return validateRolePermissions(request, permission, productId);
+}
+
+/**
+ * Función utilitaria para generar respuesta de error de autorización
+ * @param result - Resultado de la validación
+ * @returns Response object
+ */
+export function createAuthErrorResponse(result: RoleAuthResult) {
+  return {
+    success: false,
+    error: result.error || 'Acceso denegado',
+    status: result.status || 403,
+    timestamp: new Date().toISOString()
+  };
+}
+
+/**
+ * Función utilitaria para verificar múltiples permisos
+ * @param request - NextRequest object
+ * @param permissions - Array de permisos a verificar
+ * @param productId - ID del producto (opcional)
+ * @returns RoleAuthResult
+ */
+export async function validateMultiplePermissions(
+  request: NextRequest,
+  permissions: EndpointPermission[],
+  productId?: string
+): Promise<RoleAuthResult> {
+  for (const permission of permissions) {
+    const result = await validateRolePermissions(request, permission, productId);
+    if (!result.success) {
+      return result;
+    }
+  }
+
+  // Si todas las validaciones pasan, retornar el último resultado exitoso
+  return validateRolePermissions(request, permissions[permissions.length - 1], productId);
+}

@@ -1,0 +1,194 @@
+// Schema Simplificado - Sistema de Autenticación Stateless
+// Ajustado para preservar la estructura actual de las tablas de Google ADK
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ================================
+// MODELOS DE AUTENTICACIÓN (STATELESS)
+// ================================
+
+model EMPRESAS {
+  id          String @id @default(uuid())
+  nombre      String
+  descripcion String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  
+  // Relations
+  usuarios    USUARIOS[]
+  
+  @@map("empresas")
+}
+
+model USUARIOS {
+  id            String   @id @default(uuid())
+  username      String   @unique
+  email         String   @unique
+  password_hash String
+  iam_role      String   @default("user") // 'admin' | 'user'
+  empresa_id    String
+  email_verified Boolean @default(false)
+  is_active     Boolean @default(true)
+  failed_attempts Int   @default(0)
+  locked_until    DateTime?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  
+  // Relations
+  empresa       EMPRESAS @relation(fields: [empresa_id], references: [id], onDelete: Cascade)
+  password_resets PASSWORD_RESETS[]
+  events        SESSIONS_EVENTS[]
+  chatbots      USER_CHATBOTS[]  // Nueva relación
+  
+  @@map("usuarios")
+}
+
+model PASSWORD_RESETS {
+  id         String   @id @default(uuid())
+  usuario_id String
+  token      String   @unique
+  expires_at DateTime
+  used       Boolean  @default(false)
+  created_at DateTime @default(now())
+  
+  // Relations
+  usuario    USUARIOS @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  
+  @@map("password_resets")
+}
+
+model SESSIONS_EVENTS {
+  id         String   @id @default(uuid())
+  usuario_id String
+  content    String
+  role       String   // 'user' | 'assistant' | 'system'
+  timestamp  DateTime @default(now())
+  
+  // Relations
+  usuario    USUARIOS @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  
+  @@map("sessions_events")
+}
+
+// ================================
+// NUEVO MODELO: ASIGNACIÓN DE CHATBOTS POR USUARIO
+// ================================
+
+model USER_CHATBOTS {
+  id            String   @id @default(uuid())
+  usuario_id    String
+  chatbot_id    String   // ID del chatbot (ej: 'chatbotLisa')
+  chatbot_name  String   // Nombre del chatbot (ej: 'Lisit')
+  chatbot_path  String   // Ruta del chatbot (ej: '/chatbot/chatbotLisa')
+  gcp_name      String   // Nombre en GCP (ej: 'lisit')
+  is_active     Boolean  @default(true)
+  assigned_at   DateTime @default(now())
+  assigned_by   String   // ID del admin que asignó
+  
+  // Relations
+  usuario       USUARIOS @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  
+  @@unique([usuario_id, chatbot_id])
+  @@map("user_chatbots")
+}
+
+// ================================
+// MODELOS PARA GOOGLE ADK
+// ================================
+
+// Modelo UserWpp - Usuarios de WhatsApp para Google ADK
+model UserWpp {
+  id               String            @id @default(uuid())
+  phoneNumber      String            @unique
+  name             String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @default(now()) @updatedAt
+  messages         Message[]
+  
+  @@map("UserWpp")
+}
+ 
+// Modelo Message - Mensajes para Google ADK
+model Message {
+  id         String   @id @default(uuid())
+  text       String
+  userId     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+  userWpp    UserWpp     @relation(fields: [userId], references: [id])
+  
+  @@map("Message")
+}
+
+// ================================
+// MODELOS GOOGLE ADK (ESTRUCTURA ACTUAL)
+// ================================
+
+// Modelo Sessions - Sesiones Google ADK (estructura actual)
+model Sessions {
+  app_name    String   // Parte de la clave primaria compuesta
+  user_id     String   // Parte de la clave primaria compuesta
+  id          String   // Parte de la clave primaria compuesta
+  state       Json?    // Estado de la sesión
+  create_time DateTime // Timestamp de creación
+  update_time DateTime // Timestamp de actualización
+  
+  // Relación con eventos
+  events      Event[]  @relation("SessionEvents")
+  
+  @@id([app_name, user_id, id])
+  @@map("sessions")
+}
+
+// Modelo AppStates - Estados de aplicación Google ADK (estructura actual)
+model AppStates {
+  app_name    String   @id              // Clave primaria actual
+  state       Json                      // Estado en formato JSON
+  update_time DateTime                  // Timestamp de actualización
+  
+  @@map("app_states")
+}
+
+// Modelo Event - Eventos del sistema Google ADK (estructura actual)
+model Event {
+  id                          String    @id
+  app_name                    String
+  user_id                     String
+  session_id                  String
+  invocation_id               String
+  author                      String
+  branch                      String?
+  timestamp                   DateTime
+  content                     Json?
+  actions                     Bytes
+  long_running_tool_ids_json  String?
+  grounding_metadata          Json?
+  partial                     Boolean?
+  turn_complete               Boolean?
+  error_code                  String?
+  error_message               String?
+  interrupted                 Boolean?
+  
+  // Relación con sesiones
+  session                     Sessions? @relation("SessionEvents", fields: [app_name, user_id, session_id], references: [app_name, user_id, id])
+  
+  @@map("events")
+}
+
+// Modelo UserState - Estados de usuario Google ADK (estructura actual)
+model UserState {
+  app_name    String   // Parte de la clave primaria compuesta
+  user_id     String   // Parte de la clave primaria compuesta
+  state       Json     // Estado del usuario
+  update_time DateTime // Timestamp de actualización
+  
+  @@id([app_name, user_id])
+  @@map("user_states")
+}

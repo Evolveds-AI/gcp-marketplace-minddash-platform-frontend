@@ -1,0 +1,236 @@
+{
+  "paths": {
+    "/alert/sendAlerts": {
+      "post": {
+        "tags": [
+          "Alertas y Monitoreo",
+          "Alertas y Monitoreo"
+        ],
+        "summary": "Crear Nueva Alerta via canales de notificación",
+        "description": "Envia la informacion a la BD para crear la instancia de la alerta. \n        Devuelve el identificador único (`id`) de la alerta creada",
+        "operationId": "post_create_alert_alert_sendAlerts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAlertRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAlertResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alert/executeAlerts": {
+      "post": {
+        "tags": [
+          "Alertas y Monitoreo",
+          "Runner"
+        ],
+        "summary": "Ejecutar todas las alertas programadas",
+        "description": "Endpoint llamado por Cloud Scheduler. Inicia la ejecución de alertas en segundo plano.",
+        "operationId": "execute_all_alerts_endpoint_alert_executeAlerts_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alert/sendRegistroAlerta": {
+      "post": {
+        "tags": [
+          "Alertas y Monitoreo"
+        ],
+        "summary": "Registrar Nueva Alerta (CREATE)",
+        "description": "Crea un nuevo registro de alerta en la base de datos.",
+        "operationId": "sendRegistroAlerta_alert_sendRegistroAlerta_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlertRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alert/updateAlerta": {
+      "put": {
+        "tags": [
+          "Alertas y Monitoreo"
+        ],
+        "summary": "Actualizar Alerta (UPDATE)",
+        "description": "Modifica los datos de una alerta existente.",
+        "operationId": "updateAlerta_alert_updateAlerta_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlertUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alert/deleteAlerta": {
+      "delete": {
+        "tags": [
+          "Alertas y Monitoreo"
+        ],
+        "summary": "Eliminar Alerta (DELETE)",
+        "description": "Elimina una alerta del sistema usando su `id`.",
+        "operationId": "deleteAlerta_alert_deleteAlerta_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlertDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alert/getAlertsByProduct": {
+      "post": {
+        "tags": [
+          "Alertas y Monitoreo"
+        ],
+        "summary": "Trae alertas en base a un id producto",
+        "operationId": "get_alerts_alert_getAlertsByProduct_post",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Product Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

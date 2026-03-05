@@ -1,0 +1,172 @@
+{
+  "paths": {
+    "/mindsdb/meta": {
+      "post": {
+        "tags": [
+          "MindsDB"
+        ],
+        "summary": "Permite explorar y obtener metadatos de las fuentes de datos conectadas a MindsDB.",
+        "description": "Permite explorar la estructura de las bases de datos conectadas a MindsDB, basándose en el parámetro `action`:\n\n1. **`listar_conexiones`**: Muestra las conexiones registradas, filtrables por `client_name`.\n2. **`listar_esquemas`**: Muestra los esquemas de una `database` específica.\n3. **`listar_tablas`**: Muestra las tablas para una lista de `schemas` dentro de una `database`.\n4. **`listar_columnas`**: Muestra el nombre, tipo de dato y nulabilidad de las columnas para una `schema` y `table` específicas.\n\n**Parámetros clave:** `action` (obligatorio), `database` (para esquemas/tablas/columnas), `engine` (postgres/mysql/bigquery), `schema_name` y `table`.",
+        "operationId": "mindsdb_meta_mindsdb_meta_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MindsdbMetaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MindsdbMetaResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mindsdb/connections": {
+      "post": {
+        "tags": [
+          "MindsDB"
+        ],
+        "summary": "Crea una nueva conexión o base de datos dentro de MindsDB.",
+        "description": "Endpoint centralizado para crear conexiones MindsDB. Soporta dos modos:\n\n**Modo 1: Conexión estándar** (sin archivo)\n- Crea una conexión a PostgreSQL, MySQL, BigQuery, etc.\n- Para BigQuery, si no se proporciona 'service_account_json', se lee del archivo local.\n\n**Modo 2: Flujo completo con archivo** (solo para BigQuery)\n- Si se proporciona un archivo y engine='bigquery', ejecuta el flujo completo:\n  1. Sube archivo a GCS (convierte Excel a CSV si es necesario)\n  2. Carga datos a BigQuery como tabla nativa\n  3. Crea/verifica conexión MindsDB automáticamente\n- Formatos soportados: CSV, TXT, Excel (.xlsx, .xls), Parquet, Avro\n\n**Parámetros requeridos para modo con archivo:**\n- `file`: Archivo a subir\n- `product_id`: ID del producto (para organizar datasets)\n- `bucket_name`: Nombre del bucket de GCS\n- `table_name`: Nombre de la tabla en BigQuery\n- `server_url`: URL del servidor MindsDB\n- `file_format`: CSV, PARQUET o AVRO (opcional, default: CSV)",
+        "operationId": "create_connection_mindsdb_connections_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create_connection_mindsdb_connections_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mindsdb/updateConnections": {
+      "put": {
+        "tags": [
+          "MindsDB"
+        ],
+        "summary": "Actualiza una conexión existente.",
+        "description": "Actualiza los parámetros de una conexión existente eliminándola y recreándola.",
+        "operationId": "update_connection_mindsdb_updateConnections_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConnectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mindsdb/dropConnections": {
+      "delete": {
+        "tags": [
+          "MindsDB"
+        ],
+        "summary": "Elimina una conexión.",
+        "description": "Elimina una base de datos o conexión de MindsDB enviando los datos en el cuerpo de la petición.",
+        "operationId": "delete_connection_mindsdb_dropConnections_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteConnectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConnectionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

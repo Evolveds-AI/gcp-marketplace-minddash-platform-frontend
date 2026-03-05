@@ -1,0 +1,82 @@
+{
+  "schemas": {
+    "ColumnSelection": {
+      "properties": {
+        "schema_name": {
+          "type": "string",
+          "title": "Schema Name"
+        },
+        "table": {
+          "type": "string",
+          "title": "Table"
+        },
+        "columns": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Columns"
+        },
+        "column_specs": {
+          "anyOf": [
+            {
+              "items": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Column Specs"
+        },
+        "time_dimension": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Time Dimension"
+        },
+        "primary_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Primary Key"
+        }
+      },
+      "type": "object",
+      "required": [
+        "schema_name",
+        "table"
+      ],
+      "title": "ColumnSelection"
+    }
+  }
+}

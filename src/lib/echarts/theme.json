@@ -1,0 +1,68 @@
+{
+	"grid": {
+		"containLabel": true
+	},
+	"color": [
+		"#60A5FA",
+		"#34D399",
+		"#F59E0B",
+		"#EF4444",
+		"#A78BFA",
+		"#10B981",
+		"#F472B6",
+		"#FBBF24",
+		"#3B82F6",
+		"#F43F5E"
+	],
+	"legend": {
+		"show": true
+	},
+	"categoryAxis": {
+		"axisLabel": {
+			"overflow": "truncate",
+			"interval": 0,
+			"hideOverlap": false,
+			"rotate": 45,
+			"fontSize": 15,
+			"height": 20
+		}
+	},
+	"timeAxis": {
+		"axisLabel": {
+			"fontSize": 15,
+			"showMaxLabel": true,
+			"showMinLabel": true
+		}
+	},
+	"valueAxis": {
+		"axisLabel": {
+			"fontSize": 15,
+			"showMaxLabel": true,
+			"showMinLabel": true
+		}
+	},
+
+	"backgroundColor": "rgba(255, 255, 255, 1)",
+	"bar": {
+		"label": {
+			"show": true,
+			"fontSize": 16,
+			"fontWeight": "bold",
+			"color": "black"
+		},
+		"itemStyle": {
+			"borderColor": "#3B82F6",
+			"borderWidth": 2,
+			"borderRadius": [5, 5, 0, 0]
+		}
+	},
+	"line": {
+		"label": {
+			"show": true,
+			"fontSize": 16,
+			"fontWeight": "bold",
+			"color": "black"
+		},
+		"smooth": 0.15
+	}
+}

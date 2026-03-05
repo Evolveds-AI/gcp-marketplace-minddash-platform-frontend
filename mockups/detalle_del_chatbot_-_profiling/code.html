@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MindDash - Profiling</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#135bec',
+              'background-light': '#f6f6f8',
+              'background-dark': '#101622',
+            },
+            fontFamily: {
+              display: ['Inter'],
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200">
+<div class="flex h-screen">
+<aside class="w-64 flex-shrink-0 bg-white/5 dark:bg-black/10 p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-10">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<svg class="feather feather-zap" fill="none" height="20" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+</svg>
+</div>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white">MindDash</h1>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>General</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span>Semantic Layer</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">title</span>
+<span>Prompt</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span>Permissions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span>Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span>Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">show_chart</span>
+<span>Metrics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">person</span>
+<span class="font-semibold">Profiling</span>
+</a>
+</nav>
+</div>
+<div>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span>Administration</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3 text-gray-900 dark:text-white">
+<span class="material-symbols-outlined text-gray-500">apartment</span>
+<span class="text-sm font-medium">Tech Solutions - Project Alpha - EVA</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-white p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<img alt="User profile picture" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcvH2LMJCKi9d6VrYpeUT9_4sjMDgzS8jWFD7JWQ-AkFPfwTPunraBD_VOExVZ_qVoVgEa2KHHeHockbOOERQ3nnVCAIQtWRD-0dD6YloIybNC48nQYgDInv_Q0b39m5GHu-n2ta8uN0iEswLFUWkBbN05FUQBswoPPg6gShQnLYsWzR_BI6q2CQQHtmVM7K0pae1LIcRKDL28mb9eY4j6u66AX6FD-7BgKZUpvo8fH8HVkZhntdpNX_ktcfIDLsSWLMS8TIqws14"/>
+</div>
+</header>
+<main class="flex-1 p-8 overflow-y-auto">
+<div class="max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Profiling</h2>
+<div class="bg-white dark:bg-gray-900/50 rounded-xl p-6 mb-8">
+<div class="grid grid-cols-1 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="table-name">Table Name</label>
+<input class="w-full bg-gray-100 dark:bg-gray-800 border-transparent rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-primary focus:border-primary transition" id="table-name" placeholder="Enter table name" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="field-profile">Field Profile</label>
+<textarea class="w-full bg-gray-100 dark:bg-gray-800 border-transparent rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-primary focus:border-primary transition" id="field-profile" placeholder="Enter field profile" rows="4"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="field-description">Field Description</label>
+<textarea class="w-full bg-gray-100 dark:bg-gray-800 border-transparent rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-primary focus:border-primary transition" id="field-description" placeholder="Enter field description" rows="4"></textarea>
+</div>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 w-full bg-primary/20 dark:bg-primary/30 text-primary font-semibold py-3 rounded-lg hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Add table profiling</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

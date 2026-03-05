@@ -1,0 +1,306 @@
+{
+  "paths": {
+    "/metrics/upload": {
+      "post": {
+        "tags": [
+          "Metrics Management"
+        ],
+        "summary": "Generar y Subir Metricas yaml a GCS",
+        "description": "Crea un archivo YAML de metricas (que incluye version, parametros, query_content, etc.) y lo sube a una ruta específica en GCS, devolviendo la URL.",
+        "operationId": "upload_prompt_metrics_upload_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadMetricsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadMetricsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/uploadByproduct": {
+      "post": {
+        "tags": [
+          "Metrics Management"
+        ],
+        "summary": "Generar y Subir Metricas yaml a GCS",
+        "description": "Crea un archivo YAML de metricas (que incluye version, parametros, query_content, etc.) y lo sube a una ruta específica en GCS, devolviendo la URL.",
+        "operationId": "upload_prompt_by_product_metrics_uploadByproduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadMetricsByProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadMetricsByProductResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/getMetricsByProduct": {
+      "post": {
+        "tags": [
+          "Metrics Management"
+        ],
+        "summary": "Listar Métricas por Producto",
+        "description": "Obtiene todas las métricas que han sido asociadas a un **producto** específico, filtrando por el `product_id` provisto.",
+        "operationId": "getMetricsByProduct_metrics_getMetricsByProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMetricsByProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/MetricByProduct"
+                  },
+                  "type": "array",
+                  "title": "Response Getmetricsbyproduct Metrics Getmetricsbyproduct Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/getMetrics": {
+      "post": {
+        "tags": [
+          "Metrics Management"
+        ],
+        "summary": "Listar Métricas (Todas o por ID)",
+        "description": "Obtiene una lista de todas las métricas registradas. Opcionalmente, si se proporciona un `metric_id` en el cuerpo, devuelve solo los detalles de esa métrica específica.",
+        "operationId": "getMetrics_metrics_getMetrics_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMetricsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/MetricResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Getmetrics Metrics Getmetrics Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/sendRegisterMetric": {
+      "post": {
+        "tags": [
+          "Metrics Management"
+        ],
+        "summary": "Registrar Nueva Métrica (CREATE)",
+        "description": "Crea y registra una nueva métrica de negocio en la base de datos.",
+        "operationId": "sendRegisterMetric_metrics_sendRegisterMetric_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MetricRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/updateMetric": {
+      "put": {
+        "tags": [
+          "Metrics Management"
+        ],
+        "summary": "Actualizar Métrica (UPDATE)",
+        "description": "Modifica los detalles de una métrica existente. Devuelve error 404 si el `id` de la métrica no existe.",
+        "operationId": "updateMetric_metrics_updateMetric_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MetricUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/deleteMetric": {
+      "delete": {
+        "tags": [
+          "Metrics Management"
+        ],
+        "summary": "Eliminar Métrica (DELETE)",
+        "description": "Elimina una métrica del sistema. Devuelve error 404 si el `id` de la métrica no existe.",
+        "operationId": "deleteMetric_metrics_deleteMetric_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MetricDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

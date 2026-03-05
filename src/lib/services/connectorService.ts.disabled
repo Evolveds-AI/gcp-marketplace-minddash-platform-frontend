@@ -1,0 +1,768 @@
+import crypto from 'crypto';
+import { PrismaClient } from '@prisma/client';
+import {
+  DataConnector,
+  ConnectorType,
+  ConnectorStatus,
+  SyncType,
+  SyncStatus,
+  DatabaseConfig,
+  ApiConfig,
+  FileConfig,
+  WebhookConfig,
+  SyncLog,
+  FieldMapping,
+  SyncedData,
+  CreateConnectorDTO,
+  UpdateConnectorDTO,
+  ConnectorResponse,
+  ConnectorListResponse,
+  SyncResponse,
+  SyncConnectorDTO,
+  ValidationResult,
+  ConnectorMetrics,
+  ConnectorFilters,
+  ExportOptions,
+  ConnectorConfig
+} from '@/types/connectors';
+
+const prisma = new PrismaClient();
+
+// Clave de encriptación - en producción debe estar en variables de entorno
+const ENCRYPTION_KEY = process.env.CONNECTOR_ENCRYPTION_KEY || 'default-key-change-in-production';
+const ALGORITHM = 'aes-256-gcm';
+
+export class ConnectorService {
+  /**
+   * Encripta datos sensibles de configuración
+   */
+  private encryptConfig(config: any): string {
+    try {
+      const iv = crypto.randomBytes(16);
+      const cipher = crypto.createCipher(ALGORITHM, ENCRYPTION_KEY);
+      
+      let encrypted = cipher.update(JSON.stringify(config), 'utf8', 'hex');
+      encrypted += cipher.final('hex');
+      
+      const authTag = cipher.getAuthTag();
+      
+      return JSON.stringify({
+        encrypted,
+        iv: iv.toString('hex'),
+        authTag: authTag.toString('hex')
+      });
+    } catch (error) {
+      throw new Error('Error al encriptar configuración');
+    }
+  }
+
+  /**
+   * Desencripta datos de configuración
+   */
+  private decryptConfig(encryptedData: string): any {
+    try {
+      const { encrypted, iv, authTag } = JSON.parse(encryptedData);
+      
+      const decipher = crypto.createDecipher(ALGORITHM, ENCRYPTION_KEY);
+      decipher.setAuthTag(Buffer.from(authTag, 'hex'));
+      
+      let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+      decrypted += decipher.final('utf8');
+      
+      return JSON.parse(decrypted);
+    } catch (error) {
+      throw new Error('Error al desencriptar configuración');
+    }
+  }
+
+  /**
+   * Valida la configuración del conector según su tipo
+   */
+  private validateConnectorConfig(type: ConnectorType, config: any): ValidationResult {
+    const errors: string[] = [];
+    
+    switch (type) {
+      case ConnectorType.DATABASE:
+        const dbConfig = config as DatabaseConfig;
+        if (!dbConfig.host) errors.push('Host es requerido');
+        if (!dbConfig.port) errors.push('Puerto es requerido');
+        if (!dbConfig.database) errors.push('Nombre de base de datos es requerido');
+        if (!dbConfig.username) errors.push('Usuario es requerido');
+        if (!dbConfig.password) errors.push('Contraseña es requerida');
+        break;
+        
+      case ConnectorType.API:
+        const apiConfig = config as ApiConfig;
+        if (!apiConfig.baseUrl) errors.push('URL base es requerida');
+        break;
+        
+      case ConnectorType.FILE:
+        const fileConfig = config as FileConfig;
+        if (!fileConfig.path) errors.push('Ruta del archivo es requerida');
+        if (!fileConfig.format) errors.push('Formato del archivo es requerido');
+        break;
+        
+      case ConnectorType.WEBHOOK:
+        const webhookConfig = config as WebhookConfig;
+        if (!webhookConfig.url) errors.push('URL del webhook es requerida');
+        if (!webhookConfig.method) errors.push('Método HTTP es requerido');
+        break;
+    }
+    
+    return {
+      isValid: errors.length === 0,
+      errors: errors.map(error => ({
+        field: 'config',
+        message: error,
+        code: 'VALIDATION_ERROR'
+      }))
+    };
+  }
+
+  /**
+   * Crea un nuevo conector
+   */
+  async createConnector(request: CreateConnectorDTO, userId: string): Promise<ConnectorResponse> {
+    try {
+      // Validar configuración
+      const validation = this.validateConnectorConfig(request.type, request.config);
+      if (!validation.isValid) {
+        throw new Error(`Configuración inválida: ${validation.errors.join(', ')}`);
+      }
+
+      // Encriptar configuración sensible
+      const encryptedConfig = this.encryptConfig(request.config);
+
+      // Crear conector en base de datos
+      const connector = await prisma.dataConnector.create({
+        data: {
+          name: request.name,
+          type: request.type as any,
+          config: encryptedConfig,
+          status: ConnectorStatus.INACTIVE as any,
+          created_by: userId,
+          client_id: request.clientId,
+          product_id: request.productId
+        }
+      });
+
+      return {
+        success: true,
+        data: {
+          id: connector.id,
+          name: connector.name,
+          description: undefined,
+          type: connector.type as ConnectorType,
+          status: connector.status as ConnectorStatus,
+          config: connector.config as unknown as ConnectorConfig,
+          clientId: connector.client_id || undefined,
+          productId: connector.product_id || undefined,
+          createdBy: connector.created_by,
+          createdAt: connector.created_at,
+          updatedAt: connector.updated_at
+        }
+      };
+    } catch (error) {
+      console.error('Error al crear conector:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Error desconocido'
+      };
+    }
+  }
+
+  /**
+   * Obtiene un conector por ID
+   */
+  async getConnector(id: string): Promise<ConnectorResponse | null> {
+    try {
+      const connector = await prisma.dataConnector.findUnique({
+        where: { id }
+      });
+
+      if (!connector) return null;
+
+      return {
+        success: true,
+        data: {
+          id: connector.id,
+          name: connector.name,
+          description: undefined,
+          type: connector.type as ConnectorType,
+          status: connector.status as ConnectorStatus,
+          config: connector.config as unknown as ConnectorConfig,
+          clientId: connector.client_id || undefined,
+          productId: connector.product_id || undefined,
+          createdBy: connector.created_by,
+          createdAt: connector.created_at,
+          updatedAt: connector.updated_at
+        }
+      };
+    } catch (error) {
+      throw new Error(`Error al obtener conector: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Lista conectores con filtros
+   */
+  async listConnectors(filter: ConnectorFilters = {}): Promise<ConnectorListResponse> {
+    try {
+      const whereClause: any = {};
+      
+      if (filter.type) whereClause.type = filter.type;
+      if (filter.status) whereClause.status = filter.status;
+      if (filter.clientId) whereClause.client_id = filter.clientId;
+      if (filter.productId) whereClause.product_id = filter.productId;
+      if (filter.createdBy) whereClause.created_by = filter.createdBy;
+      
+      if (filter.search) {
+        whereClause.OR = [
+          { name: { contains: filter.search, mode: 'insensitive' } }
+        ];
+      }
+      
+      if (filter.dateRange) {
+        whereClause.created_at = {
+          gte: filter.dateRange.from,
+          lte: filter.dateRange.to
+        };
+      }
+
+      const limit = filter.limit || 50;
+      const offset = filter.offset || 0;
+      
+      const [connectors, total] = await Promise.all([
+        prisma.dataConnector.findMany({
+          where: whereClause,
+          orderBy: { created_at: 'desc' },
+          take: limit,
+          skip: offset
+        }),
+        prisma.dataConnector.count({ where: whereClause })
+      ]);
+
+      const dataConnectors: DataConnector[] = connectors.map(connector => ({
+        id: connector.id,
+        name: connector.name,
+        description: undefined,
+        type: connector.type as ConnectorType,
+        status: connector.status as ConnectorStatus,
+        config: connector.config as unknown as ConnectorConfig,
+        clientId: connector.client_id || undefined,
+        productId: connector.product_id || undefined,
+        createdBy: connector.created_by,
+        createdAt: connector.created_at,
+        updatedAt: connector.updated_at,
+        lastSyncAt: connector.last_sync || undefined
+      }));
+
+      return {
+        success: true,
+        data: dataConnectors,
+        pagination: {
+          page: Math.floor(offset / limit) + 1,
+          limit,
+          total,
+          totalPages: Math.ceil(total / limit)
+        }
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: `Error al listar conectores: ${error instanceof Error ? error.message : 'Error desconocido'}`
+      };
+    }
+  }
+
+  /**
+   * Actualiza un conector
+   */
+  async updateConnector(id: string, request: UpdateConnectorDTO): Promise<ConnectorResponse> {
+    try {
+      const updateData: any = {
+        updatedAt: new Date()
+      };
+
+      if (request.name) updateData.name = request.name;
+      if (request.status) updateData.status = request.status;
+      
+      if (request.config) {
+        // Validar nueva configuración
+        const connector = await prisma.dataConnector.findUnique({ where: { id } });
+        if (!connector) throw new Error('Conector no encontrado');
+        
+        const validation = this.validateConnectorConfig(connector.type as ConnectorType, request.config);
+        if (!validation.isValid) {
+          throw new Error(`Configuración inválida: ${validation.errors.join(', ')}`);
+        }
+        
+        updateData.config = this.encryptConfig(request.config);
+      }
+
+      const updatedConnector = await prisma.dataConnector.update({
+        where: { id },
+        data: updateData
+      });
+
+      return {
+        success: true,
+        data: {
+          id: updatedConnector.id,
+          name: updatedConnector.name,
+          description: undefined,
+          type: updatedConnector.type as ConnectorType,
+          status: updatedConnector.status as ConnectorStatus,
+          config: updatedConnector.config as unknown as ConnectorConfig,
+          clientId: updatedConnector.client_id || undefined,
+          productId: updatedConnector.product_id || undefined,
+          createdBy: updatedConnector.created_by,
+          createdAt: updatedConnector.created_at,
+          updatedAt: updatedConnector.updated_at
+        }
+      };
+    } catch (error) {
+      throw new Error(`Error al actualizar conector: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Elimina un conector
+   */
+  async deleteConnector(id: string): Promise<void> {
+    try {
+      await prisma.dataConnector.delete({
+        where: { id }
+      });
+    } catch (error) {
+      throw new Error(`Error al eliminar conector: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Prueba la conexión de un conector
+   */
+  async testConnection(id: string): Promise<{ success: boolean; message: string }> {
+    try {
+      const connector = await prisma.dataConnector.findUnique({ where: { id } });
+      if (!connector) throw new Error('Conector no encontrado');
+      if (!connector.config) throw new Error('Configuración del conector no encontrada');
+
+      const config = this.decryptConfig(connector.config as string);
+      
+      // Aquí implementarías la lógica específica para probar cada tipo de conector
+      // Por ahora retornamos un resultado simulado
+      
+      return {
+        success: true,
+        message: 'Conexión exitosa'
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: `Error de conexión: ${error instanceof Error ? error.message : 'Error desconocido'}`
+      };
+    }
+  }
+
+  /**
+   * Inicia una sincronización
+   */
+  async startSync(id: string, request: SyncConnectorDTO): Promise<SyncResponse> {
+    try {
+      const connector = await prisma.dataConnector.findUnique({ where: { id } });
+      if (!connector) throw new Error('Conector no encontrado');
+
+      // Crear log de sincronización
+      const syncLog = await prisma.syncLog.create({
+        data: {
+          connector_id: id,
+          status: 'RUNNING' as any,
+          started_at: new Date(),
+          records_processed: 0,
+          records_success: 0,
+          records_failed: 0
+        }
+      });
+
+      // Actualizar estado del conector
+      await prisma.dataConnector.update({
+        where: { id },
+        data: { 
+          status: 'SYNCING' as any,
+          last_sync: new Date()
+        }
+      });
+
+      // Aquí se implementaría la lógica de sincronización en background
+      // Por ahora simulamos el inicio exitoso
+
+      return {
+        success: true,
+        syncLogId: syncLog.id,
+        message: 'Sincronización iniciada exitosamente'
+      };
+    } catch (error) {
+      throw new Error(`Error al iniciar sincronización: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Obtiene métricas de un conector con filtros avanzados
+   */
+  async getMetrics(id: string, options: {
+    period?: string;
+    granularity?: string;
+    startDate?: Date;
+    endDate?: Date;
+  } = {}): Promise<any> {
+    try {
+      const connector = await prisma.dataConnector.findUnique({ where: { id } });
+      if (!connector) throw new Error('Conector no encontrado');
+
+      const { startDate, endDate, granularity = 'hour' } = options;
+      
+      // Construir filtros de fecha
+      const dateFilter: any = {};
+      if (startDate) dateFilter.gte = startDate;
+      if (endDate) dateFilter.lte = endDate;
+
+      // Obtener logs de sincronización en el rango de fechas
+      const syncLogs = await prisma.syncLog.findMany({
+        where: {
+          connector_id: id,
+          ...(Object.keys(dateFilter).length > 0 && { started_at: dateFilter })
+        },
+        orderBy: { started_at: 'desc' }
+      });
+
+      // Calcular métricas agregadas
+      const totalSyncs = syncLogs.length;
+      const successfulSyncs = syncLogs.filter(log => log.status === 'SUCCESS').length;
+      const failedSyncs = syncLogs.filter(log => log.status === 'FAILED').length;
+      const totalRecords = syncLogs.reduce((sum, log) => sum + (log.records_processed || 0), 0);
+
+      // Agrupar por granularidad para series temporales
+      const timeSeriesData = this.groupSyncLogsByGranularity(syncLogs, granularity);
+
+      return {
+        summary: {
+          totalSyncs,
+          successfulSyncs,
+          failedSyncs,
+          successRate: totalSyncs > 0 ? (successfulSyncs / totalSyncs) * 100 : 0,
+          totalRecords,
+          lastSyncAt: connector.last_sync,
+          averageSyncDuration: this.calculateAverageSyncDuration(syncLogs)
+        },
+        timeSeries: timeSeriesData
+      };
+    } catch (error) {
+      throw new Error(`Error al obtener métricas: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Agrupa logs de sincronización por granularidad temporal
+   */
+  private groupSyncLogsByGranularity(syncLogs: any[], granularity: string): any[] {
+    const groups: { [key: string]: any } = {};
+    
+    syncLogs.forEach(log => {
+      if (!log.startedAt) return;
+      
+      const date = new Date(log.startedAt);
+      let key: string;
+      
+      switch (granularity) {
+        case 'hour':
+          key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:00`;
+          break;
+        case 'day':
+          key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+          break;
+        case 'week':
+          const weekStart = new Date(date);
+          weekStart.setDate(date.getDate() - date.getDay());
+          key = `${weekStart.getFullYear()}-W${Math.ceil(weekStart.getDate() / 7)}`;
+          break;
+        case 'month':
+          key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+          break;
+        default:
+          key = date.toISOString().split('T')[0];
+      }
+      
+      if (!groups[key]) {
+        groups[key] = {
+          timestamp: key,
+          totalSyncs: 0,
+          successfulSyncs: 0,
+          failedSyncs: 0,
+          totalRecords: 0
+        };
+      }
+      
+      groups[key].totalSyncs++;
+      if (log.status === SyncStatus.COMPLETED) groups[key].successfulSyncs++;
+      if (log.status === SyncStatus.FAILED) groups[key].failedSyncs++;
+      groups[key].totalRecords += log.recordsProcessed || 0;
+    });
+    
+    return Object.values(groups).sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+  }
+
+  /**
+   * Obtiene métricas de un conector (método legacy)
+   */
+  async getConnectorMetrics(id: string): Promise<ConnectorMetrics> {
+    try {
+      const connector = await prisma.dataConnector.findUnique({ where: { id } });
+      if (!connector) throw new Error('Conector no encontrado');
+
+      // Obtener estadísticas de sincronización
+      const syncLogs = await prisma.syncLog.findMany({
+        where: { connector_id: id },
+        orderBy: { started_at: 'desc' },
+        take: 10
+      });
+
+      const totalSyncs = syncLogs.length;
+      const successfulSyncs = syncLogs.filter(log => log.status === 'SUCCESS').length;
+      const failedSyncs = syncLogs.filter(log => log.status === 'FAILED').length;
+      const totalRecords = syncLogs.reduce((sum, log) => sum + (log.records_processed || 0), 0);
+
+      return {
+        connectorId: id,
+        totalSyncs,
+        successfulSyncs,
+        failedSyncs,
+        averageSyncTime: this.calculateAverageSyncDuration(syncLogs),
+        lastSyncStatus: syncLogs.length > 0 ? syncLogs[0].status as SyncStatus : SyncStatus.PENDING,
+        dataVolume: {
+          totalRecords,
+          recordsToday: 0, // TODO: implementar cálculo
+          recordsThisWeek: 0, // TODO: implementar cálculo
+          recordsThisMonth: 0 // TODO: implementar cálculo
+        }
+      };
+    } catch (error) {
+      throw new Error(`Error al obtener métricas: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Calcula la duración promedio de sincronización
+   */
+  private calculateAverageSyncDuration(syncLogs: any[]): number {
+    const completedSyncs = syncLogs.filter(log => 
+      log.status === SyncStatus.COMPLETED && log.startedAt && log.completedAt
+    );
+
+    if (completedSyncs.length === 0) return 0;
+
+    const totalDuration = completedSyncs.reduce((sum, log) => {
+      const duration = new Date(log.completedAt).getTime() - new Date(log.startedAt).getTime();
+      return sum + duration;
+    }, 0);
+
+    return totalDuration / completedSyncs.length;
+  }
+
+  /**
+   * Obtiene la configuración desencriptada de un conector (solo para uso interno)
+   */
+  async getConnectorConfig(id: string): Promise<any> {
+    try {
+      const connector = await prisma.dataConnector.findUnique({ where: { id } });
+      if (!connector) throw new Error('Conector no encontrado');
+
+      if (!connector.config) {
+        throw new Error('Configuración del conector no encontrada');
+      }
+      return this.decryptConfig(JSON.stringify(connector.config));
+    } catch (error) {
+      throw new Error(`Error al obtener configuración: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Obtiene los logs de un conector
+   */
+  async getLogs(connectorId: string, options: {
+    page?: number;
+    limit?: number;
+    level?: string;
+    startDate?: Date;
+    endDate?: Date;
+    search?: string;
+  } = {}) {
+    try {
+      const { page = 1, limit = 50, level, startDate, endDate, search } = options;
+      const offset = (page - 1) * limit;
+
+      const where: any = { connectorId };
+      
+      if (level) where.level = level;
+      if (startDate) where.createdAt = { ...where.createdAt, gte: startDate };
+      if (endDate) where.createdAt = { ...where.createdAt, lte: endDate };
+      if (search) {
+        where.OR = [
+          { message: { contains: search, mode: 'insensitive' } },
+          { metadata: { contains: search, mode: 'insensitive' } }
+        ];
+      }
+
+      const [logs, total] = await Promise.all([
+        prisma.syncLog.findMany({
+          where,
+          orderBy: { started_at: 'desc' },
+          take: limit,
+          skip: offset
+        }),
+        prisma.syncLog.count({ where })
+      ]);
+
+      return {
+        data: logs,
+        total,
+        page,
+        limit
+      };
+    } catch (error) {
+      throw new Error(`Error al obtener logs: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Limpia los logs de un conector
+   */
+  async clearLogs(connectorId: string, filters: {
+    olderThan?: Date;
+    level?: string;
+  } = {}) {
+    try {
+      const where: any = { connectorId };
+      
+      if (filters.olderThan) {
+        where.createdAt = { lt: filters.olderThan };
+      }
+      
+      if (filters.level) {
+        where.level = filters.level;
+      }
+
+      const result = await prisma.syncLog.deleteMany({ where });
+      
+      return {
+        deletedCount: result.count
+      };
+    } catch (error) {
+      throw new Error(`Error al limpiar logs: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Limpia las métricas históricas de un conector
+   */
+  async clearMetrics(connectorId: string, options: {
+    olderThan?: Date;
+    keepSummary?: boolean;
+  } = {}) {
+    try {
+      const { olderThan, keepSummary = false } = options;
+      
+      // Verificar que el conector existe
+      const connector = await prisma.dataConnector.findUnique({ where: { id: connectorId } });
+      if (!connector) throw new Error('Conector no encontrado');
+
+      let deletedRecords = 0;
+
+      // Limpiar logs de sincronización
+      const syncLogWhere: any = { connectorId };
+      if (olderThan) {
+        syncLogWhere.startedAt = { lt: olderThan };
+      }
+      
+      // Si no se mantiene el resumen, eliminar todos los logs
+      // Si se mantiene, conservar los últimos registros para métricas básicas
+      if (!keepSummary) {
+        const syncLogResult = await prisma.syncLog.deleteMany({ where: syncLogWhere });
+        deletedRecords += syncLogResult.count;
+      } else {
+        // Mantener los últimos 10 registros para métricas de resumen
+        const logsToKeep = await prisma.syncLog.findMany({
+          where: { connector_id: connectorId },
+          orderBy: { started_at: 'desc' },
+          take: 10,
+          select: { id: true }
+        });
+        
+        const keepIds = logsToKeep.map(log => log.id);
+        const deleteWhere = {
+          ...syncLogWhere,
+          id: { notIn: keepIds }
+        };
+        
+        const syncLogResult = await prisma.syncLog.deleteMany({ where: deleteWhere });
+        deletedRecords += syncLogResult.count;
+      }
+
+      // Limpiar logs del conector
+      const connectorLogWhere: any = { connectorId };
+      if (olderThan) {
+        connectorLogWhere.createdAt = { lt: olderThan };
+      }
+      
+      if (!keepSummary) {
+        const syncLogResult = await prisma.syncLog.deleteMany({ where: connectorLogWhere });
+        deletedRecords += syncLogResult.count;
+      }
+
+      return {
+        deletedRecords,
+        keptSummary: keepSummary
+      };
+    } catch (error) {
+      throw new Error(`Error al limpiar métricas: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Obtiene la configuración de sincronización de un conector
+   */
+  async getSchedule(connectorId: string) {
+    try {
+      // TODO: Implementar cuando se agregue el modelo SyncSchedule al esquema
+      throw new Error('Funcionalidad de programación no implementada');
+    } catch (error) {
+      throw new Error(`Error al obtener programación: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Configura la sincronización automática de un conector
+   */
+  async setSchedule(connectorId: string, schedule: any) {
+    try {
+      // TODO: Implementar cuando se agregue el modelo SyncSchedule al esquema
+      throw new Error('Funcionalidad de programación no implementada');
+    } catch (error) {
+      throw new Error(`Error al configurar sincronización: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+
+  /**
+   * Elimina la configuración de sincronización de un conector
+   */
+  async removeSchedule(connectorId: string) {
+    try {
+      // TODO: Implementar cuando se agregue el modelo SyncSchedule al esquema
+      throw new Error('Funcionalidad de programación no implementada');
+    } catch (error) {
+      throw new Error(`Error al eliminar configuración de sincronización: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  }
+}
+
+export const connectorService = new ConnectorService();

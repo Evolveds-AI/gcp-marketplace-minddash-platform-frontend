@@ -1,0 +1,216 @@
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+interface SearchResult {
+  chunk: {
+    id: string;
+    content: string;
+    chunk_index: number;
+    metadata: any;
+  };
+  file: {
+    id: string;
+    filename: string;
+    original_name: string;
+    file_type: string;
+  };
+  relevanceScore: number;
+}
+
+interface SearchOptions {
+  limit?: number;
+  minRelevanceScore?: number;
+}
+
+export class KnowledgeSearchService {
+  /**
+   * Busca contenido relevante en la base de conocimiento de un producto
+   */
+  static async searchKnowledge(
+    productId: string,
+    query: string,
+    options: SearchOptions = {}
+  ): Promise<SearchResult[]> {
+    const { limit = 5, minRelevanceScore = 0.1 } = options;
+
+    try {
+      // Obtener todos los chunks del producto con archivos activos
+      const chunks = await prisma.knowledge_chunks.findMany({
+        where: {
+          chatbotKnowledgeFile: {
+            product_id: productId,
+            processing_status: 'COMPLETED'
+          }
+        },
+        include: {
+          chatbotKnowledgeFile: {
+            select: {
+              id: true,
+              filename: true,
+              original_name: true,
+              file_type: true
+            }
+          }
+        },
+        orderBy: {
+          chunk_index: 'asc'
+        }
+      });
+
+      if (chunks.length === 0) {
+        return [];
+      }
+
+      // Realizar búsqueda simple por coincidencia de texto
+      // En una implementación más avanzada, aquí se usarían embeddings y búsqueda vectorial
+      const queryWords = query.toLowerCase().split(' ').filter(word => word.length > 2);
+      
+      const results: SearchResult[] = chunks
+        .map((chunk: any) => {
+          const content = chunk.content.toLowerCase();
+          let score = 0;
+          
+          // Calcular puntuación basada en coincidencias de palabras
+          queryWords.forEach(word => {
+            const matches = (content.match(new RegExp(word, 'g')) || []).length;
+            score += matches * (word.length / query.length);
+          });
+          
+          // Normalizar puntuación
+          const relevanceScore = Math.min(score / queryWords.length, 1);
+          
+          return {
+            chunk: {
+              id: chunk.id,
+              content: chunk.content,
+              chunk_index: chunk.chunk_index,
+              metadata: chunk.metadata
+            },
+            file: {
+              id: chunk.chatbotKnowledgeFile.id,
+              filename: chunk.chatbotKnowledgeFile.filename,
+              original_name: chunk.chatbotKnowledgeFile.original_name,
+              file_type: chunk.chatbotKnowledgeFile.file_type
+            },
+            relevanceScore
+          };
+        })
+        .filter((result: any) => result.relevanceScore >= minRelevanceScore)
+        .sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
+        .slice(0, limit);
+
+      return results;
+    } catch (error) {
+      console.error('Error searching knowledge base:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Obtiene el contexto completo para el chatbot basado en una consulta
+   */
+  static async getContextForQuery(
+    productId: string,
+    query: string,
+    maxContextLength: number = 2000
+  ): Promise<string> {
+    const searchResults = await this.searchKnowledge(productId, query, {
+      limit: 10,
+      minRelevanceScore: 0.1
+    });
+
+    if (searchResults.length === 0) {
+      return '';
+    }
+
+    let context = '';
+    let currentLength = 0;
+
+    for (const result of searchResults) {
+      const chunkText = `[${result.file.original_name}] ${result.chunk.content}\n\n`;
+      
+      if (currentLength + chunkText.length > maxContextLength) {
+        break;
+      }
+      
+      context += chunkText;
+      currentLength += chunkText.length;
+    }
+
+    return context.trim();
+  }
+
+  /**
+   * Verifica si un producto tiene archivos de conocimiento procesados
+   */
+  static async hasKnowledgeBase(productId: string): Promise<boolean> {
+    const count = await prisma.chatbot_knowledge_files.count({
+      where: {
+        product_id: productId,
+        processing_status: 'COMPLETED'
+      }
+    });
+
+    return count > 0;
+  }
+
+  /**
+   * Obtiene estadísticas de la base de conocimiento de un producto
+   */
+  static async getKnowledgeBaseStats(productId: string) {
+    const files = await prisma.chatbot_knowledge_files.findMany({
+      where: {
+        product_id: productId
+      },
+      include: {
+        _count: {
+          select: {
+            knowledgeChunks: true
+          }
+        }
+      }
+    });
+
+    const totalFiles = files.length;
+    const processedFiles = files.filter((f: any) => f.processing_status === 'COMPLETED').length;
+    const totalChunks = files.reduce((sum: number, file: any) => sum + file._count.knowledgeChunks, 0);
+    const totalSize = files.reduce((sum: number, file: any) => sum + file.file_size, 0);
+
+    return {
+      totalFiles,
+      processedFiles,
+      totalChunks,
+      totalSize,
+      processingRate: totalFiles > 0 ? (processedFiles / totalFiles) * 100 : 0
+    };
+  }
+
+  /**
+   * Busca archivos similares por nombre o contenido
+   */
+  static async findSimilarFiles(
+    productId: string,
+    filename: string
+  ): Promise<any[]> {
+    const files = await prisma.chatbot_knowledge_files.findMany({
+      where: {
+        product_id: productId,
+        processing_status: 'COMPLETED',
+        original_name: {
+          contains: filename,
+          mode: 'insensitive'
+        }
+      },
+      include: {
+        _count: {
+          select: {
+            knowledgeChunks: true
+          }
+        }
+      }
+    });
+
+    return files;
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "schemas": {
+    "QueryBuildAdvancedRequest": {
+      "properties": {
+        "gs_uri": {
+          "type": "string",
+          "title": "Gs Uri"
+        },
+        "engine": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "postgres",
+                "mysql",
+                "bigquery",
+                "mariadb",
+                "mssql",
+                "synapsemssql",
+                "redshift",
+                "snowflake",
+                "aurora",
+                "aurorapostgres",
+                "auroramysql",
+                "hana",
+                "oracle",
+                "teradata",
+                "clickhouse"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Engine",
+          "default": "postgres"
+        },
+        "dimensions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Dimensions"
+        },
+        "measures": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Measures"
+        },
+        "filters": {
+          "anyOf": [
+            {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Filters"
+        },
+        "order_by": {
+          "anyOf": [
+            {
+              "items": {
+                "prefixItems": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      "ASC",
+                      "DESC"
+                    ]
+                  }
+                ],
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 2
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Order By"
+        },
+        "limit": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Limit"
+        },
+        "derived_measures": {
+          "anyOf": [
+            {
+              "items": {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Derived Measures"
+        }
+      },
+      "type": "object",
+      "required": [
+        "gs_uri",
+        "dimensions",
+        "measures"
+      ],
+      "title": "QueryBuildAdvancedRequest"
+    },
+    "QueryRunReq": {
+      "properties": {
+        "connection_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Connection Id",
+          "description": "El ID único de la conexión"
+        },
+        "sql": {
+          "type": "string",
+          "title": "Sql",
+          "description": "La consulta SQL a ejecutar"
+        },
+        "connection_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Connection Name",
+          "description": "Nombre opcional de la conexión"
+        }
+      },
+      "type": "object",
+      "required": [
+        "sql"
+      ],
+      "title": "QueryRunReq"
+    },
+    "QueryRunRequest": {
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "title": "Server Url"
+        },
+        "database": {
+          "type": "string",
+          "title": "Database"
+        },
+        "sql": {
+          "type": "string",
+          "title": "Sql"
+        }
+      },
+      "type": "object",
+      "required": [
+        "server_url",
+        "database",
+        "sql"
+      ],
+      "title": "QueryRunRequest"
+    }
+  }
+}

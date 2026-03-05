@@ -1,0 +1,231 @@
+import prisma from '@/lib/database';
+import { v4 as uuidv4 } from 'uuid';
+
+/**
+ * Mapea nombres de clientes a configuraciones de chatbots específicos
+ */
+const CLIENT_CHATBOT_MAPPING: Record<string, {
+  chatbot_id: string;
+  chatbot_name: string;
+  chatbot_path: string;
+  gcp_name: string;
+}> = {
+  'cintac': {
+    chatbot_id: 'cintac',
+    chatbot_name: 'Cintac Assistant',
+    chatbot_path: '/chatbot/cintac',
+    gcp_name: 'cintac'
+  },
+  'lisit': {
+    chatbot_id: 'lisit',
+    chatbot_name: 'Lisit',
+    chatbot_path: '/chatbot/lisit',
+    gcp_name: 'lisit'
+  },
+  'bayer': {
+    chatbot_id: 'bayer',
+    chatbot_name: 'Bayer',
+    chatbot_path: '/chatbot/bayer',
+    gcp_name: 'bayer'
+  },
+  'mecanic': {
+    chatbot_id: 'mecanic', 
+    chatbot_name: 'Mecanic',
+    chatbot_path: '/chatbot/mecanic',
+    gcp_name: 'mecanic'
+  },
+  'mecánica': {
+    chatbot_id: 'mecanic',
+    chatbot_name: 'Mecanic',
+    chatbot_path: '/chatbot/mecanic',
+    gcp_name: 'mecanic'
+  },
+  'restobar': {
+    chatbot_id: 'chatbotID9292',
+    chatbot_name: 'REMO',
+    chatbot_path: '/chatbot/chatbotID9292',
+    gcp_name: 'remo'
+  },
+  'central': {
+    chatbot_id: 'chatbotID9292',
+    chatbot_name: 'REMO',
+    chatbot_path: '/chatbot/chatbotID9292',
+    gcp_name: 'remo'
+  },
+  'minddash': {
+    chatbot_id: 'minddash',
+    chatbot_name: 'MindDash',
+    chatbot_path: '/chatbot/minddash',
+    gcp_name: 'minddash'
+  }
+};
+
+/**
+ * Chatbot por defecto para usuarios sin cliente específico o cliente no reconocido
+ */
+const DEFAULT_CHATBOT = {
+  chatbot_id: 'lisit',
+  chatbot_name: 'Lisit',
+  chatbot_path: '/chatbot/lisit',
+  gcp_name: 'lisit'
+};
+
+/**
+ * Determina qué chatbot asignar basado en el nombre del cliente
+ */
+function determineChatbotForClient(clientName: string): typeof DEFAULT_CHATBOT {
+  if (!clientName) return DEFAULT_CHATBOT;
+  
+  const normalizedClientName = clientName.toLowerCase();
+  
+  // Buscar coincidencias en el mapeo
+  for (const [key, chatbot] of Object.entries(CLIENT_CHATBOT_MAPPING)) {
+    if (normalizedClientName.includes(key)) {
+      return chatbot;
+    }
+  }
+  
+  return DEFAULT_CHATBOT;
+}
+
+/**
+ * Asigna automáticamente un chatbot a un usuario admin basado en su cliente
+ * @param userId ID del usuario admin
+ * @param assignedBy ID del usuario que hace la asignación (opcional)
+ * @returns Promise<boolean> true si se asignó correctamente, false si ya tenía chatbot o error
+ */
+export async function autoAssignChatbotToAdmin(
+  userId: string, 
+  assignedBy: string = 'system-auto-assign'
+): Promise<boolean> {
+  try {
+    // Verificar que el usuario existe y es admin
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+      include: {
+        client: true,
+        user_chatbots: true
+      }
+    });
+
+    if (!user) {
+      console.error(`Usuario con ID ${userId} no encontrado`);
+      return false;
+    }
+
+    if (user.iam_role !== 'admin') {
+      console.log(`Usuario ${user.username} no es admin, omitiendo asignación automática`);
+      return false;
+    }
+
+    // Verificar si ya tiene chatbots asignados
+    if (user.user_chatbots && user.user_chatbots.length > 0) {
+      console.log(`Usuario ${user.username} ya tiene ${user.user_chatbots.length} chatbot(s) asignado(s)`);
+      return false;
+    }
+
+    // Determinar qué chatbot asignar
+    const chatbotConfig = determineChatbotForClient(user.client?.nombre || '');
+    
+    console.log(`Asignando chatbot ${chatbotConfig.chatbot_name} a usuario admin ${user.username}`);
+
+    // Crear la asignación
+    await prisma.user_chatbots.create({
+      data: {
+        id: uuidv4(),
+        usuario_id: userId,
+        chatbot_id: chatbotConfig.chatbot_id,
+        chatbot_name: chatbotConfig.chatbot_name,
+        chatbot_path: chatbotConfig.chatbot_path,
+        gcp_name: chatbotConfig.gcp_name,
+        is_active: true,
+        assigned_by: assignedBy
+      }
+    });
+
+    console.log(`✅ Chatbot ${chatbotConfig.chatbot_name} asignado exitosamente a ${user.username}`);
+    return true;
+
+  } catch (error) {
+    console.error(`Error al asignar chatbot automáticamente al usuario ${userId}:`, error);
+    return false;
+  }
+}
+
+/**
+ * Asigna chatbots automáticamente a todos los usuarios admin que no tienen ninguno
+ * @param assignedBy ID del usuario que hace la asignación (opcional)
+ * @returns Promise<{ success: number, failed: number, skipped: number }>
+ */
+export async function autoAssignChatbotsToAllAdmins(
+  assignedBy: string = 'system-bulk-assign'
+): Promise<{ success: number, failed: number, skipped: number }> {
+  const result = { success: 0, failed: 0, skipped: 0 };
+
+  try {
+    // Obtener todos los usuarios admin
+    const adminUsers = await prisma.users.findMany({
+      where: { iam_role: 'admin' },
+      include: {
+        user_chatbots: true
+      }
+    });
+
+    console.log(`🔄 Procesando ${adminUsers.length} usuarios admin para asignación automática...`);
+
+    for (const user of adminUsers) {
+      if (user.user_chatbots && user.user_chatbots.length > 0) {
+        result.skipped++;
+        continue;
+      }
+
+      const assigned = await autoAssignChatbotToAdmin(user.id, assignedBy);
+      if (assigned) {
+        result.success++;
+      } else {
+        result.failed++;
+      }
+    }
+
+    console.log(`📊 Asignación automática completada:`, result);
+    return result;
+
+  } catch (error) {
+    console.error('Error en asignación masiva de chatbots:', error);
+    throw error;
+  }
+}
+
+/**
+ * Hook que se puede llamar después de crear un usuario admin
+ * @param userId ID del usuario recién creado
+ */
+export async function onAdminUserCreated(userId: string): Promise<void> {
+  console.log(`🔔 Nuevo usuario admin creado: ${userId}. Asignando chatbot automáticamente...`);
+  await autoAssignChatbotToAdmin(userId, 'system-on-create');
+}
+
+/**
+ * Verifica si un usuario admin tiene al menos un chatbot asignado
+ * @param userId ID del usuario a verificar
+ * @returns Promise<boolean>
+ */
+export async function adminHasChatbot(userId: string): Promise<boolean> {
+  try {
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+      include: {
+        user_chatbots: {
+          where: {
+            is_active: true
+          }
+        }
+      }
+    });
+
+    return user?.user_chatbots ? user.user_chatbots.length > 0 : false;
+  } catch (error) {
+    console.error(`Error verificando chatbots del usuario ${userId}:`, error);
+    return false;
+  }
+}

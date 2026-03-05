@@ -1,0 +1,321 @@
+{
+  "schemas": {
+    "AlertCreationResponse": {
+      "properties": {
+        "id_alerta": {
+          "type": "string",
+          "title": "Id Alerta",
+          "description": "ID de la alerta recién creada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_alerta"
+      ],
+      "title": "AlertCreationResponse"
+    },
+    "AlertDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID de la alerta que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "AlertDeleteRequest",
+      "description": "Datos para eliminar una alerta."
+    },
+    "AlertDeleteResponse": {
+      "properties": {
+        "id_alerta": {
+          "type": "string",
+          "title": "Id Alerta",
+          "description": "ID de la alerta eliminada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_alerta"
+      ],
+      "title": "AlertDeleteResponse"
+    },
+    "AlertListResponse": {
+      "properties": {
+        "alerts": {
+          "items": {
+            "$ref": "#/components/schemas/ListAlerts"
+          },
+          "type": "array",
+          "title": "Alerts"
+        }
+      },
+      "type": "object",
+      "required": [
+        "alerts"
+      ],
+      "title": "AlertListResponse"
+    },
+    "AlertRegisterRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "UUID del producto al que pertenece la alerta."
+        },
+        "prompt_alerta": {
+          "type": "string",
+          "maxLength": 1500,
+          "title": "Prompt Alerta",
+          "description": "El contenido o lógica de la alerta."
+        },
+        "codigo_cron": {
+          "type": "string",
+          "maxLength": 100,
+          "title": "Codigo Cron",
+          "description": "Frecuencia de ejecución en formato CRON."
+        },
+        "user_id": {
+          "type": "string",
+          "maxLength": 150,
+          "title": "User Id",
+          "description": "ID del usuario que creó la alerta."
+        },
+        "session_id": {
+          "type": "string",
+          "maxLength": 150,
+          "title": "Session Id",
+          "description": "ID de la sesión de usuario que creó la alerta."
+        },
+        "channel_product_type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Channel Product Type",
+          "description": "Tipo de relación del producto/canal (ej: 'whatsapp', 'email')."
+        },
+        "flg_habilitado": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Flg Habilitado",
+          "description": "Estado de habilitación de la alerta.",
+          "default": true
+        },
+        "fecha_inicio": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fecha Inicio",
+          "description": "Fecha y hora opcional de inicio de la alerta."
+        },
+        "fecha_fin": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fecha Fin",
+          "description": "Fecha y hora opcional de fin de la alerta."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "prompt_alerta",
+        "codigo_cron",
+        "user_id",
+        "session_id"
+      ],
+      "title": "AlertRegisterRequest",
+      "description": "Datos para registrar una nueva alerta.",
+      "example": {
+        "channel_product_type": "whatsapp",
+        "codigo_cron": "0 8 * * *",
+        "flg_habilitado": true,
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "prompt_alerta": "dame el top 5 de ventas por mes",
+        "session_id": "sess-xyz-456",
+        "user_id": "user-abc-123"
+      }
+    },
+    "AlertUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID de la alerta que se va a actualizar."
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id",
+          "description": "Nuevo UUID del producto."
+        },
+        "prompt_alerta": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 1500
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Prompt Alerta",
+          "description": "Nuevo contenido o lógica de la alerta."
+        },
+        "codigo_cron": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Codigo Cron",
+          "description": "Nueva frecuencia CRON."
+        },
+        "user_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 150
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Id",
+          "description": "ID del usuario que realiza la actualización."
+        },
+        "session_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 150
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Session Id",
+          "description": "Nuevo ID de sesión."
+        },
+        "channel_product_type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Channel Product Type",
+          "description": "Nuevo tipo de relación del producto/canal."
+        },
+        "flg_habilitado": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Flg Habilitado",
+          "description": "Nuevo estado de habilitación."
+        },
+        "fecha_inicio": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fecha Inicio",
+          "description": "Nueva fecha de inicio."
+        },
+        "fecha_fin": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fecha Fin",
+          "description": "Nueva fecha de fin."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "AlertUpdateRequest",
+      "description": "Datos para actualizar una alerta existente.",
+      "example": {
+        "channel_product_type": "email",
+        "codigo_cron": "0 9 * * *",
+        "flg_habilitado": false,
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e",
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "prompt_alerta": "dame el top 10 de ventas por mes",
+        "session_id": "sess-xyz-456",
+        "user_id": "user-abc-123"
+      }
+    },
+    "AlertUpdateResponse": {
+      "properties": {
+        "id_alerta": {
+          "type": "string",
+          "title": "Id Alerta",
+          "description": "ID de la alerta actualizada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_alerta"
+      ],
+      "title": "AlertUpdateResponse"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#135bec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#101622",
+          },
+          fontFamily: {
+            "display": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex min-h-screen">
+<aside class="w-64 shrink-0 bg-background-light dark:bg-background-dark p-4 flex flex-col justify-between border-r border-background-dark/10 dark:border-background-light/10">
+<div>
+<div class="px-4 py-2 mb-4">
+<h1 class="text-xl font-bold text-slate-800 dark:text-white">MindDash</h1>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">General</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-sm font-medium">Capa Semántica</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">format_bold</span>
+<span class="text-sm font-medium">Prompt</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="text-sm font-medium">Permisos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm font-medium">Alertas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="text-sm font-medium">Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium">Métricas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded bg-primary/10 text-primary dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">list</span>
+<span class="text-sm font-medium">Ejemplos</span>
+</a>
+</nav>
+</div>
+<div>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="text-sm font-medium">Administración</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="flex items-center justify-between px-6 py-3 border-b border-background-dark/10 dark:border-background-light/10">
+<div class="flex items-center gap-2">
+<h2 class="text-base font-semibold text-slate-800 dark:text-white">Tech Solutions - Proyecto Alpha - EVA</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-9 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-slate-600 dark:text-slate-300 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+<div class="size-9 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAbarlCLJmgz2aLdw52245WVw1E1m3xoZOQS-RihaIBlLWsjICWY9pxNp3dYiuOsJ96s38ZWsk17Gn8tjaZvqFJ_8DeFeQjEP0h8IUl59gYCwpzswy-E76_CyxnSN91YEvWqwJFWyxyX2HPHcNlZfxVnDtkrHXQiYlbTdnWoG1m4vfHb_LFh-U1cZGTnY-3vA40KDdlAt-C9aPOibY1kjH3-vG18ClnfBOx3gwfbJnobd0oneq-sAL_Sngio_HmhdRtrRjqNdDxhbc");'></div>
+</div>
+</header>
+<main class="flex-1 p-8">
+<div class="max-w-4xl mx-auto">
+<h1 class="text-3xl font-bold text-slate-800 dark:text-white mb-8">Ejemplos</h1>
+<div class="space-y-6">
+<div class="p-6 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="question1">Pregunta de ejemplo</label>
+<textarea class="w-full rounded border-background-dark/20 dark:border-background-light/20 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500" id="question1" name="question1" placeholder="Ingresa la pregunta de ejemplo" rows="4"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="sql1">Consulta SQL</label>
+<textarea class="w-full rounded border-background-dark/20 dark:border-background-light/20 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500" id="sql1" name="sql1" placeholder="Consulta SQL respectiva" rows="4"></textarea>
+</div>
+</div>
+</div>
+<div class="flex justify-start">
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark">
+                Agregar ejemplo
+              </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,88 @@
+{
+  "paths": {
+    "/chart": {
+      "post": {
+        "tags": [
+          "Visualización y Gráficos"
+        ],
+        "summary": "Crear Especificación de Gráfico a partir de una respuesta de Agente",
+        "description": "Recibe la respuesta natural del agente (`agent_reply`) y señales opcionales para preferir ciertos tipos de gráfico. Devuelve un ChartSpec.",
+        "operationId": "create_chart_spec_chart_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChartSpec"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chart/render": {
+      "post": {
+        "tags": [
+          "Visualización y Gráficos"
+        ],
+        "summary": "Renderizar Especificación de Gráfico a Imagen Segura",
+        "description": "Recibe un objeto **ChartSpec** (JSON) y lo renderiza como una imagen PNG. La imagen se sube de forma segura a un bucket de GCS privado y se devuelve una **URL firmada** (Signed URL) de corta duración para su visualización.",
+        "operationId": "render_chart_from_spec_chart_render_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChartSpec"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RenderedChartResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

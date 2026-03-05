@@ -1,0 +1,784 @@
+{
+  "schemas": {
+    "Product": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "str del usuario."
+        },
+        "user_role_name": {
+          "type": "string",
+          "title": "User Role Name",
+          "description": "Nombre del rol más efectivo del usuario en la jerarquía (ej. 'SuperAdmin')."
+        },
+        "user_name": {
+          "type": "string",
+          "title": "User Name",
+          "description": "Nombre completo del usuario."
+        },
+        "user_phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Phone",
+          "description": "Número de teléfono del usuario."
+        },
+        "user_email": {
+          "type": "string",
+          "format": "email",
+          "title": "User Email",
+          "description": "Correo electrónico del usuario."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "str de la producto a la que pertenece el proyecto."
+        },
+        "organization_name": {
+          "type": "string",
+          "title": "Organization Name",
+          "description": "Nombre de la producto."
+        },
+        "project_id": {
+          "type": "string",
+          "title": "Project Id",
+          "description": "str del proyecto."
+        },
+        "project_name": {
+          "type": "string",
+          "title": "Project Name",
+          "description": "Nombre del proyecto."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "str del producto."
+        },
+        "product_name": {
+          "type": "string",
+          "title": "Product Name",
+          "description": "Nombre del producto."
+        },
+        "product_description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Description",
+          "description": "Descripción del producto."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "user_role_name",
+        "user_name",
+        "user_email",
+        "organization_id",
+        "organization_name",
+        "project_id",
+        "project_name",
+        "product_id",
+        "product_name"
+      ],
+      "title": "Product",
+      "description": "Representa una tupla de acceso a un Producto para un usuario específico,\nincluyendo la jerarquía superior (Producto y Producto)."
+    },
+    "ProductByUser": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "str del usuario."
+        },
+        "user_role_name": {
+          "type": "string",
+          "title": "User Role Name",
+          "description": "Nombre del rol más efectivo del usuario en la jerarquía (ej. 'SuperAdmin')."
+        },
+        "user_name": {
+          "type": "string",
+          "title": "User Name",
+          "description": "Nombre completo del usuario."
+        },
+        "user_phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Phone",
+          "description": "Número de teléfono del usuario."
+        },
+        "user_email": {
+          "type": "string",
+          "format": "email",
+          "title": "User Email",
+          "description": "Correo electrónico del usuario."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "str de la producto a la que pertenece el proyecto."
+        },
+        "organization_name": {
+          "type": "string",
+          "title": "Organization Name",
+          "description": "Nombre de la producto."
+        },
+        "project_id": {
+          "type": "string",
+          "title": "Project Id",
+          "description": "str del proyecto."
+        },
+        "project_name": {
+          "type": "string",
+          "title": "Project Name",
+          "description": "Nombre del proyecto."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "str del producto."
+        },
+        "product_name": {
+          "type": "string",
+          "title": "Product Name",
+          "description": "Nombre del producto."
+        },
+        "product_description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Description",
+          "description": "Descripción del producto."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "user_role_name",
+        "user_name",
+        "user_email",
+        "organization_id",
+        "organization_name",
+        "project_id",
+        "project_name",
+        "product_id",
+        "product_name"
+      ],
+      "title": "ProductByUser",
+      "description": "Representa una tupla de acceso a un Producto para un usuario específico,\nincluyendo la jerarquía superior (Producto y Producto)."
+    },
+    "ProductCreationAccessResponse": {
+      "properties": {
+        "product_access_id": {
+          "type": "string",
+          "title": "Product Access Id",
+          "description": "UUID del nuevo registro de acceso creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_access_id"
+      ],
+      "title": "ProductCreationAccessResponse",
+      "description": "Respuesta para el registro exitoso."
+    },
+    "ProductCreationResponse": {
+      "properties": {
+        "id_product": {
+          "type": "string",
+          "title": "Id Product"
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_product"
+      ],
+      "title": "ProductCreationResponse"
+    },
+    "ProductDeleteAccessRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "UUID del registro de acceso a eliminar (access_user_product.id)."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "ProductDeleteAccessRequest",
+      "description": "Modelo para la entrada de datos al eliminar un registro de acceso (DELETE).\nSolo requiere el ID del registro de acceso."
+    },
+    "ProductDeleteAccessResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Acceso a producto eliminado exitosamente."
+        },
+        "product_access_id": {
+          "type": "string",
+          "title": "Product Access Id",
+          "description": "UUID del registro de acceso eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_access_id"
+      ],
+      "title": "ProductDeleteAccessResponse",
+      "description": "Respuesta para la eliminación exitosa."
+    },
+    "ProductDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del producto que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "ProductDeleteRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_delete_product.\nSolo requiere el ID.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "ProductDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Producto eliminada exitosamente."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "str de la Producto eliminada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "ProductDeleteResponse"
+    },
+    "ProductRegisterAccessRequest": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "UUID del usuario al que se le da acceso."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "UUID de la producto a la que se da acceso."
+        },
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "UUID del rol que se asigna en esa producto."
+        }
+      },
+      "type": "object",
+      "required": [
+        "user_id",
+        "product_id",
+        "role_id"
+      ],
+      "title": "ProductRegisterAccessRequest",
+      "description": "Modelo para la entrada de datos al registrar un nuevo acceso (INSERT).\nCorresponde a los parámetros del SP: user_id, product_id, role_id."
+    },
+    "ProductRegisterRequest": {
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "title": "Project Id",
+          "description": "ID del proyecto al que pertenece este producto."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Name",
+          "description": "Nombre del producto (ej: 'Chatbot de Soporte')."
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description",
+          "description": "Descripción del producto."
+        },
+        "language": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 50
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Language",
+          "description": "Idioma principal (ej: 'es', 'en')."
+        },
+        "tipo": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 20
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tipo",
+          "description": "Tipo de producto ('chatbot' por defecto).",
+          "default": "chatbot"
+        },
+        "config": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Config",
+          "description": "Configuración JSONB del producto."
+        },
+        "welcome_message": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Welcome Message",
+          "description": "Mensaje de bienvenida del producto."
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 50
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Label",
+          "description": "Etiqueta corta del producto."
+        },
+        "label_color": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 20
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Label Color",
+          "description": "Código de color para la etiqueta (ej: '#007bff')."
+        },
+        "max_users": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Max Users",
+          "description": "Límite máximo de usuarios concurrentes.",
+          "default": 100
+        },
+        "is_active_rag": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active Rag",
+          "description": "Indica si la funcionalidad RAG (Recuperación Aumentada) está activa.",
+          "default": false
+        },
+        "is_active_alerts": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active Alerts",
+          "description": "Indica si el sistema de alertas está activo.",
+          "default": false
+        },
+        "is_active_insight": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active Insight",
+          "description": "Indica si la funcionalidad de insights/análisis está activa.",
+          "default": false
+        }
+      },
+      "type": "object",
+      "required": [
+        "project_id",
+        "name"
+      ],
+      "title": "ProductRegisterRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_product.",
+      "example": {
+        "config": {
+          "model": "gpt-4",
+          "prompt_version": "v2"
+        },
+        "description": "Bot automatizado para calificar leads.",
+        "is_active_alerts": false,
+        "is_active_insight": false,
+        "is_active_rag": true,
+        "label": "SALES-BOT",
+        "label_color": "#008000",
+        "language": "en",
+        "max_users": 200,
+        "name": "Chatbot de Ventas",
+        "project_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "tipo": "chatbot",
+        "welcome_message": "Hello, how can I help you?"
+      }
+    },
+    "ProductUpdateAccessRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "UUID del registro de acceso a actualizar (access_user_product.id)."
+        },
+        "user_id": {
+          "type": "string",
+          "title": "User Id",
+          "description": "Nuevo UUID del usuario (generalmente el mismo)."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "Nuevo UUID de la producto (generalmente el mismo)."
+        },
+        "role_id": {
+          "type": "string",
+          "title": "Role Id",
+          "description": "Nuevo UUID del rol que se asigna."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "user_id",
+        "product_id",
+        "role_id"
+      ],
+      "title": "ProductUpdateAccessRequest",
+      "description": "Modelo para la entrada de datos al actualizar un registro de acceso existente (UPDATE).\nCorresponde a los parámetros del SP: id, user_id, product_id, role_id."
+    },
+    "ProductUpdateAccessResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Acceso a producto actualizado exitosamente."
+        },
+        "product_access_id": {
+          "type": "string",
+          "title": "Product Access Id",
+          "description": "UUID del registro de acceso actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_access_id"
+      ],
+      "title": "ProductUpdateAccessResponse",
+      "description": "Respuesta para la actualización exitosa."
+    },
+    "ProductUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del producto que se va a actualizar."
+        },
+        "project_id": {
+          "type": "string",
+          "title": "Project Id",
+          "description": "ID del proyecto (para reasignación o verificación de FK)."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Name",
+          "description": "Nuevo nombre del producto."
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description",
+          "description": "Nueva descripción."
+        },
+        "language": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 50
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Language",
+          "description": "Nuevo idioma."
+        },
+        "tipo": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 20
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tipo",
+          "description": "Nuevo tipo de producto.",
+          "default": "chatbot"
+        },
+        "config": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Config",
+          "description": "Nueva configuración JSONB."
+        },
+        "welcome_message": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 100
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Welcome Message",
+          "description": "Nuevo mensaje de bienvenida."
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 50
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Label",
+          "description": "Nueva etiqueta."
+        },
+        "label_color": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 20
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Label Color",
+          "description": "Nuevo color de etiqueta."
+        },
+        "max_users": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Max Users",
+          "description": "Nuevo límite de usuarios.",
+          "default": 100
+        },
+        "is_active": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active",
+          "description": "Estado de actividad del producto.",
+          "default": true
+        },
+        "is_active_rag": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active Rag",
+          "description": "Nuevo estado de RAG.",
+          "default": false
+        },
+        "is_active_alerts": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active Alerts",
+          "description": "Nuevo estado de alertas.",
+          "default": false
+        },
+        "is_active_insight": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active Insight",
+          "description": "Nuevo estado de insights.",
+          "default": false
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "project_id",
+        "name"
+      ],
+      "title": "ProductUpdateRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_product.\nTodos los campos deben ser provistos para la actualización completa.",
+      "example": {
+        "config": {
+          "model": "gpt-4o",
+          "prompt_version": "v3"
+        },
+        "description": "Bot automatizado con nueva lógica de calificación.",
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e",
+        "is_active": true,
+        "is_active_alerts": true,
+        "is_active_insight": true,
+        "is_active_rag": true,
+        "label": "SALES-V1.1",
+        "label_color": "#0000FF",
+        "language": "es",
+        "max_users": 250,
+        "name": "Chatbot de Ventas (v1.1)",
+        "project_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "tipo": "chatbot",
+        "welcome_message": "Bienvenido al bot de ventas actualizado."
+      }
+    },
+    "ProductUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Producto actualizada exitosamente."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "str de la Producto actualizada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "ProductUpdateResponse"
+    }
+  }
+}

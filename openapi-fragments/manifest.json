@@ -1,0 +1,284 @@
+{
+  "source": "enpoints.json",
+  "generatedAt": "2026-01-14T02:46:34.123Z",
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Evolve Semantic API",
+    "description": "API de backends para el componente de servicio",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "MindsDB",
+      "description": "Operaciones para gestionar **Modelos de IA** y **Conexiones** con MindsDB."
+    },
+    {
+      "name": "Semantic Layer",
+      "description": "Operaciones para la **construcción**, **acceso**, **configuración** (CRUD) y **ejecución de consultas SQL** a través de la Capa Semántica (Semantic Layer)."
+    },
+    {
+      "name": "Users Management",
+      "description": "Operaciones de lectura para obtener la información básica y de acceso de los **usuarios**."
+    },
+    {
+      "name": "Organization Management",
+      "description": "Creación, lectura, actualización y eliminación (CRUD) de la entidad **Organización**."
+    },
+    {
+      "name": "Organization Access",
+      "description": "Gestión de permisos y roles de acceso a nivel de **Organización** para usuarios o grupos."
+    },
+    {
+      "name": "Project Management",
+      "description": "Creación, lectura, actualización y eliminación (CRUD) de la entidad **Proyecto**."
+    },
+    {
+      "name": "Project Access",
+      "description": "Gestión de permisos y roles de acceso a nivel de **Proyecto** para usuarios o grupos."
+    },
+    {
+      "name": "Products Management",
+      "description": "Creación, lectura, actualización y eliminación (CRUD) de la entidad **Producto**."
+    },
+    {
+      "name": "Product Access",
+      "description": "Gestión de permisos y roles de acceso a nivel de **Producto** para usuarios o grupos."
+    },
+    {
+      "name": "Examples Mannagement",
+      "description": "Gestión de los **ejemplos few-shot** de consultas de usuario/SQL, incluyendo la generación de *embeddings* y el CRUD de la base de datos."
+    },
+    {
+      "name": "Prompts Mannagement",
+      "description": "Gestión de las **plantillas de *prompts*** (sistema o SQL) usadas por el agente de IA, incluyendo la subida a GCS y el CRUD de la base de datos."
+    },
+    {
+      "name": "Visualización y Gráficos",
+      "description": "Operaciones para la generación de especificaciones de gráficos a partir de la salida del agente de IA."
+    },
+    {
+      "name": "Alertas y Monitoreo",
+      "description": "Operaciones para la creación y gestión de alertas basadas en métricas y condiciones de datos."
+    },
+    {
+      "name": "Connections Management",
+      "description": "Creación, listado, actualización y eliminación (CRUD) de las **conexiones a fuentes de datos**."
+    },
+    {
+      "name": "Metrics Management",
+      "description": "Creación, listado, actualización y eliminación (CRUD) de las **métricas de negocio** (KPIs)."
+    },
+    {
+      "name": "User Data Access",
+      "description": "Gestión de permisos de acceso a datos a nivel de **Usuario** (Ej: RLS)."
+    },
+    {
+      "name": "Role Data Access",
+      "description": "Gestión de permisos de acceso a datos a nivel de **Rol** (Ej: RLS/CLS)."
+    },
+    {
+      "name": "Client Product Deploys",
+      "description": "Gestión de la configuración de **despliegue** específica por producto/cliente."
+    },
+    {
+      "name": "Channel Management",
+      "description": "Gestión de la configuración de **Canales** especifica el canal y su configuracion por product."
+    }
+  ],
+  "fragments": {
+    "paths": {
+      "alert": {
+        "file": "paths/alert.json",
+        "count": 6
+      },
+      "Channels": {
+        "file": "paths/Channels.json",
+        "count": 6
+      },
+      "chart": {
+        "file": "paths/chart.json",
+        "count": 2
+      },
+      "connections": {
+        "file": "paths/connections.json",
+        "count": 5
+      },
+      "metrics": {
+        "file": "paths/metrics.json",
+        "count": 7
+      },
+      "mindsdb": {
+        "file": "paths/mindsdb.json",
+        "count": 4
+      },
+      "organizations": {
+        "file": "paths/organizations.json",
+        "count": 9
+      },
+      "products": {
+        "file": "paths/products.json",
+        "count": 9
+      },
+      "projects": {
+        "file": "paths/projects.json",
+        "count": 9
+      },
+      "prompts_and_examples": {
+        "file": "paths/prompts_and_examples.json",
+        "count": 15
+      },
+      "semantic": {
+        "file": "paths/semantic.json",
+        "count": 12
+      },
+      "user-data-access": {
+        "file": "paths/user-data-access.json",
+        "count": 16
+      },
+      "users": {
+        "file": "paths/users.json",
+        "count": 1
+      }
+    },
+    "components": {
+      "schemas": {
+        "_": {
+          "file": "components/schemas/_.json",
+          "count": 1
+        },
+        "alert": {
+          "file": "components/schemas/alert.json",
+          "count": 7
+        },
+        "body": {
+          "file": "components/schemas/body.json",
+          "count": 1
+        },
+        "build": {
+          "file": "components/schemas/build.json",
+          "count": 3
+        },
+        "channel": {
+          "file": "components/schemas/channel.json",
+          "count": 12
+        },
+        "chart": {
+          "file": "components/schemas/chart.json",
+          "count": 2
+        },
+        "client": {
+          "file": "components/schemas/client.json",
+          "count": 7
+        },
+        "column": {
+          "file": "components/schemas/column.json",
+          "count": 1
+        },
+        "create": {
+          "file": "components/schemas/create.json",
+          "count": 1
+        },
+        "data": {
+          "file": "components/schemas/data.json",
+          "count": 8
+        },
+        "databricks": {
+          "file": "components/schemas/databricks.json",
+          "count": 1
+        },
+        "delete": {
+          "file": "components/schemas/delete.json",
+          "count": 1
+        },
+        "email": {
+          "file": "components/schemas/email.json",
+          "count": 1
+        },
+        "encoding": {
+          "file": "components/schemas/encoding.json",
+          "count": 1
+        },
+        "example": {
+          "file": "components/schemas/example.json",
+          "count": 8
+        },
+        "get": {
+          "file": "components/schemas/get.json",
+          "count": 20
+        },
+        "list": {
+          "file": "components/schemas/list.json",
+          "count": 1
+        },
+        "metric": {
+          "file": "components/schemas/metric.json",
+          "count": 11
+        },
+        "mindsdb": {
+          "file": "components/schemas/mindsdb.json",
+          "count": 2
+        },
+        "organization": {
+          "file": "components/schemas/organization.json",
+          "count": 14
+        },
+        "product": {
+          "file": "components/schemas/product.json",
+          "count": 14
+        },
+        "project": {
+          "file": "components/schemas/project.json",
+          "count": 14
+        },
+        "prompt": {
+          "file": "components/schemas/prompt.json",
+          "count": 9
+        },
+        "query": {
+          "file": "components/schemas/query.json",
+          "count": 3
+        },
+        "rendered": {
+          "file": "components/schemas/rendered.json",
+          "count": 1
+        },
+        "role": {
+          "file": "components/schemas/role.json",
+          "count": 8
+        },
+        "semantic": {
+          "file": "components/schemas/semantic.json",
+          "count": 11
+        },
+        "send": {
+          "file": "components/schemas/send.json",
+          "count": 2
+        },
+        "series": {
+          "file": "components/schemas/series.json",
+          "count": 1
+        },
+        "table": {
+          "file": "components/schemas/table.json",
+          "count": 1
+        },
+        "update": {
+          "file": "components/schemas/update.json",
+          "count": 2
+        },
+        "upload": {
+          "file": "components/schemas/upload.json",
+          "count": 7
+        },
+        "user": {
+          "file": "components/schemas/user.json",
+          "count": 10
+        },
+        "validation": {
+          "file": "components/schemas/validation.json",
+          "count": 1
+        }
+      }
+    }
+  }
+}

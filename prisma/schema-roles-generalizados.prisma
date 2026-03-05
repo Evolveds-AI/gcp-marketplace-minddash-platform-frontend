@@ -1,0 +1,406 @@
+// Esquema preparado para roles generalizados - NO EJECUTAR MIGRACIÓN AÚN
+// Este archivo contiene el esquema completo con las nuevas tablas para roles generalizados
+// Para aplicar: copiar contenido a schema.prisma y ejecutar 'npx prisma migrate dev --name add_generalized_roles_system'
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// MODELOS EXISTENTES (mantener sin cambios)
+// ============================================================================
+
+model Message {
+  id        String    @id
+  text      String?
+  userId    String?
+  createdAt DateTime? @db.Timestamp(6)
+  updatedAt DateTime? @db.Timestamp(6)
+}
+
+model UserWpp {
+  id          String   @id
+  phoneNumber String   @unique
+  name        String?
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @default(now()) @db.Timestamp(6)
+}
+
+model app_states {
+  app_name    String   @id @db.VarChar(128)
+  state       Json
+  update_time DateTime @db.Timestamp(6)
+}
+
+model chatbot_owners {
+  id           String    @id @default(dbgenerated("gen_random_uuid()"))
+  usuario_id   String
+  chatbot_id   String
+  chatbot_name String
+  company_name String
+  permissions  Json?     @default("{}")
+  created_at   DateTime? @default(now()) @db.Timestamp(6)
+  updated_at   DateTime? @default(now()) @db.Timestamp(6)
+  usuarios     usuarios  @relation(fields: [usuario_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_chatbot_owner_user")
+
+  @@unique([usuario_id, chatbot_id], map: "unique_user_chatbot")
+}
+
+model conversations {
+  id          String   @id
+  title       String
+  lastMessage String
+  timestamp   DateTime @default(now())
+  client_name String
+  usuario_id  String?
+}
+
+model events {
+  id                         String   @db.VarChar(128)
+  app_name                   String   @db.VarChar(128)
+  user_id                    String   @db.VarChar(128)
+  session_id                 String   @db.VarChar(128)
+  invocation_id              String   @db.VarChar(256)
+  author                     String   @db.VarChar(256)
+  branch                     String?  @db.VarChar(256)
+  timestamp                  DateTime @db.Timestamp(6)
+  content                    Json?
+  actions                    Bytes
+  long_running_tool_ids_json String?
+  grounding_metadata         Json?
+  partial                    Boolean?
+  turn_complete              Boolean?
+  error_code                 String?  @db.VarChar(256)
+  error_message              String?  @db.VarChar(1024)
+  interrupted                Boolean?
+  sessions                   sessions @relation(fields: [app_name, user_id, session_id], references: [app_name, user_id, id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([id, app_name, user_id, session_id])
+}
+
+model password_resets {
+  id         String   @id
+  usuario_id String
+  token      String   @unique
+  expires_at DateTime
+  used       Boolean  @default(false)
+  created_at DateTime @default(now())
+  usuarios   usuarios @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+}
+
+model sessions {
+  app_name    String   @db.VarChar(128)
+  user_id     String   @db.VarChar(128)
+  id          String   @db.VarChar(128)
+  state       Json
+  create_time DateTime @db.Timestamp(6)
+  update_time DateTime @db.Timestamp(6)
+  events      events[]
+
+  @@id([app_name, user_id, id])
+}
+
+model sessions_user {
+  id                 String   @id
+  usuario_id         String
+  jwt_token          String   @unique
+  refresh_token      String   @unique
+  expires_at         DateTime
+  refresh_expires_at DateTime
+  is_active          Boolean  @default(true)
+  ip_address         String?
+  user_agent         String?
+  created_at         DateTime @default(now())
+  usuarios           usuarios @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+}
+
+model user_chatbots {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.VarChar
+  usuario_id   String   @db.VarChar
+  chatbot_id   String   @db.VarChar
+  chatbot_name String   @db.VarChar
+  chatbot_path String   @db.VarChar
+  gcp_name     String   @db.VarChar
+  is_active    Boolean  @default(true)
+  assigned_at  DateTime @default(now()) @db.Timestamp(6)
+  assigned_by  String   @db.VarChar
+  usuarios     usuarios @relation(fields: [usuario_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([usuario_id, chatbot_id])
+}
+
+model user_states {
+  app_name    String   @db.VarChar(128)
+  user_id     String   @db.VarChar(128)
+  state       Json
+  update_time DateTime @db.Timestamp(6)
+
+  @@id([app_name, user_id])
+}
+
+model usuarios {
+  id                 String            @id
+  username           String            @unique
+  email              String?           @unique
+  password_hash      String?
+  iam_role           String            @default("user")
+  client_id          String?
+  email_verified     Boolean           @default(false)
+  is_active          Boolean           @default(true)
+  failed_attempts    Int               @default(0)
+  locked_until       DateTime?
+  created_at         DateTime          @default(now())
+  updated_at         DateTime
+  primary_chatbot_id String?           @db.VarChar(255)
+  can_manage_users   Boolean?          @default(false)
+  chatbot_owners     chatbot_owners[]
+  password_resets    password_resets[]
+  productUser        productUser[]
+  rolesAcDatos       rolesAcDatos[]
+  sessions_user      sessions_user[]
+  user_chatbots      user_chatbots[]
+  client             client            @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  // Nuevas relaciones para roles generalizados
+  userProductRoles   UserProductRole[]
+  auditEvents        AuditEvent[]      @relation("AuditEventUser")
+  assignedRoles      AuditEvent[]      @relation("AuditEventAssignedBy")
+}
+
+model client {
+  id          String     @id(map: "empresas_pkey")
+  nombre      String
+  descripcion String?
+  created_at  DateTime   @default(now())
+  updated_at  DateTime
+  product     product[]
+  usuarios    usuarios[]
+}
+
+model product {
+  id                      String                    @id(map: "PRODUCT_pkey")
+  nombre                  String
+  client_id               String
+  is_active               Boolean                   @default(true)
+  created_at              DateTime                  @default(now())
+  updated_at              DateTime
+  descripcion             String?
+  tipo                    String                    @default("chatbot") @db.VarChar(20)
+  config                  Json?                     @default("{}")
+  usuarios_asignados      Int?                      @default(0)
+  mensajes_mes            Int?                      @default(0)
+  welcome_message         String?
+  max_users               Int?                      @default(100)
+  features                Json?                     @default("[]")
+  personality_prompt      String?                   @db.Text
+  file_constraints_enabled Boolean                  @default(false)
+  knowledge_base_config   Json?                     @default("{}")
+  client                  client                    @relation(fields: [client_id], references: [id], onDelete: Cascade, map: "PRODUCT_client_id_fkey")
+  productUser             productUser[]
+  chatbotKnowledgeFiles   chatbot_knowledge_files[]
+  // Nueva relación para roles generalizados
+  productRoles            ProductRole[]
+
+  @@index([tipo], map: "idx_product_tipo")
+  @@index([file_constraints_enabled], map: "idx_product_file_constraints")
+}
+
+model productUser {
+  id         String   @id(map: "PRODUCT_USER_pkey")
+  product_id String
+  user_id    String
+  action     String
+  timestamp  DateTime @default(now())
+  product    product  @relation(fields: [product_id], references: [id], map: "PRODUCT_USER_product_id_fkey")
+  usuarios   usuarios @relation(fields: [user_id], references: [id], map: "PRODUCT_USER_user_id_fkey")
+}
+
+// MANTENER TEMPORALMENTE para migración gradual
+model rolesAcDatos {
+  id       String   @id(map: "ROLES_AC_DATOS_pkey")
+  user_id  String
+  tabla    String
+  campo    String
+  valor    String
+  usuarios usuarios @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "ROLES_AC_DATOS_user_id_fkey")
+}
+
+model chatbot_knowledge_files {
+  id              String            @id @default(dbgenerated("gen_random_uuid()"))
+  product_id      String
+  filename        String
+  original_name   String
+  file_type       String            @db.VarChar(10)
+  file_size       Int
+  upload_status   FileUploadStatus  @default(PENDING)
+  processing_status ProcessingStatus @default(PENDING)
+  file_path       String?
+  upload_date     DateTime          @default(now())
+  processed_date  DateTime?
+  error_message   String?
+  metadata        Json?             @default("{}")
+  product         product           @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  knowledgeChunks knowledge_chunks[]
+
+  @@index([product_id], map: "idx_knowledge_files_product")
+  @@index([upload_status], map: "idx_knowledge_files_upload_status")
+  @@index([processing_status], map: "idx_knowledge_files_processing_status")
+}
+
+model knowledge_chunks {
+  id                    String                  @id @default(dbgenerated("gen_random_uuid()"))
+  knowledge_file_id     String
+  chunk_index           Int
+  content               String                  @db.Text
+  embedding             String?                 @db.Text
+  metadata              Json?                   @default("{}")
+  created_at            DateTime                @default(now())
+  chatbotKnowledgeFile  chatbot_knowledge_files @relation(fields: [knowledge_file_id], references: [id], onDelete: Cascade)
+
+  @@index([knowledge_file_id], map: "idx_knowledge_chunks_file")
+  @@index([chunk_index], map: "idx_knowledge_chunks_index")
+}
+
+// ============================================================================
+// NUEVOS MODELOS PARA ROLES GENERALIZADOS
+// ============================================================================
+
+/// Tabla principal para definir roles de producto
+model ProductRole {
+  id                  String            @id @default(dbgenerated("gen_random_uuid()"))
+  product_id          String
+  name                String            @db.VarChar(100)
+  type                RoleType
+  source              RoleSource?
+  table               String?           @db.VarChar(100)
+  field               String?           @db.VarChar(100)
+  uses_user_code      Boolean           @default(false)
+  user_code_table     String?           @db.VarChar(100)
+  user_code_key       String?           @db.VarChar(100)
+  user_code_value_col String?           @db.VarChar(100)
+  static_value        String?           @db.Text
+  active              Boolean           @default(true)
+  created_at          DateTime          @default(now())
+  updated_at          DateTime          @updatedAt
+  
+  // Relaciones
+  product             product           @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  userProductRoles    UserProductRole[]
+  auditEvents         AuditEvent[]
+  
+  @@unique([product_id, name], map: "unique_product_role_name")
+  @@index([product_id], map: "idx_product_role_product")
+  @@index([type], map: "idx_product_role_type")
+  @@index([source], map: "idx_product_role_source")
+  @@index([active], map: "idx_product_role_active")
+}
+
+/// Tabla de relación usuario-rol de producto
+model UserProductRole {
+  id              String      @id @default(dbgenerated("gen_random_uuid()"))
+  user_id         String
+  product_role_id String
+  assigned_at     DateTime    @default(now())
+  assigned_by     String
+  
+  // Relaciones
+  user            usuarios    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  productRole     ProductRole @relation(fields: [product_role_id], references: [id], onDelete: Cascade)
+  assignedByUser  usuarios    @relation("UserProductRoleAssignedBy", fields: [assigned_by], references: [id])
+  
+  @@unique([user_id, product_role_id], map: "unique_user_product_role")
+  @@index([user_id], map: "idx_user_product_role_user")
+  @@index([product_role_id], map: "idx_user_product_role_role")
+}
+
+/// Tabla de auditoría para cambios en roles
+model AuditEvent {
+  id              String          @id @default(dbgenerated("gen_random_uuid()"))
+  event_type      AuditEventType
+  user_id         String
+  product_id      String
+  product_role_id String?
+  target_user_id  String?         // Para eventos de asignación/desasignación
+  details         Json            @default("{}")
+  timestamp       DateTime        @default(now())
+  
+  // Relaciones
+  user            usuarios        @relation("AuditEventUser", fields: [user_id], references: [id])
+  productRole     ProductRole?    @relation(fields: [product_role_id], references: [id])
+  targetUser      usuarios?       @relation("AuditEventAssignedBy", fields: [target_user_id], references: [id])
+  
+  @@index([event_type], map: "idx_audit_event_type")
+  @@index([user_id], map: "idx_audit_event_user")
+  @@index([product_id], map: "idx_audit_event_product")
+  @@index([timestamp], map: "idx_audit_event_timestamp")
+}
+
+// ============================================================================
+// ENUMS EXISTENTES Y NUEVOS
+// ============================================================================
+
+enum FileUploadStatus {
+  PENDING
+  UPLOADING
+  UPLOADED
+  FAILED
+}
+
+enum ProcessingStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum UserRole {
+  SUPERADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+// Nuevos enums para roles generalizados
+enum RoleType {
+  DYNAMIC
+  STATIC
+  ALL
+  NONE
+}
+
+enum RoleSource {
+  DISTRIBUIDOR
+  BU
+  REGION
+  CUSTOM
+}
+
+enum AuditEventType {
+  ROLE_CREATED
+  ROLE_UPDATED
+  ROLE_DELETED
+  ROLE_ASSIGNED
+  ROLE_UNASSIGNED
+  ROLE_ACTIVATED
+  ROLE_DEACTIVATED
+}
+
+// ============================================================================
+// NOTAS DE MIGRACIÓN
+// ============================================================================
+
+// 1. Este esquema mantiene todas las tablas existentes
+// 2. Añade las nuevas tablas para roles generalizados
+// 3. La tabla rolesAcDatos se mantiene para migración gradual
+// 4. Se añaden índices para optimizar consultas
+// 5. Se incluyen relaciones de auditoría completas
+// 6. Los enums están definidos para tipado fuerte
+
+// COMANDOS PARA APLICAR (NO EJECUTAR AÚN):
+// 1. cp prisma/schema-roles-generalizados.prisma prisma/schema.prisma
+// 2. npx prisma migrate dev --name add_generalized_roles_system
+// 3. npx prisma generate

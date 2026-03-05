@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-07-29T20:08:10.963Z",
+  "migration": "add_userwpp_relation_to_message",
+  "tables": {
+    "Message": [],
+    "UserWpp": []
+  },
+  "counts": {
+    "messages": 0,
+    "userWpps": 0
+  }
+}

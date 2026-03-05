@@ -1,0 +1,374 @@
+{
+  "paths": {
+    "/projects/getListProject": {
+      "get": {
+        "tags": [
+          "Project Management"
+        ],
+        "summary": "Listar Todos los Proyectos",
+        "description": "Obtiene una lista completa de todos los proyectos registrados en el sistema.",
+        "operationId": "getListProject_projects_getListProject_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistproject Projects Getlistproject Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/getListProjectByUser": {
+      "post": {
+        "tags": [
+          "Project Management"
+        ],
+        "summary": "Listar Proyectos por Usuario",
+        "description": "Obtiene la lista de proyectos a los que un `user_id` específico tiene acceso (directo o heredado), filtrando por el ID de usuario proporcionado en el cuerpo de la solicitud.",
+        "operationId": "getListProjectByUser_projects_getListProjectByUser_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectByUser"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistprojectbyuser Projects Getlistprojectbyuser Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/getListProjectByPrj": {
+      "post": {
+        "tags": [
+          "Project Management"
+        ],
+        "summary": "Obtener Proyecto por ID",
+        "description": "Recupera los detalles de un proyecto específico utilizando su `project_id`. Incluye validación de acceso por `user_id`.",
+        "operationId": "getListProjectByPrj_projects_getListProjectByPrj_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetProjectRequestByPrj"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistprojectbyprj Projects Getlistprojectbyprj Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/sendRegistroProject": {
+      "post": {
+        "tags": [
+          "Project Management"
+        ],
+        "summary": "Registrar Nuevo Proyecto (CREATE)",
+        "description": "Crea un nuevo registro de proyecto en la base de datos.",
+        "operationId": "sendRegistroProject_projects_sendRegistroProject_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/updateProject": {
+      "put": {
+        "tags": [
+          "Project Management"
+        ],
+        "summary": "Actualizar Proyecto (UPDATE)",
+        "description": "Modifica los datos de un proyecto existente. Devuelve error 404 si el proyecto no existe.",
+        "operationId": "updateProject_projects_updateProject_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/deleteProject": {
+      "delete": {
+        "tags": [
+          "Project Management"
+        ],
+        "summary": "Eliminar Proyecto (DELETE)",
+        "description": "Elimina un proyecto del sistema usando su `id`. Devuelve error 404 si el proyecto no existe.",
+        "operationId": "deleteProject_projects_deleteProject_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/sendAccessProject": {
+      "post": {
+        "tags": [
+          "Project Access"
+        ],
+        "summary": "Otorgar Acceso a Proyecto (CREATE Permission)",
+        "description": "Registra el acceso de un `user_id` a un `project_id` específico, asignándole un `role_id`.",
+        "operationId": "sendAccessProject_projects_sendAccessProject_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectRegisterAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectCreationAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/updateAccessProject": {
+      "put": {
+        "tags": [
+          "Project Access"
+        ],
+        "summary": "Actualizar Acceso a Proyecto (UPDATE Permission)",
+        "description": "Modifica un registro de acceso existente, permitiendo cambiar el rol (`role_id`) o reasignar el acceso. Devuelve error 404 si el registro de acceso no existe.",
+        "operationId": "updateAccessProject_projects_updateAccessProject_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectUpdateAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectUpdateAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/deleteAccessProject": {
+      "delete": {
+        "tags": [
+          "Project Access"
+        ],
+        "summary": "Revocar Acceso a Proyecto (DELETE Permission)",
+        "description": "Elimina el registro de acceso, revocando los permisos del usuario para el proyecto específico. Devuelve error 404 si el registro de acceso no existe.",
+        "operationId": "deleteAccessProject_projects_deleteAccessProject_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectDeleteAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDeleteAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

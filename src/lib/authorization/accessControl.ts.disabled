@@ -1,0 +1,36 @@
+import prisma from '@/lib/database';
+
+export async function checkAccess({
+  userId,
+  tabla,
+  campo,
+  valor
+}: {
+  userId: string;
+  tabla: string;
+  campo: string;
+  valor: string;
+}) {
+  const record = await prisma.rolesAcDatos.findFirst({
+    where: {
+      user_id: userId,
+      tabla,
+      campo,
+      valor
+    }
+  });
+  return !!record; // true si existe, false si no
+}
+
+// Helper adicional para verificar acceso a producto completo
+export async function canAccessProduct(userId: string, productId: string) {
+  const role = await prisma.rolesAcDatos.findFirst({
+    where: {
+      user_id: userId,
+      tabla: 'product',
+      campo: 'id',
+      valor: productId
+    }
+  });
+  return !!role;
+}

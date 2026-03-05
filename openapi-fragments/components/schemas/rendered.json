@@ -1,0 +1,31 @@
+{
+  "schemas": {
+    "RenderedChartResponse": {
+      "properties": {
+        "image_url": {
+          "type": "string",
+          "maxLength": 2083,
+          "minLength": 1,
+          "format": "uri",
+          "title": "Image Url"
+        },
+        "chart_type": {
+          "type": "string",
+          "title": "Chart Type"
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Gráfico renderizado exitosamente."
+        }
+      },
+      "type": "object",
+      "required": [
+        "image_url",
+        "chart_type"
+      ],
+      "title": "RenderedChartResponse",
+      "description": "Respuesta que contiene la URL segura de la imagen generada."
+    }
+  }
+}

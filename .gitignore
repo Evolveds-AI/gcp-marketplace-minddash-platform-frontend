@@ -1,0 +1,60 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+.vscode
+.cursor
+.trae
+.windsurf
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+.env.development
+.env.production
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Netlify
+.netlify
+
+# Logs
+logs/
+*.log
+build/.next
+test/
+
+# clerk configuration (can include secrets)
+/.clerk/
+
+# Admin redesign (moved outside project, safety net)
+/src/app/dashboard/admin2/
+/src/app/dashboard/admin3/
+/src/app/dashboard/vistro/
+/src/components/vistro/
+/src/vistro-shell/
+/vristo/

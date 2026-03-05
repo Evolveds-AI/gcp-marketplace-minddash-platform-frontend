@@ -1,0 +1,390 @@
+{
+  "schemas": {
+    "PromptConfig": {
+      "properties": {
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Temperature"
+        },
+        "agent_main_role": {
+          "type": "string",
+          "title": "Agent Main Role"
+        },
+        "business_rules": {
+          "type": "string",
+          "title": "Business Rules"
+        },
+        "advanced_agent_metrics": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": "array",
+          "title": "Advanced Agent Metrics"
+        },
+        "table_selection_logic": {
+          "items": {
+            "$ref": "#/components/schemas/TableSelectionLogic"
+          },
+          "type": "array",
+          "title": "Table Selection Logic"
+        },
+        "additional_considerations": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Additional Considerations"
+        }
+      },
+      "type": "object",
+      "required": [
+        "temperature",
+        "agent_main_role",
+        "business_rules",
+        "advanced_agent_metrics",
+        "table_selection_logic"
+      ],
+      "title": "PromptConfig"
+    },
+    "PromptCreationResponse": {
+      "properties": {
+        "id_prompt": {
+          "type": "string",
+          "title": "Id Prompt",
+          "description": "UUID del prompt recién creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_prompt"
+      ],
+      "title": "PromptCreationResponse"
+    },
+    "PromptDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del prompt a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "PromptDeleteRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_delete_prompt."
+    },
+    "PromptDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Prompt eliminado exitosamente."
+        },
+        "id_prompt": {
+          "type": "string",
+          "title": "Id Prompt",
+          "description": "UUID del prompt eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_prompt"
+      ],
+      "title": "PromptDeleteResponse"
+    },
+    "PromptRegisterRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto al que pertenece."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255,
+          "title": "Name",
+          "description": "Nombre del prompt."
+        },
+        "config_prompt": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Config Prompt",
+          "description": "Configuración JSONB."
+        },
+        "path_config_file": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 255
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Path Config File",
+          "description": "Ruta opcional al archivo."
+        },
+        "prompt_content": {
+          "type": "string",
+          "title": "Prompt Content",
+          "description": "Contenido del prompt."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "name",
+        "prompt_content"
+      ],
+      "title": "PromptRegisterRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_prompt."
+    },
+    "PromptRegisterRequestV2": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto al que pertenece."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255,
+          "title": "Name",
+          "description": "Nombre del prompt."
+        },
+        "config_prompt": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/PromptConfig"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Configuración JSONB (opcional)."
+        },
+        "path_config_file": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 255
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Path Config File",
+          "description": "Ruta opcional al archivo."
+        },
+        "prompt_content": {
+          "type": "string",
+          "title": "Prompt Content",
+          "description": "Contenido del prompt."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "name",
+        "prompt_content"
+      ],
+      "title": "PromptRegisterRequestV2",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_prompt."
+    },
+    "PromptUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del prompt a actualizar."
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id",
+          "description": "Nuevo ID del producto (opcional)."
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 255
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name",
+          "description": "Nuevo nombre (opcional)."
+        },
+        "config_prompt": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Config Prompt",
+          "description": "Nueva configuración JSONB (opcional)."
+        },
+        "path_config_file": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 255
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Path Config File",
+          "description": "Nueva ruta opcional (opcional)."
+        },
+        "prompt_content": {
+          "type": "string",
+          "title": "Prompt Content",
+          "description": "Contenido del prompt."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "prompt_content"
+      ],
+      "title": "PromptUpdateRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_prompt.",
+      "example": {
+        "config_prompt": {
+          "temperature": 0.5
+        },
+        "id": "1e2f3g4h-5i6j-7k8l-9m0n-1o2p3q4r5s6t",
+        "name": "Generación de Resumen V2",
+        "path_config_file": "example.yaml",
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "prompt_content": "prompt_content"
+      }
+    },
+    "PromptUpdateRequestV2": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID del prompt a actualizar."
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id",
+          "description": "Nuevo ID del producto (opcional)."
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 255
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name",
+          "description": "Nuevo nombre (opcional)."
+        },
+        "config_prompt": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/PromptConfig"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Nueva configuración JSONB (opcional)."
+        },
+        "path_config_file": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 255
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Path Config File",
+          "description": "Nueva ruta opcional (opcional)."
+        },
+        "prompt_content": {
+          "type": "string",
+          "title": "Prompt Content",
+          "description": "Contenido del prompt."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "prompt_content"
+      ],
+      "title": "PromptUpdateRequestV2",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_prompt."
+    },
+    "PromptUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Prompt actualizado exitosamente."
+        },
+        "id_prompt": {
+          "type": "string",
+          "title": "Id Prompt",
+          "description": "UUID del prompt actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_prompt"
+      ],
+      "title": "PromptUpdateResponse"
+    }
+  }
+}

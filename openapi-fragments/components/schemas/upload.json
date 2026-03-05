@@ -1,0 +1,273 @@
+{
+  "schemas": {
+    "UploadMetricsByProductRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto cuyas métricas se cargarán de la base de datos."
+        },
+        "bucket_name": {
+          "type": "string",
+          "title": "Bucket Name",
+          "description": "Nombre del bucket de GCS de destino."
+        },
+        "object_path": {
+          "type": "string",
+          "title": "Object Path",
+          "description": "Ruta y nombre del archivo dentro del bucket (ej: metrics/v1/producto_x.yaml)."
+        },
+        "client": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Client"
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "bucket_name",
+        "object_path"
+      ],
+      "title": "UploadMetricsByProductRequest",
+      "description": "Define los parámetros necesarios para obtener métricas por ID de producto,\nformatearlas en YAML y subirlas a GCS.",
+      "example": {
+        "bucket_name": "gs-minddash-agent-env",
+        "object_path": "profiling/metrics_example.yaml",
+        "product_id": "72a7c5c5-dcbb-4f08-8016-ae1ca63230a3"
+      }
+    },
+    "UploadMetricsByProductResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Estado de la operación (ej: 'success')."
+        },
+        "url": {
+          "type": "string",
+          "title": "Url",
+          "description": "URL pública o interna del archivo YAML subido en GCS."
+        }
+      },
+      "type": "object",
+      "required": [
+        "status",
+        "url"
+      ],
+      "title": "UploadMetricsByProductResponse",
+      "description": "Define la respuesta que confirma el éxito de la subida del YAML a GCS.",
+      "example": {
+        "status": "success",
+        "url": "https://storage.googleapis.com/minddash-metrics-definitions-prod/metrics/v1/cross_and_nip_metrics.yaml"
+      }
+    },
+    "UploadMetricsRequest": {
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Version"
+        },
+        "product": {
+          "type": "string",
+          "title": "Product"
+        },
+        "metrics_name": {
+          "type": "string",
+          "title": "Metrics Name"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description"
+        },
+        "metrics_content": {
+          "items": {
+            "$ref": "#/components/schemas/MetricDefinition"
+          },
+          "type": "array",
+          "title": "Metrics Content",
+          "description": "Lista de objetos con las definiciones de métricas."
+        },
+        "bucket_name": {
+          "type": "string",
+          "title": "Bucket Name"
+        },
+        "object_path": {
+          "type": "string",
+          "title": "Object Path"
+        }
+      },
+      "type": "object",
+      "required": [
+        "version",
+        "product",
+        "metrics_name",
+        "description",
+        "metrics_content",
+        "bucket_name",
+        "object_path"
+      ],
+      "title": "UploadMetricsRequest",
+      "example": {
+        "bucket_name": "gs-minddash-agent-env",
+        "description": "Colección de métricas de Cross Selling y NIP.",
+        "metrics_content": [
+          {
+            "name_metrics": "cross_selling_general",
+            "optional_params": [
+              "group_by_select"
+            ],
+            "required_params": [
+              "start_date",
+              "end_date"
+            ],
+            "sql_template": "SELECT count(*) FROM facturacion WHERE..."
+          },
+          {
+            "name_metrics": "nip_real_ponderado",
+            "optional_params": [],
+            "required_params": [
+              "start_date",
+              "end_date"
+            ],
+            "sql_template": "SELECT (SUM(\"Importe\") / SUM(\"Fact_UEQ\")) AS NIP FROM..."
+          }
+        ],
+        "metrics_name": "Metrics Collection V1",
+        "object_path": "profiling/metrics_upload_example.yaml",
+        "product": "cross_and_nip",
+        "version": "1.0"
+      }
+    },
+    "UploadMetricsResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "title": "Status"
+        },
+        "url": {
+          "type": "string",
+          "title": "Url"
+        }
+      },
+      "type": "object",
+      "required": [
+        "status",
+        "url"
+      ],
+      "title": "UploadMetricsResponse"
+    },
+    "UploadPromptRequest": {
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Version"
+        },
+        "product": {
+          "type": "string",
+          "title": "Product"
+        },
+        "prompt_name": {
+          "type": "string",
+          "title": "Prompt Name"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description"
+        },
+        "prompt_content": {
+          "type": "string",
+          "title": "Prompt Content"
+        },
+        "bucket_name": {
+          "type": "string",
+          "title": "Bucket Name"
+        },
+        "object_path": {
+          "type": "string",
+          "title": "Object Path"
+        }
+      },
+      "type": "object",
+      "required": [
+        "version",
+        "product",
+        "prompt_name",
+        "description",
+        "prompt_content",
+        "bucket_name",
+        "object_path"
+      ],
+      "title": "UploadPromptRequest"
+    },
+    "UploadPromptRequestByProduct": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "format": "uuid",
+          "title": "Product Id",
+          "description": "ID del producto para extraer la configuración del prompt."
+        },
+        "bucket_name": {
+          "type": "string",
+          "title": "Bucket Name",
+          "description": "Nombre del bucket de GCS de destino."
+        },
+        "object_path": {
+          "type": "string",
+          "title": "Object Path",
+          "description": "Ruta y nombre del archivo YAML dentro del bucket (ej: prompts/agent/cyt_v2.yaml)."
+        },
+        "embeddings_npy_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Embeddings Npy Path"
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "bucket_name",
+        "object_path"
+      ],
+      "title": "UploadPromptRequestByProduct",
+      "description": "Solicitud para generar y subir el prompt YAML usando solo el ID del producto.",
+      "example": {
+        "bucket_name": "gs-minddash-agent-env",
+        "object_path": "profiling/prompt_example_load.yaml",
+        "product_id": "72a7c5c5-dcbb-4f08-8016-ae1ca63230a3"
+      }
+    },
+    "UploadPromptResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "title": "Status"
+        },
+        "url": {
+          "type": "string",
+          "title": "Url"
+        }
+      },
+      "type": "object",
+      "required": [
+        "status",
+        "url"
+      ],
+      "title": "UploadPromptResponse",
+      "description": "Respuesta para la subida exitosa del archivo YAML."
+    }
+  }
+}

@@ -1,0 +1,256 @@
+{
+  "paths": {
+    "/Channels/sendRegistroChannel": {
+      "post": {
+        "tags": [
+          "Channel Management"
+        ],
+        "summary": "Registrar Nuevo Canal (CREATE)",
+        "description": "Crea un nuevo registro de canal en la base de datos.",
+        "operationId": "sendRegistroChannel_Channels_sendRegistroChannel_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Channels/SendUpdateChannel": {
+      "put": {
+        "tags": [
+          "Channel Management"
+        ],
+        "summary": "Actualizar Canal (UPDATE)",
+        "description": "Modifica los datos de un canal existente. Devuelve error 404 si el canal no existe.",
+        "operationId": "updateChannel_Channels_SendUpdateChannel_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Channels/SendDeleteChannel": {
+      "delete": {
+        "tags": [
+          "Channel Management"
+        ],
+        "summary": "Eliminar Canal (DELETE)",
+        "description": "Elimina un canal del sistema usando su `id`. Devuelve error 404 si el canal no existe.",
+        "operationId": "deleteChannel_Channels_SendDeleteChannel_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Channels/sendRegistroChannelProduct": {
+      "post": {
+        "tags": [
+          "Channel Management"
+        ],
+        "summary": "Registrar Nueva Relación Canal-Producto (CREATE)",
+        "description": "Crea un nuevo registro de relación en la base de datos.",
+        "operationId": "sendRegistroChannelProduct_Channels_sendRegistroChannelProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelProductRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelProductCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Channels/updateChannelProduct": {
+      "put": {
+        "tags": [
+          "Channel Management"
+        ],
+        "summary": "Actualizar Relación Canal-Producto (UPDATE)",
+        "description": "Modifica un registro de relación existente. Devuelve error 404 si el ID no existe.",
+        "operationId": "updateChannelProduct_Channels_updateChannelProduct_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelProductUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelProductUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Channels/deleteChannelProduct": {
+      "delete": {
+        "tags": [
+          "Channel Management"
+        ],
+        "summary": "Eliminar Relación Canal-Producto (DELETE)",
+        "description": "Elimina un registro de relación usando su `id`. Devuelve error 404 si el ID no existe.",
+        "operationId": "deleteChannelProduct_Channels_deleteChannelProduct_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelProductDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelProductDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

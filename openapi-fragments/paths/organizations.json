@@ -1,0 +1,374 @@
+{
+  "paths": {
+    "/organizations/getListOrganization": {
+      "get": {
+        "tags": [
+          "Organization Management"
+        ],
+        "summary": "Listar Todas las Organizaciones",
+        "description": "Obtiene una lista completa de todas las organizaciones registradas en el sistema.",
+        "operationId": "getListOrganization_organizations_getListOrganization_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Organization"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistorganization Organizations Getlistorganization Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/getListOrganizationByOrg": {
+      "post": {
+        "tags": [
+          "Organization Management"
+        ],
+        "summary": "Obtener Organización por ID",
+        "description": "Recupera los detalles de una organización específica utilizando su `organization_id`. Puede incluir validación de acceso por `user_id`.",
+        "operationId": "getListOrganizationByOrg_organizations_getListOrganizationByOrg_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOrganizationRequestByOrg"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Organization"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistorganizationbyorg Organizations Getlistorganizationbyorg Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/getListOrganizationByUser": {
+      "post": {
+        "tags": [
+          "Organization Management"
+        ],
+        "summary": "Listar Organizaciones por Usuario",
+        "description": "Obtiene la lista de organizaciones a las que tiene acceso un `user_id` específico.",
+        "operationId": "getListOrganizationByUser_organizations_getListOrganizationByUser_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOrganizationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/OrganizationByUser"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistorganizationbyuser Organizations Getlistorganizationbyuser Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/sendRegisterOrganization": {
+      "post": {
+        "tags": [
+          "Organization Management"
+        ],
+        "summary": "Registrar Nueva Organización (CREATE)",
+        "description": "Crea un nuevo registro de organización en la base de datos.",
+        "operationId": "sendRegisterOrganization_organizations_sendRegisterOrganization_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/updateOrganization": {
+      "put": {
+        "tags": [
+          "Organization Management"
+        ],
+        "summary": "Actualizar Organización (UPDATE)",
+        "description": "Modifica los datos de una organización existente. Devuelve error 404 si la organización no existe.",
+        "operationId": "updateOrganization_organizations_updateOrganization_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/deleteOrganization": {
+      "delete": {
+        "tags": [
+          "Organization Management"
+        ],
+        "summary": "Eliminar Organización (DELETE)",
+        "description": "Elimina una organización del sistema usando su `id`. Devuelve error 404 si la organización no existe.",
+        "operationId": "deleteOrganization_organizations_deleteOrganization_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/sendAccessOrganization": {
+      "post": {
+        "tags": [
+          "Organization Access"
+        ],
+        "summary": "Otorgar Acceso a Organización (CREATE Permission)",
+        "description": "Registra el acceso de un `user_id` a una `organization_id` específica, asignándole un `role_id`.",
+        "operationId": "sendAccessOrganization_organizations_sendAccessOrganization_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationRegisterAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationCreationAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/updateAccessOrganization": {
+      "put": {
+        "tags": [
+          "Organization Access"
+        ],
+        "summary": "Actualizar Acceso a Organización (UPDATE Permission)",
+        "description": "Modifica un registro de acceso existente, permitiendo cambiar el rol (`role_id`) o reasignar el acceso a otro usuario/organización. Devuelve error 404 si el registro de acceso no existe.",
+        "operationId": "updateAccessOrganization_organizations_updateAccessOrganization_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationUpdateAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationUpdateAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/deleteAccessOrganization": {
+      "delete": {
+        "tags": [
+          "Organization Access"
+        ],
+        "summary": "Revocar Acceso a Organización (DELETE Permission)",
+        "description": "Elimina el registro de acceso, revocando los permisos del usuario para la organización específica. Devuelve error 404 si el registro de acceso no existe.",
+        "operationId": "deleteAccessOrganization_organizations_deleteAccessOrganization_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationDeleteAccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationDeleteAccessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

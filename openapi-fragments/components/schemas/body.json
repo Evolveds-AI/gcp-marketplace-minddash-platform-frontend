@@ -1,0 +1,114 @@
+{
+  "schemas": {
+    "Body_create_connection_mindsdb_connections_post": {
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "title": "Server Url"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "engine": {
+          "type": "string",
+          "title": "Engine"
+        },
+        "file": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "binary"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "File"
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id"
+        },
+        "bucket_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bucket Name"
+        },
+        "table_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Table Name"
+        },
+        "file_format": {
+          "type": "string",
+          "title": "File Format",
+          "default": "CSV"
+        },
+        "skip_leading_rows": {
+          "type": "integer",
+          "title": "Skip Leading Rows",
+          "default": 1
+        },
+        "field_delimiter": {
+          "type": "string",
+          "title": "Field Delimiter",
+          "default": ","
+        },
+        "quote_character": {
+          "type": "string",
+          "title": "Quote Character",
+          "default": "\""
+        },
+        "sheet_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sheet Name"
+        },
+        "parameters": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parameters"
+        }
+      },
+      "type": "object",
+      "required": [
+        "server_url",
+        "name",
+        "engine"
+      ],
+      "title": "Body_create_connection_mindsdb_connections_post"
+    }
+  }
+}

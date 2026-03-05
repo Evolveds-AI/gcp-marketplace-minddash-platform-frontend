@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              display: ["Inter"],
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="flex min-h-screen">
+<aside class="flex w-64 flex-col border-r border-slate-200/50 dark:border-slate-800/50">
+<div class="flex h-16 items-center px-6">
+<h1 class="text-xl font-bold text-slate-900 dark:text-white">MindDash</h1>
+</div>
+<nav class="flex-1 space-y-2 px-4 py-4">
+<a class="flex items-center gap-3 rounded px-3 py-2 text-slate-700 hover:bg-primary/10 dark:text-slate-300 dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400"> settings </span>
+<span>General</span>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-slate-700 hover:bg-primary/10 dark:text-slate-300 dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400"> layers </span>
+<span>Capa Semántica</span>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-slate-700 hover:bg-primary/10 dark:text-slate-300 dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400"> edit_document </span>
+<span>Prompt</span>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-slate-700 hover:bg-primary/10 dark:text-slate-300 dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400"> security </span>
+<span>Permisos</span>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-slate-700 hover:bg-primary/10 dark:text-slate-300 dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400"> notifications </span>
+<span>Alertas</span>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-slate-700 hover:bg-primary/10 dark:text-slate-300 dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400"> insights </span>
+<span>Insights</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 font-semibold text-primary dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined"> monitoring </span>
+<span>Métricas</span>
+</a>
+</nav>
+<div class="p-4">
+<a class="flex items-center gap-3 rounded px-3 py-2 text-slate-700 hover:bg-primary/10 dark:text-slate-300 dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400"> admin_panel_settings </span>
+<span>Administración</span>
+</a>
+</div>
+</aside>
+<div class="flex flex-1 flex-col">
+<header class="flex h-16 items-center justify-between border-b border-slate-200/50 px-6 dark:border-slate-800/50">
+<div class="flex items-center gap-2">
+<h2 class="font-semibold text-slate-900 dark:text-white">Tech Solutions - Proyecto Alpha - EVA</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg bg-primary p-2 text-white">
+<span class="material-symbols-outlined"> add </span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBM-qBpYyQbT7sHDiIZQbGGwQ5m1S2vqC48hS7-q72Vadd16GJ_dZsCmmHJtCl3-0vXXsCv32zG7lMalne5AqJSkQeRm-mqStsou0JkT0oFORO6hT7I01olWpWA4G2f9NKSUiELGHSTDh_r4fXIv46FV1S6IR1IkrIZ8pS1n-E8mYeIRYqxsoZF3Tv79BIJyYnZtZoPQeuHqXgQebUzgCzdWui0Zvu_EXRaJvsQd5tNMQj1i1iKQW2L56Ln3m3ZNyg71bQ9S7W11M");'></div>
+</div>
+</header>
+<main class="flex-1 p-8">
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white">Métricas</h1>
+</div>
+<div class="grid grid-cols-3 gap-8">
+<div class="col-span-2 space-y-6">
+<div>
+<h2 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Query Builder</h2>
+<textarea class="w-full rounded-lg border-slate-300 bg-background-light p-4 font-mono text-sm text-slate-800 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-background-dark dark:text-slate-200" placeholder="SELECT * FROM users WHERE last_login &gt; {last_week};" rows="8"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+<button class="rounded-lg bg-slate-200/80 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-300/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-700/80">
+                  SELECT
+                </button>
+<button class="rounded-lg bg-slate-200/80 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-300/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-700/80">
+                  FROM
+                </button>
+<button class="rounded-lg bg-slate-200/80 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-300/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-700/80">
+                  WHERE
+                </button>
+<button class="rounded-lg bg-slate-200/80 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-300/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-700/80">
+                  JOIN
+                </button>
+<button class="rounded-lg bg-slate-200/80 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-300/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-700/80">
+                  GROUP BY
+                </button>
+<button class="rounded-lg bg-slate-200/80 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-300/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-700/80">
+                  ORDER BY
+                </button>
+</div>
+</div>
+<div class="col-span-1 space-y-6">
+<div>
+<h2 class="mb-4 text-xl font-semibold text-slate-900 dark:text-white">Tablas</h2>
+<div class="relative">
+<span class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> search </span>
+<input class="w-full rounded-lg border-slate-300 bg-background-light py-2 pl-10 pr-4 text-slate-800 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-background-dark dark:text-slate-200" placeholder="Buscar tablas..." type="text"/>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800/50">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined"> table </span>
+</div>
+<div>
+<p class="font-medium text-slate-900 dark:text-white">Tabla 1</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Columna 1, Columna 2, Columna 3...</p>
+</div>
+</div>
+<div class="flex items-center gap-4 rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800/50">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined"> table </span>
+</div>
+<div>
+<p class="font-medium text-slate-900 dark:text-white">Tabla 2</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Columna A, Columna B, Columna C...</p>
+</div>
+</div>
+<div class="flex items-center gap-4 rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800/50">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined"> table </span>
+</div>
+<div>
+<p class="font-medium text-slate-900 dark:text-white">Tabla 3</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">ID, Nombre, Fecha...</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

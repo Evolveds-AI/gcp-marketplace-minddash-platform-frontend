@@ -1,0 +1,231 @@
+{
+  "schemas": {
+    "BuildPromptsExamplesByProductRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id"
+        },
+        "bucket_name": {
+          "type": "string",
+          "title": "Bucket Name"
+        },
+        "examples_yaml_path": {
+          "type": "string",
+          "title": "Examples Yaml Path"
+        },
+        "embeddings_npy_path": {
+          "type": "string",
+          "title": "Embeddings Npy Path"
+        },
+        "model_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Model Name",
+          "default": "paraphrase-multilingual-mpnet-base-v2"
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "bucket_name",
+        "examples_yaml_path",
+        "embeddings_npy_path"
+      ],
+      "title": "BuildPromptsExamplesByProductRequest",
+      "example": {
+        "bucket_name": "gs-minddash-agent-env",
+        "embeddings_npy_path": "examples_agents/few_shot_examples_develop.npy",
+        "examples_yaml_path": "examples_agents/few_shot_examples_develop.yaml",
+        "model_name": "paraphrase-multilingual-mpnet-base-v2",
+        "product_id": "72a7c5c5-dcbb-4f08-8016-ae1ca63230a3"
+      }
+    },
+    "BuildPromptsExamplesResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "title": "Status"
+        },
+        "examples_yaml_url": {
+          "type": "string",
+          "title": "Examples Yaml Url"
+        },
+        "embeddings_npy_url": {
+          "type": "string",
+          "title": "Embeddings Npy Url"
+        }
+      },
+      "type": "object",
+      "required": [
+        "status",
+        "examples_yaml_url",
+        "embeddings_npy_url"
+      ],
+      "title": "BuildPromptsExamplesResponse"
+    },
+    "BuildRequest": {
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "title": "Server Url"
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id"
+        },
+        "database": {
+          "type": "string",
+          "title": "Database"
+        },
+        "selections": {
+          "items": {
+            "$ref": "#/components/schemas/ColumnSelection"
+          },
+          "type": "array",
+          "title": "Selections"
+        },
+        "infer_types": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Infer Types",
+          "default": true
+        },
+        "add_default_measures": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Add Default Measures",
+          "default": true
+        },
+        "time_dimension_candidates": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Time Dimension Candidates",
+          "default": [
+            "fecha",
+            "date",
+            "created_at",
+            "updated_at",
+            "timestamp",
+            "fecha_factura"
+          ]
+        },
+        "engine": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "postgres",
+                "mysql",
+                "bigquery",
+                "databricks",
+                "mariadb",
+                "mssql",
+                "synapsemssql",
+                "redshift",
+                "snowflake",
+                "aurora",
+                "aurorapostgres",
+                "auroramysql",
+                "hana",
+                "oracle",
+                "teradata",
+                "clickhouse"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Engine",
+          "default": "postgres"
+        },
+        "include_profiling": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Include Profiling",
+          "default": false
+        },
+        "bucket_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bucket Name"
+        },
+        "object_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Object Path"
+        },
+        "databricks_config": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/DatabricksConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "server_url",
+        "database",
+        "selections"
+      ],
+      "title": "BuildRequest"
+    }
+  }
+}

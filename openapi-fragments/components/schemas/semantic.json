@@ -1,0 +1,295 @@
+{
+  "schemas": {
+    "SemanticLayerConfigData": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "str del registro de configuración."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "str del producto asociado."
+        },
+        "object_path_saved": {
+          "type": "string",
+          "title": "Object Path Saved",
+          "description": "Ruta del objeto guardado."
+        },
+        "bucket_name_saved": {
+          "type": "string",
+          "title": "Bucket Name Saved",
+          "description": "Nombre del bucket donde se guardó."
+        },
+        "object_path_deployed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Object Path Deployed",
+          "description": "Ruta del objeto desplegado."
+        },
+        "bucket_name_deployed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bucket Name Deployed",
+          "description": "Nombre del bucket donde se desplegó."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Created At",
+          "description": "Fecha de creación."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Updated At",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "product_id",
+        "object_path_saved",
+        "bucket_name_saved",
+        "created_at",
+        "updated_at"
+      ],
+      "title": "SemanticLayerConfigData",
+      "description": "Modelo para representar un registro de semantic_layer_configs."
+    },
+    "SemanticLayerCreateRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id"
+        },
+        "object_path_saved": {
+          "type": "string",
+          "title": "Object Path Saved"
+        },
+        "bucket_name_saved": {
+          "type": "string",
+          "title": "Bucket Name Saved"
+        },
+        "object_path_deployed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Object Path Deployed"
+        },
+        "bucket_name_deployed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bucket Name Deployed"
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "object_path_saved",
+        "bucket_name_saved"
+      ],
+      "title": "SemanticLayerCreateRequest"
+    },
+    "SemanticLayerCreationResponse": {
+      "properties": {
+        "config_id": {
+          "type": "string",
+          "title": "Config Id",
+          "description": "str del nuevo registro de configuración creado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "config_id"
+      ],
+      "title": "SemanticLayerCreationResponse"
+    },
+    "SemanticLayerDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "str del registro a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "SemanticLayerDeleteRequest"
+    },
+    "SemanticLayerDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Configuración de capa semántica eliminada exitosamente."
+        },
+        "config_id": {
+          "type": "string",
+          "title": "Config Id",
+          "description": "str del registro eliminado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "config_id"
+      ],
+      "title": "SemanticLayerDeleteResponse"
+    },
+    "SemanticLayerGetByIDRequest": {
+      "properties": {
+        "config_id": {
+          "type": "string",
+          "title": "Config Id",
+          "description": "UUID del registro de configuración."
+        }
+      },
+      "type": "object",
+      "required": [
+        "config_id"
+      ],
+      "title": "SemanticLayerGetByIDRequest",
+      "description": "Modelo para obtener un registro por ID, enviado en el body."
+    },
+    "SemanticLayerGetByProductRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "UUID del producto para filtrar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id"
+      ],
+      "title": "SemanticLayerGetByProductRequest",
+      "description": "Modelo para obtener registros por product_id, enviado en el body."
+    },
+    "SemanticLayerListResponse": {
+      "properties": {
+        "configs": {
+          "items": {
+            "$ref": "#/components/schemas/SemanticLayerConfigData"
+          },
+          "type": "array",
+          "title": "Configs"
+        }
+      },
+      "type": "object",
+      "required": [
+        "configs"
+      ],
+      "title": "SemanticLayerListResponse"
+    },
+    "SemanticLayerSingleResponse": {
+      "properties": {
+        "config": {
+          "$ref": "#/components/schemas/SemanticLayerConfigData"
+        }
+      },
+      "type": "object",
+      "required": [
+        "config"
+      ],
+      "title": "SemanticLayerSingleResponse"
+    },
+    "SemanticLayerUpdateRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id"
+        },
+        "object_path_saved": {
+          "type": "string",
+          "title": "Object Path Saved"
+        },
+        "bucket_name_saved": {
+          "type": "string",
+          "title": "Bucket Name Saved"
+        },
+        "object_path_deployed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Object Path Deployed"
+        },
+        "bucket_name_deployed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bucket Name Deployed"
+        },
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "str del registro a actualizar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "object_path_saved",
+        "bucket_name_saved",
+        "id"
+      ],
+      "title": "SemanticLayerUpdateRequest"
+    },
+    "SemanticLayerUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "default": "Configuración de capa semántica actualizada exitosamente."
+        },
+        "config_id": {
+          "type": "string",
+          "title": "Config Id",
+          "description": "str del registro actualizado."
+        }
+      },
+      "type": "object",
+      "required": [
+        "config_id"
+      ],
+      "title": "SemanticLayerUpdateResponse"
+    }
+  }
+}

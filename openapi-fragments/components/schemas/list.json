@@ -1,0 +1,118 @@
+{
+  "schemas": {
+    "ListAlerts": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID de la alerta."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "str del producto al que pertenece la alerta."
+        },
+        "prompt_alerta": {
+          "type": "string",
+          "maxLength": 1500,
+          "title": "Prompt Alerta",
+          "description": "El contenido o lógica de la alerta."
+        },
+        "codigo_cron": {
+          "type": "string",
+          "maxLength": 100,
+          "title": "Codigo Cron",
+          "description": "Frecuencia de ejecución en formato CRON."
+        },
+        "user_id": {
+          "type": "string",
+          "maxLength": 250,
+          "title": "User Id",
+          "description": "ID del usuario que creó la alerta."
+        },
+        "session_id": {
+          "type": "string",
+          "maxLength": 250,
+          "title": "Session Id",
+          "description": "ID de la sesión de usuario que creó la alerta."
+        },
+        "flg_habilitado": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Flg Habilitado",
+          "description": "Estado de habilitación de la alerta.",
+          "default": true
+        },
+        "fecha_inicio": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fecha Inicio",
+          "description": "Fecha y hora opcional de inicio de la alerta."
+        },
+        "fecha_fin": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fecha Fin",
+          "description": "Fecha y hora opcional de fin de la alerta."
+        },
+        "type_alert": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 250
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Type Alert",
+          "description": "Tipo de Alerta Enviado."
+        },
+        "configuration_alert": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Configuration Alert",
+          "description": "Configuración JSONB específica."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "product_id",
+        "prompt_alerta",
+        "codigo_cron",
+        "user_id",
+        "session_id"
+      ],
+      "title": "ListAlerts",
+      "description": "Datos para registrar una nueva alerta."
+    }
+  }
+}

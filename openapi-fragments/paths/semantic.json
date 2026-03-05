@@ -1,0 +1,496 @@
+{
+  "paths": {
+    "/semantic/layer/build": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Construir capa semántica (opcional: perfilar y/o subir a GCS)",
+        "description": "Genera el YAML de la capa semántica. Maneja motores tipo MindsDB (postgres, etc.) y conexiones directas a Databricks.",
+        "operationId": "build_layer_databricks_semantic_layer_build_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuildRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/layer/update": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Actualizar capa semántica (reemplazo in-place en GCS)",
+        "description": "Reconstruye completamente la capa semántica y **reemplaza el archivo YAML anterior** en el mismo URI de GCS (`gs://bucket/object`) especificado en `previous_gs_uri`. Garantiza la actualización atómica del archivo.",
+        "operationId": "update_layer_semantic_layer_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/layer/fetch": {
+      "get": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Servir YAML desde GCS (privado)",
+        "description": "Actúa como un *proxy* para leer y servir el archivo YAML de la capa semántica desde un **objeto privado** en GCS (usando la cuenta de servicio), sin exponer su URL pública.",
+        "operationId": "fetch_layer_semantic_layer_fetch_get",
+        "parameters": [
+          {
+            "name": "gs_uri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Gs Uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/layer/describe": {
+      "get": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Describir YAML como JSON para el frontend",
+        "description": "Carga el archivo YAML desde GCS y devuelve una **representación JSON** optimizada y parseada (solo *datasets* y sus atributos), ideal para su consumo directo por interfaces de usuario.",
+        "operationId": "describe_layer_semantic_layer_describe_get",
+        "parameters": [
+          {
+            "name": "gs_uri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Gs Uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/query/build-advanced": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Construir SQL (Multi-datasets con Joins)",
+        "description": "Genera la sentencia SQL subyacente a una consulta semántica compleja. Utiliza las **relaciones** y el esquema definidos en el YAML de `gs_uri` para construir el SQL con *joins*, filtros, ordenamiento y límites.",
+        "operationId": "build_query_advanced_semantic_query_build_advanced_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryBuildAdvancedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/query/run": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Ejecutar SQL en MindsDB",
+        "description": "Ejecuta la sentencia SQL construida (o provista) contra la conexión de MindsDB especificada. La consulta es envuelta para ser ejecutada como una **consulta remota** dentro del motor de MindsDB.",
+        "operationId": "run_query_via_mindsdb_semantic_query_run_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/query/runV2": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Ejecutar SQL en MindsDB",
+        "description": "Ejecuta la sentencia SQL construida contra la conexión especificada. Diferencia la lógica según sea Databricks, BigQuery o conexiones estándar de MindsDB.",
+        "operationId": "run_query_general_semantic_query_runV2_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRunReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/getConfigByID": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Obtener Configuración por ID",
+        "description": "Recupera un registro de la tabla de configuraciones de capa semántica (`semantic_layer_configs`) usando el `config_id` provisto en el cuerpo de la solicitud.",
+        "operationId": "get_config_by_body_semantic_getConfigByID_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SemanticLayerGetByIDRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticLayerSingleResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/getConfigsByProduct": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Obtener Configuraciones por Producto",
+        "description": "Recupera todos los registros de configuración asociados a un `product_id` específico, lo que permite listar las distintas versiones o *deployments* por producto.",
+        "operationId": "get_configs_by_product_by_body_semantic_getConfigsByProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SemanticLayerGetByProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticLayerListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/createConfig": {
+      "post": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Crear Nueva Configuración de Capa Semántica",
+        "description": "Registra un nuevo metadato de configuración de capa semántica en la base de datos (Ej: un nuevo *deployment* o una versión). Devuelve el ID de la nueva configuración creada.",
+        "operationId": "create_semantic_layer_config_semantic_createConfig_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SemanticLayerCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticLayerCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/updateConfig": {
+      "put": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Actualizar Configuración de Capa Semántica",
+        "description": "Modifica un registro de configuración de capa semántica existente, identificado por su `id`.",
+        "operationId": "update_semantic_layer_config_semantic_updateConfig_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SemanticLayerUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticLayerUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic/deleteConfig": {
+      "delete": {
+        "tags": [
+          "Semantic Layer"
+        ],
+        "summary": "Eliminar Configuración de Capa Semántica",
+        "description": "Elimina un registro de configuración de capa semántica de la base de datos usando el `id` provisto.",
+        "operationId": "delete_semantic_layer_config_semantic_deleteConfig_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SemanticLayerDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticLayerDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

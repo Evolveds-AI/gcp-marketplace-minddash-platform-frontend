@@ -1,0 +1,45 @@
+-- CreateTable
+CREATE TABLE "PRODUCT" (
+    "id" TEXT NOT NULL,
+    "nombre" TEXT NOT NULL,
+    "client_id" TEXT NOT NULL,
+    "is_active" BOOLEAN NOT NULL DEFAULT true,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PRODUCT_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PRODUCT_USER" (
+    "id" TEXT NOT NULL,
+    "product_id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "action" TEXT NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "PRODUCT_USER_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ROLES_AC_DATOS" (
+    "id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "tabla" TEXT NOT NULL,
+    "campo" TEXT NOT NULL,
+    "valor" TEXT NOT NULL,
+
+    CONSTRAINT "ROLES_AC_DATOS_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "PRODUCT" ADD CONSTRAINT "PRODUCT_client_id_fkey" FOREIGN KEY ("client_id") REFERENCES "clients"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PRODUCT_USER" ADD CONSTRAINT "PRODUCT_USER_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "PRODUCT"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PRODUCT_USER" ADD CONSTRAINT "PRODUCT_USER_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "usuarios"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ROLES_AC_DATOS" ADD CONSTRAINT "ROLES_AC_DATOS_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;

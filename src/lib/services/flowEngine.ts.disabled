@@ -1,0 +1,675 @@
+import { PrismaClient } from '@prisma/client';
+import {
+  FlowDefinition,
+  FlowVersion,
+  FlowExecution,
+  NodeExecutionLog,
+  FlowNode,
+  FlowEdge,
+  FlowStatus,
+  FlowCategory,
+  ExecutionStatus,
+  NodeExecutionStatus,
+  TriggerType,
+  NodeCategory,
+  TriggerConfig,
+  ActionConfig,
+  ConditionConfig,
+  TransformConfig,
+  IntegrationConfig,
+  CreateFlowDTO,
+  CreateFlowWithDefinitionDTO,
+  UpdateFlowDTO,
+  FlowResponse,
+  ExecuteFlowDTO,
+  FlowExecutionResponse,
+  FlowValidationResult,
+  FlowValidationError,
+  FlowValidationWarning,
+  FlowMetrics,
+  FlowFilter
+} from '@/types/flows';
+
+const prisma = new PrismaClient();
+
+export class FlowEngine {
+  /**
+   * Valida la estructura de un flujo
+   */
+  private validateFlow(nodes: FlowNode[], edges: FlowEdge[]): FlowValidationResult {
+    const errors: FlowValidationError[] = [];
+    const warnings: FlowValidationWarning[] = [];
+
+    // Verificar que hay al menos un nodo trigger
+    const triggerNodes = nodes.filter(node => node.data.category === NodeCategory.TRIGGER);
+    if (triggerNodes.length === 0) {
+      errors.push({
+        type: 'MISSING_CONNECTION',
+        message: 'El flujo debe tener al menos un nodo trigger',
+        severity: 'ERROR'
+      });
+    }
+
+    // Verificar que todos los nodos tienen configuración válida
+    nodes.forEach(node => {
+      if (!node.data.config) {
+        errors.push({
+          nodeId: node.id,
+          type: 'INVALID_CONFIG',
+          message: `El nodo ${node.id} no tiene configuración`,
+          severity: 'ERROR'
+        });
+      }
+
+      // Validar configuración específica por categoría
+      switch (node.data.category) {
+        case NodeCategory.TRIGGER:
+          const triggerConfig = node.data.config as TriggerConfig;
+          if (!triggerConfig.type) {
+            errors.push({
+              nodeId: node.id,
+              type: 'INVALID_CONFIG',
+              message: `El nodo trigger ${node.id} debe especificar un tipo de trigger`,
+              severity: 'ERROR'
+            });
+          }
+          break;
+
+        case NodeCategory.ACTION:
+          const actionConfig = node.data.config as ActionConfig;
+          if (!actionConfig.type) {
+            errors.push({
+              nodeId: node.id,
+              type: 'INVALID_CONFIG',
+              message: `El nodo acción ${node.id} debe especificar un tipo de acción`,
+              severity: 'ERROR'
+            });
+          }
+          break;
+
+        case NodeCategory.CONDITION:
+          const conditionConfig = node.data.config as ConditionConfig;
+          if (!conditionConfig.conditions || conditionConfig.conditions.length === 0) {
+            errors.push({
+              nodeId: node.id,
+              type: 'INVALID_CONFIG',
+              message: `El nodo condición ${node.id} debe tener al menos una condición`,
+              severity: 'ERROR'
+            });
+          }
+          break;
+      }
+    });
+
+    // Verificar conectividad del grafo
+    const nodeIds = new Set(nodes.map(n => n.id));
+    edges.forEach(edge => {
+      if (!nodeIds.has(edge.source)) {
+        errors.push({
+          edgeId: edge.id,
+          type: 'MISSING_CONNECTION',
+          message: `Edge ${edge.id} referencia nodo fuente inexistente: ${edge.source}`,
+          severity: 'ERROR'
+        });
+      }
+      if (!nodeIds.has(edge.target)) {
+        errors.push({
+          edgeId: edge.id,
+          type: 'MISSING_CONNECTION',
+          message: `Edge ${edge.id} referencia nodo destino inexistente: ${edge.target}`,
+          severity: 'ERROR'
+        });
+      }
+    });
+
+    // Verificar nodos huérfanos (sin conexiones)
+    const connectedNodes = new Set();
+    edges.forEach(edge => {
+      connectedNodes.add(edge.source);
+      connectedNodes.add(edge.target);
+    });
+
+    nodes.forEach(node => {
+      if (!connectedNodes.has(node.id) && node.data.category !== NodeCategory.TRIGGER) {
+        warnings.push({
+          nodeId: node.id,
+          type: 'BEST_PRACTICE',
+          message: `El nodo ${node.id} no está conectado al flujo`
+        });
+      }
+    });
+
+    return {
+      isValid: errors.length === 0,
+      errors,
+      warnings
+    };
+  }
+
+  /**
+   * Crea una nueva definición de flujo
+   */
+  async createFlow(request: CreateFlowWithDefinitionDTO): Promise<FlowDefinition> {
+    try {
+      // Validar estructura del flujo
+      const validation = this.validateFlow(request.nodes, request.edges);
+      if (!validation.isValid) {
+        throw new Error(`Flujo inválido: ${validation.errors.map(e => e.message).join(', ')}`);
+      }
+
+      // Crear definición de flujo
+      const flowDefinition = await prisma.flowDefinition.create({
+          data: {
+            name: request.name,
+            description: request.description,
+            category: request.category,
+            status: FlowStatus.DRAFT,
+            flow_data: JSON.stringify({
+              nodes: request.nodes,
+              edges: request.edges,
+              variables: request.variables || {},
+              settings: request.settings || {}
+            }),
+            created_by: request.userId,
+            client_id: request.clientId,
+            product_id: request.productId
+          }
+        });
+
+      // Crear primera versión del flujo
+        const flowVersion = await prisma.flowVersion.create({
+          data: {
+            flow_id: flowDefinition.id,
+            version_number: 1,
+            flow_data: JSON.stringify({
+            nodes: request.nodes,
+            edges: request.edges,
+            variables: request.variables || {},
+            settings: request.settings || {}
+          }),
+            is_active: true,
+            created_by: request.userId
+          }
+        });
+
+      return {
+          id: flowDefinition.id,
+          name: flowDefinition.name,
+          description: flowDefinition.description || undefined,
+          category: flowDefinition.category as FlowCategory,
+          status: flowDefinition.status as FlowStatus,
+          createdBy: flowDefinition.created_by,
+          clientId: flowDefinition.client_id || undefined,
+          productId: flowDefinition.product_id || undefined,
+          versions: [{
+            id: flowVersion.id,
+            flowId: flowDefinition.id,
+            version: flowVersion.version_number,
+            definition: {
+               nodes: JSON.parse(flowDefinition.flow_data as string).nodes,
+               edges: JSON.parse(flowDefinition.flow_data as string).edges
+             },
+            isActive: flowVersion.is_active,
+            createdBy: flowVersion.created_by,
+            createdAt: flowVersion.created_at
+          }],
+          createdAt: flowDefinition.created_at,
+          updatedAt: flowDefinition.updated_at,
+          // lastExecutedAt no está en FlowDefinition
+        };
+    } catch (error) {
+      throw new Error(`Error al crear flujo: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  /**
+   * Obtiene un flujo por ID
+   */
+  async getFlow(id: string): Promise<FlowDefinition | null> {
+    try {
+      const flowDefinition = await prisma.flowDefinition.findUnique({
+        where: { id },
+        include: {
+          versions: {
+            where: { is_active: true },
+            take: 1
+          }
+        }
+      });
+
+      if (!flowDefinition || flowDefinition.versions.length === 0) {
+        return null;
+      }
+
+      const activeVersion = flowDefinition.versions[0];
+
+      return {
+          id: flowDefinition.id,
+          name: flowDefinition.name,
+          description: flowDefinition.description || undefined,
+          category: flowDefinition.category as FlowCategory,
+          status: flowDefinition.status as FlowStatus,
+          createdBy: flowDefinition.created_by,
+          clientId: flowDefinition.client_id || undefined,
+          productId: flowDefinition.product_id || undefined,
+          versions: [{
+            id: activeVersion.id,
+            flowId: flowDefinition.id,
+            version: activeVersion.version_number,
+            definition: {
+               nodes: JSON.parse(activeVersion.flow_data as string).nodes,
+               edges: JSON.parse(activeVersion.flow_data as string).edges
+             },
+            isActive: activeVersion.is_active,
+            createdBy: activeVersion.created_by,
+            createdAt: activeVersion.created_at
+          }],
+          createdAt: flowDefinition.created_at,
+          updatedAt: flowDefinition.updated_at,
+          // lastExecutedAt no está en FlowDefinition
+        };
+    } catch (error) {
+      throw new Error(`Error al obtener flujo: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  /**
+   * Lista flujos con filtros
+   */
+  async listFlows(filter: FlowFilter): Promise<FlowDefinition[]> {
+    try {
+      const where: any = {};
+      
+      if (filter.userId) where.created_by = filter.userId;
+      if (filter.clientId) where.client_id = filter.clientId;
+      if (filter.productId) where.product_id = filter.productId;
+      if (filter.category) where.category = filter.category;
+      if (filter.status) where.status = filter.status;
+
+      const flowDefinitions = await prisma.flowDefinition.findMany({
+        where,
+        include: {
+          versions: {
+            where: { is_active: true },
+            take: 1
+          }
+        },
+        orderBy: { created_at: 'desc' },
+        take: filter.limit || 50,
+        skip: filter.offset || 0
+      });
+
+      return flowDefinitions
+        .filter(flow => flow.versions.length > 0)
+        .map(flow => {
+          const activeVersion = flow.versions[0];
+          return {
+              id: flow.id,
+              name: flow.name,
+              description: flow.description || undefined,
+              category: flow.category as FlowCategory,
+              status: flow.status as FlowStatus,
+              createdBy: flow.created_by,
+              clientId: flow.client_id || undefined,
+              productId: flow.product_id || undefined,
+              versions: [{
+                id: activeVersion.id,
+                flowId: flow.id,
+                version: activeVersion.version_number,
+                definition: {
+                   nodes: JSON.parse(activeVersion.flow_data as string).nodes,
+                   edges: JSON.parse(activeVersion.flow_data as string).edges
+                 },
+                isActive: activeVersion.is_active,
+                createdBy: activeVersion.created_by,
+                createdAt: activeVersion.created_at
+              }],
+              createdAt: flow.created_at,
+              updatedAt: flow.updated_at,
+              // lastExecutedAt no está en FlowDefinition
+            };
+        });
+    } catch (error) {
+      throw new Error(`Error al listar flujos: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  /**
+   * Ejecuta un flujo
+   */
+  async executeFlow(id: string, request: ExecuteFlowDTO): Promise<FlowExecutionResponse> {
+    try {
+      const flow = await this.getFlow(id);
+      if (!flow) {
+        throw new Error('Flujo no encontrado');
+      }
+
+      if (flow.status !== FlowStatus.ACTIVE) {
+        throw new Error('El flujo debe estar activo para ejecutarse');
+      }
+
+      const activeVersion = flow.versions?.[0];
+      if (!activeVersion) {
+        throw new Error('No se encontró una versión activa del flujo');
+      }
+
+      // Crear registro de ejecución
+      const execution = await prisma.flowExecution.create({
+        data: {
+          flow_id: id,
+          version_id: activeVersion.id,
+          status: ExecutionStatus.RUNNING,
+          trigger_data: JSON.stringify(request.context || {}),
+          started_at: new Date()
+        }
+      });
+
+      // El flow se ha iniciado correctamente
+
+      // Iniciar ejecución en background
+      this.executeFlowNodes(execution.id, activeVersion.definition.nodes, activeVersion.definition.edges, request.context || {})
+        .catch(error => {
+          console.error(`Error en ejecución de flujo ${id}:`, error);
+          // Marcar ejecución como fallida
+          prisma.flowExecution.update({
+            where: { id: execution.id },
+            data: {
+              status: ExecutionStatus.FAILED,
+              error_message: error instanceof Error ? error.message : 'Unknown error',
+              completed_at: new Date()
+            }
+          }).catch(console.error);
+        });
+
+      return {
+        success: true,
+        data: {
+          id: execution.id,
+          flowId: id,
+          versionId: activeVersion.id,
+          status: ExecutionStatus.RUNNING,
+          startedAt: execution.started_at,
+          triggeredBy: request.triggeredBy,
+          context: request.context || {}
+        } as FlowExecution,
+        executionId: execution.id
+      };
+    } catch (error) {
+      console.error('Error executing flow:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      };
+    }
+  }
+
+  /**
+   * Ejecuta los nodos del flujo secuencialmente
+   */
+  private async executeFlowNodes(
+    executionId: string,
+    nodes: FlowNode[],
+    edges: FlowEdge[],
+    triggerData: any
+  ): Promise<void> {
+    try {
+      // Encontrar nodos trigger
+      const triggerNodes = nodes.filter(node => node.data.category === NodeCategory.TRIGGER);
+      
+      // Ejecutar desde cada trigger
+      for (const triggerNode of triggerNodes) {
+        await this.executeNodeChain(executionId, triggerNode, nodes, edges, triggerData);
+      }
+
+      // Marcar ejecución como completada
+      await prisma.flowExecution.update({
+        where: { id: executionId },
+        data: {
+          status: ExecutionStatus.COMPLETED,
+          completed_at: new Date()
+        }
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * Ejecuta una cadena de nodos desde un nodo inicial
+   */
+  private async executeNodeChain(
+    executionId: string,
+    startNode: FlowNode,
+    allNodes: FlowNode[],
+    edges: FlowEdge[],
+    data: any
+  ): Promise<any> {
+    try {
+      // Ejecutar nodo actual
+      const nodeResult = await this.executeNode(executionId, startNode, data);
+      
+      // Encontrar nodos siguientes
+      const outgoingEdges = edges.filter(edge => edge.source === startNode.id);
+      
+      // Ejecutar nodos siguientes
+      for (const edge of outgoingEdges) {
+        const nextNode = allNodes.find(node => node.id === edge.target);
+        if (nextNode) {
+          await this.executeNodeChain(executionId, nextNode, allNodes, edges, nodeResult);
+        }
+      }
+
+      return nodeResult;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * Ejecuta un nodo individual
+   */
+  private async executeNode(executionId: string, node: FlowNode, inputData: any): Promise<any> {
+    const startTime = new Date();
+    
+    try {
+      // Crear log de ejecución del nodo
+      const nodeLog = await prisma.nodeExecutionLog.create({
+        data: {
+          execution_id: executionId,
+          node_id: node.id,
+          node_type: node.data.category,
+          status: NodeExecutionStatus.RUNNING,
+          input_data: JSON.stringify(inputData),
+          started_at: startTime
+        }
+      });
+
+      let result: any = inputData;
+
+      // Ejecutar lógica específica del nodo
+      switch (node.data.category) {
+        case NodeCategory.TRIGGER:
+          result = await this.executeTriggerNode(node, inputData);
+          break;
+        case NodeCategory.ACTION:
+          result = await this.executeActionNode(node, inputData);
+          break;
+        case NodeCategory.CONDITION:
+          result = await this.executeConditionNode(node, inputData);
+          break;
+        case NodeCategory.TRANSFORM:
+          result = await this.executeTransformNode(node, inputData);
+          break;
+        case NodeCategory.INTEGRATION:
+          result = await this.executeIntegrationNode(node, inputData);
+          break;
+        default:
+          throw new Error(`Tipo de nodo no soportado: ${node.data.category}`);
+      }
+
+      // Actualizar log como exitoso
+      await prisma.nodeExecutionLog.update({
+        where: { id: nodeLog.id },
+        data: {
+          status: NodeExecutionStatus.COMPLETED,
+          output_data: JSON.stringify(result),
+          completed_at: new Date(),
+          execution_time: new Date().getTime() - startTime.getTime()
+        }
+      });
+
+      return result;
+    } catch (error) {
+      // Actualizar log como fallido
+      await prisma.nodeExecutionLog.updateMany({
+        where: {
+          execution_id: executionId,
+          node_id: node.id,
+          status: NodeExecutionStatus.RUNNING
+        },
+        data: {
+          status: NodeExecutionStatus.FAILED,
+          error_message: error instanceof Error ? error.message : 'Unknown error',
+          completed_at: new Date(),
+          execution_time: new Date().getTime() - startTime.getTime()
+        }
+      });
+
+      throw error;
+    }
+  }
+
+  /**
+   * Ejecuta un nodo trigger
+   */
+  private async executeTriggerNode(node: FlowNode, inputData: any): Promise<any> {
+    const config = node.data.config as TriggerConfig;
+    
+    // Por ahora solo pasamos los datos del trigger
+    return {
+      ...inputData,
+      triggeredBy: config.type,
+      triggeredAt: new Date().toISOString()
+    };
+  }
+
+  /**
+   * Ejecuta un nodo de acción
+   */
+  private async executeActionNode(node: FlowNode, inputData: any): Promise<any> {
+    const config = node.data.config as ActionConfig;
+    
+    // Implementar lógica específica de acciones
+    // Por ahora simulamos la ejecución
+    return {
+      ...inputData,
+      actionExecuted: config.type,
+      executedAt: new Date().toISOString()
+    };
+  }
+
+  /**
+   * Ejecuta un nodo de condición
+   */
+  private async executeConditionNode(node: FlowNode, inputData: any): Promise<any> {
+    const config = node.data.config as ConditionConfig;
+    
+    // Evaluar condiciones
+    const conditionResults = config.conditions.map(condition => {
+      // Implementar evaluación de condiciones
+      // Por ahora simulamos que todas las condiciones son verdaderas
+      return true;
+    });
+
+    const result = config.operator === 'AND' 
+      ? conditionResults.every(r => r)
+      : conditionResults.some(r => r);
+
+    return {
+      ...inputData,
+      conditionResult: result,
+      evaluatedAt: new Date().toISOString()
+    };
+  }
+
+  /**
+   * Ejecuta un nodo de transformación
+   */
+  private async executeTransformNode(node: FlowNode, inputData: any): Promise<any> {
+    const config = node.data.config as TransformConfig;
+    
+    // Aplicar transformaciones
+    let result = { ...inputData };
+    
+    config.transformations.forEach(transform => {
+      // Implementar lógica de transformación
+      // Por ahora simulamos la transformación
+      result[transform.targetField] = `transformed_${transform.sourceField}`;
+    });
+
+    return result;
+  }
+
+  /**
+   * Ejecuta un nodo de integración
+   */
+  private async executeIntegrationNode(node: FlowNode, inputData: any): Promise<any> {
+    const config = node.data.config as IntegrationConfig;
+    
+    // Ejecutar integración
+    // Por ahora simulamos la integración
+    return {
+      ...inputData,
+      integrationExecuted: config.operation,
+      integrationResult: 'success',
+      executedAt: new Date().toISOString()
+    };
+  }
+
+  /**
+   * Obtiene métricas de un flujo
+   */
+  async getFlowMetrics(id: string): Promise<FlowMetrics> {
+    try {
+      const executions = await prisma.flowExecution.findMany({
+        where: { flow_id: id },
+        orderBy: { started_at: 'desc' },
+        take: 100
+      });
+
+      const totalExecutions = executions.length;
+      const successfulExecutions = executions.filter(e => e.status === ExecutionStatus.COMPLETED).length;
+      const failedExecutions = executions.filter(e => e.status === ExecutionStatus.FAILED).length;
+      const runningExecutions = executions.filter(e => e.status === ExecutionStatus.RUNNING).length;
+
+      const completedExecutions = executions.filter(e => 
+        e.status === ExecutionStatus.COMPLETED && e.started_at && e.completed_at
+      );
+
+      const averageExecutionTime = completedExecutions.length > 0
+        ? completedExecutions.reduce((sum, e) => {
+            const duration = new Date(e.completed_at!).getTime() - new Date(e.started_at).getTime();
+            return sum + duration;
+          }, 0) / completedExecutions.length
+        : 0;
+
+      return {
+        flowId: id,
+        totalExecutions,
+        successfulExecutions,
+        failedExecutions,
+        averageExecutionTime: Math.round(averageExecutionTime / 1000), // Convertir a segundos
+        lastExecutionStatus: executions.length > 0 ? executions[0].status as ExecutionStatus : ExecutionStatus.COMPLETED,
+        executionTrends: {
+          daily: [],
+          weekly: [],
+          monthly: []
+        }
+      };
+    } catch (error) {
+      throw new Error(`Error al obtener métricas: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+}
+
+export const flowEngine = new FlowEngine();

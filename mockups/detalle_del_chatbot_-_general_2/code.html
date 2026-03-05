@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MindDash - Configuración de Prompt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #3b82f6;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #d1d5db;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar {
+            background-color: #1f2937;
+        }
+        .sidebar a {
+            color: #9ca3af;
+        }
+        .sidebar a:hover {
+            background-color: #374151;
+            color: #ffffff;
+        }
+        .sidebar a.active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .header {
+            border-bottom: 1px solid #374151;
+        }
+        .form-select,
+        .form-input,
+        .form-textarea {
+            background-color: #374151;
+            border-color: #4b5563;
+            color: #d1d5db;
+        }
+        .form-select:focus,
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 1px var(--primary-color);
+            --tw-ring-color: var(--primary-color);
+        }
+        .card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+<div class="flex min-h-screen">
+<aside class="w-64 sidebar flex flex-col">
+<div class="p-6">
+<h1 class="text-2xl font-bold text-white">MindDash</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>General</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span>Capa Semántica</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md active" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span>Prompt</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span>Permisos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span>Alertas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-md" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span>Insights</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<a class="flex items-center gap-3 px-4 py-2 rounded-md" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span>Administración</span>
+</a>
+</div>
+</aside>
+<main class="flex-1">
+<header class="flex items-center justify-between header px-8 py-4">
+<div class="flex items-center gap-2 text-sm text-gray-400">
+<span>Tech Solutions</span>
+<span class="material-symbols-outlined text-gray-500 text-base">chevron_right</span>
+<span>Proyecto Alpha</span>
+<span class="material-symbols-outlined text-gray-500 text-base">chevron_right</span>
+<span class="text-white font-medium">EVA</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-9 bg-gray-700 rounded-full hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+<img alt="User profile picture" class="size-9 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuKdX2RJBTHrHYc3qUbyVqP_aHsfx35iSuSGOID6VND6kyFi44uSHIdvC_x0bL2rq_CHSPwRFRneFVPmFcypwVs2OioHNsDO3o6dgEDAApFlJ-LW_-aaKup5oPdxXkPnKAC53JCVyiRF1fxLHUMWtGHszO7_bJUDmVDrLpOz1vHFIFVvalmLK92zaGYTg86P1CoOwknY69ZfGuHm76I7bNZM93tJeyZN21j54fom3JTNGMPkYpmoelBeS1P7kE8kyiQX3nJ0Npskk"/>
+</div>
+</header>
+<div class="p-8">
+<h2 class="text-2xl font-bold text-white mb-6">Configuración del Prompt</h2>
+<div class="space-y-8">
+<div class="card p-6">
+<h3 class="text-lg font-semibold text-white mb-4">Rol Principal del agente</h3>
+<textarea class="mt-1 block w-full rounded-md form-textarea shadow-sm" id="agent-role" name="agent-role" rows="4">Eres un asistente de inteligencia artificial llamado EVA, experto en análisis de datos para la empresa Tech Solutions. Tu objetivo es ayudar a los usuarios a obtener insights valiosos a partir de las bases de datos de la compañía, generando consultas SQL y presentando los resultados de forma clara y concisa.</textarea>
+</div>
+<div class="card p-6">
+<h3 class="text-lg font-semibold text-white mb-4">Métricas Avanzadas</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
+<div class="lg:col-span-1">
+<label class="block text-sm font-medium text-gray-400" for="metrics">Seleccionar métrica</label>
+<select class="mt-1 block w-full rounded-md form-select shadow-sm" id="metrics" name="metrics">
+<option>Crecimiento de Usuarios Activos (CUA)</option>
+<option>Tasa de Retención de Clientes (TRC)</option>
+<option>Valor de Vida del Cliente (VVC)</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<label class="block text-sm font-medium text-gray-400" for="when-to-use">¿Cuándo Utilizarlo?</label>
+<input class="mt-1 block w-full rounded-md form-input shadow-sm" id="when-to-use" name="when-to-use" placeholder="Ej: Cuando se pregunta por el crecimiento de la base de usuarios..." type="text"/>
+</div>
+<div class="lg:col-span-3">
+<label class="block text-sm font-medium text-gray-400" for="arguments">Argumentos</label>
+<input class="mt-1 block w-full rounded-md form-input shadow-sm" id="arguments" name="arguments" placeholder="Ej: periodo:rango_de_fechas, segmento:string" type="text"/>
+</div>
+</div>
+</div>
+<div class="card p-6">
+<h3 class="text-lg font-semibold text-white mb-4">Flujo de selección de Tablas</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-400" for="tables">Seleccionar tabla</label>
+<select class="mt-1 block w-full rounded-md form-select shadow-sm" id="tables" name="tables">
+<option>ventas_consolidadas</option>
+<option>usuarios_registrados</option>
+<option>inventario_productos</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-400" for="when-to-use-table">¿Cuándo utilizarlo?</label>
+<input class="mt-1 block w-full rounded-md form-input shadow-sm" id="when-to-use-table" name="when-to-use-table" placeholder="Ej: Para preguntas sobre ingresos, transacciones..." type="text"/>
+</div>
+</div>
+</div>
+<div class="card p-6">
+<h3 class="text-lg font-semibold text-white mb-4">Reglas de Negocios</h3>
+<textarea class="mt-1 block w-full rounded-md form-textarea shadow-sm" rows="5">- El año fiscal comienza en febrero.
+- Los clientes VIP son aquellos con más de 10 compras en el último trimestre.
+- Las ventas se atribuyen al día en que se confirma el pago, no el pedido.
+- No considerar devoluciones en el cálculo de ingresos brutos.
+- Siempre utilizar el alias 'u' para la tabla de usuarios y 'v' para la de ventas.</textarea>
+</div>
+<div class="card p-6">
+<h3 class="text-lg font-semibold text-white mb-4">Restricciones Críticas</h3>
+<textarea class="mt-1 block w-full rounded-md form-textarea shadow-sm" rows="5">- NUNCA bajo ninguna circunstancia utilices las operaciones DELETE, UPDATE o DROP en las consultas SQL.
+- Siempre limita las consultas a un máximo de 1000 resultados a menos que se especifique lo contrario.
+- No accedas a columnas que contengan información personal sensible como 'password' o 'direccion_particular'.
+- Las consultas deben ser eficientes, evita los SELECT * y especifica siempre las columnas necesarias.
+- No realices joins entre más de 3 tablas sin una justificación clara.</textarea>
+</div>
+<div class="card p-6">
+<h3 class="text-lg font-semibold text-white mb-4">Formato de Respuesta</h3>
+<textarea class="mt-1 block w-full rounded-md form-textarea shadow-sm" rows="5">1.  **Resumen Ejecutivo:** Comienza con una frase corta y clara que responda directamente a la pregunta del usuario.
+2.  **Visualización:** Si aplica, presenta los datos en una tabla markdown bien formateada.
+3.  **Consulta SQL:** Muestra la consulta SQL utilizada para obtener el resultado, dentro de un bloque de código SQL.
+4.  **Insights Adicionales:** (Opcional) Si encuentras algún dato interesante o una tendencia relevante, añádelo en un párrafo final.</textarea>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,225 @@
+{
+  "schemas": {
+    "SendAlertRequest": {
+      "properties": {
+        "subject": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subject",
+          "description": "Asunto o título del mensaje de alerta."
+        },
+        "html_body": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Html Body",
+          "description": "Cuerpo del mensaje en formato HTML (puede contener el texto enriquecido del LLM)."
+        },
+        "sender_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sender Email",
+          "description": "El correo del remitente (debe estar verificado en el servicio SMTP, ej. Brevo)."
+        },
+        "sender_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sender Name",
+          "description": "Nombre amigable del remitente (ej. 'Sistema de Alertas AI')."
+        },
+        "recipients": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/EmailRecipients"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "alert_type": {
+          "type": "string",
+          "enum": [
+            "email",
+            "teams",
+            "slack",
+            "whatsapp"
+          ],
+          "title": "Alert Type",
+          "description": "El tipo de canal de notificación a usar.",
+          "default": "email"
+        },
+        "message_content_wsp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Message Content Wsp",
+          "description": "El mensaje completo de envio al webhook de alertas"
+        },
+        "message_sender_wsp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Message Sender Wsp",
+          "description": "El Nombre de la persona al que se dirige el mensaje."
+        },
+        "message_phone_number_wsp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Message Phone Number Wsp",
+          "description": "El numero Telefonico de Envio del Mensaje."
+        },
+        "secre_access_token": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Secre Access Token",
+          "description": "El Nombre del creto que contiene el access Token"
+        },
+        "url_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Url Path",
+          "description": "El link del servicio para envio de alertas."
+        }
+      },
+      "type": "object",
+      "title": "SendAlertRequest",
+      "description": "Modelo principal de datos para la solicitud de envío de alerta.",
+      "example": {
+        "alert_type": "email",
+        "html_body": "<div style=\"font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; max-width: 600px; margin: auto;\"><h2 style=\"color: #e6b200; border-bottom: 2px solid #e6b200; padding-bottom: 10px;\">⚠️ Alerta de Tendencia Crítica: Caída de Ventas ⚠️</h2><p style=\"font-size: 14px; color: #555;\">El análisis del Agente AI muestra una disminución significativa en las ventas totales del mes. Se recomienda revisar la ejecución de la última campaña.</p><h3 style=\"color: #333;\">Resumen Comparativo (Mensual):</h3><table style=\"width: 100%; border-collapse: collapse; margin-top: 15px;\"><thead style=\"background-color: #fce8e8;\"><tr><th style=\"padding: 10px; border: 1px solid #ddd; text-align: left;\">Período</th><th style=\"padding: 10px; border: 1px solid #ddd; text-align: left;\">Ventas Totales</th><th style=\"padding: 10px; border: 1px solid #ddd; text-align: left;\">Diferencia vs. Mes Anterior</th></tr></thead><tbody><tr style=\"background-color: #fff;\"><td style=\"padding: 10px; border: 1px solid #ddd;\">Mes Anterior</td><td style=\"padding: 10px; border: 1px solid #ddd;\"><b>$500,000 USD</b></td><td style=\"padding: 10px; border: 1px solid #ddd;\">-</td></tr><tr style=\"background-color: #ffe0e0;\"><td style=\"padding: 10px; border: 1px solid #ddd;\">Mes Actual</td><td style=\"padding: 10px; border: 1px solid #ddd;\"><b>$450,000 USD</b></td><td style=\"padding: 10px; border: 1px solid #ddd; color: #cc0000; font-weight: bold;\">-10% ⬇️</td></tr></tbody></table><h3 style=\"color: #111; margin-top: 30px;\">Recomendación:</h3><p style=\"background-color: #fffaf0; padding: 15px; border-left: 5px solid #ff9900; font-size: 14px;\">El Agente AI sugiere priorizar una reunión inmediata con el equipo de Marketing para revisar la segmentación y el presupuesto de la próxima semana.</p><p style=\"font-size: 12px; color: #888; margin-top: 20px;\">Este mensaje de alerta fue enviado correctamente por el Sistema AI.</p></div>",
+        "message_content_wsp": "Es una prueba de mensaje by Alerts API",
+        "message_phone_number_wsp": "+51939275711",
+        "message_sender_wsp": "Cesar Condor",
+        "recipients": {
+          "bcc": [],
+          "cc": [
+            "cesarcondor2013@gmail.com"
+          ],
+          "to": [
+            "cesarcondor2013@gmail.com"
+          ]
+        },
+        "secre_access_token": "tttt-xxxx-tt",
+        "sender_email": "cesarcondor2013@gmail.com",
+        "sender_name": "Agente AI | Monitoreo de Negocio",
+        "subject": "ALERTA DE VENTAS: Caída del 10% Mensual",
+        "url_path": "www.linkgalert.com"
+      }
+    },
+    "SendAlertResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ],
+          "title": "Status",
+          "description": "Resultado general..."
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje conciso..."
+        },
+        "alert_type": {
+          "type": "string",
+          "title": "Alert Type",
+          "description": "El tipo de notificación procesado."
+        },
+        "details": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Details",
+          "description": "Contiene datos específicos del proveedor o errores."
+        }
+      },
+      "type": "object",
+      "required": [
+        "status",
+        "message",
+        "alert_type"
+      ],
+      "title": "SendAlertResponse",
+      "description": "Estructura de la respuesta estándar del endpoint de envío de alertas.",
+      "examples": [
+        {
+          "alert_type": "email",
+          "details": {
+            "brevo_message_id": "b6a71e72-d5e8-42f1-a1b7-d1a2f3e4d5c6"
+          },
+          "message": "Correo enviado exitosamente. ID de Brevo: 12345ABC",
+          "status": "success"
+        },
+        {
+          "alert_type": "email",
+          "details": {
+            "error_code": 401,
+            "provider_message": "Invalid API Key"
+          },
+          "message": "Fallo en la autenticación con Brevo.",
+          "status": "error"
+        }
+      ]
+    }
+  }
+}

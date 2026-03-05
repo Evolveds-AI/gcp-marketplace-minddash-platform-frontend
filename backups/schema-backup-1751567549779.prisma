@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model EMPRESAS {
+  id          String @id @default(uuid())
+  nombre      String
+  descripcion String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  
+  // Relations
+  usuarios    USUARIOS[]
+  
+  @@map("empresas")
+}
+
+model USUARIOS {
+  id            String   @id @default(uuid())
+  username      String   @unique
+  email         String   @unique
+  password_hash String
+  iam_role      String   @default("user") // 'admin' | 'user'
+  empresa_id    String
+  email_verified Boolean @default(false)
+  is_active     Boolean @default(true)
+  failed_attempts Int   @default(0)
+  locked_until    DateTime?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  
+  // Relations
+  empresa       EMPRESAS @relation(fields: [empresa_id], references: [id], onDelete: Cascade)
+  password_resets PASSWORD_RESETS[]
+  sessions_user SESSIONS_USER[]
+  events        SESSIONS_EVENTS[]
+  
+  @@map("usuarios")
+}
+
+model PASSWORD_RESETS {
+  id         String   @id @default(uuid())
+  usuario_id String
+  token      String   @unique
+  expires_at DateTime
+  used       Boolean  @default(false)
+  created_at DateTime @default(now())
+  
+  // Relations
+  usuario    USUARIOS @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  
+  @@map("password_resets")
+}
+
+model SESSIONS_USER {
+  id         String   @id @default(uuid())
+  usuario_id String
+  jwt_token  String   @unique
+  refresh_token String @unique
+  expires_at DateTime
+  refresh_expires_at DateTime
+  is_active  Boolean  @default(true)
+  ip_address String?
+  user_agent String?
+  created_at DateTime @default(now())
+  
+  // Relations
+  usuario    USUARIOS @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  
+  @@map("sessions_user")
+}
+
+model SESSIONS_EVENTS {
+  id         String   @id @default(uuid())
+  usuario_id String
+  content    String
+  role       String   // 'user' | 'assistant' | 'system'
+  timestamp  DateTime @default(now())
+  
+  // Relations
+  usuario    USUARIOS @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  
+  @@map("sessions_events")
+} 

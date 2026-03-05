@@ -1,0 +1,7 @@
+id,username,email,password_hash,iam_role,empresa_id,email_verified,is_active,failed_attempts,locked_until,created_at,updated_at
+2431de40-226e-4403-81b9-90ac6e6633b9,mecanic,mecanic@mecánicaexpress.com,$2b$12$IJHcgTICy5tituzDegpzCOaYigQUS58btenQuF284u9Zod1WFDhGS,user,889f70cf-0f4a-4182-a085-f6bc2252f32d,true,true,0,,2025-07-03 18:31:33.451,2025-07-03 18:44:28.312
+5f212679-9aca-4cae-9ed2-81a324e9cb36,cintac,cintac@cintac.com,$2b$12$6Mjdm81wCBMiaXo.9I0/i.uB3L4oaOsuK0wtm2Xu4/hOYUG5jJfSm,user,3abedca5-7215-4b92-a7e7-5d128d5aaadb,true,true,0,,2025-07-03 18:31:32.885,2025-07-03 18:44:27.824
+9ee57f9f-f095-4d03-bc0b-b57a955ccf83,restobar,restobar@restobarcentral.com,$2b$12$yf4BqbTqNPZXqtFgdH65ken5aRHt414u/XDN8VKgZ5WGyL2soLzPu,user,8c520572-e8a0-4271-b66f-1fa295642d1b,true,true,0,,2025-07-03 18:31:33.935,2025-07-03 18:44:28.79
+a52e4caf-74af-43d2-9441-683908ab5c75,minddash,minddash@minddashanalytics.com,$2b$12$Jh190DwnceFu8dLkeiLk0.vQRYLiiF8IRmJ7.DGKNiJZBArlXtnyC,user,44a2b24d-e5ba-42d9-960f-bf550948334b,true,true,0,,2025-07-03 18:31:34.413,2025-07-03 18:44:29.268
+ef133e6e-03c3-44c5-9981-a68f87356554,lisit,lisit@lisit.com,$2b$12$ucHwsUUIwnh2fK3m.rEFy.8LVlq6XVYareP1tw4yeovKt04gBd8Q.,user,d6e51532-c220-4014-ab32-1e3dbe9d1786,true,true,0,,2025-07-03 18:31:32.402,2025-07-03 18:44:27.344
+f9fd1cd3-be68-42b9-aff4-bda91cc433a6,admin,admin@evolveadmin.com,$2b$12$PP5JUw4vxjmAiZVjjG8S4.gLRdVRhFamONwO8LqRYsCkPCp1hUmDq,admin,b0cf199e-664f-4945-8577-ea0a679814ce,true,true,0,,2025-07-03 18:31:31.669,2025-07-03 18:44:26.45

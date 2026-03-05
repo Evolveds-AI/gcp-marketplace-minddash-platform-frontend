@@ -1,0 +1,31 @@
+{
+  "schemas": {
+    "DatabricksConfig": {
+      "properties": {
+        "http_path": {
+          "type": "string",
+          "title": "Http Path",
+          "description": "El HTTP Path del SQL Warehouse"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "Client Id",
+          "description": "Service Principal Client ID"
+        },
+        "client_secret": {
+          "type": "string",
+          "title": "Client Secret",
+          "description": "Service Principal Client Secret"
+        }
+      },
+      "type": "object",
+      "required": [
+        "http_path",
+        "client_id",
+        "client_secret"
+      ],
+      "title": "DatabricksConfig",
+      "description": "Configuración específica requerida si engine='databricks'"
+    }
+  }
+}

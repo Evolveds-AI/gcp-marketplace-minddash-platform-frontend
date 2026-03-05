@@ -1,0 +1,356 @@
+{
+  "schemas": {
+    "DataConnectionByOrganization": {
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "title": "Connection Id",
+          "description": "ID de la conexión."
+        },
+        "connection_name": {
+          "type": "string",
+          "title": "Connection Name",
+          "description": "Nombre de la conexión."
+        },
+        "connection_type": {
+          "type": "string",
+          "title": "Connection Type",
+          "description": "Tipo de conexión."
+        },
+        "connection_configuration": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Connection Configuration",
+          "description": "Configuración de la conexión."
+        },
+        "organization_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Id",
+          "description": "ID de la organización."
+        },
+        "organization_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Name",
+          "description": "Nombre de la organización."
+        },
+        "organization_company_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Company Name",
+          "description": "Nombre de la empresa."
+        },
+        "organization_country": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Country",
+          "description": "País de la organización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "connection_id",
+        "connection_name",
+        "connection_type"
+      ],
+      "title": "DataConnectionByOrganization",
+      "description": "Representa una conexión de datos con información de la organización."
+    },
+    "DataConnectionCreationResponse": {
+      "properties": {
+        "id_connection": {
+          "type": "string",
+          "title": "Id Connection",
+          "description": "ID de la conexión creada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_connection"
+      ],
+      "title": "DataConnectionCreationResponse",
+      "description": "Respuesta al crear una nueva conexión de datos."
+    },
+    "DataConnectionDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID de la conexión que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "DataConnectionDeleteRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_delete_data_connection.\nSolo requiere el ID.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "DataConnectionDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Conexión eliminada exitosamente."
+        },
+        "connection_id": {
+          "type": "string",
+          "title": "Connection Id",
+          "description": "ID de la conexión eliminada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "connection_id"
+      ],
+      "title": "DataConnectionDeleteResponse",
+      "description": "Respuesta al eliminar una conexión de datos."
+    },
+    "DataConnectionRegisterRequest": {
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "ID de la organización a la que pertenece la conexión."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Nombre de la conexión."
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Tipo de conexión (ej: 'postgresql', 'mysql', 'mongodb')."
+        },
+        "configuration": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Configuration",
+          "description": "Configuración JSONB de la conexión."
+        }
+      },
+      "type": "object",
+      "required": [
+        "organization_id",
+        "name",
+        "type",
+        "configuration"
+      ],
+      "title": "DataConnectionRegisterRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_data_connection.",
+      "example": {
+        "configuration": {
+          "database": "minddash_db",
+          "host": "localhost",
+          "password": "secret123",
+          "port": 5432,
+          "ssl_mode": "require",
+          "username": "admin"
+        },
+        "name": "Conexión PostgreSQL Principal",
+        "organization_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "type": "postgresql"
+      }
+    },
+    "DataConnectionResponse": {
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "title": "Connection Id",
+          "description": "ID de la conexión."
+        },
+        "connection_name": {
+          "type": "string",
+          "title": "Connection Name",
+          "description": "Nombre de la conexión."
+        },
+        "connection_type": {
+          "type": "string",
+          "title": "Connection Type",
+          "description": "Tipo de conexión."
+        },
+        "connection_configuration": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Connection Configuration",
+          "description": "Configuración de la conexión."
+        },
+        "organization_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Id",
+          "description": "ID de la organización."
+        },
+        "organization_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Name",
+          "description": "Nombre de la organización."
+        },
+        "organization_company_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Company Name",
+          "description": "Nombre de la empresa."
+        },
+        "organization_country": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Organization Country",
+          "description": "País de la organización."
+        }
+      },
+      "type": "object",
+      "required": [
+        "connection_id",
+        "connection_name",
+        "connection_type"
+      ],
+      "title": "DataConnectionResponse",
+      "description": "Respuesta para una conexión de datos individual."
+    },
+    "DataConnectionUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID de la conexión que se va a actualizar."
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization Id",
+          "description": "ID de la organización."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Nuevo nombre de la conexión."
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Nuevo tipo de conexión."
+        },
+        "configuration": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Configuration",
+          "description": "Nueva configuración JSONB."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "organization_id",
+        "name",
+        "type",
+        "configuration"
+      ],
+      "title": "DataConnectionUpdateRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_data_connection.",
+      "example": {
+        "configuration": {
+          "database": "updated_db",
+          "host": "new-host.example.com",
+          "password": "new_secret123",
+          "port": 5432,
+          "ssl_mode": "prefer",
+          "username": "new_admin"
+        },
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e",
+        "name": "Conexión PostgreSQL Actualizada",
+        "organization_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "type": "postgresql"
+      }
+    },
+    "DataConnectionUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Conexión actualizada exitosamente."
+        },
+        "connection_id": {
+          "type": "string",
+          "title": "Connection Id",
+          "description": "ID de la conexión actualizada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "connection_id"
+      ],
+      "title": "DataConnectionUpdateResponse",
+      "description": "Respuesta al actualizar una conexión de datos."
+    }
+  }
+}

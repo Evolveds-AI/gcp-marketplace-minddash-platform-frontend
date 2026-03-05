@@ -1,0 +1,49 @@
+{
+  "schemas": {
+    "DeleteConnectionRequest": {
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "title": "Server Url"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "postgres",
+            "mysql",
+            "bigquery",
+            "mariadb",
+            "mssql",
+            "synapsemssql",
+            "redshift",
+            "snowflake",
+            "aurora",
+            "aurorapostgres",
+            "auroramysql",
+            "hana",
+            "oracle",
+            "teradata",
+            "clickhouse"
+          ],
+          "title": "Engine"
+        }
+      },
+      "type": "object",
+      "required": [
+        "server_url",
+        "name",
+        "engine"
+      ],
+      "title": "DeleteConnectionRequest",
+      "example": {
+        "engine": "postgres",
+        "name": "postgresql_conn_minddash_demo",
+        "server_url": "http://0.0.0.0:47334"
+      }
+    }
+  }
+}

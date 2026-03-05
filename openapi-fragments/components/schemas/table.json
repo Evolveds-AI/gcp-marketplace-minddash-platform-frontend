@@ -1,0 +1,32 @@
+{
+  "schemas": {
+    "TableSelectionLogic": {
+      "properties": {
+        "table_name": {
+          "type": "string",
+          "title": "Table Name"
+        },
+        "usage_instructions": {
+          "type": "string",
+          "title": "Usage Instructions"
+        },
+        "validation": {
+          "type": "string",
+          "title": "Validation"
+        },
+        "important_notes": {
+          "type": "string",
+          "title": "Important Notes"
+        }
+      },
+      "type": "object",
+      "required": [
+        "table_name",
+        "usage_instructions",
+        "validation",
+        "important_notes"
+      ],
+      "title": "TableSelectionLogic"
+    }
+  }
+}

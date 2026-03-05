@@ -1,0 +1,538 @@
+{
+  "schemas": {
+    "Metric": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "metric": {
+          "type": "string",
+          "title": "Metric"
+        },
+        "parameters": {
+          "items": {
+            "$ref": "#/components/schemas/MetricParameter"
+          },
+          "type": "array",
+          "title": "Parameters"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "metric",
+        "parameters"
+      ],
+      "title": "Metric"
+    },
+    "MetricByProduct": {
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "title": "Metric Id",
+          "description": "ID de la métrica."
+        },
+        "metric_name": {
+          "type": "string",
+          "title": "Metric Name",
+          "description": "Nombre de la métrica."
+        },
+        "metric_description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Description",
+          "description": "Descripción de la métrica."
+        },
+        "metric_data_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Data Query",
+          "description": "Query de datos de la métrica."
+        },
+        "metric_required_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Required Params",
+          "description": "Lista de nombres de parametros requeridos."
+        },
+        "metric_optional_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Optional Params",
+          "description": "Lista de nombres de parametros opcionales."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto."
+        },
+        "product_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Name",
+          "description": "Nombre del producto."
+        }
+      },
+      "type": "object",
+      "required": [
+        "metric_id",
+        "metric_name",
+        "product_id"
+      ],
+      "title": "MetricByProduct",
+      "description": "Representa una métrica con información del producto."
+    },
+    "MetricCreationResponse": {
+      "properties": {
+        "id_metric": {
+          "type": "string",
+          "title": "Id Metric",
+          "description": "ID de la métrica creada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id_metric"
+      ],
+      "title": "MetricCreationResponse",
+      "description": "Respuesta al crear una nueva métrica."
+    },
+    "MetricDefinition": {
+      "properties": {
+        "name_metrics": {
+          "type": "string",
+          "title": "Name Metrics",
+          "description": "Nombre clave de la métrica (ej: cross_selling_general)"
+        },
+        "sql_template": {
+          "type": "string",
+          "title": "Sql Template",
+          "description": "Plantilla SQL que define la métrica."
+        },
+        "required_params": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Required Params",
+          "description": "Parámetros obligatorios en el SQL."
+        },
+        "optional_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Optional Params",
+          "description": "Parámetros opcionales en el SQL."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name_metrics",
+        "sql_template"
+      ],
+      "title": "MetricDefinition",
+      "description": "Define la estructura de una métrica individual enviada en el request."
+    },
+    "MetricDeleteRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID de la métrica que se va a eliminar."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "title": "MetricDeleteRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_delete_metric.\nSolo requiere el ID.",
+      "example": {
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e"
+      }
+    },
+    "MetricDeleteResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Métrica eliminada exitosamente."
+        },
+        "metric_id": {
+          "type": "string",
+          "title": "Metric Id",
+          "description": "ID de la métrica eliminada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "metric_id"
+      ],
+      "title": "MetricDeleteResponse",
+      "description": "Respuesta al eliminar una métrica."
+    },
+    "MetricParameter": {
+      "properties": {
+        "parameter": {
+          "type": "string",
+          "title": "Parameter"
+        },
+        "meaning": {
+          "type": "string",
+          "title": "Meaning"
+        }
+      },
+      "type": "object",
+      "required": [
+        "parameter",
+        "meaning"
+      ],
+      "title": "MetricParameter"
+    },
+    "MetricRegisterRequest": {
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto al que pertenece la métrica."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Name",
+          "description": "Nombre de la métrica."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Description",
+          "description": "Descripción de la métrica."
+        },
+        "data_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Query",
+          "description": "Query de datos de la métrica."
+        },
+        "required_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Required Params",
+          "description": "Lista de nombres de parametros requeridos."
+        },
+        "optional_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Optional Params",
+          "description": "Lista de nombres de parametros opcionales."
+        }
+      },
+      "type": "object",
+      "required": [
+        "product_id",
+        "name",
+        "description"
+      ],
+      "title": "MetricRegisterRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_insert_metric.",
+      "example": {
+        "data_query": "SELECT COUNT(DISTINCT user_id) FROM user_interactions WHERE DATE(created_at) = CURRENT_DATE",
+        "description": "Número de usuarios únicos que interactúan con el producto cada día",
+        "name": "Usuarios Activos Diarios",
+        "optional_params": [
+          "user_count",
+          "order_volume",
+          "revenue"
+        ],
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "required_params": [
+          "user_count",
+          "order_volume",
+          "revenue"
+        ]
+      }
+    },
+    "MetricResponse": {
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "title": "Metric Id",
+          "description": "ID de la métrica."
+        },
+        "metric_name": {
+          "type": "string",
+          "title": "Metric Name",
+          "description": "Nombre de la métrica."
+        },
+        "metric_description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Description",
+          "description": "Descripción de la métrica."
+        },
+        "metric_data_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Data Query",
+          "description": "Query de datos de la métrica."
+        },
+        "metric_required_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Required Params",
+          "description": "Lista de nombres de parametros requeridos."
+        },
+        "metric_optional_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Metric Optional Params",
+          "description": "Lista de nombres de parametros opcionales."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto."
+        },
+        "product_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Name",
+          "description": "Nombre del producto."
+        }
+      },
+      "type": "object",
+      "required": [
+        "metric_id",
+        "metric_name",
+        "product_id"
+      ],
+      "title": "MetricResponse",
+      "description": "Respuesta para una métrica individual."
+    },
+    "MetricUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "ID de la métrica que se va a actualizar."
+        },
+        "product_id": {
+          "type": "string",
+          "title": "Product Id",
+          "description": "ID del producto."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Name",
+          "description": "Nuevo nombre de la métrica."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "title": "Description",
+          "description": "Nueva descripción."
+        },
+        "data_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Query",
+          "description": "Query de datos de la métrica."
+        },
+        "required_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Required Params",
+          "description": "Lista de nombres de parametros requeridos."
+        },
+        "optional_params": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Optional Params",
+          "description": "Lista de nombres de parametros opcionales."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "product_id",
+        "name",
+        "description"
+      ],
+      "title": "MetricUpdateRequest",
+      "description": "Datos necesarios para llamar a spu_minddash_app_update_metric.",
+      "example": {
+        "data_query": {
+          "aggregation": "weekly",
+          "query": "SELECT COUNT(DISTINCT user_id) FROM user_interactions WHERE DATE(created_at) >= DATE_TRUNC('week', CURRENT_DATE)",
+          "type": "count"
+        },
+        "description": "Número de usuarios únicos que interactúan con el producto cada semana",
+        "id": "1ee67952-ef83-4038-ae9d-d95d2f16c32e",
+        "name": "Usuarios Activos Semanales",
+        "optional_params": [
+          "user_count",
+          "order_volume",
+          "revenue"
+        ],
+        "product_id": "a6f38618-4308-4dfc-83d7-4f98651649c1",
+        "required_params": [
+          "user_count",
+          "order_volume",
+          "revenue"
+        ]
+      }
+    },
+    "MetricUpdateResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Mensaje de confirmación.",
+          "default": "Métrica actualizada exitosamente."
+        },
+        "metric_id": {
+          "type": "string",
+          "title": "Metric Id",
+          "description": "ID de la métrica actualizada."
+        }
+      },
+      "type": "object",
+      "required": [
+        "metric_id"
+      ],
+      "title": "MetricUpdateResponse",
+      "description": "Respuesta al actualizar una métrica."
+    }
+  }
+}

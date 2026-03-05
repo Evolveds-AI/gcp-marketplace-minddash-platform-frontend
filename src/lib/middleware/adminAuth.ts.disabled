@@ -1,0 +1,131 @@
+import { NextRequest } from 'next/server';
+import { verifyAccessToken } from '../auth';
+import prisma from '../database';
+import { isAdminRole } from '../utils/role-helpers';
+
+export interface AdminVerificationResult {
+  success: boolean;
+  user?: {
+    id: string;
+    username: string;
+    email: string;
+    iam_role: string;
+    client_id: string;
+  };
+  error?: string;
+  status?: number;
+}
+
+/**
+ * Verifica que el usuario sea administrador de forma unificada
+ * @param request - NextRequest object
+ * @returns AdminVerificationResult
+ */
+export async function verifyAdmin(request: NextRequest): Promise<AdminVerificationResult> {
+  try {
+    // Obtener el token del header Authorization o de las cookies
+    const authHeader = request.headers.get('Authorization');
+    const bearerToken = authHeader?.replace('Bearer ', '');
+    const cookieToken = request.cookies.get('access-token')?.value;
+    const token = bearerToken || cookieToken;
+    
+    if (!token) {
+      return { 
+        success: false, 
+        error: 'Token requerido', 
+        status: 401 
+      };
+    }
+
+    const decoded = verifyAccessToken(token);
+    if (!decoded) {
+      return { 
+        success: false, 
+        error: 'Token inválido', 
+        status: 401 
+      };
+    }
+
+    // Buscar usuario actualizado en DB para verificar roles y estado
+    const user = await prisma.users.findUnique({
+      where: { id: decoded.userId },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        is_active: true,
+        role: {
+          select: {
+            name: true
+          }
+        }
+      }
+    });
+
+    if (!user) {
+      return { 
+        success: false, 
+        error: 'Usuario no encontrado', 
+        status: 404 
+      };
+    }
+
+    if (!user.is_active) {
+      return { 
+        success: false, 
+        error: 'Usuario inactivo', 
+        status: 403 
+      };
+    }
+
+    // Verificar que sea admin
+    if (!isAdminRole(user.role?.name)) {
+      return { 
+        success: false, 
+        error: 'Acceso denegado. Se requieren permisos de administrador', 
+        status: 403 
+      };
+    }
+
+    return {
+      success: true,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email || '',
+        iam_role: user.iam_role,
+        client_id: user.client_id || ''
+      }
+    };
+  } catch (error) {
+    console.error('Error en verificación de admin:', error);
+    return { 
+      success: false, 
+      error: 'Error interno del servidor', 
+      status: 500 
+    };
+  }
+}
+
+/**
+ * Verifica que el usuario sea super administrador
+ * @param request - NextRequest object
+ * @returns AdminVerificationResult
+ */
+export async function verifySuperAdmin(request: NextRequest): Promise<AdminVerificationResult> {
+  const result = await verifyAdmin(request);
+  
+  if (!result.success) {
+    return result;
+  }
+
+  if (result.user?.iam_role !== 'super_admin') {
+    return {
+      success: false,
+      error: 'Se requieren permisos de super administrador',
+      status: 403
+    };
+  }
+
+  return result;
+}

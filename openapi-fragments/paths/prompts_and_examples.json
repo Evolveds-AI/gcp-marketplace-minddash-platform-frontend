@@ -1,0 +1,642 @@
+{
+  "paths": {
+    "/prompts_and_examples/prompts/getPromptsByproduct": {
+      "post": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Subir Prompt General/SQL de Agente a GCS",
+        "description": "Crea un archivo YAML de prompt (que incluye version, product, prompt_content, etc.) y lo sube a una ruta específica en GCS, devolviendo la URL.",
+        "operationId": "getListProjectByProduct_prompts_and_examples_prompts_getPromptsByproduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetPromptsRequestByProduct"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/GetPromptsResponseByProduct"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistprojectbyproduct Prompts And Examples Prompts Getpromptsbyproduct Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/upload": {
+      "post": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Subir Prompt General/SQL de Agente a GCS",
+        "description": "Crea un archivo YAML de prompt (que incluye version, product, prompt_content, etc.) y lo sube a una ruta específica en GCS, devolviendo la URL.",
+        "operationId": "upload_prompt_prompts_and_examples_prompts_upload_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadPromptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadPromptResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/uploadByProduct": {
+      "post": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Generar y Subir Prompt de Agente a GCS por Product ID",
+        "description": "Extrae la configuración del prompt de la BD por product_id, genera el YAML y lo sube a GCS.",
+        "operationId": "upload_prompt_by_product_id_prompts_and_examples_prompts_uploadByProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadPromptRequestByProduct"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadPromptResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/sendRegisterPrompt": {
+      "post": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Registrar un Nuevo Prompt (CREATE)",
+        "description": "Crea un nuevo registro de prompt en la base de datos. Asocia el prompt a un rol y/o producto específico.",
+        "operationId": "sendRegisterPrompt_prompts_and_examples_prompts_sendRegisterPrompt_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromptCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/sendUpdatePrompt": {
+      "put": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Actualizar un Prompt existente (Parcial)",
+        "description": "Modifica los campos de un prompt existente, identificado por su id. Soporta la actualización parcial de los datos.",
+        "operationId": "updatePrompt_prompts_and_examples_prompts_sendUpdatePrompt_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromptUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/sendDeletePrompt": {
+      "delete": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Eliminar un Prompt existente (DELETE)",
+        "description": "Elimina el registro de prompt de la base de datos, identificado por su id.",
+        "operationId": "deletePrompt_prompts_and_examples_prompts_sendDeletePrompt_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromptDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/examples/upload": {
+      "post": {
+        "tags": [
+          "Examples Mannagement"
+        ],
+        "summary": "Construir y Subir Few-shot Examples + Embeddings",
+        "description": "Recibe una lista de pares user_query/sql_query, genera YAML de ejemplos y embeddings .npy (a través de Vertex AI), y los sube a GCS, devolviendo sus URLs.",
+        "operationId": "build_prompts_examples_prompts_and_examples_examples_upload_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadPromptRequestByProduct"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuildPromptsExamplesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/examples/uploadByProduct": {
+      "post": {
+        "tags": [
+          "Examples Mannagement"
+        ],
+        "summary": "Construir y Subir Few-shot Examples + Embeddings por ID de Producto",
+        "description": "Recibe un product_id, consulta la DB para obtener ejemplos, genera YAML y embeddings, y los sube a GCS, devolviendo sus URLs.",
+        "operationId": "build_prompts_examples_by_product_prompts_and_examples_examples_uploadByProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuildPromptsExamplesByProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuildPromptsExamplesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/examples/getListExamplesByProduct": {
+      "post": {
+        "tags": [
+          "Examples Mannagement"
+        ],
+        "summary": "Listar Ejemplos filtrados por ID de Producto",
+        "description": "Obtiene una lista detallada de todos los ejemplos que están asociados a un product_id específico.",
+        "operationId": "getListExamplesByProduct_prompts_and_examples_examples_getListExamplesByProduct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExampleListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ExampleListResponseItem"
+                  },
+                  "type": "array",
+                  "title": "Response Getlistexamplesbyproduct Prompts And Examples Examples Getlistexamplesbyproduct Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/examples/sendRegisterExample": {
+      "post": {
+        "tags": [
+          "Examples Mannagement"
+        ],
+        "summary": "Registrar un Nuevo Ejemplo asociado a un producto (CREATE)",
+        "description": "Crea un nuevo registro de ejemplo en la base de datos. Requiere la asociación a un product_id válido.",
+        "operationId": "sendRegisterExample_prompts_and_examples_examples_sendRegisterExample_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExampleRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExampleCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/examples/sendUpdateExample": {
+      "put": {
+        "tags": [
+          "Examples Mannagement"
+        ],
+        "summary": "Actualizar un Ejemplo existente (Parcial)",
+        "description": "Modifica campos de un registro de ejemplo existente, identificado por su id. Soporta actualizaciones parciales.",
+        "operationId": "updateExample_prompts_and_examples_examples_sendUpdateExample_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExampleUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExampleUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/examples/sendDeleteExample": {
+      "delete": {
+        "tags": [
+          "Examples Mannagement"
+        ],
+        "summary": "Eliminar un Ejemplo existente (DELETE)",
+        "description": "Elimina el registro de ejemplo de la base de datos, identificado por su id.",
+        "operationId": "deleteExample_prompts_and_examples_examples_sendDeleteExample_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExampleDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExampleDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/sendRegisterPromptV2": {
+      "post": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Registrar un Nuevo Prompt (CREATE)",
+        "description": "Crea un nuevo registro de prompt en la base de datos. Asocia el prompt a un rol y/o producto específico.",
+        "operationId": "sendRegisterPromptV2_prompts_and_examples_prompts_sendRegisterPromptV2_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptRegisterRequestV2"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromptCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/sendUpdatePromptV2": {
+      "put": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Actualizar un Prompt existente (Parcial)",
+        "description": "Modifica los campos de un prompt existente, identificado por su id. Soporta la actualización parcial de los datos.",
+        "operationId": "updatePromptV2_prompts_and_examples_prompts_sendUpdatePromptV2_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptUpdateRequestV2"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromptUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts_and_examples/prompts/uploadByProductV2": {
+      "post": {
+        "tags": [
+          "Prompts Mannagement"
+        ],
+        "summary": "Generar y Subir Prompt de Agente a GCS por Product ID",
+        "description": "Extrae la configuración del prompt de la BD por product_id, genera el YAML y lo sube a GCS.",
+        "operationId": "upload_prompt_by_product_idV2_prompts_and_examples_prompts_uploadByProductV2_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadPromptRequestByProduct"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadPromptResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

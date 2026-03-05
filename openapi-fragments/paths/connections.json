@@ -1,0 +1,222 @@
+{
+  "paths": {
+    "/connections/getDataConnectionsByOrganization": {
+      "post": {
+        "tags": [
+          "Connections Management"
+        ],
+        "summary": "Listar Conexiones por Organización",
+        "description": "Obtiene todas las conexiones de datos que han sido asociadas a una **organización** específica, filtrando por el `organization_id` provisto.",
+        "operationId": "getDataConnectionsByOrganization_connections_getDataConnectionsByOrganization_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetDataConnectionsByOrganizationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DataConnectionByOrganization"
+                  },
+                  "type": "array",
+                  "title": "Response Getdataconnectionsbyorganization Connections Getdataconnectionsbyorganization Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connections/getDataConnections": {
+      "post": {
+        "tags": [
+          "Connections Management"
+        ],
+        "summary": "Listar Conexiones (Todas o por ID)",
+        "description": "Obtiene una lista de todas las conexiones registradas. Opcionalmente, si se proporciona un `connection_id` en el cuerpo, devuelve solo los detalles de esa conexión específica.",
+        "operationId": "getDataConnections_connections_getDataConnections_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetDataConnectionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DataConnectionResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Getdataconnections Connections Getdataconnections Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connections/sendRegistroConnection": {
+      "post": {
+        "tags": [
+          "Connections Management"
+        ],
+        "summary": "Registrar Nueva Conexión (CREATE)",
+        "description": "Crea y registra una nueva conexión a una fuente de datos en la base de datos.",
+        "operationId": "sendRegistroConnection_connections_sendRegistroConnection_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataConnectionRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectionCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connections/updateConnection": {
+      "put": {
+        "tags": [
+          "Connections Management"
+        ],
+        "summary": "Actualizar Conexión (UPDATE)",
+        "description": "Modifica los detalles de una conexión de datos existente. Devuelve error 404 si el `id` de la conexión no existe.",
+        "operationId": "updateConnection_connections_updateConnection_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataConnectionUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectionUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connections/deleteConnection": {
+      "delete": {
+        "tags": [
+          "Connections Management"
+        ],
+        "summary": "Eliminar Conexión (DELETE)",
+        "description": "Elimina una conexión de datos del sistema. Devuelve error 404 si el `id` de la conexión no existe.",
+        "operationId": "deleteConnection_connections_deleteConnection_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataConnectionDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectionDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
