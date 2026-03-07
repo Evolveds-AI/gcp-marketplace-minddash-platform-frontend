@@ -95,6 +95,7 @@ substitutions:
   _DOMAIN: ''  # Opcional: dominio personalizado (ej: minddash.tuempresa.com)
 
 options:
+  substitution_option: ALLOW_LOOSE
   logging: CLOUD_LOGGING_ONLY
 
 timeout: 1800s
