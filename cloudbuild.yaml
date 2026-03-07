@@ -1,0 +1,100 @@
+steps:
+  # 1. Obtener URLs de todos los servicios backend
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        BACKEND_URL=$(gcloud run services describe minddash-backend \
+          --region=${_REGION} --project=$PROJECT_ID \
+          --format='value(status.url)' 2>/dev/null || echo "")
+        AGENT_URL=$(gcloud run services describe minddash-agent \
+          --region=${_REGION} --project=$PROJECT_ID \
+          --format='value(status.url)' 2>/dev/null || echo "")
+        RAG_URL=$(gcloud run services describe minddash-rag \
+          --region=${_REGION} --project=$PROJECT_ID \
+          --format='value(status.url)' 2>/dev/null || echo "")
+        DASHBOARDS_URL=$(gcloud run services describe minddash-dashboards \
+          --region=${_REGION} --project=$PROJECT_ID \
+          --format='value(status.url)' 2>/dev/null || echo "")
+        MINDSDB_URL=$(gcloud run services describe minddash-mindsdb \
+          --region=${_REGION} --project=$PROJECT_ID \
+          --format='value(status.url)' 2>/dev/null || echo "")
+
+        echo "BACKEND_URL=$BACKEND_URL" > /workspace/service_urls.env
+        echo "AGENT_URL=$AGENT_URL" >> /workspace/service_urls.env
+        echo "RAG_URL=$RAG_URL" >> /workspace/service_urls.env
+        echo "DASHBOARDS_URL=$DASHBOARDS_URL" >> /workspace/service_urls.env
+        echo "MINDSDB_URL=$MINDSDB_URL" >> /workspace/service_urls.env
+
+        # URL del frontend (para NEXTAUTH_URL)
+        FRONTEND_URL=$(gcloud run services describe minddash-frontend \
+          --region=${_REGION} --project=$PROJECT_ID \
+          --format='value(status.url)' 2>/dev/null || echo "")
+        echo "FRONTEND_URL=$FRONTEND_URL" >> /workspace/service_urls.env
+    id: get-urls
+
+  # 2. Build imagen Docker con args de build-time para Next.js
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        source /workspace/service_urls.env
+
+        docker build \
+          --build-arg NEXT_PUBLIC_BACKEND_API_URL=$${BACKEND_URL} \
+          --build-arg NEXT_PUBLIC_RAG_API_URL=$${RAG_URL} \
+          --build-arg NEXT_PUBLIC_DASHBOARDS_API_URL=$${DASHBOARDS_URL} \
+          -t ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/frontend:$COMMIT_SHA \
+          -t ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/frontend:latest \
+          .
+    id: build
+    waitFor: ['get-urls']
+
+  # 3. Push a Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - push
+      - '--all-tags'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/frontend'
+    id: push
+    waitFor: ['build']
+
+  # 4. Deploy a Cloud Run con todas las env vars
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        source /workspace/service_urls.env
+
+        # Obtener secrets de Secret Manager
+        JWT_SECRET=$(gcloud secrets versions access latest \
+          --secret=minddash-jwt-secret --project=$PROJECT_ID)
+        NEXTAUTH_SECRET=$(gcloud secrets versions access latest \
+          --secret=minddash-nextauth-secret --project=$PROJECT_ID)
+        DB_URL=$(gcloud secrets versions access latest \
+          --secret=minddash-db-url-frontend --project=$PROJECT_ID)
+
+        # NEXTAUTH_URL: usar dominio si existe, sino URL de Cloud Run
+        NEXTAUTH_URL="${_DOMAIN:-$${FRONTEND_URL}}"
+
+        gcloud run deploy minddash-frontend \
+          --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/frontend:$COMMIT_SHA \
+          --region=${_REGION} \
+          --project=$PROJECT_ID \
+          --service-account=minddash-frontend-sa@$PROJECT_ID.iam.gserviceaccount.com \
+          --update-env-vars="NEXT_PUBLIC_BACKEND_API_URL=$${BACKEND_URL},NEXT_PUBLIC_RAG_API_URL=$${RAG_URL},NEXT_PUBLIC_DASHBOARDS_API_URL=$${DASHBOARDS_URL},AGENT_SERVICE_URL=$${AGENT_URL}/chat,BAYER_API_URL=$${AGENT_URL}/chat,MINDSDB_SERVER_URL=$${MINDSDB_URL},NEXTAUTH_URL=$${NEXTAUTH_URL},JWT_SECRET=$${JWT_SECRET},JWT_REFRESH_SECRET=$${JWT_SECRET},NEXTAUTH_SECRET=$${NEXTAUTH_SECRET},MINDDASH_DB_URL=$${DB_URL},DATABASE_URL=$${DB_URL}"
+    id: deploy
+    waitFor: ['push']
+
+substitutions:
+  _REGION: us-central1
+  _REPO: minddash-repo
+  _DOMAIN: ''  # Opcional: dominio personalizado (ej: minddash.tuempresa.com)
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: 1800s
