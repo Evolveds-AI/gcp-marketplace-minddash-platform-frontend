@@ -5,12 +5,9 @@ steps:
       - -c
       - |
         set -e
-        BACKEND_URL=$(gcloud run services describe minddash-backend --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)')
-        RAG_URL=$(gcloud run services describe minddash-rag --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)')
-        DASH_URL=$(gcloud run services describe minddash-dashboards --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)')
-        echo "BACKEND_URL=${BACKEND_URL}" > /workspace/urls.env
-        echo "RAG_URL=${RAG_URL}" >> /workspace/urls.env
-        echo "DASH_URL=${DASH_URL}" >> /workspace/urls.env
+        gcloud run services describe minddash-backend --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)' > /workspace/backend_url.txt
+        gcloud run services describe minddash-rag --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)' > /workspace/rag_url.txt
+        gcloud run services describe minddash-dashboards --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)' > /workspace/dash_url.txt
     id: get-urls
 
   - name: 'gcr.io/cloud-builders/docker'
@@ -18,11 +15,10 @@ steps:
     args:
       - -c
       - |
-        source /workspace/urls.env
         docker build \
-          --build-arg NEXT_PUBLIC_BACKEND_API_URL="${BACKEND_URL}" \
-          --build-arg NEXT_PUBLIC_RAG_API_URL="${RAG_URL}" \
-          --build-arg NEXT_PUBLIC_DASHBOARDS_API_URL="${DASH_URL}" \
+          --build-arg NEXT_PUBLIC_BACKEND_API_URL="$(cat /workspace/backend_url.txt)" \
+          --build-arg NEXT_PUBLIC_RAG_API_URL="$(cat /workspace/rag_url.txt)" \
+          --build-arg NEXT_PUBLIC_DASHBOARDS_API_URL="$(cat /workspace/dash_url.txt)" \
           -t ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/frontend:$COMMIT_SHA \
           -t ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/frontend:latest .
     id: build
@@ -39,19 +35,18 @@ steps:
       - -c
       - |
         set -e
-        source /workspace/urls.env
-        AGENT_URL=$(gcloud run services describe minddash-agent --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)')
-        MINDSDB_URL=$(gcloud run services describe minddash-mindsdb --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)')
-        FRONTEND_URL=$(gcloud run services describe minddash-frontend --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)' 2>/dev/null || echo "")
-        NEXTAUTH_URL="${_DOMAIN:-${FRONTEND_URL}}"
-        JWT_SECRET=$(gcloud secrets versions access latest --secret=minddash-jwt-secret --project=$PROJECT_ID)
-        NEXTAUTH_SECRET=$(gcloud secrets versions access latest --secret=minddash-nextauth-secret --project=$PROJECT_ID)
-        DB_URL=$(gcloud secrets versions access latest --secret=minddash-db-url-frontend --project=$PROJECT_ID)
+        gcloud run services describe minddash-agent --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)' > /workspace/agent_url.txt
+        gcloud run services describe minddash-mindsdb --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)' > /workspace/mindsdb_url.txt
+        gcloud run services describe minddash-frontend --region=${_REGION} --project=$PROJECT_ID --format='value(status.url)' 2>/dev/null > /workspace/frontend_url.txt || echo "" > /workspace/frontend_url.txt
+        gcloud secrets versions access latest --secret=minddash-jwt-secret --project=$PROJECT_ID > /workspace/jwt_secret.txt
+        gcloud secrets versions access latest --secret=minddash-nextauth-secret --project=$PROJECT_ID > /workspace/nextauth_secret.txt
+        gcloud secrets versions access latest --secret=minddash-db-url-frontend --project=$PROJECT_ID > /workspace/db_url.txt
+        if [ -n "${_DOMAIN}" ]; then echo "${_DOMAIN}" > /workspace/nextauth_url.txt; else cat /workspace/frontend_url.txt > /workspace/nextauth_url.txt; fi
         gcloud run deploy minddash-frontend \
           --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/frontend:$COMMIT_SHA \
           --region=${_REGION} --project=$PROJECT_ID \
           --service-account=minddash-frontend-sa@$PROJECT_ID.iam.gserviceaccount.com \
-          --update-env-vars="NEXT_PUBLIC_BACKEND_API_URL=${BACKEND_URL},NEXT_PUBLIC_RAG_API_URL=${RAG_URL},NEXT_PUBLIC_DASHBOARDS_API_URL=${DASH_URL},AGENT_SERVICE_URL=${AGENT_URL}/chat,BAYER_API_URL=${AGENT_URL}/chat,MINDSDB_SERVER_URL=${MINDSDB_URL},NEXTAUTH_URL=${NEXTAUTH_URL},JWT_SECRET=${JWT_SECRET},JWT_REFRESH_SECRET=${JWT_SECRET},NEXTAUTH_SECRET=${NEXTAUTH_SECRET},MINDDASH_DB_URL=${DB_URL},DATABASE_URL=${DB_URL}"
+          --update-env-vars="NEXT_PUBLIC_BACKEND_API_URL=$(cat /workspace/backend_url.txt),NEXT_PUBLIC_RAG_API_URL=$(cat /workspace/rag_url.txt),NEXT_PUBLIC_DASHBOARDS_API_URL=$(cat /workspace/dash_url.txt),AGENT_SERVICE_URL=$(cat /workspace/agent_url.txt)/chat,BAYER_API_URL=$(cat /workspace/agent_url.txt)/chat,MINDSDB_SERVER_URL=$(cat /workspace/mindsdb_url.txt),NEXTAUTH_URL=$(cat /workspace/nextauth_url.txt),JWT_SECRET=$(cat /workspace/jwt_secret.txt),JWT_REFRESH_SECRET=$(cat /workspace/jwt_secret.txt),NEXTAUTH_SECRET=$(cat /workspace/nextauth_secret.txt),MINDDASH_DB_URL=$(cat /workspace/db_url.txt),DATABASE_URL=$(cat /workspace/db_url.txt)"
     id: deploy
     waitFor: ['push']
 
