@@ -47,8 +47,8 @@ for (const [name, type_role, desc] of [
 ]) {
   await client.query(
     `INSERT INTO roles (id, name, type_role, description, created_at)
-     SELECT uuid_generate_v4(), $1, $2, $3, NOW()
-     WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = $1)`,
+     SELECT uuid_generate_v4(), $1::varchar, $2::varchar, $3, NOW()
+     WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = $1::varchar)`,
     [name, type_role, desc]
   );
 }
