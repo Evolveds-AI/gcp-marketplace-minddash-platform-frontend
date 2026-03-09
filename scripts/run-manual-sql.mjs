@@ -39,5 +39,20 @@ await client.query(`
 `);
 console.log('view_list_data_connections_by_product: OK');
 
+// Seed base roles (idempotent)
+for (const [name, type_role, desc] of [
+  ['admin', 'admin', 'Administrator with full access'],
+  ['user', 'user', 'Standard user role'],
+  ['viewer', 'viewer', 'Read-only viewer role'],
+]) {
+  await client.query(
+    `INSERT INTO roles (id, name, type_role, description, created_at)
+     SELECT uuid_generate_v4(), $1, $2, $3, NOW()
+     WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = $1)`,
+    [name, type_role, desc]
+  );
+}
+console.log('roles seed: OK');
+
 await client.end();
 console.log('All manual SQL applied successfully');
