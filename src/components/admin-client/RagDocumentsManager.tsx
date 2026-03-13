@@ -259,8 +259,9 @@ export default function RagDocumentsManager({ productId }: RagDocumentsManagerPr
 
       const token = JSON.parse(authData).accessToken;
 
-      const response = await fetch(`/api/backend/rag/documents?product_id=${productId}`, {
+      const response = await fetch(`/api/backend/rag/documents?product_id=${productId}&_t=${Date.now()}`, {
         method: 'GET',
+        cache: 'no-store',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -475,7 +476,23 @@ export default function RagDocumentsManager({ productId }: RagDocumentsManagerPr
         fileInputRef.current.value = '';
       }
 
-      await loadDocuments(true);
+      // Optimistic update: add document immediately so it shows as PENDING
+      // without waiting for the next loadDocuments round-trip
+      if (data?.id) {
+        setDocuments((prev) => [
+          {
+            id: data.id,
+            filename: data.filename || selectedFile.name,
+            content_type: data.content_type || selectedFile.type,
+            uri: data.uri || '',
+            status: data.status || 'PENDING',
+            created_at: data.created_at || new Date().toISOString(),
+          },
+          ...prev,
+        ]);
+      } else {
+        await loadDocuments(true);
+      }
     } catch (e: any) {
       setError(e?.message || 'Error al subir documento');
     } finally {
