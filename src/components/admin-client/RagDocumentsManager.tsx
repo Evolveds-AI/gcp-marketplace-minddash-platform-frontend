@@ -62,6 +62,8 @@ export default function RagDocumentsManager({ productId }: RagDocumentsManagerPr
   const [testRagError, setTestRagError] = useState<string | null>(null);
   const [testRagResult, setTestRagResult] = useState<any>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // Track IDs deleted in this session so polling doesn't restore them from stale server cache
+  const deletedIdsRef = useRef<Set<string>>(new Set());
 
   const getKeywordFromFilename = (filename?: string | null) => {
     if (!filename) return null;
@@ -288,14 +290,16 @@ export default function RagDocumentsManager({ productId }: RagDocumentsManagerPr
       }
 
       setDocuments(
-        items.map((d: any) => ({
-          id: d.id || d.document_id || '',
-          filename: d.filename || d.name || 'Sin nombre',
-          content_type: d.content_type || d.mime_type || 'application/octet-stream',
-          uri: d.uri || d.path || '',
-          status: d.status || 'PENDING',
-          created_at: d.created_at || d.createdAt || new Date().toISOString(),
-        }))
+        items
+          .filter((d: any) => !deletedIdsRef.current.has(d.id || d.document_id || ''))
+          .map((d: any) => ({
+            id: d.id || d.document_id || '',
+            filename: d.filename || d.name || 'Sin nombre',
+            content_type: d.content_type || d.mime_type || 'application/octet-stream',
+            uri: d.uri || d.path || '',
+            status: d.status || 'PENDING',
+            created_at: d.created_at || d.createdAt || new Date().toISOString(),
+          }))
       );
     } catch (e: any) {
       setError(e?.message || 'Error al cargar documentos');
@@ -336,6 +340,8 @@ export default function RagDocumentsManager({ productId }: RagDocumentsManagerPr
         setDetailDocument(null);
       }
 
+      // Mark as deleted so loadDocuments (polling) never restores it from stale server cache
+      deletedIdsRef.current.add(id);
       // Optimistic update: remove document from state immediately
       setDocuments((prev) => prev.filter((doc) => doc.id !== id));
     } catch (e: any) {
