@@ -40,6 +40,7 @@ export async function GET(request: NextRequest) {
 
     const response = await fetch(backendUrl, {
       method: 'GET',
+      cache: 'no-store',
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: 'application/json',

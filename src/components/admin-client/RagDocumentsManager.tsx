@@ -336,7 +336,8 @@ export default function RagDocumentsManager({ productId }: RagDocumentsManagerPr
         setDetailDocument(null);
       }
 
-      await loadDocuments(true);
+      // Optimistic update: remove document from state immediately
+      setDocuments((prev) => prev.filter((doc) => doc.id !== id));
     } catch (e: any) {
       setError(e?.message || 'Error al eliminar documento');
     } finally {
