@@ -64,11 +64,27 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error: any) {
+    const msg: string = error.message || '';
+    const isMindsDBQueryError =
+      msg.includes("Can't select from") ||
+      msg.includes('Error ejecutando consulta en MindsDB') ||
+      msg.includes('unknown') ||
+      msg.includes('not found') ||
+      msg.includes('does not exist');
+
+    if (isMindsDBQueryError) {
+      console.warn('[mindsdb/meta] MindsDB query error (returning empty):', msg);
+      return NextResponse.json({
+        success: true,
+        data: { status: 'success', esquemas: [], tablas: [], columnas: [], conexiones: [] }
+      });
+    }
+
     console.error('Error obteniendo metadatos MindsDB:', error);
     return NextResponse.json(
-      { 
-        success: false, 
-        message: error.message || 'Error al obtener metadatos',
+      {
+        success: false,
+        message: msg || 'Error al obtener metadatos',
         error: process.env.NODE_ENV === 'development' ? error.toString() : undefined
       },
       { status: 500 }
@@ -122,11 +138,29 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
+    const msg: string = error.message || '';
+    // MindsDB query errors (connection not registered in MindsDB, engine not found, etc.)
+    // are not system failures — return empty result so the UI degrades gracefully.
+    const isMindsDBQueryError =
+      msg.includes("Can't select from") ||
+      msg.includes('Error ejecutando consulta en MindsDB') ||
+      msg.includes('unknown') ||
+      msg.includes('not found') ||
+      msg.includes('does not exist');
+
+    if (isMindsDBQueryError) {
+      console.warn('[mindsdb/meta] MindsDB query error (returning empty):', msg);
+      return NextResponse.json({
+        success: true,
+        data: { status: 'success', esquemas: [], tablas: [], columnas: [], conexiones: [] }
+      });
+    }
+
     console.error('Error obteniendo metadatos MindsDB (POST):', error);
     return NextResponse.json(
-      { 
-        success: false, 
-        message: error.message || 'Error al obtener metadatos',
+      {
+        success: false,
+        message: msg || 'Error al obtener metadatos',
         error: process.env.NODE_ENV === 'development' ? error.toString() : undefined
       },
       { status: 500 }
